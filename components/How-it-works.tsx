@@ -2,23 +2,16 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-// Register ScrollTrigger plugin
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 export default function HorizontalScrollSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isLargeScreen, setIsLargeScreen] = useState(true);
+  const [isLargeScreen, setIsLargeScreen] = useState<boolean | null>(null);
 
-  // Check screen size
+  // Check screen size on client only
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsLargeScreen(window.innerWidth >= 1024); // lg breakpoint
+      setIsLargeScreen(window.innerWidth >= 1024);
     };
 
     checkScreenSize();
@@ -27,22 +20,30 @@ export default function HorizontalScrollSection() {
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
+  // Load GSAP dynamically and run animation
   useEffect(() => {
-    // Only run GSAP animation on large screens
-    if (!isLargeScreen) return;
+    if (isLargeScreen) {
+      const loadGsap = async () => {
+        const gsapModule = await import("gsap");
+        const scrollTriggerModule = await import("gsap/ScrollTrigger");
 
+        gsapModule.gsap.registerPlugin(scrollTriggerModule.ScrollTrigger);
+        runAnimation(gsapModule.gsap, scrollTriggerModule.ScrollTrigger);
+      };
+
+      loadGsap();
+    }
+  }, [isLargeScreen]);
+
+  const runAnimation = (gsap: any, ScrollTrigger: any) => {
     const section = sectionRef.current;
     const container = containerRef.current;
 
     if (!section || !container) return;
 
-    const handleResize = () => {
-      ScrollTrigger.refresh();
-    };
-
     const cardWidth = 450;
-    const gap = 16; // gap-4 = 1rem = 16px
-    const padding = 64; // px-8 on desktop
+    const gap = 16;
+    const padding = 64;
     const numCards = 4;
 
     const totalContentWidth =
@@ -52,8 +53,8 @@ export default function HorizontalScrollSection() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
-        start: "top 20%", // Start when section is 20% from top instead of immediately
-        end: () => `+=${Math.max(scrollDistance, 100)}`,
+        start: "top 20%",
+        end: `+=${Math.max(scrollDistance, 100)}`,
         scrub: 1,
         pin: true,
         anticipatePin: 1,
@@ -67,15 +68,19 @@ export default function HorizontalScrollSection() {
       ease: "none",
     });
 
+    const handleResize = () => {
+      ScrollTrigger.refresh();
+    };
+
     window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("resize", handleResize);
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      ScrollTrigger.getAll().forEach((trigger: any) => trigger.kill());
     };
-  }, [isLargeScreen]);
+  };
 
-  // Card data for easier management
+  // Card data
   const cards = [
     {
       id: 1,
@@ -114,7 +119,7 @@ export default function HorizontalScrollSection() {
     },
   ];
 
-  const renderCard = (card: any, index: number) => (
+  const renderCard = (card: any) => (
     <div
       key={card.id}
       className={`
@@ -149,7 +154,7 @@ export default function HorizontalScrollSection() {
   );
 
   return (
-    <div className="">
+    <div>
       <div className="text-center py-16 px-4">
         <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 max-w-4xl mx-auto leading-tight">
           Discover the seamless process behind our approach.
@@ -161,23 +166,20 @@ export default function HorizontalScrollSection() {
         </p>
       </div>
 
-      {/* Conditional rendering based on screen size */}
-      {isLargeScreen ? (
-        /* Horizontal Scroll Section for Large Screens */
+      {isLargeScreen === null ? null : isLargeScreen ? (
         <div ref={sectionRef} className="relative overflow-hidden h-[540px]">
           <div
             ref={containerRef}
             className="flex gap-4 px-8"
             style={{ width: "fit-content" }}
           >
-            {cards.map((card, index) => renderCard(card, index))}
+            {cards.map((card) => renderCard(card))}
           </div>
         </div>
       ) : (
-        /* Vertical Layout for Medium and Small Screens */
         <div className="px-4 md:px-8 pb-16">
           <div className="max-w-2xl mx-auto">
-            {cards.map((card, index) => renderCard(card, index))}
+            {cards.map((card) => renderCard(card))}
           </div>
         </div>
       )}

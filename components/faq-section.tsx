@@ -208,7 +208,7 @@ export const FAQSection = () => {
 
               {/* View All FAQs Button */}
               <div className="text-left">
-                <button className="bg-black text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition-colors inline-flex items-center gap-2 text-sm">
+                <button className="bg-black w-full md:w-fit justify-center text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition-colors inline-flex items-center gap-2 text-sm">
                   View all FAQs
                   <ChevronRight className="w-4 h-4" />
                 </button>
