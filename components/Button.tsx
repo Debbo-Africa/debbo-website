@@ -1,12 +1,22 @@
-import Image from 'next/image';
-import React from 'react'
-import { Button } from './ui/button';
+import Image from "next/image";
+import React from "react";
+import { Button } from "./ui/button";
 
-const ButtonComponent = () => {
+interface ButtonComponentProps {
+  fullWidth?: boolean;
+}
+
+const ButtonComponent: React.FC<ButtonComponentProps> = ({
+  fullWidth = false,
+}) => {
   return (
-    <Button className="bg-[#0D0D0D] text-sm text-white hover:bg-gray-800 rounded-full px-4 py-6 font-medium">
+    <Button
+      className={`bg-[#0D0D0D] text-sm text-white hover:bg-gray-800 rounded-full px-4 py-6 font-medium ${
+        fullWidth ? "w-full" : ""
+      }`}
+    >
       <Image
-        src="/images/Brand-Logo-Icon.png"
+        src="/images/Brand-Logo-Icon.png-light.png"
         alt="brand logo"
         className="w-6 h-6"
         width={12}
@@ -17,6 +27,6 @@ const ButtonComponent = () => {
       Download App
     </Button>
   );
-}
+};
 
-export default ButtonComponent
+export default ButtonComponent;
