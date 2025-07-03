@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
-import { ChevronLeft, ChevronRight, Plus, Minus } from "lucide-react";
+import { ChevronLeft, ChevronRight, Plus, Minus, Star } from "lucide-react";
 
 interface Review {
   id: number;
@@ -47,7 +46,7 @@ const faqs: FAQItem[] = [
   },
   {
     id: 2,
-    question: "Who can use Débbo Africa?",
+    question: "Who can use Débbo Africa's services?",
     answer:
       "Débbo Africa is designed for all women, particularly African women who want access to quality healthcare services. Our platform caters to women of all ages and health needs.",
   },
@@ -89,79 +88,75 @@ export const FAQSection = () => {
 
   return (
     <section className="relative min-h-screen w-full overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <Image
-          src="/images/faq-background.png"
-          alt="Background"
-          fill
-          className="object-cover object-top"
-          priority
-        />
-      </div>
+      <div className="absolute inset-0 bg-cover bg-top bg-no-repeat bg-[url('/images/faq-background-small.png')] md:bg-[url('/images/faq-background.png')]" />
 
-      {/* Content */}
-      <div className="relative z-10 min-h-screen flex items-end pb-16 px-4 pt-[25rem]">
+      <div className="relative z-10 min-h-screen flex items-end pb-16 px-4 pt-[28rem] md:pt-[25rem]">
         <div className="max-w-5xl mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
-            <div className="bg-white/60  backdrop-blur-sm rounded-2xl  p-6 shadow-sm flex flex-col justify-between h-full">
-              <div className="mb-6">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="text-xs font-medium text-gray-600">
-                    Trustpilot
+            {/* Left Column - Two Cards with Matching Height */}
+            <div className="flex flex-col gap-6 h-full">
+              {/* Trustpilot & Review Card - Expandable */}
+              <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-sm flex-1 flex flex-col">
+                {/* Trustpilot Rating */}
+                <div className="mb-6">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Star className="w-4 h-4 text-green-600 fill-green-600" />
+                    <div className="text-xs font-medium text-gray-600">
+                      Trustpilot
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-1 mb-1">
+                    {[...Array(5)].map((_, i) => (
+                      <div
+                        key={i}
+                        className="w-4 h-4 bg-green-500 rounded-sm flex items-center justify-center"
+                      >
+                        <span className="text-white text-xs">★</span>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-gray-700">
+                    <span className="font-semibold">99%</span> of clients rated
+                    our health services as 'Excellent'
+                  </p>
+                </div>
+
+                {/* Review Content - Takes remaining space */}
+                <div className="flex-1 flex flex-col justify-center mb-6">
+                  <p className="text-base text-gray-800 leading-relaxed mb-3">
+                    "{reviews[currentReview].text}"
+                  </p>
+                  <p className="text-sm font-medium text-gray-600 mb-4">
+                    {reviews[currentReview].author}
+                  </p>
+
+                  {/* Navigation Arrows */}
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={prevReview}
+                      className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:border-gray-400 transition-colors"
+                      aria-label="Previous review"
+                    >
+                      <ChevronLeft className="w-4 h-4 text-gray-600" />
+                    </button>
+                    <button
+                      onClick={nextReview}
+                      className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:border-gray-400 transition-colors"
+                      aria-label="Next review"
+                    >
+                      <ChevronRight className="w-4 h-4 text-gray-600" />
+                    </button>
                   </div>
                 </div>
-                <div className="flex items-center gap-1 mb-1 ">
-                  {[...Array(5)].map((_, i) => (
-                    <div
-                      key={i}
-                      className="w-4 h-4 bg-green-500 rounded-sm flex items-center justify-center"
-                    >
-                      <span className="text-white text-xs">★</span>
-                    </div>
-                  ))}
-                </div>
-                <p className="text-xs text-gray-700">
-                  <span className="font-semibold">98%</span> of clients rated
-                  our health services as 'Excellent'
-                </p>
               </div>
 
-              <div className="flex-1 mb-6">
-                <p className="text-base text-gray-800 leading-relaxed mb-3">
-                  "{reviews[currentReview].text}"
-                </p>
-                <p className="text-sm font-medium text-gray-600 mb-4">
-                  {reviews[currentReview].author}
-                </p>
-
-                {/* Navigation Arrows */}
-                <div className="flex items-center gap-3">
-                  <button
-                    onClick={prevReview}
-                    className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:border-gray-400 transition-colors"
-                    aria-label="Previous review"
-                  >
-                    <ChevronLeft className="w-4 h-4 text-gray-600" />
-                  </button>
-                  <button
-                    onClick={nextReview}
-                    className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:border-gray-400 transition-colors"
-                    aria-label="Next review"
-                  >
-                    <ChevronRight className="w-4 h-4 text-gray-600" />
-                  </button>
-                </div>
-              </div>
-
-              <div>
+              {/* Media Logos Card - Fixed Height */}
+              <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
                 <p className="text-xs text-gray-600 mb-3">As Seen In</p>
                 <div className="flex items-center">
-                  <Image
+                  <img
                     src="/images/media-logos.png"
                     alt="Media logos - BusinessDay, Pulse, BellaNaija"
-                    width={200}
-                    height={40}
                     className="w-full max-w-xs h-auto"
                   />
                 </div>
@@ -171,9 +166,6 @@ export const FAQSection = () => {
             {/* Right Column - FAQ */}
             <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-sm flex flex-col h-full">
               <div className="text-center mb-6">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full mb-3">
-                  <span className="text-lg">💬</span>
-                </div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-1">
                   Frequently Asked
                 </h2>
