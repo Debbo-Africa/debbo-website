@@ -12,7 +12,6 @@ export const Footer = () => {
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  // Google Play Store URL for the app
   const appUrl =
     "https://play.google.com/store/apps/details?id=com.debboafrica.app";
 
@@ -39,7 +38,6 @@ export const Footer = () => {
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle subscription logic here
     console.log("Subscribed:", email);
     setEmail("");
   };
@@ -50,14 +48,15 @@ export const Footer = () => {
       <div className="relative z-10 px-4 pb-8">
         <div className=" mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
-            <div className="rounded-3xl p-6 md:p-10 relative overflow-hidden min-h-[400px] flex items-center bg-[url('/images/woman-headphones.png')] bg-cover bg-no-repeat bg-center ">
-              <div className=" absolute md:relative top-6 md:top-0 z-10 max-w-[20rem] md:max-w-[16rem] max-auto">
+            {/* First Card */}
+            <div className="rounded-3xl p-6 md:p-10 relative overflow-hidden min-h-[450px] flex items-center bg-[url('/images/woman-headphones.png')] bg-cover bg-no-repeat bg-center ">
+              <div className=" absolute md:relative top-6 md:top-0 z-10 max-w-[18rem] md:max-w-[16rem] max-auto">
                 <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">
                   Stay connected with DébboAfrica!
                 </h3>
                 <form
                   onSubmit={handleSubscribe}
-                  className="space-y-4 mt-36 md:mt-0"
+                  className="space-y-4 mt-[10rem] md:mt-0"
                 >
                   <div>
                     <label
@@ -86,15 +85,17 @@ export const Footer = () => {
               </div>
             </div>
 
-            <div className="text-white rounded-3xl p-6 md:p-10 relative overflow-hidden min-h-[400px] flex items-center bg-[url('/images/phone-app-mobile.png')] md:bg-[url('/images/phone-app.png')] bg-cover bg-no-repeat bg-right">
-              <div className="relative z-10 max-w-sm mb-4">
-                <div className="w-24 h-24 bg-white rounded-lg p-2 mb-4">
+            <div className="text-white rounded-3xl p-6 md:p-10 relative overflow-hidden min-h-[450px] bg-[url('/images/phone-app-mobile.png')] md:bg-[url('/images/phone-app.png')] bg-cover bg-no-repeat bg-right flex items-center md:items-start">
+              <div className="relative z-10 w-full h-full">
+                <div className="absolute top-4 right-2 md:static md:mb-4 w-24 h-24 bg-white rounded-lg p-2 mx-auto md:mx-0">
                   <canvas ref={canvasRef} className="w-full h-full rounded" />
                 </div>
-                <h3 className="text-2xl font-bold mb-6">
+
+                <h3 className="absolute top-4 left-2 max-w-44 md:w-fit md:static text-xl md:text-2xl font-bold mb-6">
                   Download My Debbo <br /> App Today
                 </h3>
-                <div className="mt-4 flex items-center gap-2">
+
+                <div className="absolute bottom-4  transform  md:static md:mt-10 flex items-center gap-2">
                   <Image
                     src="/images/android-download.png"
                     alt="Download on Google Play"
@@ -114,6 +115,7 @@ export const Footer = () => {
             </div>
           </div>
 
+          {/* Rest of Footer */}
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 mb-8">
             {/* Logo and Contact */}
             <div className="col-span-2 md:col-span-2 lg:col-span-2">
