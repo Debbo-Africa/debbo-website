@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 import QRCode from "qrcode";
+import Tagline from "./Tagline";
 
 export const Footer = () => {
   const [email, setEmail] = useState("");
@@ -45,6 +46,7 @@ export const Footer = () => {
 
   return (
     <footer className="relative bg-[#D76441] rounded-t-3xl mt-10 overflow-hidden">
+      <Tagline bgColor="none" textColor="text-[#DF8367]" />
       <div className="relative z-10 px-4 pb-8">
         <div className=" mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
