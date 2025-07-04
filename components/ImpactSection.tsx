@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import ButtonComponent from "./Button";
 
 export const ImpactSection = () => {
   const [hoveredStat, setHoveredStat] = useState<number | null>(null);
@@ -20,22 +21,7 @@ export const ImpactSection = () => {
               Africa, we're here to change this — with care that listens,
               understands, and meets you where you are.
             </p>
-            <button className="bg-black text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors inline-flex items-center gap-2">
-              Download App
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
-            </button>
+            <ButtonComponent/>
           </div>
 
           {/* Statistics Cards - Mobile */}
@@ -167,22 +153,7 @@ export const ImpactSection = () => {
                   unique health needs.
                 </p>
                 <div className="flex items-center gap-4 mb-6">
-                  <button className="bg-black text-white px-8 py-4 rounded-full font-semibold hover:bg-gray-800 transition-colors inline-flex items-center gap-2">
-                    Download App
-                    <svg
-                      className="w-4 h-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      />
-                    </svg>
-                  </button>
+                 <ButtonComponent/>
                 </div>
               </div>
             </div>

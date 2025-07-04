@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Matter from "matter-js";
+import ButtonComponent from "./Button";
 
 const healthConditions = [
   {
@@ -323,22 +324,7 @@ export const Trust = () => {
             Whether you're managing pain, planning a family, or just not feeling
             like yourself, we are here to help.
           </p>
-          <button className="bg-black text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-gray-800 transition-colors inline-flex items-center gap-2 text-sm sm:text-base">
-            Download App
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
-            </svg>
-          </button>
+        <ButtonComponent/>
         </div>
       </div>
       {/* Physics Container */}
