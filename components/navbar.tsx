@@ -103,16 +103,15 @@ export default function Navbar() {
 
             {/* Mobile Menu Button */}
             <Button
-              variant="ghost"
               size="icon"
-              className="md:hidden"
+              className="md:hidden bg-transparent"
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle menu"
             >
               {isOpen ? (
-                <X className="h-6 w-6" />
+                <X className="h-6 w-6" color="#000" />
               ) : (
-                <Menu className="h-6 w-6" />
+                <Menu className="h-6 w-6" color="#000" />
               )}
             </Button>
           </div>
@@ -235,7 +234,7 @@ export default function Navbar() {
 
               {/* Download App Button */}
               <div className="pt-6">
-                <ButtonComponent fullWidth/>
+                <ButtonComponent fullWidth />
               </div>
             </div>
           </div>

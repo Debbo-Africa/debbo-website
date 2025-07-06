@@ -11,7 +11,7 @@ import WhyChooseSection from "@/components/why-choose-section";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#FFF5E9]">
+    <main className="min-h-screen bg-badge">
       <Navbar />
       <HeroSection />
       <ScrollingCards />

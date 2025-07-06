@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 import ButtonComponent from "./Button";
 
 export default function HeroSection() {
@@ -36,7 +35,6 @@ export default function HeroSection() {
       if (!animatedWordRef.current) return;
       isTyping = true;
 
-      // Hide cursor during typing
       if (cursorRef.current) cursorRef.current.style.opacity = "0";
 
       animatedWordRef.current.textContent = "";
@@ -52,10 +50,9 @@ export default function HeroSection() {
         await sleep(150);
       }
 
-      // Show blinking cursor after typing finishes
       if (cursorRef.current) cursorRef.current.style.opacity = "1";
 
-      await sleep(2000); // pause before erase
+      await sleep(2000); 
       await eraseWord();
     };
 
@@ -64,7 +61,6 @@ export default function HeroSection() {
 
       const word = animatedWordRef.current.textContent || "";
 
-      // Hide cursor during erasing
       if (cursorRef.current) cursorRef.current.style.opacity = "0";
 
       for (let i = word.length; i >= 0; i--) {
@@ -78,11 +74,10 @@ export default function HeroSection() {
         await sleep(100);
       }
 
-      // Show blinking cursor after erasing finishes (before next word starts typing)
       if (cursorRef.current) cursorRef.current.style.opacity = "1";
 
       currentWordIndex = (currentWordIndex + 1) % words.length;
-      await sleep(500); // small pause before next typing
+      await sleep(500); 
       await typeWord(words[currentWordIndex]);
     };
 
@@ -96,31 +91,23 @@ export default function HeroSection() {
   return (
     <section className="pt-32 sm:pt-44 pb-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl lg:text-6xl font-bold text-[#0D0D0D] mb-6 leading-normal">
+        <h1 className="text-4xl lg:text-6xl font-extrabold text-general-white mb-6 leading-normal ">
           <div className="flex flex-col md:flex-row md:items-center">
-            <span
-              className="flex items-center text-[#FF9B33] md:mr-2"
-              style={{ fontFamily: "DM Serif Display, serif" }}
-            >
+            <span className="flex items-center text-yellow md:mr-2">
               <span ref={animatedWordRef}></span>
               <span
                 ref={cursorRef}
-                className="ml-1 animate-blink"
-                style={{ fontFamily: "monospace", opacity: 0 }}
+                className="ml-1 animate-blink  md:leading-normal"
               >
                 |
               </span>
             </span>
-            <span style={{ fontFamily: "DM Serif Display, serif" }}>
-              African Women
-            </span>
+            <span>African Women</span>
           </div>
-          <span style={{ fontFamily: "DM Serif Display, serif" }}>
-            Through Smart Health
-          </span>
+          <span>Through Smart Health</span>
         </h1>
 
-        <p className="text-md sm:text-xl text-[#242424] mb-8 mx-auto text-left">
+        <p className="text-md sm:text-xl text-gray-text mb-8 mx-auto text-left font-medium">
           Cutting-Edge Care for African Women's Health
         </p>
 

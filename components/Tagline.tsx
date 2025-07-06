@@ -8,8 +8,8 @@ interface TaglineProps {
 }
 
 export default function Tagline({
-  bgColor = "bg-[#2B1D18]",
-  textColor = "text-[#AAA5A3]",
+  bgColor = "bg-[#2b1d18]",
+  textColor = "text-gray-text",
 }: TaglineProps) {
   const taglineRef = useRef<HTMLDivElement>(null);
 

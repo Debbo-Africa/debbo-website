@@ -11,14 +11,14 @@ const ButtonComponent: React.FC<ButtonComponentProps> = ({
 }) => {
   return (
     <Button
-      className={`bg-[#0D0D0D] text-sm text-white hover:bg-gray-800 rounded-full px-4 py-6 font-medium ${
+      className={`bg-general-white text-sm text-general-black hover:bg-gray-800 rounded-full px-4 py-6 font-medium ${
         fullWidth ? "w-full" : ""
       }`}
     >
       <Image
         src="/images/Brand-Logo-Icon.png-light.png"
         alt="brand logo"
-        className="w-6 h-6"
+        className="w-4 h-4"
         width={12}
         height={12}
         placeholder="blur"

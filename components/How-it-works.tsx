@@ -28,12 +28,10 @@ export default function HorizontalScrollSection() {
       const sectionHeight = section.offsetHeight;
       const windowHeight = window.innerHeight;
 
-      // Calculate when section should start and end being active
-      const startOffset = windowHeight * 0.2; // Start when section is 20% from top
-      const endOffset = -sectionHeight + windowHeight * 0.8; // End when section is mostly past
+      const startOffset = windowHeight * 0.2;
+      const endOffset = -sectionHeight + windowHeight * 0.8;
 
       if (rect.top <= startOffset && rect.top >= endOffset) {
-        // Section is in the active scroll zone
         const progress = (startOffset - rect.top) / (startOffset - endOffset);
         const clampedProgress = Math.max(0, Math.min(1, progress));
         setScrollProgress(clampedProgress);
@@ -50,54 +48,49 @@ export default function HorizontalScrollSection() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isLargeScreen]);
 
- const cards = [
-   {
-     id: 1,
-     title: "Triage",
-     description:
-       "Our AI-powered tool helps guide you to the right care quickly and safely.",
-     image: "/images/triage-phone.png",
-     alt: "Triage phone interface",
-     bgClass: "",
-   },
-   {
-     id: 2,
-     title: "Consult",
-     description: "Speak with licensed doctors virtually or in person.",
-     image: "/images/consult-phone.png",
-     alt: "Consult phone interface",
-     bgClass: "",
-   },
-   {
-     id: 3,
-     title: "Act",
-     description:
-       "Need a lab test or scan? We come to you, or you can visit our trusted facilities. All tests are reviewed by trusted clinical experts.",
-     image: "/images/act-microscope.png",
-     alt: "Medical microscope",
-     bgClass: "bg-gradient-to-br from-gray-800 to-gray-900",
-   },
-   {
-     id: 4,
-     title: "Support",
-     description:
-       "Care doesn't end with a test. Track results, access health reminders, join community forums, and learn from personalised content in the app.",
-     image: "/images/doctor.png",
-     alt: "Doctor providing care",
-     bgClass: "bg-gradient-to-br from-teal-500 to-teal-600",
-   },
- ];
+  const cards = [
+    {
+      id: 1,
+      title: "Triage",
+      description:
+        "Our AI-powered tool helps guide you to the right care quickly and safely.",
+      image: "/images/triage-phone.png",
+      alt: "Triage phone interface",
+      bgClass: "",
+    },
+    {
+      id: 2,
+      title: "Consult",
+      description: "Speak with licensed doctors virtually or in person.",
+      image: "/images/consult-phone.png",
+      alt: "Consult phone interface",
+      bgClass: "",
+    },
+    {
+      id: 3,
+      title: "Act",
+      description:
+        "Need a lab test or scan? We come to you, or you can visit our trusted facilities. All tests are reviewed by trusted clinical experts.",
+      image: "/images/act-microscope.png",
+      alt: "Medical microscope",
+      bgClass: "",
+    },
+    {
+      id: 4,
+      title: "Support",
+      description:
+        "Care doesn't end with a test. Track results, access health reminders, join community forums, and learn from personalised content in the app.",
+      image: "/images/doctor.png",
+      alt: "Doctor providing care",
+      bgClass: "",
+    },
+  ];
+
 
   const renderCard = (card: any) => (
     <div
       key={card.id}
-      className={`${
-        isLargeScreen
-          ? "flex-shrink-0 w-[450px] h-[540px]"
-          : "w-full h-[580px] md:h-[450px]"
-      } rounded-3xl relative overflow-hidden ${card.bgClass} ${
-        !isLargeScreen ? "mb-4" : ""
-      }`}
+      className={`flex-shrink-0 w-[450px] h-[540px] rounded-3xl relative overflow-hidden ${card.bgClass}`}
     >
       <Image
         src={card.image || "/placeholder.svg"}
@@ -105,31 +98,28 @@ export default function HorizontalScrollSection() {
         fill
         className="object-cover"
       />
-      <div className="absolute top-6 left-6 md:top-8 md:left-8 z-10 text-white">
-        <h3 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">
+      <div
+        className={`absolute top-6 left-6 md:top-8 md:left-8 z-10 ${
+          card.id === 1 ? "text-general-white" : "text-general-black"
+        }`}
+      >
+        <h3 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4 ">
           {card.title}
         </h3>
-        <p
-          className={`text-base leading-relaxed opacity-90 ${
-            isLargeScreen
-              ? "md:text-lg max-w-[280px] md:max-w-[340px]"
-              : "max-w-[280px] sm:max-w-[400px]"
-          }`}
-        >
+        <p className="text-base leading-relaxed opacity-90 md:text-lg max-w-[280px] md:max-w-[340px]">
           {card.description}
         </p>
       </div>
     </div>
   );
 
-  // Calculate transform based on scroll progress
   const getTransform = () => {
     if (!isLargeScreen) return {};
 
     const cardWidth = 450;
     const gap = 16;
     const padding = 64;
-    const numCards = 4;
+    const numCards = cards.length;
     const totalContentWidth =
       cardWidth * numCards + gap * (numCards - 1) + padding;
     const maxScroll = totalContentWidth - window.innerWidth;
@@ -144,10 +134,10 @@ export default function HorizontalScrollSection() {
   return (
     <div>
       <div className="text-center py-16 px-4">
-        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 max-w-4xl mx-auto leading-tight">
+        <h2 className="text-4xl md:text-5xl font-bold text-general-white mb-6 max-w-4xl mx-auto leading-tight">
           Discover the seamless process behind our approach.
         </h2>
-        <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+        <p className="text-lg text-gray-text max-w-3xl mx-auto leading-relaxed">
           Every woman's health story is different. We're here to support your
           journey through our free AI-powered mobile app — a digital health
           companion thoughtfully guided by doctors who care.
@@ -157,7 +147,18 @@ export default function HorizontalScrollSection() {
       {isLargeScreen === null ? null : isLargeScreen ? (
         <div
           ref={sectionRef}
-          className="sticky top-[20vh] overflow-hidden h-[540px] mb-[100vh]"
+          className="sticky top-[20vh] overflow-hidden h-[540px]"
+          style={{
+            // Dynamically calculate required bottom margin based on total scroll
+            marginBottom: `${
+              ((450 * cards.length +
+                16 * (cards.length - 1) +
+                64 -
+                window.innerWidth) /
+                window.innerWidth) *
+              window.innerHeight
+            }px`,
+          }}
         >
           <div
             ref={containerRef}
@@ -180,5 +181,3 @@ export default function HorizontalScrollSection() {
     </div>
   );
 }
-
-

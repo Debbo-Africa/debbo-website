@@ -43,15 +43,14 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="relative bg-[#D76441] rounded-t-3xl mt-10 overflow-hidden">
-      <Tagline bgColor="none" textColor="text-[#DF8367]" />
+    <footer className="relative bg-secondary-debbo1 rounded-t-3xl mt-10 overflow-hidden">
+      <Tagline bgColor="none" textColor="text-secondary-debbo" />
       <div className="relative z-10 px-4 pb-8">
         <div className=" mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
-            {/* First Card */}
             <div className="rounded-3xl p-6 md:p-10 relative overflow-hidden min-h-[450px] flex items-center bg-[url('/images/woman-headphones.png')] bg-cover bg-no-repeat bg-center ">
               <div className=" absolute md:relative top-6 md:top-0 z-10 max-w-[18rem] md:max-w-[16rem] max-auto">
-                <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">
+                <h3 className="text-xl md:text-2xl font-bold text-general-white mb-4">
                   Stay connected with DébboAfrica!
                 </h3>
                 <form
@@ -61,7 +60,7 @@ export const Footer = () => {
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-sm font-medium text-gray-700 mb-2"
+                      className="block text-sm font-medium text-gray-text mb-2"
                     >
                       Email Address
                     </label>
@@ -77,7 +76,7 @@ export const Footer = () => {
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-black text-white py-3 px-6 rounded-full font-semibold hover:bg-gray-800 transition-colors"
+                    className="w-full bg-general-white text-general-black py-3 px-6 rounded-full font-semibold hover:bg-gray-800 transition-colors"
                   >
                     Subscribe →
                   </button>

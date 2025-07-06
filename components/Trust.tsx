@@ -7,66 +7,66 @@ import ButtonComponent from "./Button";
 const healthConditions = [
   {
     text: "Menopause Care",
-    color: "bg-[#D76441]",
+    color: "bg-[--color-secondary-debbo2]",
     finalPos: { x: 180, y: 520 },
   },
   {
     text: "Endometriosis",
-    color: "bg-[#FF9B33]",
+    color: "bg-[--color-secondary-debbo3]",
     finalPos: { x: 420, y: 480 },
   },
   {
     text: "Mental Health",
-    color: "bg-[#FFCE08]",
+    color: "bg-[--color-secondary-debbo4]",
     finalPos: { x: 650, y: 520 },
   },
   {
     text: "Skin & Gut Concerns",
-    color: "bg-[#7D5EFA]",
+    color: "bg-[--color-secondary-debbo9]",
     finalPos: { x: 720, y: 420 },
   },
   {
     text: "Hormonal Disorders",
-    color: "bg-[#FFCE08]",
+    color: "bg-[--color-secondary-debbo4]",
     finalPos: { x: 1050, y: 480 },
   },
   {
     text: "Gynaecology",
-    color: "bg-[#D76441]",
+    color: "bg-[--color-secondary-debbo5]",
     finalPos: { x: 1280, y: 440 },
   },
   {
     text: "Fibroids",
-    color: "bg-[#4BB543]",
+    color: "bg-[--color-secondary-debbo9]",
     finalPos: { x: 140, y: 580 },
   },
   {
     text: "Sexual Health",
-    color: "bg-[#01AC9C]",
+    color: "bg-[--color-secondary-debbo6]",
     finalPos: { x: 480, y: 600 },
   },
   {
     text: "General Health",
-    color: "bg-[#FF4671]",
+    color: "bg-[--color-secondary-debbo10]",
     finalPos: { x: 750, y: 580 },
   },
   {
     text: "PCOS",
-    color: "bg-[#3697FF]",
+    color: "bg-[--color-secondary-debbo6]",
     finalPos: { x: 980, y: 540 },
   },
   {
-    text: "Cervical Cancer Screening",
-    color: "bg-[#FF9B33]",
+    text: "Cervical Cancer ",
+    color: "bg-[--color-secondary-debbo3]",
     finalPos: { x: 900, y: 600 },
   },
 ];
 
 export const Trust = () => {
   const sceneRef = useRef<HTMLDivElement>(null);
-  const engineRef = useRef<Matter.Engine>();
-  const renderRef = useRef<Matter.Render>();
-  const mouseConstraintRef = useRef<Matter.MouseConstraint>();
+  const engineRef = useRef<Matter.Engine>(null);
+  const renderRef = useRef<Matter.Render>(null);
+  const mouseConstraintRef = useRef<Matter.MouseConstraint>(null);
   const [isRaining, setIsRaining] = useState(true);
   const [tags, setTags] = useState<
     {
@@ -306,7 +306,7 @@ export const Trust = () => {
   }, [shouldStartAnimation]);
 
   return (
-    <section className="relative h-[100vh] overflow-hidden bg-[#F2E9DD] m-4 rounded-3xl ">
+    <section className="relative h-[100vh] overflow-hidden  m-4 rounded-3xl ">
       {/* Rain effect overlay */}
       {isRaining && (
         <div className="absolute inset-0 pointer-events-none z-5">
@@ -315,16 +315,16 @@ export const Trust = () => {
       )}
       <div className="max-w-6xl mx-auto px-4 sm:px-8 relative z-10 pt-20">
         <div className="text-center mb-8">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            We focus on conditions that
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-general-white mb-6 ">
+            We focus on conditions that 
             <br />
-            impact African women
+            significantly impact African women
           </h2>
-          <p className="text-base sm:text-lg text-gray-700 mb-8 max-w-2xl mx-auto px-4">
+          <p className="text-base sm:text-lg text-gray-text mb-8 max-w-2xl mx-auto px-4">
             Whether you're managing pain, planning a family, or just not feeling
             like yourself, we are here to help.
           </p>
-        <ButtonComponent/>
+          <ButtonComponent />
         </div>
       </div>
       {/* Physics Container */}

@@ -21,7 +21,7 @@ export const ImpactSection = () => {
               Africa, we're here to change this — with care that listens,
               understands, and meets you where you are.
             </p>
-            <ButtonComponent/>
+            <ButtonComponent />
           </div>
 
           {/* Statistics Cards - Mobile */}
@@ -142,10 +142,10 @@ export const ImpactSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start mb-16">
             <div className="space-y-8 h-full flex flex-col justify-center">
               <div>
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-snug">
+                <h2 className="text-4xl md:text-5xl font-bold text-general-white mb-6 leading-snug">
                   Impact that <br /> Matters
                 </h2>
-                <p className="text-lg text-gray-700 leading-relaxed mb-8">
+                <p className="text-lg text-gray-text leading-relaxed mb-8">
                   For far too long, the health concerns and symptoms experienced
                   by African women have been overlooked and undervalued in both
                   medical research and healthcare practices. This neglect has
@@ -153,7 +153,7 @@ export const ImpactSection = () => {
                   unique health needs.
                 </p>
                 <div className="flex items-center gap-4 mb-6">
-                 <ButtonComponent/>
+                  <ButtonComponent />
                 </div>
               </div>
             </div>
@@ -243,8 +243,8 @@ export const ImpactSection = () => {
                 fill
                 className="object-cover"
               />
-              <div className="absolute bottom-0 left-0 right-0 p-8 z-10 max-w-xs">
-                <h3 className="text-2xl font-bold mb-1">No insurance?</h3>
+              <div className="absolute bottom-0 left-0 right-0 p-8 z-10 max-w-xs text-general-black">
+                <h3 className="text-2xl font-bold mb-1 ">No insurance?</h3>
                 <h3 className="text-2xl font-bold mb-6">No problem.</h3>
                 <p className="text-sm opacity-90 leading-relaxed">
                   We offer flexible, transparent payment options that work for
@@ -255,13 +255,13 @@ export const ImpactSection = () => {
 
             <div className="space-y-8 flex flex-col justify-between">
               <div>
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+                <h2 className="text-4xl md:text-5xl font-bold text-general-white mb-4 leading-tight">
                   Start for free.
                 </h2>
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-10 leading-tight">
+                <h2 className="text-4xl md:text-5xl font-bold text-general-white mb-10 leading-tight">
                   Stay in control.
                 </h2>
-                <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+                <p className="text-lg text-gray-text mb-8 leading-relaxed">
                   We also work with insurance providers and employer health
                   plans to make your care even more affordable. Our HMO partners
                   include AXA Mansard, Reliance, Leadway, BUPA and Allianz.
