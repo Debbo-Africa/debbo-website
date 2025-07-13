@@ -77,7 +77,7 @@ const config: Config = {
         "general-black": "var(--general-black)",
         "body-text-gray": "var(--body-text-gray)",
         "gray-text": "var(--gray-text)",
-        "text-gray": "var(--text-gray)",
+        "text-gray": "var(--text-body)",
 
         /* Forms */
         "form-bg": "var(--form-bg)",
@@ -98,6 +98,7 @@ const config: Config = {
         "secondary-debbo11": "var(--color-secondary-debbo11)",
         "secondary-debbo-dark": "var(--color-secondary-debbo-dark)",
         "secondary-debbo-dark1": "var(--color-secondary-debbo-dark1)",
+        "text-body": "var(--text-body)",
 
         /* Other specific colors */
         green: "var(--green)",

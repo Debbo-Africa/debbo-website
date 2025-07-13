@@ -52,7 +52,7 @@ export default function HeroSection() {
 
       if (cursorRef.current) cursorRef.current.style.opacity = "1";
 
-      await sleep(2000); 
+      await sleep(2000);
       await eraseWord();
     };
 
@@ -77,7 +77,7 @@ export default function HeroSection() {
       if (cursorRef.current) cursorRef.current.style.opacity = "1";
 
       currentWordIndex = (currentWordIndex + 1) % words.length;
-      await sleep(500); 
+      await sleep(500);
       await typeWord(words[currentWordIndex]);
     };
 
@@ -89,29 +89,34 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="pt-32 sm:pt-44 pb-16 px-4 sm:px-6 lg:px-8">
+    <section className="pt-32 sm:pt-44 pb-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl lg:text-6xl font-extrabold text-general-white mb-6 leading-normal ">
-          <div className="flex flex-col md:flex-row md:items-center">
-            <span className="flex items-center text-yellow md:mr-2">
-              <span ref={animatedWordRef}></span>
-              <span
-                ref={cursorRef}
-                className="ml-1 animate-blink  md:leading-normal"
-              >
-                |
+        <div className="text-center">
+          {" "}
+          <h1 className="text-4xl lg:text-6xl font-extrabold text-general-black mb-6 leading-normal inline-block">
+            <div className="flex flex-col md:flex-row items-center justify-center">
+              <span className="flex items-center text-yellow md:mr-2">
+                <span ref={animatedWordRef}></span>
+                <span
+                  ref={cursorRef}
+                  className="ml-1 animate-blink md:leading-normal"
+                >
+                  |
+                </span>
               </span>
-            </span>
-            <span>African Women</span>
-          </div>
-          <span>Through Smart Health</span>
-        </h1>
+              <span>African Women</span>
+            </div>
+            <span className="block">Through Smart Health</span>
+          </h1>
+        </div>
 
-        <p className="text-md sm:text-xl text-gray-text mb-8 mx-auto text-left font-medium">
-          Cutting-Edge Care for African Women's Health
-        </p>
-
-        <ButtonComponent />
+        <div className="text-center max-w-xl mx-auto">
+          {" "}
+          <p className="text-md sm:text-xl text-body-text-gray mb-8 font-medium">
+            Cutting-Edge Care for African Women's Health
+          </p>
+          <ButtonComponent />
+        </div>
       </div>
 
       <style jsx>{`

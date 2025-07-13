@@ -315,12 +315,12 @@ export const Trust = () => {
       )}
       <div className="max-w-6xl mx-auto px-4 sm:px-8 relative z-10 pt-20">
         <div className="text-center mb-8">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-general-white mb-6 ">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-general-black mb-6 ">
             We focus on conditions that 
             <br />
             significantly impact African women
           </h2>
-          <p className="text-base sm:text-lg text-gray-text mb-8 max-w-2xl mx-auto px-4">
+          <p className="text-base sm:text-lg text-body-text-gray mb-8 max-w-2xl mx-auto px-4">
             Whether you're managing pain, planning a family, or just not feeling
             like yourself, we are here to help.
           </p>

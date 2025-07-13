@@ -5,14 +5,12 @@ import HowItworks from "@/components/How-it-works";
 import { Trust } from "@/components/Trust";
 import { ImpactSection } from "@/components/ImpactSection";
 import FAQSection from "@/components/faq-section";
-import Footer from "@/components/footer-section";
 import DownloadSection from "@/components/download-app";
 import WhyChooseSection from "@/components/why-choose-section";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-badge">
-      <Navbar />
       <HeroSection />
       <ScrollingCards />
       <HowItworks />
@@ -21,7 +19,6 @@ export default function Home() {
       <ImpactSection />
       <WhyChooseSection/>
       <FAQSection />
-      <Footer/>
     </main>
   );
 }

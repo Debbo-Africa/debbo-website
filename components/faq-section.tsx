@@ -1,7 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, Plus, Minus, Star } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Plus,
+  Minus,
+  Star,
+  MoveRight,
+  MoveLeft,
+} from "lucide-react";
+import Image from "next/image";
 
 interface Review {
   id: number;
@@ -93,32 +102,21 @@ export const FAQSection = () => {
       <div className="relative z-10 min-h-screen flex items-end pb-16 px-4 pt-[28rem] md:pt-[25rem]">
         <div className="max-w-5xl mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
-            {/* Left Column - Two Cards with Matching Height */}
             <div className="flex flex-col gap-6 h-full">
-              {/* Trustpilot & Review Card - Expandable */}
               <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-sm flex-1 flex flex-col">
-                {/* Trustpilot Rating */}
                 <div className="mb-6">
                   <div className="flex items-center gap-2 mb-2">
-                    <Star className="w-4 h-4 text-green-600 fill-green-600" />
-                    <div className="text-xs font-medium text-gray-600">
-                      Trustpilot
-                    </div>
+                    <Image
+                      src="images/trustpilot.svg"
+                      alt="truestpilot"
+                      width={100}
+                      height={40}
+                    />{" "}
+                    <p className="text-sm ">
+                      99% of clients
+                      rated our health <br/> services as 'Excellent'
+                    </p>
                   </div>
-                  <div className="flex items-center gap-1 mb-1">
-                    {[...Array(5)].map((_, i) => (
-                      <div
-                        key={i}
-                        className="w-4 h-4 bg-green-500 rounded-sm flex items-center justify-center"
-                      >
-                        <span className="text-white text-xs">★</span>
-                      </div>
-                    ))}
-                  </div>
-                  <p className="text-xs text-gray-700">
-                    <span className="font-semibold">99%</span> of clients rated
-                    our health services as 'Excellent'
-                  </p>
                 </div>
 
                 {/* Review Content - Takes remaining space */}
@@ -130,21 +128,20 @@ export const FAQSection = () => {
                     {reviews[currentReview].author}
                   </p>
 
-                  {/* Navigation Arrows */}
                   <div className="flex items-center gap-3">
                     <button
                       onClick={prevReview}
-                      className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:border-gray-400 transition-colors"
+                      className="w-8 h-8 rounded-full flex items-center justify-center  transition-colors"
                       aria-label="Previous review"
                     >
-                      <ChevronLeft className="w-4 h-4 text-gray-600" />
+                      <MoveLeft className="w-6 h-6 text-gray-600 bg-[#FFF8F04D] p-1 rounded-full" />
                     </button>
                     <button
                       onClick={nextReview}
-                      className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:border-gray-400 transition-colors"
+                      className="w-8 h-8 rounded-fullflex items-center justify-center transition-colors"
                       aria-label="Next review"
                     >
-                      <ChevronRight className="w-4 h-4 text-gray-600" />
+                      <MoveRight className="w-6 h-6 text-gray-600 bg-[#FFF8F04D] p-1 rounded-full " />
                     </button>
                   </div>
                 </div>
@@ -163,16 +160,16 @@ export const FAQSection = () => {
               </div>
             </div>
 
-            {/* Right Column - FAQ */}
             <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-sm flex flex-col h-full">
               <div className="text-center mb-6">
-                <h2 className="text-2xl font-bold text-gray-900 mb-1">
+                <h2 className="text-2xl font-bold text-general-black mb-1">
                   Frequently Asked
                 </h2>
-                <h2 className="text-2xl font-bold text-gray-900">Questions</h2>
+                <h2 className="text-2xl font-bold text-general-black">
+                  Questions
+                </h2>
               </div>
 
-              {/* FAQ Items */}
               <div className="space-y-2 mb-6 flex-1">
                 {faqs.map((faq) => (
                   <div
@@ -181,22 +178,22 @@ export const FAQSection = () => {
                   >
                     <button
                       onClick={() => toggleFAQ(faq.id)}
-                      className="w-full px-4 py-3 text-left flex items-center justify-between transition-colors"
+                      className="w-full px-4 py-3 text-left flex items-center justify-between transition-colors "
                     >
-                      <span className="font-medium text-gray-900 text-sm pr-4">
+                      <span className="font-medium text-general-black text-sm pr-4">
                         {faq.question}
                       </span>
-                      <div className="flex-shrink-0">
+                      <div className="flex-shrink-0 ">
                         {openFAQ === faq.id ? (
-                          <Minus className="w-4 h-4 text-gray-600" />
+                          <Minus className="w-6 h-6 text-white bg-[#0D0D0DFC] p-1 rounded-full" />
                         ) : (
-                          <Plus className="w-4 h-4 text-gray-600" />
+                          <Plus className="w-6 h-6 text-gray-600 bg-[#FFF8F04D] p-1 rounded-full" />
                         )}
                       </div>
                     </button>
 
                     {openFAQ === faq.id && (
-                      <div className="px-4 pb-3 border-t border-gray-100">
+                      <div className="px-4 pb-3 border-t border-gray-100 ">
                         <p className="text-gray-700 text-sm leading-relaxed pt-3">
                           {faq.answer}
                         </p>
@@ -206,11 +203,10 @@ export const FAQSection = () => {
                 ))}
               </div>
 
-              {/* View All FAQs Button */}
               <div className="text-left">
-                <button className="bg-black w-full md:w-fit justify-center text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition-colors inline-flex items-center gap-2 text-sm">
+                <button className="bg-[#0D0D0DFC] w-full md:w-fit justify-center text-general-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition-colors inline-flex items-center gap-2 text-sm">
                   View all FAQs
-                  <ChevronRight className="w-4 h-4" />
+                  <MoveRight className="w-4 h-4" />
                 </button>
               </div>
             </div>

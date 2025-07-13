@@ -12,10 +12,10 @@ export const ImpactSection = () => {
       <div className="max-w-7xl mx-auto px-4">
         <div className="block md:hidden space-y-8">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4 leading-tight">
+            <h2 className="text-3xl font-bold text-general-black mb-4 leading-tight">
               Impact that Matters
             </h2>
-            <p className="text-base text-gray-700 leading-relaxed mb-6">
+            <p className="text-base text-body-text-gray leading-relaxed mb-6">
               African women's health has been overlooked and undervalued,
               leading to significant gaps in care and understanding. At Débbo
               Africa, we're here to change this — with care that listens,
@@ -24,9 +24,8 @@ export const ImpactSection = () => {
             <ButtonComponent />
           </div>
 
-          {/* Statistics Cards - Mobile */}
           <div className="space-y-4 px-2">
-            <div className="bg-[#FF9B33] rounded-2xl p-6 py-12 text-black">
+            <div className="bg-yellow rounded-2xl p-6 py-12 text-general-black">
               <div className="text-4xl font-bold mb-2">80%</div>
               <p className="text-md font-medium">
                 of Black women will develop fibroids by age 50. Most go
@@ -34,7 +33,7 @@ export const ImpactSection = () => {
               </p>
             </div>
 
-            <div className="bg-red-400 rounded-2xl p-6 py-12 text-black  items-start gap-4">
+            <div className="bg-secondary-debbo1 rounded-2xl p-6 py-12 text-general-black  items-start gap-4">
               <Image
                 src="/images/earth-africa.png"
                 alt="Africa"
@@ -50,7 +49,7 @@ export const ImpactSection = () => {
               </div>
             </div>
 
-            <div className="bg-teal-400 rounded-3xl p-6 py-12 text-black">
+            <div className="bg-green rounded-3xl p-6 py-12 text-general-black">
               <Image
                 src="/images/Vector.png"
                 alt="Africa"
@@ -66,13 +65,13 @@ export const ImpactSection = () => {
           </div>
 
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-2 leading-tight">
+            <h2 className="text-3xl font-bold text-general-black mb-2 leading-tight">
               Start for free.
             </h2>
-            <h2 className="text-3xl font-bold text-gray-900 mb-4 leading-tight">
+            <h2 className="text-3xl font-bold text-general-black mb-4 leading-tight">
               Stay in control.
             </h2>
-            <p className="text-base text-gray-700 mb-6 leading-relaxed">
+            <p className="text-base  mb-6 leading-relaxed">
               We work with insurance providers and employer health plans to make
               your care even more affordable. Our HMO partners include AXA
               Mansard, Reliance, Leadway, BUPA and Allianz.
@@ -116,7 +115,6 @@ export const ImpactSection = () => {
             </div>
           </div>
 
-          {/* No insurance section - Mobile */}
           <div className="relative rounded-3xl overflow-hidden min-h-[500px] text-white">
             <Image
               src="/images/woman-smiling.png"
@@ -139,13 +137,13 @@ export const ImpactSection = () => {
         {/* Desktop Layout */}
         <div className="hidden md:block">
           {/* Top Section */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mb-16">
             <div className="space-y-8 h-full flex flex-col justify-center">
               <div>
-                <h2 className="text-4xl md:text-5xl font-bold text-general-white mb-6 leading-snug">
+                <h2 className="text-4xl md:text-5xl font-bold text-general-black mb-6 leading-snug">
                   Impact that <br /> Matters
                 </h2>
-                <p className="text-lg text-gray-text leading-relaxed mb-8">
+                <p className="text-lg text-body-text-gray leading-relaxed mb-8">
                   For far too long, the health concerns and symptoms experienced
                   by African women have been overlooked and undervalued in both
                   medical research and healthcare practices. This neglect has
@@ -158,18 +156,19 @@ export const ImpactSection = () => {
               </div>
             </div>
 
-            <div className="bg-[#F2E9DD] rounded-3xl p-6 pr-0 relative overflow-hidden h-full">
+            <div className="bg-[--surface-card] rounded-3xl p-6 pr-0 relative overflow-hidden h-full">
               <div className="space-y-2">
-                {/* 80% Statistic - Orange */}
                 <div
-                  className={`bg-[#FF9B33] rounded-l-full p-6 ml-8 transition-transform duration-300 ease-out ${
+                  className={`bg-yellow rounded-l-full p-6 ml-8 transition-transform duration-300 ease-out ${
                     hoveredStat === 0 ? "transform translate-x-4" : ""
                   }`}
                   onMouseEnter={() => setHoveredStat(0)}
                   onMouseLeave={() => setHoveredStat(null)}
                 >
                   <div className="flex items-center gap-2 md:gap-4">
-                    <div className="text-2xl font-bold text-black">80%</div>
+                    <div className="text-2xl font-bold text-general-black">
+                      80%
+                    </div>
                     <div className="text-black text-sm mt-2 leading-tight">
                       of Black women will develop fibroids by age 50. Most go
                       undiagnosed for years.
@@ -177,9 +176,8 @@ export const ImpactSection = () => {
                   </div>
                 </div>
 
-                {/* First Africa statistic - Coral */}
                 <div
-                  className={`bg-red-400 rounded-l-full p-6 ml-8 transition-transform duration-300 ease-out ${
+                  className={`bg-secondary-debbo1 rounded-l-full p-6 ml-8 transition-transform duration-300 ease-out ${
                     hoveredStat === 1 ? "transform translate-x-4" : ""
                   }`}
                   onMouseEnter={() => setHoveredStat(1)}
@@ -195,7 +193,7 @@ export const ImpactSection = () => {
                         className="w-6 h-6"
                       />
                     </div>
-                    <div className="text-sm text-black leading-tight">
+                    <div className="text-sm text-general-black leading-tight">
                       <span className="font-medium">
                         19 of the 20 countries with the highest cervical cancer
                         burden are in Africa.
@@ -204,9 +202,8 @@ export const ImpactSection = () => {
                   </div>
                 </div>
 
-                {/* Second Africa statistic - Teal */}
                 <div
-                  className={`bg-teal-400 rounded-l-full p-6 ml-8 transition-transform duration-300 ease-out ${
+                  className={`bg-green rounded-l-full p-6 ml-8 transition-transform duration-300 ease-out ${
                     hoveredStat === 2 ? "transform translate-x-4" : ""
                   }`}
                   onMouseEnter={() => setHoveredStat(2)}
@@ -222,7 +219,7 @@ export const ImpactSection = () => {
                         className="w-10 h-10"
                       />
                     </div>
-                    <div className="text-sm text-black leading-tight">
+                    <div className="text-sm text-general-black leading-tight">
                       <span className="font-medium">
                         Millions of African women are living with Polycystic
                         Ovarian Syndrome (PCOS), many without even knowing it.
@@ -234,8 +231,7 @@ export const ImpactSection = () => {
             </div>
           </div>
 
-          {/* Bottom Section */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
             <div className="relative rounded-3xl overflow-hidden min-h-[400px] text-white">
               <Image
                 src="/images/woman-smiling.png"
@@ -255,13 +251,13 @@ export const ImpactSection = () => {
 
             <div className="space-y-8 flex flex-col justify-between">
               <div>
-                <h2 className="text-4xl md:text-5xl font-bold text-general-white mb-4 leading-tight">
+                <h2 className="text-4xl md:text-5xl font-bold text-general-black mb-4 leading-tight">
                   Start for free.
                 </h2>
-                <h2 className="text-4xl md:text-5xl font-bold text-general-white mb-10 leading-tight">
+                <h2 className="text-4xl md:text-5xl font-bold text-body-text-gray mb-10 leading-tight">
                   Stay in control.
                 </h2>
-                <p className="text-lg text-gray-text mb-8 leading-relaxed">
+                <p className="text-lg text-body-text-gray mb-8 leading-relaxed">
                   We also work with insurance providers and employer health
                   plans to make your care even more affordable. Our HMO partners
                   include AXA Mansard, Reliance, Leadway, BUPA and Allianz.

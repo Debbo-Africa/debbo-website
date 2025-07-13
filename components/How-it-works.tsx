@@ -1,183 +1,80 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
-export default function HorizontalScrollSection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isLargeScreen, setIsLargeScreen] = useState<boolean | null>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
+const cards = [
+  {
+    id: 1,
+    title: "Triage",
+    description:
+      "Our AI-powered tool helps guide you to the right care quickly and safely.",
+    image: "/images/triage-phone.png",
+    alt: "Triage phone interface",
+  },
+  {
+    id: 2,
+    title: "Consult",
+    description: "Speak with licensed doctors virtually or in person.",
 
-  useEffect(() => {
-    const checkScreenSize = () => {
-      setIsLargeScreen(window.innerWidth >= 1024);
-    };
-    checkScreenSize();
-    window.addEventListener("resize", checkScreenSize);
-    return () => window.removeEventListener("resize", checkScreenSize);
-  }, []);
+    image: "/images/doctor.png",
+    alt: "Consult phone interface",
+  },
+  {
+    id: 3,
+    title: "Act",
+    description:
+      "Need a lab test or scan? We come to you, or you can visit our Lekki facility. All tests are reviewed by trusted clinical experts.",
+    image: "/images/act-microscope.png",
+    alt: "Lab test image",
+  },
+  {
+    id: 4,
+    title: "Support",
+    description:
+      "Care doesn't end with a test. Track results, access health reminders, join community forums, and learn from personalised content in the app.",
+    image: "/images/consult-phone.png",
+    alt: "Support care image",
+  },
+];
 
-  useEffect(() => {
-    if (!isLargeScreen) return;
-
-    const handleScroll = () => {
-      const section = sectionRef.current;
-      if (!section) return;
-
-      const rect = section.getBoundingClientRect();
-      const sectionHeight = section.offsetHeight;
-      const windowHeight = window.innerHeight;
-
-      const startOffset = windowHeight * 0.2;
-      const endOffset = -sectionHeight + windowHeight * 0.8;
-
-      if (rect.top <= startOffset && rect.top >= endOffset) {
-        const progress = (startOffset - rect.top) / (startOffset - endOffset);
-        const clampedProgress = Math.max(0, Math.min(1, progress));
-        setScrollProgress(clampedProgress);
-      } else if (rect.top > startOffset) {
-        setScrollProgress(0);
-      } else if (rect.top < endOffset) {
-        setScrollProgress(1);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isLargeScreen]);
-
-  const cards = [
-    {
-      id: 1,
-      title: "Triage",
-      description:
-        "Our AI-powered tool helps guide you to the right care quickly and safely.",
-      image: "/images/triage-phone.png",
-      alt: "Triage phone interface",
-      bgClass: "",
-    },
-    {
-      id: 2,
-      title: "Consult",
-      description: "Speak with licensed doctors virtually or in person.",
-      image: "/images/consult-phone.png",
-      alt: "Consult phone interface",
-      bgClass: "",
-    },
-    {
-      id: 3,
-      title: "Act",
-      description:
-        "Need a lab test or scan? We come to you, or you can visit our trusted facilities. All tests are reviewed by trusted clinical experts.",
-      image: "/images/act-microscope.png",
-      alt: "Medical microscope",
-      bgClass: "",
-    },
-    {
-      id: 4,
-      title: "Support",
-      description:
-        "Care doesn't end with a test. Track results, access health reminders, join community forums, and learn from personalised content in the app.",
-      image: "/images/doctor.png",
-      alt: "Doctor providing care",
-      bgClass: "",
-    },
-  ];
-
-
-  const renderCard = (card: any) => (
-    <div
-      key={card.id}
-      className={`flex-shrink-0 w-[450px] h-[540px] rounded-3xl relative overflow-hidden ${card.bgClass}`}
-    >
-      <Image
-        src={card.image || "/placeholder.svg"}
-        alt={card.alt}
-        fill
-        className="object-cover"
-      />
-      <div
-        className={`absolute top-6 left-6 md:top-8 md:left-8 z-10 ${
-          card.id === 1 ? "text-general-white" : "text-general-black"
-        }`}
-      >
-        <h3 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4 ">
-          {card.title}
-        </h3>
-        <p className="text-base leading-relaxed opacity-90 md:text-lg max-w-[280px] md:max-w-[340px]">
-          {card.description}
-        </p>
-      </div>
-    </div>
-  );
-
-  const getTransform = () => {
-    if (!isLargeScreen) return {};
-
-    const cardWidth = 450;
-    const gap = 16;
-    const padding = 64;
-    const numCards = cards.length;
-    const totalContentWidth =
-      cardWidth * numCards + gap * (numCards - 1) + padding;
-    const maxScroll = totalContentWidth - window.innerWidth;
-    const translateX = -(scrollProgress * maxScroll);
-
-    return {
-      transform: `translateX(${translateX}px)`,
-      transition: "transform 0.1s ease-out",
-    };
-  };
-
+export default function HorizontalProcessSection() {
   return (
-    <div>
-      <div className="text-center py-16 px-4">
-        <h2 className="text-4xl md:text-5xl font-bold text-general-white mb-6 max-w-4xl mx-auto leading-tight">
+    <section className="py-16 px-4 md:px-8">
+      <div className="text-center mb-16 max-w-4xl mx-auto">
+        <h2 className="text-4xl md:text-5xl font-bold text-general-black mb-6 leading-tight">
           Discover the seamless process behind our approach.
         </h2>
-        <p className="text-lg text-gray-text max-w-3xl mx-auto leading-relaxed">
-          Every woman's health story is different. We're here to support your
-          journey through our free AI-powered mobile app — a digital health
-          companion thoughtfully guided by doctors who care.
+        <p className="text-lg text-body-text-gray leading-relaxed">
+          Every woman&apos;s health story is different. We&apos;re here to
+          support your journey through our free AI-powered mobile app, a digital
+          health companion thoughtfully guided by doctors who care.
         </p>
       </div>
 
-      {isLargeScreen === null ? null : isLargeScreen ? (
-        <div
-          ref={sectionRef}
-          className="sticky top-[20vh] overflow-hidden h-[540px]"
-          style={{
-            // Dynamically calculate required bottom margin based on total scroll
-            marginBottom: `${
-              ((450 * cards.length +
-                16 * (cards.length - 1) +
-                64 -
-                window.innerWidth) /
-                window.innerWidth) *
-              window.innerHeight
-            }px`,
-          }}
-        >
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto ">
+        {cards.map((card) => (
           <div
-            ref={containerRef}
-            className="flex gap-4 px-8"
-            style={{
-              width: "fit-content",
-              ...getTransform(),
-            }}
+            key={card.id}
+            className="rounded-3xl overflow-hidden text-center pb-0 p-6 md:p-8  lg:pb-0 bg-[--surface-card] flex flex-col h-full"
           >
-            {cards.map((card) => renderCard(card))}
+            <div className="mb-6 max-w-xs mx-auto">
+              <h3 className="text-2xl font-bold text-general-black mb-2">
+                {card.title}
+              </h3>
+              <p className="text-base  text-body-text-gray leading-relaxed  mb-8 md:mb-0">
+                {card.description}
+              </p>
+            </div>
+            <div className="w-full relative h-[350px] max-w-sm mx-auto mt-auto rounded-t-2xl">
+              <Image
+                src={card.image}
+                alt={card.alt}
+                fill
+                className="object-contain rounded-xl hover:scale-105 duration-1000"
+              />
+            </div>
           </div>
-        </div>
-      ) : (
-        <div className="px-4 md:px-8 pb-16">
-          <div className="max-w-2xl mx-auto">
-            {cards.map((card) => renderCard(card))}
-          </div>
-        </div>
-      )}
-    </div>
+        ))}
+      </div>
+    </section>
   );
 }

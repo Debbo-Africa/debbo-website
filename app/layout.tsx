@@ -4,6 +4,8 @@ import { DM_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer-section";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -13,56 +15,14 @@ const dmSans = DM_Sans({
 
 const satoshi = localFont({
   src: [
-    {
-      path: "./fonts/Satoshi-Black.otf",
-      weight: "50",
-      style: "normal",
-    },
+ 
     {
       path: "./fonts/Satoshi-BlackItalic.otf",
       weight: "100",
       style: "normal",
     },
-    {
-      path: "./fonts/Satoshi-Bold.otf",
-      weight: "200",
-      style: "normal",
-    },
-    {
-      path: "./fonts/Satoshi-BoldItalic.otf",
-      weight: "300",
-      style: "normal",
-    },
-    {
-      path: "./fonts/Satoshi-Italic.otf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "./fonts/Satoshi-Light.otf",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "./fonts/Satoshi-LightItalic.otf",
-      weight: "600",
-      style: "normal",
-    },
-    {
-      path: "./fonts/Satoshi-Medium.otf",
-      weight: "700",
-      style: "normal",
-    },
-    {
-      path: "./fonts/Satoshi-MediumItalic.otf",
-      weight: "800",
-      style: "normal",
-    },
-    {
-      path: "./fonts/Satoshi-Regular.otf",
-      weight: "900",
-      style: "normal",
-    },
+   
+   
   ],
   variable: "--font-satoshi",
   display: "swap",
@@ -80,8 +40,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${dmSans.variable} ${satoshi.variable}`}>
-      <body className="min-h-screen bg-general-white  text-general-black  transition-colors">
-        <ThemeProvider>{children}</ThemeProvider>
+      <body className="min-h-screen   text-general-black  transition-colors bg-badge">
+        <ThemeProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -1,0 +1,31 @@
+"use client";
+
+import React from "react";
+import Image from "next/image";
+
+const DebboAfricaHubSection = () => {
+  return (
+    <section className="flex flex-col gap-8 py-20 px-6 max-w-7xl mx-auto">
+      <div className="relative w-full overflow-hidden rounded-xl bg-gray-200 h-[400px] md:h-[500px]">
+        <Image
+          src="/images/debbo-hub.jpg"
+          alt="Student hub"
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 75vw"
+          priority
+        />
+
+        <div className="absolute bottom-4 left-4 text-white font-semibold text-2xl md:text-3xl">
+          Débbo Africa
+          <br />
+          Student Hub
+          <br />
+          DASH
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default DebboAfricaHubSection;

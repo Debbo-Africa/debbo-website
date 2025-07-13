@@ -11,7 +11,7 @@ const ButtonComponent: React.FC<ButtonComponentProps> = ({
 }) => {
   return (
     <Button
-      className={`bg-general-white text-sm text-general-black hover:bg-gray-800 rounded-full px-4 py-6 font-medium ${
+      className={`bg-[#0D0D0DFC] text-sm text-general-white  rounded-full px-4 py-6 font-medium ${
         fullWidth ? "w-full" : ""
       }`}
     >
