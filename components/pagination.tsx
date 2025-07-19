@@ -28,7 +28,7 @@ export function Pagination({
         variant={variant}
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="flex items-center space-x-1"
+        className="flex items-center space-x-1 bg-transparent hover:bg-transparent"
       >
         <ChevronLeft className="w-4 h-4" />
         <span>Previous</span>
@@ -42,7 +42,7 @@ export function Pagination({
           className={`w-8 h-8 p-0 ${
             currentPage === page
               ? "bg-general-black text-yellow hover:bg-general-black"
-              : ""
+              : "bg-transparent   hover:bg-transparent"
           }`}
         >
           {page}
@@ -53,9 +53,9 @@ export function Pagination({
         variant={variant}
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="flex items-center space-x-1"
+        className="flex items-center space-x-1  bg-transparent hover:bg-transparent"
       >
-        <span>Next</span>
+        <span className="bg-transparent">Next</span>
         <ChevronRight className="w-4 h-4" />
       </Button>
     </div>

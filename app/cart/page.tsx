@@ -153,7 +153,7 @@ export default function CartPage() {
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium mb-1">
                         First Name
@@ -182,7 +182,7 @@ export default function CartPage() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium mb-1">
                         Email
@@ -229,7 +229,7 @@ export default function CartPage() {
 
                   <Button
                     type="submit"
-                    className="w-full rounded-full bg-yellow hover:bg-yellow"
+                    className="w-full rounded-full bg-yellow hover:bg-yellow text-general-black"
                   >
                     Order Now →
                   </Button>

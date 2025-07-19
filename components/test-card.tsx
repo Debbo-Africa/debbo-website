@@ -10,6 +10,7 @@ import type { MedicalTestEntry } from "@/types/contentful";
 
 interface TestCardProps {
   test: MedicalTestEntry;
+  hideCart?: boolean; 
 }
 
 const richTextOptions = {
@@ -41,18 +42,21 @@ const countTestsInRichText = (richText: any): number => {
     }
   };
 
-  if (richText.content) {
+  if (richText?.content) {
     richText.content.forEach(countInNode);
   }
 
   return count;
 };
 
-export function TestCard({ test }: TestCardProps) {
+export function TestCard({ test, hideCart }: TestCardProps) {
   const { addToCart, updateQuantity, isInCart, getItemQuantity } = useCart();
   const quantity = getItemQuantity(test.sys.id);
   const inCart = isInCart(test.sys.id);
   const testCount = countTestsInRichText(test.fields.testList);
+  const scanCount = countTestsInRichText(test.fields.scan);
+
+  const useScan = test.fields.scan === true;
 
   const handleAddToCart = () => {
     addToCart({
@@ -61,7 +65,7 @@ export function TestCard({ test }: TestCardProps) {
       price: test.fields.price,
       category: test.fields.category,
       type: test.fields.type,
-      testCount,
+      testCount: useScan ? scanCount : testCount,
     });
   };
 
@@ -72,7 +76,7 @@ export function TestCard({ test }: TestCardProps) {
   return (
     <Card className="h-full flex flex-col bg-[--surface-card] border-none rounded-2xl">
       <CardContent className="p-6 flex flex-col h-full">
-        <div className="flex justify-between items-start mb-4">
+        <div className="flex justify-between items-start mb-4 ">
           <div>
             <h3 className="font-semibold text-lg mb-1">
               {test.fields.testName}
@@ -80,7 +84,7 @@ export function TestCard({ test }: TestCardProps) {
             <p className="text-xl font-bold">{test.fields.price}</p>
           </div>
           {test.fields.category && (
-            <span className="bg-[#FFF8F0] text-general-black px-3 py-1 rounded-full text-sm">
+            <span className="bg-[#FFF8F0] text-general-black px-3 py-1 rounded-full text-xs md:text-sm">
               {test.fields.category}
             </span>
           )}
@@ -88,8 +92,13 @@ export function TestCard({ test }: TestCardProps) {
 
         <div className="mb-4">
           <span className="text-sm font-medium text-body-text-gray">
-            {testCount > 0 ? testCount : 1} Test
-            {testCount > 1 || testCount === 0 ? "s" : ""}
+            {useScan
+              ? `${scanCount > 0 ? scanCount : 1} Scan${
+                  scanCount !== 1 ? "" : "s"
+                }`
+              : `${testCount > 0 ? testCount : 1} Test${
+                  testCount !== 1 ? "s" : ""
+                }`}
           </span>
         </div>
 
@@ -97,39 +106,41 @@ export function TestCard({ test }: TestCardProps) {
           {documentToReactComponents(test.fields.testList, richTextOptions)}
         </div>
 
-        <div className="mt-auto">
-          {!inCart ? (
-            <Button
-              onClick={handleAddToCart}
-              variant="outline"
-              className="w-full hover:bg-[#0D0D0DFC] rounded-full hover:text-white transition-colors bg-transparent"
-            >
-              Add to cart +
-            </Button>
-          ) : (
-            <div className="flex items-center justify-center gap-4">
+        {!hideCart && (
+          <div className="mt-auto">
+            {!inCart ? (
               <Button
+                onClick={handleAddToCart}
                 variant="outline"
-                size="icon"
-                onClick={() => handleQuantityChange(quantity - 1)}
-                className="rounded-full bg-[#0D0D0DFC]   text-white hover:bg-[#D9D0C6]"
+                className="w-full hover:bg-[#0D0D0DFC] rounded-full hover:text-white transition-colors bg-transparent"
               >
-                <Minus className="w-4 h-4" />
+                Add to cart +
               </Button>
-              <Button className="font-semibold text-lg flex-1 bg-[#D9D0C6] text-general-black rounded-full hover:bg-[#D9D0C6]">
-                {quantity}
-              </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => handleQuantityChange(quantity + 1)}
-                className="rounded-full bg-[#0D0D0DFC] text-white hover:bg-[#D9D0C6]"
-              >
-                <Plus className="w-4 h-4" />
-              </Button>
-            </div>
-          )}
-        </div>
+            ) : (
+              <div className="flex items-center justify-center gap-4">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => handleQuantityChange(quantity - 1)}
+                  className="rounded-full bg-[#0D0D0DFC] text-white hover:bg-[#D9D0C6]"
+                >
+                  <Minus className="w-4 h-4" />
+                </Button>
+                <Button className="font-semibold text-lg flex-1 bg-[#D9D0C6] text-general-black rounded-full hover:bg-[#D9D0C6]">
+                  {quantity}
+                </Button>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => handleQuantityChange(quantity + 1)}
+                  className="rounded-full bg-[#0D0D0DFC] text-white hover:bg-[#D9D0C6]"
+                >
+                  <Plus className="w-4 h-4" />
+                </Button>
+              </div>
+            )}
+          </div>
+        )}
       </CardContent>
     </Card>
   );

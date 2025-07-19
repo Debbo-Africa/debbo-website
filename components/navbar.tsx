@@ -85,7 +85,7 @@ export default function EnhancedNavbar() {
     },
     {
       label: "Speak to a Doctor",
-      href: "/individual/speak-to-doctor",
+      href: "/individual/contact-a-doctor",
       image: "/images/glossary.jpg",
       description: "Stay up to date with regular health tips",
     },

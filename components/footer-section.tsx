@@ -220,35 +220,35 @@ export const Footer = () => {
               <h4 className="text-white/80  mb-4">HMO partners</h4>
               <div className="grid grid-cols-2 gap-3">
                 <Image
-                  src="/images/AXA_Mansard.png"
+                  src="/images/AXA_Mansard.svg"
                   alt="AXA Mansard"
                   width={80}
                   height={40}
                   className="h-6 w-auto"
                 />
                 <Image
-                  src="/images/reliance.png"
+                  src="/images/reliance.svg"
                   alt="Reliance"
                   width={80}
                   height={40}
                   className="h-6 w-auto"
                 />
                 <Image
-                  src="/images/leadway.png"
+                  src="/images/leadway.svg"
                   alt="Leadway"
                   width={80}
                   height={40}
                   className="h-6 w-auto"
                 />
                 <Image
-                  src="/images/Allianz-1.png"
+                  src="/images/Allianz-1.svg"
                   alt="Allianz"
                   width={80}
                   height={40}
                   className="h-6 w-auto"
                 />
                 <Image
-                  src="/images/bupa.png"
+                  src="/images/bupa.svg"
                   alt="BUPA"
                   width={80}
                   height={40}
