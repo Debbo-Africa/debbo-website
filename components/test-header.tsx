@@ -19,22 +19,22 @@ const tabs = [
   {
     key: "women",
     label: "Women's Health",
-    icon: "/placeholder.svg?height=20&width=20",
+    icon: "/images/woman-head.svg",
   },
   {
     key: "sexual",
     label: "Sexual Health",
-    icon: "/placeholder.svg?height=20&width=20",
+    icon: "/images/gynecology.svg",
   },
   {
     key: "general",
     label: "General Health",
-    icon: "/placeholder.svg?height=20&width=20",
+    icon: "/images/general-health.svg",
   },
   {
     key: "occupational",
     label: "Occupational Health",
-    icon: "/placeholder.svg?height=20&width=20",
+    icon: "/images/briefcase.svg",
   },
 ];
 

@@ -85,7 +85,7 @@ export default function CartPage() {
                   <CardContent className="p-6">
                     <div className="flex justify-between items-start mb-4">
                       <div>
-                        <p className="text-sm text-gray-600">{item.category}</p>
+                        <p className="text-xs md:text-sm text-body-text-gray">{item.category}</p>
                         <h3 className="font-semibold">{item.testName}</h3>
                         {item.testCount && (
                           <p className="text-sm text-gray-500">
@@ -229,7 +229,7 @@ export default function CartPage() {
 
                   <Button
                     type="submit"
-                    className="w-full rounded-full bg-yellow"
+                    className="w-full rounded-full bg-yellow hover:bg-yellow"
                   >
                     Order Now →
                   </Button>
