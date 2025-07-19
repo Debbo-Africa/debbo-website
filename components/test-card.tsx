@@ -112,7 +112,7 @@ export function TestCard({ test }: TestCardProps) {
                 variant="outline"
                 size="icon"
                 onClick={() => handleQuantityChange(quantity - 1)}
-                className="rounded-full bg-[#0D0D0DFC] text-white hover:bg-[#D9D0C6]"
+                className="rounded-full bg-[#0D0D0DFC]   text-white hover:bg-[#D9D0C6]"
               >
                 <Minus className="w-4 h-4" />
               </Button>

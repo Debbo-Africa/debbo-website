@@ -112,18 +112,20 @@ export default function CartPage() {
                           onClick={() =>
                             updateQuantity(item.id, item.quantity - 1)
                           }
-                          className="rounded-full w-8 h-8"
+                          className="rounded-full w-8 h-8 bg-[#0D0D0DFC] hover:bg-[#0D0D0DFC] text-white  hover:bg-[#D9D0C6]"
                         >
                           <Minus className="w-4 h-4" />
                         </Button>
-                        <span className="font-semibold">{item.quantity}</span>
+                        <Button className="font-semibold bg-[#D9D0C6] text-general-black rounded-full hover:bg-[#D9D0C6] px-4">
+                          {item.quantity}
+                        </Button>
                         <Button
                           variant="outline"
                           size="icon"
                           onClick={() =>
                             updateQuantity(item.id, item.quantity + 1)
                           }
-                          className="rounded-full w-8 h-8"
+                          className="rounded-full w-8 h-8 bg-[#0D0D0DFC] hover:bg-[#0D0D0DFC] hover:bg-[#D9D0C6] text-white"
                         >
                           <Plus className="w-4 h-4" />
                         </Button>
@@ -227,7 +229,7 @@ export default function CartPage() {
 
                   <Button
                     type="submit"
-                    className="w-full rounded-full bg-orange-500 hover:bg-orange-600"
+                    className="w-full rounded-full bg-yellow"
                   >
                     Order Now →
                   </Button>
