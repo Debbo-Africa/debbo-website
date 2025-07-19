@@ -70,7 +70,7 @@ export const Footer = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="e.g. test@debboafrica.com"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                      className="w-full px-4 py-3   rounded-lg outline-none bg-[--surface-card] focus:ring-none focus:border-transparent"
                       required
                     />
                   </div>
@@ -215,7 +215,6 @@ export const Footer = () => {
               </ul>
             </div>
 
-            {/* Payment Partners */}
             <div>
               <h4 className="text-white/80  mb-4">HMO partners</h4>
               <div className="grid grid-cols-2 gap-3">

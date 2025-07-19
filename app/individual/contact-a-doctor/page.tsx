@@ -120,7 +120,7 @@ export default function SpeakToDoctor() {
                   placeholder="Search tests..."
                   value={searchQuery}
                   onChange={handleSearchChange}
-                  className="pl-10 w-full md:max-w-xs bg-[--surface-card] border-none focus:outline-none focus:border-none"
+                  className="pl-10 w-full md:max-w-xs bg-[--surface-card] border-none focus:outline-none focus:border-none focus:ring-none"
                 />
               </div>
 
