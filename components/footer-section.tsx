@@ -50,7 +50,7 @@ export const Footer = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
             <div className="rounded-3xl p-6 md:p-10 relative overflow-hidden min-h-[450px] flex items-center bg-[url('/images/woman-headphones.png')] bg-cover bg-no-repeat bg-center ">
               <div className=" absolute md:relative top-6 md:top-0 z-10 max-w-[18rem] md:max-w-[16rem] max-auto">
-                <h3 className="text-xl md:text-2xl font-bold text-general-white mb-4">
+                <h3 className="text-xl md:text-2xl font-bold text-general-black mb-4">
                   Stay connected with DébboAfrica!
                 </h3>
                 <form
@@ -60,7 +60,7 @@ export const Footer = () => {
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-sm font-medium text-gray-text mb-2"
+                      className="block text-sm font-medium text-body-text-gray mb-2"
                     >
                       Email Address
                     </label>
@@ -76,7 +76,7 @@ export const Footer = () => {
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-general-white text-general-black py-3 px-6 rounded-full font-semibold hover:bg-gray-800 transition-colors"
+                    className="w-full bg-[#0D0D0DFC] text-general-white py-3 px-6 rounded-full font-semibold hover:bg-gray-800 transition-colors"
                   >
                     Subscribe →
                   </button>
@@ -96,14 +96,14 @@ export const Footer = () => {
 
                 <div className="absolute bottom-4  transform  md:static md:mt-10 flex items-center gap-2">
                   <Image
-                    src="/images/android-download.png"
+                    src="/images/playstore-small.svg"
                     alt="Download on Google Play"
                     width={160}
                     height={48}
                     className="h-12 w-auto"
                   />
                   <Image
-                    src="/images/app-store-download.png"
+                    src="/images/appstore-small.svg"
                     alt="Download on App Store"
                     width={160}
                     height={48}

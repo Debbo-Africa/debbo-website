@@ -150,7 +150,7 @@ export default function ScrollingCards() {
     return (
       <div
         key={card.id}
-        className={`flex-shrink-0 aspect-[3/2] ${cardWidth} h-[8.5rem] rounded-full mx-2 overflow-hidden ${
+        className={`flex-shrink-0 aspect-[3/2] ${cardWidth} h-[8.5rem] rounded-full mx-1 overflow-hidden ${
           card.type === "color" ? card.bgColor : "bg-gray-200"
         } relative`}
       >

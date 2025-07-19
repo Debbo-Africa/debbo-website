@@ -19,7 +19,7 @@ const config: Config = {
     extend: {
       fontFamily: {
         "dm-sans": ["var(--font-dm-sans)", "sans-serif"],
-        satoshi: ["var(--font-satoshi)", "sans-serif"],
+        recoleta: ["var(--font-recoleta)", "sans-serif"],
       },
       colors: {
         /* Core colors */
@@ -78,6 +78,7 @@ const config: Config = {
         "body-text-gray": "var(--body-text-gray)",
         "gray-text": "var(--gray-text)",
         "text-gray": "var(--text-body)",
+        "surface-card-bold": "var(--surface-card-bold)",
 
         /* Forms */
         "form-bg": "var(--form-bg)",

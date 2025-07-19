@@ -13,18 +13,15 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
-const satoshi = localFont({
+const recoleta = localFont({
   src: [
- 
     {
-      path: "./fonts/Satoshi-BlackItalic.otf",
-      weight: "100",
+      path: "./fonts/Recoleta-RegularDEMO.otf",
+      weight: "600",
       style: "normal",
     },
-   
-   
   ],
-  variable: "--font-satoshi",
+  variable: "--font-recoleta",
   display: "swap",
 });
 
@@ -39,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${satoshi.variable}`}>
+    <html lang="en" className={`${dmSans.variable} ${recoleta.variable}`}>
       <body className="min-h-screen   text-general-black  transition-colors bg-badge">
         <ThemeProvider>
           <Navbar />

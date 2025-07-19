@@ -93,13 +93,13 @@ export default function HeroSection() {
           </p>
         </div>
 
-        <div className="lg:w-1/2 rounded-xl overflow-hidden transform transition duration-500 hover:scale-105">
+        <div className="lg:w-1/2 rounded-xl overflow-hidden">
           <Image
             src="/images/hero-grid.png"
             alt="Corporate wellness team"
             width={600}
             height={400}
-            className="rounded-lg w-full"
+            className="rounded-lg w-full  transform transition duration-500 hover:scale-105"
             priority
           />
         </div>

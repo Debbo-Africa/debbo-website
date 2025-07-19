@@ -13,7 +13,6 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { BLOCKS, MARKS } from "@contentful/rich-text-types";
 import { Breadcrumb } from "./breadcrumb";
 import { BlogCard } from "./blog-card";
-import { DismissibleBanner } from "./dismissable-banner";
 
 interface BlogDetailPageProps {
   slug: string;
@@ -39,7 +38,6 @@ export default function BlogDetailPage({ slug }: BlogDetailPageProps) {
     });
   };
 
-  // Custom rich text renderer with responsive image handling
   const richTextOptions = {
     renderNode: {
       [BLOCKS.HEADING_3]: (node: any, children: any) => (
@@ -48,7 +46,7 @@ export default function BlogDetailPage({ slug }: BlogDetailPageProps) {
         </h3>
       ),
       [BLOCKS.PARAGRAPH]: (node: any, children: any) => (
-        <p className="text-gray-text leading-relaxed mb-6 text-lg">
+        <p className=" leading-relaxed mb-6 text-lg">
           {children}
         </p>
       ),
@@ -63,7 +61,7 @@ export default function BlogDetailPage({ slug }: BlogDetailPageProps) {
                 src={`https:${asset.fields.file.url}`}
                 alt={asset.fields.title || "Blog image"}
                 fill
-                className="object-cover"
+                className="object-cover hover:scale-105 duration-300"
               />
             </div>
           </div>
@@ -77,7 +75,6 @@ export default function BlogDetailPage({ slug }: BlogDetailPageProps) {
     },
   };
 
-  // Custom function to handle multiple consecutive images
   const renderContentWithImageGroups = (content: any) => {
     if (!content?.content)
       return documentToReactComponents(content, richTextOptions);
@@ -113,7 +110,7 @@ export default function BlogDetailPage({ slug }: BlogDetailPageProps) {
                   src={`https:${asset.fields.file.url}`}
                   alt={asset.fields.title || `Blog image ${index + 1}`}
                   fill
-                  className="object-cover"
+                  className="object-cover hover:scale-105 duration-300"
                 />
               </div>
             ))}
@@ -163,7 +160,6 @@ export default function BlogDetailPage({ slug }: BlogDetailPageProps) {
         if (currentBlog) {
           setBlog(currentBlog);
 
-          // Get related blogs from the same category (top 3 most recent)
           const related = allBlogs
             .filter(
               (blog) =>
@@ -189,13 +185,7 @@ export default function BlogDetailPage({ slug }: BlogDetailPageProps) {
     fetchBlog();
   }, [slug]);
 
-  if (loading) {
-    return (
-      <div className="min-h-screen mt-20 flex items-center justify-center">
-        <div className="text-lg">Loading...</div>
-      </div>
-    );
-  }
+
 
   if (!blog) {
     return (
@@ -207,8 +197,8 @@ export default function BlogDetailPage({ slug }: BlogDetailPageProps) {
           <p className="text-gray-text mb-6">
             The blog post you're looking for doesn't exist.
           </p>
-          <Link href="/blog">
-            <button className="bg-general-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors">
+          <Link href="/resources/blog">
+            <button className="bg-[#0D0D0DFC] text-white px-6 py-3 rounded-lg transition-colors">
               Back to Blog
             </button>
           </Link>
@@ -219,76 +209,107 @@ export default function BlogDetailPage({ slug }: BlogDetailPageProps) {
 
   const imageUrl = (blog as any).fields.image?.fields?.file?.url;
 
-  return (
-    <div className="min-h-screen">
-      <DismissibleBanner />
+ return (
+   <div className="min-h-screen">
+     <div className="mt-20">
+       <Breadcrumb
+         items={[
+           { label: "Home", href: "/" },
+           { label: "DébboAfrica Blog", href: "/resources/blog" },
+           { label: blog ? blog.fields.title : "Loading..." },
+         ]}
+       />
 
-      <div className="mt-6">
-        <Breadcrumb
-          items={[
-            { label: "Home", href: "/" },
-            { label: "DébboAfrica Blog", href: "/resources/blog" },
-            { label: blog.fields.title },
-          ]}
-        />
+       {loading ? (
+         <div className="px-4 lg:px-0 mb-12 text-center pt-6 animate-pulse">
+           <div className="mb-8 max-w-4xl mx-auto">
+             <div className="inline-block bg-gray-200 px-6 py-3 rounded-full text-sm font-medium mb-4 w-32 h-6"></div>
+             <div className="h-10 bg-gray-200 rounded w-3/4 mx-auto mb-4"></div>
+             <div className="flex items-center justify-center gap-6 text-body-text-gray mb-6">
+               <div className="h-5 w-24 bg-gray-200 rounded"></div>
+               <div className="h-5 w-24 bg-gray-200 rounded"></div>
+             </div>
+           </div>
 
-        {/* Blog Header */}
-        <div className=" px-4 lg:px-0 mb-12">
-          <div className=" mb-8 max-w-4xl mx-auto">
-            <div className="inline-block bg-[--surface-card] text-general-black px-3 py-1 rounded-full text-sm font-medium mb-4">
-              {blog.fields.category}
-            </div>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-general-black mb-6 leading-tight">
-              {blog.fields.title}
-            </h1>
-            <div className="flex items-center  gap-6 text-gray-500">
-              <div className="flex items-center gap-2">
-                <User className="h-5 w-5" />
-                <span>{blog.fields.writer}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Calendar className="h-5 w-5" />
-                <span>{formatDate(blog.fields.date)}</span>
-              </div>
-            </div>
-          </div>
+           <div className="aspect-[8/4] relative rounded-2xl overflow-hidden mb-12 max-w-7xl mx-auto max-h-[600px] w-full bg-gray-200"></div>
 
-          {/* Hero Image */}
-          {imageUrl && (
-            <div className="aspect-video relative rounded-2xl overflow-hidden mb-12 max-w-7xl mx-auto">
-              <Image
-                src={`https:${imageUrl}`}
-                alt={blog.fields.title}
-                fill
-                className="object-cover"
-              />
-            </div>
-          )}
-        </div>
+           <div className="max-w-4xl mx-auto px-4 lg:px-0 mb-16 text-body-text-gray space-y-4">
+             {[...Array(5)].map((_, i) => (
+               <div key={i} className="h-4 bg-gray-200 rounded w-full"></div>
+             ))}
+           </div>
 
-        {/* Blog Content */}
-        <div className="max-w-4xl mx-auto px-4 lg:px-0 mb-16">
-          <div className="prose prose-lg max-w-none">
-            {renderContentWithImageGroups(blog.fields.about)}
-          </div>
-        </div>
+           <div className="max-w-7xl mx-auto px-4 lg:px-0 pb-12">
+             <div className="border-t border-gray-200 pt-12">
+               <h2 className="text-2xl font-bold text-general-black mb-8">
+                 Related Posts
+               </h2>
+               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                 {[...Array(3)].map((_, i) => (
+                   <div key={i} className="h-64 bg-gray-200 rounded"></div>
+                 ))}
+               </div>
+             </div>
+           </div>
+         </div>
+       ) : (
+         <>
+           <div className="px-4 lg:px-0 mb-12 text-center pt-6">
+             <div className="mb-8 max-w-4xl mx-auto">
+               <div className="inline-block bg-[--surface-card] text-general-black px-3 py-1 rounded-full text-sm font-medium mb-4">
+                 {blog.fields.category}
+               </div>
+               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-general-black mb-6 leading-tight">
+                 {blog.fields.title}
+               </h1>
+               <div className="flex items-center gap-6 text-body-text-gray justify-center">
+                 <div className="flex items-center gap-2">
+                   <User className="h-5 w-5" />
+                   <span>{blog.fields.writer}</span>
+                 </div>
+                 <div className="flex items-center gap-2">
+                   <Calendar className="h-5 w-5" />
+                   <span>{formatDate(blog.fields.date)}</span>
+                 </div>
+               </div>
+             </div>
 
-        {/* Related Blogs */}
-        {relatedBlogs.length > 0 && (
-          <div className="max-w-7xl mx-auto px-4 lg:px-0 pb-12">
-            <div className="border-t border-gray-200 pt-12">
-              <h2 className="text-2xl font-bold text-general-black mb-8">
-                Post you might also like
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {relatedBlogs.map((relatedBlog) => (
-                  <BlogCard key={relatedBlog.sys.id} blog={relatedBlog} />
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
+             {imageUrl && (
+               <div className="aspect-[8/4] relative rounded-2xl overflow-hidden mb-12 max-w-7xl mx-auto max-h-[600px] w-full">
+                 <Image
+                   src={`https:${imageUrl}`}
+                   alt={blog.fields.title}
+                   fill
+                   className="object-cover hover:scale-105 duration-300"
+                 />
+               </div>
+             )}
+           </div>
+
+           <div className="max-w-4xl mx-auto px-4 lg:px-0 mb-16 text-body-text-gray">
+             <div className="prose prose-lg max-w-none">
+               {renderContentWithImageGroups(blog.fields.about)}
+             </div>
+           </div>
+
+           {relatedBlogs.length > 0 && (
+             <div className="max-w-7xl mx-auto px-4 lg:px-0 pb-12">
+               <div className="border-t border-gray-200 pt-12">
+                 <h2 className="text-2xl font-bold text-general-black mb-8">
+                   Post you might also like
+                 </h2>
+                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                   {relatedBlogs.map((relatedBlog) => (
+                     <BlogCard key={relatedBlog.sys.id} blog={relatedBlog} />
+                   ))}
+                 </div>
+               </div>
+             </div>
+           )}
+         </>
+       )}
+     </div>
+   </div>
+ );
+
 }

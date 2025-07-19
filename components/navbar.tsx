@@ -69,10 +69,32 @@ export default function EnhancedNavbar() {
       description: "Frequently Asked Questions",
     },
   ];
+  const individualItems = [
+    {
+      label: "Book a Test",
+      href: "/individual",
+      image: "/images/resources-blog.jpg",
+      description: "Stay up to date with our news and Events.",
+    },
+    {
+      label: "Book a Scan",
+      href: "/individual/scan",
+      image: "/images/nav-blog.jpg",
+      description:
+        "Discover our expert radiology services for accurate & diagnosis",
+    },
+    {
+      label: "Speak to a Doctor",
+      href: "/individual/speak-to-doctor",
+      image: "/images/glossary.jpg",
+      description: "Stay up to date with regular health tips",
+    },
+  ];
 
   const getDefaultImage = (dropdown: string) => {
     if (dropdown === "about") return aboutUsItems[0];
     if (dropdown === "resources") return resourcesItems[0];
+    if (dropdown === "individual") return resourcesItems[0];
     return null;
   };
 
@@ -88,6 +110,12 @@ export default function EnhancedNavbar() {
         (item) => item.label === hoveredItem
       );
       return hoveredResourceItem || resourcesItems[0];
+    }
+    if (dropdown === "individual") {
+      const hoveredIndividuaItem = individualItems.find(
+        (item) => item.label === hoveredItem
+      );
+      return hoveredIndividuaItem || individualItems[0];
     }
     return null;
   };
@@ -110,9 +138,51 @@ export default function EnhancedNavbar() {
             </div>
 
             <div className="hidden lg:flex items-center space-x-8  text-body-text-gray hover:text-general-black">
-              <Link href="/individual" className=" font-medium">
-                Individual
-              </Link>
+              <div className="relative group">
+                <button className="flex items-center text-body-text-gray hover:text-general-black font-medium">
+                  individual
+                  <ChevronDown className="ml-1 h-4 w-4" />
+                </button>
+                <div className="absolute top-full left-0 mt-2 w-[600px] bg-badge -ml-[200px] rounded-2xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                  <div className="flex gap-4">
+                    <div className="w-1/2 py-4 ml-4">
+                      {individualItems.map((item, index) => (
+                        <Link
+                          key={index}
+                          href={item.href}
+                          className="block px-6 py-3 text-sm text-body-text-gray hover:text-general-black hover:bg-[--surface-card] hover:rounded-xl transition-colors"
+                          onMouseEnter={() => setHoveredItem(item.label)}
+                          onMouseLeave={() => setHoveredItem(null)}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                    <div className="w-1/2 p-4">
+                      {(() => {
+                        const currentImage = getCurrentImage("individual");
+                        return currentImage ? (
+                          <div className="relative h-64 rounded-2xl overflow-hidden">
+                            <Image
+                              src={currentImage.image || "/placeholder.svg"}
+                              alt={currentImage.label}
+                              fill
+                              className="object-cover"
+                            />
+                            <div className="absolute inset-0 bg-black bg-opacity-40 flex items-end">
+                              <div className="p-4 text-white">
+                                <h3 className="font-semibold text-lg opacity-90">
+                                  {currentImage.description}
+                                </h3>
+                              </div>
+                            </div>
+                          </div>
+                        ) : null;
+                      })()}
+                    </div>
+                  </div>
+                </div>
+              </div>
               <Link
                 href="/corporate"
                 className="text-body-text-gray hover:text-general-black  font-medium"
@@ -126,7 +196,7 @@ export default function EnhancedNavbar() {
                   About Us
                   <ChevronDown className="ml-1 h-4 w-4" />
                 </button>
-                <div className="absolute top-full left-0 mt-2 w-[800px] bg-badge -ml-[400px] rounded-2xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div className="absolute top-full left-0 mt-2 w-[600px] bg-badge -ml-[300px] rounded-2xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                   <div className="flex gap-4">
                     <div className="w-1/2 py-4 ml-4">
                       {aboutUsItems.map((item, index) => (
@@ -154,12 +224,9 @@ export default function EnhancedNavbar() {
                             />
                             <div className="absolute inset-0 bg-black bg-opacity-40 flex items-end">
                               <div className="p-4 text-white">
-                                <h3 className="font-semibold text-lg">
-                                  {currentImage.label}
-                                </h3>
-                                <p className="text-sm opacity-90">
+                                <h3 className="font-semibold text-lg opacity-90">
                                   {currentImage.description}
-                                </p>
+                                </h3>
                               </div>
                             </div>
                           </div>
@@ -175,7 +242,7 @@ export default function EnhancedNavbar() {
                   Resources
                   <ChevronDown className="ml-1 h-4 w-4" />
                 </button>
-                <div className="absolute top-full left-0 mt-2 w-[800px] bg-badge -ml-[400px] rounded-2xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div className="absolute top-full left-0 mt-2 w-[600px] bg-badge -ml-[300px] rounded-2xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                   <div className="flex gap-4">
                     <div className="w-1/2 py-4 ml-4">
                       {resourcesItems.map((item, index) => (
@@ -203,12 +270,9 @@ export default function EnhancedNavbar() {
                             />
                             <div className="absolute inset-0 bg-black bg-opacity-40 flex items-end">
                               <div className="p-4 text-white">
-                                <h3 className="font-semibold text-lg">
-                                  {currentImage.label}
-                                </h3>
-                                <p className="text-sm opacity-90">
+                                <h3 className="font-semibold text-lg opacity-90">
                                   {currentImage.description}
-                                </p>
+                                </h3>
                               </div>
                             </div>
                           </div>

@@ -110,5 +110,19 @@ export interface JobSkeleton {
   contentTypeId: "job";
   fields: JobFields;
 }
+export interface MedicalTestFields {
+  type?: EntryFieldTypes.Text;
+  category?: EntryFieldTypes.Text;
+  testName: EntryFieldTypes.Text;
+  price: EntryFieldTypes.Text;
+  testList: Document;
+  scan?: EntryFieldTypes.Boolean;
+}
 
+export interface MedicalTestSkeleton {
+  contentTypeId: "medicalTest";
+  fields: MedicalTestFields;
+}
+
+export type MedicalTestEntry = Entry<MedicalTestSkeleton, undefined, string>;
 export type JobEntry = Entry<JobSkeleton, undefined, string>;

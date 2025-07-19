@@ -88,13 +88,13 @@ export function BlogCard({
         </Link>
 
         <div className="space-y-2">
-          <div className="text-xs text-gray-500">{blog.fields.category}</div>
+          <div className="text-xs ">{blog.fields.category}</div>
           <Link href={`/blog/${createSlug(blog.fields.title)}`}>
-            <h3 className="text-sm font-semibold text-general-black group-hover:text-gray-600 transition-colors leading-tight line-clamp-2">
+            <h3 className="text-sm font-semibold text-general-black  transition-colors leading-tight line-clamp-2">
               {blog.fields.title}
             </h3>
           </Link>
-          <div className="text-xs text-gray-500">
+          <div className="text-xs text-body-text-gray">
             {formatDate(blog.fields.date)}
           </div>
         </div>
@@ -123,15 +123,15 @@ export function BlogCard({
 
         <div className="flex-1 flex flex-col justify-between min-w-0">
           <div>
-            <div className="text-xs text-gray-500 mb-2">
+            <div className="text-xs  mb-2">
               {blog.fields.category}
             </div>
             <Link href={`/blog/${createSlug(blog.fields.title)}`}>
-              <h3 className="text-lg font-semibold text-general-black group-hover:text-gray-600 transition-colors leading-tight mb-2">
+              <h3 className="text-lg font-semibold text-general-black transition-colors leading-tight mb-2">
                 {blog.fields.title}
               </h3>
             </Link>
-            <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
+            <div className="flex items-center gap-4 text-sm  mb-3">
               <span>{formatDate(blog.fields.date)}</span>
               <span>{blog.fields.writer}</span>
             </div>
@@ -141,7 +141,7 @@ export function BlogCard({
             <Link href={`/resources/blog/${createSlug(blog.fields.title)}`}>
               <Button
                 variant="link"
-                className="text-gray-600 hover:text-general-black p-0 h-auto underline"
+                className="text-body-text-gray hover:text-general-black p-0 h-auto underline"
               >
                 Read more
               </Button>
@@ -171,7 +171,7 @@ export function BlogCard({
         <div className="inline-block bg-[--surface-card] text-general-black px-3 py-1 rounded-full text-sm font-medium mb-4">
           {blog.fields.category}
         </div>
-        <div className="flex items-center gap-4 text-sm text-gray-500">
+        <div className="flex items-center gap-4 text-sm ">
           <div className="flex items-center gap-1">
             <Calendar className="h-4 w-4" />
             <span>{formatDate(blog.fields.date)}</span>
@@ -183,7 +183,7 @@ export function BlogCard({
         </div>
 
         <Link href={`/resources/blog/${createSlug(blog.fields.title)}`}>
-          <h3 className="text-lg font-semibold text-general-black group-hover:text-gray-600 transition-colors leading-tight">
+          <h3 className="text-lg font-semibold text-general-black  transition-colors leading-tight">
             {blog.fields.title}
           </h3>
         </Link>
@@ -191,7 +191,7 @@ export function BlogCard({
         <Link href={`/resources/blog/${createSlug(blog.fields.title)}`}>
           <Button
             variant="link"
-            className="text-gray-600 hover:text-general-black p-0 h-auto underline"
+            className="text-body-text-gray hover:text-general-black p-0 h-auto underline"
           >
             Read more
           </Button>

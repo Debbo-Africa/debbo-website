@@ -1,11 +1,9 @@
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Apple, Play } from "lucide-react";
 import Image from "next/image";
 
 export default function HealthFeatureCards() {
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-6xl mx-auto px-4 py-8">
       <div className="text-center mb-8">
         <h1 className="text-3xl md:text-4xl font-light text-general-black mb-4">
           Your <span className="text-yellow font-medium">Body.</span>
@@ -17,7 +15,7 @@ export default function HealthFeatureCards() {
         </p>
       </div>
 
-      <Card className="mb-6 overflow-hidden rounded-3xl relative min-h-[400px] md:min-h-[500px]">
+      <div className="mb-6 overflow-hidden rounded-3xl relative min-h-[400px] md:min-h-[500px]">
         <div className="absolute inset-0">
           <Image
             src="/images/virtual-care.png"
@@ -56,62 +54,55 @@ export default function HealthFeatureCards() {
             className="h-auto w-auto"
           />
         </div>
-      </Card>
+      </div>
 
-      {/* Second Row - Two Cards Side by Side */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        {/* Book Tests Card */}
-        <Card className="overflow-hidden rounded-3xl bg-yellow min-h-[350px]">
-          <div className="p-8 h-full flex flex-col">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div className="overflow-hidden text-center rounded-3xl bg-yellow min-h-[480px]">
+          <div className="p-6 pb-0 h-full flex flex-col">
             <h2 className="text-white text-2xl md:text-3xl font-semibold mb-4">
               Book Tests in Minutes
             </h2>
-            <p className="text-white/90 mb-8 leading-relaxed flex-grow">
+            <p className="text-white/90 leading-relaxed flex-grow">
               Skip the queues. Schedule lab tests from anywhere—fast, easy, and
               reliable.
             </p>
 
-            {/* Phone Image Placeholder */}
-            <div className="flex justify-center">
-              <div className="w-48 h-60 relative">
-                <Image
-                  src="/images/"
-                  alt="Book tests phone mockup"
-                  fill
-                  className="object-contain"
-                />
-              </div>
+            <div className="w-full h-72 lg:h-96 relative">
+              <Image
+                src="/images/book-test-mockup.png"
+                alt="Book tests phone mockup"
+                fill
+                className="lg:object-cover"
+              />
             </div>
           </div>
-        </Card>
+        </div>
 
-        {/* Never Miss Checkup Card */}
-        <Card className="overflow-hidden rounded-3xl bg-yellow min-h-[350px]">
-          <div className="p-8 h-full flex flex-col">
+        <div className="overflow-hidden rounded-3xl bg-secondary-debbo1 text-center min-h-[480px]">
+          <div className="p-6 pb-0 h-full flex flex-col">
             <h2 className="text-white text-2xl md:text-3xl font-semibold mb-4">
               Never Miss a Checkup
             </h2>
-            <p className="text-white/90 mb-8 leading-relaxed flex-grow">
+            <p className="text-white/90 leading-relaxed flex-grow">
               Set reminders to stay on top of your wellness checks and
               appointments, no more guesswork.
             </p>
 
-            {/* Phone Image Placeholder */}
-            <div className="flex justify-center">
-              <div className="w-48 h-60 relative">
+            <div className="flex justify-center mt-4">
+              <div className="w-full  h-72 lg:h-96 relative">
                 <Image
-                  src="/images/"
+                  src="/images/miss-cehckup-mockup.png"
                   alt="Checkup reminder phone mockup"
                   fill
-                  className="object-contain"
+                  className="lg:object-cover"
                 />
               </div>
             </div>
           </div>
-        </Card>
+        </div>
       </div>
 
-      <Card className="overflow-hidden rounded-3xl relative min-h-[400px] md:min-h-[500px]">
+      <Card className="overflow-hidden rounded-3xl relative min-h-[420px] md:min-h-[490px]">
         <div className="absolute inset-0">
           <Image
             src="/images/old-woman-bg.png"
@@ -121,17 +112,27 @@ export default function HealthFeatureCards() {
           />
         </div>
 
-        <div className="relative z-10 p-8 md:p-12 flex flex-col lg:flex-row items-center">
+        <div className="relative z-10 p-8 md:p-12 pb-0 flex flex-col lg:flex-row items-center">
           <div className="flex-1 text-white mb-8 lg:mb-0 lg:mr-8">
             <h2 className="text-3xl md:text-4xl font-semibold mb-4">
               Track What Truly
               <br />
               Matters
             </h2>
-            <p className="text-white/90 text-lg mb-8 leading-relaxed max-w-md">
+            <p className="text-white/90 text-lg leading-relaxed max-w-md">
               Our AI-powered triage tool assesses your symptoms and connects you
               to the care you need, when you need it.
             </p>
+            <div className=" flex gap-1 mb-8 ">
+              <Image
+                src="/images/icon-logo.svg"
+                alt="Track matters phone mockup"
+                className="object-contain w-6 h-6"
+                width={10}
+                height={10}
+              />
+              <p>Dr Déb</p>
+            </div>
 
             <div className="flex flex-row gap-4">
               <Image
@@ -152,12 +153,11 @@ export default function HealthFeatureCards() {
           </div>
 
           <div className="flex-shrink-0">
-            <div className="w-64 h-80 relative">
+            <div className="w-64 h-72 relative md:absolute md:-bottom-1/4 md:left-1/2">
               <Image
                 src="/images/iphone.png"
                 alt="Track matters phone mockup"
                 fill
-                className="object-contain"
               />
             </div>
           </div>

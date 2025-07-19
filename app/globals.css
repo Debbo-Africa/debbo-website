@@ -107,7 +107,8 @@
   --gray-text: #aaa5a3;
   --text-gray: #6b6b6b;
   --form-bg: #fff6f6;
---text-body:#333537
+--text-body:#333537;
+--surface-card-bold:#D9D0C6
 
   --background: 0 0% 3.9%;
   --foreground: 0 0% 98%;
@@ -157,12 +158,12 @@
   }
 
   body {
-    font-family: var(--font-michroma), sans-serif;
-    @apply bg-background text-foreground;
+    font-family: var(--font-recoleta), sans-serif;
+    @apply bg-background text-body-text-gray;
   }
 
   h1, h2, h3 {
-    font-family: var(--font-michroma), monospace;
+    font-family: var(--font-recoleta), monospace;
     font-weight: 400;
   }
 
