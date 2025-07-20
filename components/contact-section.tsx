@@ -1,11 +1,50 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
 import ContactCard from "./contact-card";
 import ContactForm from "./contact-form";
 import IconCard from "./contact-icon-card";
 
 export default function ContactSection() {
+  const smRef = useRef(null);
+  const mdRef = useRef(null);
+  const lgRef = useRef(null);
+
+  useEffect(() => {
+    if (smRef.current) {
+      gsap.from((smRef as any).current.children , {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power3.out",
+      });
+    }
+    if (mdRef.current) {
+      gsap.from((mdRef as any).current.querySelectorAll(".icon-card"), {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power3.out",
+      });
+    }
+    if (lgRef.current) {
+      gsap.from((lgRef as any).current.children, {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power3.out",
+      });
+    }
+  }, []);
+
   return (
-    <section className="px-4 sm:px-8 py-16 space-y-12 max-w-6xl mx-auto">
-      <div className="flex flex-col gap-4 md:hidden">
+    <section className="px-4 sm:px-8 py-16 space-y-12 max-w-7xl mx-auto">
+      {/* Small screens */}
+      <div className="flex flex-col gap-4 md:hidden" ref={smRef}>
         <IconCard
           icon="/images/office-location.svg"
           title="Visit our office"
@@ -23,33 +62,32 @@ export default function ContactSection() {
         />
       </div>
 
-      <div className="hidden md:flex md:flex-col gap-4 lg:hidden">
-        <div className="flex flex-col w-full">
+      {/* Medium screens */}
+      <div className="hidden md:flex md:flex-col gap-4 lg:hidden" ref={mdRef}>
+        <IconCard
+          icon="/images/office-location.svg"
+          title="Visit our office"
+          description="Block 52, Plot 1, Omorinre Johnson, Lekki Phase I, Lagos"
+          className="icon-card "
+        />
+        <div className="flex flex-col md:flex-row gap-4 w-full">
           <IconCard
-            icon="/images/office-location.svg"
-            title="Visit our office"
-            description="Block 52, Plot 1, Omorinre Johnson, Lekki Phase I, Lagos"
+            icon="/images/envelope.svg"
+            title="Reach out to us"
+            description="info@debbo.africa"
+            className="icon-card"
+          />
+          <IconCard
+            icon="/images/call-outgoing.svg"
+            title="Call us at"
+            description="+234 913 007 6332"
+            className="icon-card"
           />
         </div>
-        <div className="flex flex-col md:flex-row gap-4 w-full">
-          <div className="w-full">
-            <IconCard
-              icon="/images/envelope.svg"
-              title="Reach out to us"
-              description="info@debbo.africa"
-            />
-          </div>
-          <div className="w-full">
-            <IconCard
-              icon="/images/call-outgoing.svg"
-              title="Call us at"
-              description="+234 913 007 6332"
-            />
-          </div>
-        </div>
       </div>
 
-      <div className="hidden lg:flex lg:flex-row gap-4">
+      {/* Large screens */}
+      <div className="hidden lg:flex lg:flex-row gap-4" ref={lgRef}>
         <IconCard
           icon="/images/office-location.svg"
           title="Visit our office"
@@ -67,12 +105,15 @@ export default function ContactSection() {
         />
       </div>
 
+      {/* Contact card and form */}
       <div className="flex flex-col lg:flex-row gap-8 md:items-stretch">
-        <div className=" lg:w-1/2">
+        <div className="lg:w-1/2">
           <ContactCard />
         </div>
         <div className="w-full lg:w-1/2 flex flex-col">
-          <h2 className="text-2xl font-bold text-general-black mb-6">Say Hello</h2>
+          <h2 className="text-2xl font-bold text-general-black mb-6">
+            Say Hello
+          </h2>
           <div className="flex-grow">
             <ContactForm />
           </div>

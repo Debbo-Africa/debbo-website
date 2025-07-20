@@ -7,7 +7,7 @@ export default function ContactCard() {
         src="/images/contact-image.jpg"
         alt="Contact"
         fill
-        className="object-cover rounded-2xl transition-transform duration-500 group-hover:scale-105 origin-center"
+        className="object-cover rounded-2xl transition-transform duration-500 group-hover:scale-105 cursor-pointer origin-center"
       />
       <div className="absolute bottom-0 left-0 w-full p-6 md:p-12">
         <p className="text-white text-xl sm:text-2xl text-left max-w-md  font-medium">
