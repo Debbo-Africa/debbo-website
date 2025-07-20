@@ -26,7 +26,7 @@ export function OurStorySection({
               {title}
             </h2>
             <div className="prose prose-lg max-w-none">
-              <p className="text-gray-text leading-relaxed text-lg">{content}</p>
+              <p className="text-body-text-gray leading-relaxed text-lg">{content}</p>
             </div>
           </div>
 
@@ -36,7 +36,7 @@ export function OurStorySection({
                 src={imageSrc}
                 alt={imageAlt}
                 fill
-                className="object-cover"
+                className="object-cover hover:scale-95 duration-500 cursor-pointer"
               />
             </div>
           </div>

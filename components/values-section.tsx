@@ -60,7 +60,7 @@ export function ValuesSection() {
   }, []);
 
   return (
-    <section className=" py-0 md:py-16">
+    <section className="py-0">
       <div className="max-w-5xl mx-auto px-4 lg:px-0">
         <div className="text-center mb-12">
           <h2 className="text-3xl lg:text-4xl font-bold text-general-black mb-8">

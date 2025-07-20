@@ -67,12 +67,12 @@ export default function ContactSection() {
         />
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-8 items-stretch">
-        <div className=" w-1/2">
+      <div className="flex flex-col lg:flex-row gap-8 md:items-stretch">
+        <div className=" lg:w-1/2">
           <ContactCard />
         </div>
         <div className="w-full lg:w-1/2 flex flex-col">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">Say Hello</h2>
+          <h2 className="text-2xl font-bold text-general-black mb-6">Say Hello</h2>
           <div className="flex-grow">
             <ContactForm />
           </div>
