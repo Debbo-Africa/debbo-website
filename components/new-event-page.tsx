@@ -1,28 +1,37 @@
 "use client";
 
 import type React from "react";
-
 import { useEffect, useState } from "react";
-import { Search, ChevronLeft, ChevronRight } from "lucide-react";
+import { Search } from "lucide-react";
 import client from "@/lib/contentful";
 import type { NewsEventsEntry, NewsEventsSkeleton } from "@/types/contentful";
 import type { EntryCollection } from "contentful";
 import { Breadcrumb } from "./breadcrumb";
 import { PageHero } from "./page-hero";
-import { Tabs } from "./tabs";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { DismissibleBanner } from "./dismissable-banner";
 import { NewsEventCard } from "./new-event-card";
 import { Pagination } from "./pagination";
 
 const ITEMS_PER_PAGE = 3;
+
+const LoadingCardPlaceholder = () => (
+  <div className="animate-pulse flex flex-col lg:flex-row gap-4 mb-6 border rounded-lg p-4 border-[--surface-card]">
+    <div className="bg-[--surface-card] rounded w-full lg:w-60 h-40"></div>
+    <div className="flex-1 space-y-4">
+      <div className="h-4 bg-[--surface-card] rounded w-1/3"></div>
+      <div className="h-6 bg-[--surface-card] rounded w-3/4"></div>
+      <div className="h-4 bg-[--surface-card] rounded w-1/2"></div>
+      <div className="h-10 bg-[--surface-card] rounded w-24"></div>
+    </div>
+  </div>
+);
 
 export default function NewsEventsPage() {
   const [newsEvents, setNewsEvents] = useState<NewsEventsEntry[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState<"News" | "Events">("News");
 
   useEffect(() => {
     const fetchNewsEvents = async () => {
@@ -45,7 +54,7 @@ export default function NewsEventsPage() {
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
-    setCurrentPage(1); // Reset to page 1 when search changes
+    setCurrentPage(1);
   };
 
   const handlePageChange = (page: number) => {
@@ -53,7 +62,6 @@ export default function NewsEventsPage() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Function to filter and paginate items for a specific category
   const getFilteredAndPaginatedItems = (category: "News" | "Events") => {
     const filteredItems = newsEvents.filter((item) => {
       const matchesCategory = item.fields.category === category;
@@ -77,25 +85,17 @@ export default function NewsEventsPage() {
     return { paginatedItems, totalPages, totalItems: filteredItems.length };
   };
 
-  // Reset to page 1 when search changes
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchQuery]);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen mt-20 flex items-center justify-center">
-        <div className="text-lg">Loading...</div>
-      </div>
-    );
-  }
+  }, [searchQuery, activeTab]);
 
   const newsData = getFilteredAndPaginatedItems("News");
   const eventsData = getFilteredAndPaginatedItems("Events");
 
+  const currentData = activeTab === "News" ? newsData : eventsData;
+
   return (
     <div className="min-h-screen">
-
       <div className="mt-20">
         <Breadcrumb
           items={[{ label: "Home", href: "/" }, { label: "News & Event" }]}
@@ -108,146 +108,65 @@ export default function NewsEventsPage() {
           imageAlt="News & Events illustration"
         />
 
-        <div className="max-w-7xl mx-auto pb-12 px-4 lg:px-0">
-          <div className="flex gap-4">
-            <div className="w-full">
-              <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-6">
-                <div className="flex-1">
-                  <Tabs
-                    defaultActiveKey="News"
-                    tabs={[
-                      {
-                        key: "News",
-                        label: "News",
-                        content: (
-                          <div className="w-full">
-                            <div className="w-full max-w-7xl">
-                              {newsData.paginatedItems.length === 0 ? (
-                                <div className="text-center py-12">
-                                  <p className="text-gray-500">
-                                    No news found
-                                    {searchQuery &&
-                                      ` matching "${searchQuery}"`}
-                                    .
-                                  </p>
-                                </div>
-                              ) : (
-                                newsData.paginatedItems.map((item) => (
-                                  <NewsEventCard
-                                    key={item.sys.id}
-                                    item={item}
-                                    layout="list"
-                                  />
-                                ))
-                              )}
-                            </div>
-
-                            {/* Pagination for News */}
-                            {newsData.totalPages > 1 && (
-                              <div className="flex items-center justify-center space-x-2 mt-8">
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  onClick={() =>
-                                    handlePageChange(currentPage - 1)
-                                  }
-                                  disabled={currentPage === 1}
-                                >
-                                  <ChevronLeft className="h-4 w-4 mr-1" />
-                                  Previous
-                                </Button>
-
-                                {Array.from(
-                                  { length: newsData.totalPages },
-                                  (_, i) => i + 1
-                                ).map((page) => (
-                                  <Button
-                                    key={page}
-                                    variant={
-                                      currentPage === page
-                                        ? "default"
-                                        : "outline"
-                                    }
-                                    size="sm"
-                                    onClick={() => handlePageChange(page)}
-                                    className={
-                                      currentPage === page
-                                        ? "bg-orange-500 hover:bg-orange-600"
-                                        : ""
-                                    }
-                                  >
-                                    {page}
-                                  </Button>
-                                ))}
-
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  onClick={() =>
-                                    handlePageChange(currentPage + 1)
-                                  }
-                                  disabled={currentPage === newsData.totalPages}
-                                >
-                                  Next
-                                  <ChevronRight className="h-4 w-4 ml-1" />
-                                </Button>
-                              </div>
-                            )}
-                          </div>
-                        ),
-                      },
-                      {
-                        key: "Events",
-                        label: "Events",
-                        content: (
-                          <div className="w-full">
-                            <div className="w-full">
-                              {eventsData.paginatedItems.length === 0 ? (
-                                <div className="text-center py-12">
-                                  <p className="text-gray-500">
-                                    No events found
-                                    {searchQuery &&
-                                      ` matching "${searchQuery}"`}
-                                    .
-                                  </p>
-                                </div>
-                              ) : (
-                                eventsData.paginatedItems.map((item) => (
-                                  <NewsEventCard
-                                    key={item.sys.id}
-                                    item={item}
-                                    layout="list"
-                                  />
-                                ))
-                              )}
-                            </div>
-
-                            <Pagination
-                              currentPage={currentPage}
-                              totalPages={newsData.totalPages}
-                              onPageChange={handlePageChange}
-                              variant="ghost"
-                            />
-                          </div>
-                        ),
-                      },
-                    ]}
-                  />
-                </div>
-
-                <div className="lg:ml-8  ">
-                  <div className="relative bg-[--surface-card]">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-                    <Input
-                      type="text"
-                      placeholder="Search news"
-                      value={searchQuery}
-                      onChange={handleSearchChange}
-                      className="pl-10 w-full lg:w-80 bg-[--surface-card]"
-                    />
-                  </div>
-                </div>
+        <div className="max-w-7xl mx-auto pb-12 px-4">
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+              <div className="flex space-x-6 border-b w-full">
+                {["News", "Events"].map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => setActiveTab(tab as "News" | "Events")}
+                    className={`pb-2 w-20 border-b-2 ${
+                      activeTab === tab
+                        ? "border-orange-500 text-black font-semibold"
+                        : "border-transparent text-gray-500 hover:text-black"
+                    }`}
+                  >
+                    {tab}
+                  </button>
+                ))}
               </div>
+
+              <div className="relative w-full lg:w-80">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                <Input
+                  type="text"
+                  placeholder={`Search ${activeTab.toLowerCase()}`}
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                  className="pl-10 bg-[--surface-card]"
+                />
+              </div>
+            </div>
+
+            <div>
+              {loading ? (
+                <div className="space-y-4">
+                  {[...Array(ITEMS_PER_PAGE)].map((_, index) => (
+                    <LoadingCardPlaceholder key={index} />
+                  ))}
+                </div>
+              ) : currentData.paginatedItems.length === 0 ? (
+                <div className="text-center py-12">
+                  <p className="text-gray-500">
+                    No {activeTab.toLowerCase()} found
+                    {searchQuery && ` matching "${searchQuery}"`}.
+                  </p>
+                </div>
+              ) : (
+                currentData.paginatedItems.map((item) => (
+                  <NewsEventCard key={item.sys.id} item={item} layout="list" />
+                ))
+              )}
+
+              {!loading && currentData.totalPages > 1 && (
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={currentData.totalPages}
+                  onPageChange={handlePageChange}
+                  variant="ghost"
+                />
+              )}
             </div>
           </div>
         </div>

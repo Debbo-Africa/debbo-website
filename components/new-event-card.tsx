@@ -89,8 +89,8 @@ export function NewsEventCard({ item, layout = "list" }: NewsEventCardProps) {
           <div className="flex-1 flex flex-col justify-between min-w-0">
             <div>
               <div className="flex items-center gap-2 mb-3">
-                <Calendar className="h-4 w-4 text-text-gray" />
-                <span className="text-sm text-general-black">
+                <Calendar className="h-4 w-4 text-body-text-gray" />
+                <span className="text-sm text-body-text-gray">
                   {formatDate(item.fields.event_date)}
                 </span>
               </div>
@@ -111,12 +111,14 @@ export function NewsEventCard({ item, layout = "list" }: NewsEventCardProps) {
                     className="rounded"
                   />
                 )}
-                <span className="text-sm text-gray-600">{item.fields.tag}</span>
+                <span className="text-sm text-body-text-gray">
+                  {item.fields.tag}
+                </span>
               </div>
 
               <Button
                 variant="link"
-                className="text-gray-600 hover:text-gray-800 p-0 h-auto underline"
+                className="text-body-text-gray hover:text-general-black p-0 h-auto underline"
                 onClick={handleLearnMoreClick}
                 disabled={!linkUrl}
               >
@@ -148,8 +150,8 @@ export function NewsEventCard({ item, layout = "list" }: NewsEventCardProps) {
         <div className="flex-1 flex flex-col justify-between min-w-0">
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <Calendar className="h-4 w-4 text-gray-500" />
-              <span className="text-sm text-gray-500">
+              <Calendar className="h-4 w-4 text-body-text-gray" />
+              <span className="text-sm text-body-text-gray">
                 {formatDate(item.fields.event_date)}
               </span>
             </div>
@@ -175,7 +177,7 @@ export function NewsEventCard({ item, layout = "list" }: NewsEventCardProps) {
 
             <Button
               variant="link"
-              className="text-gray-text hover:text-gray-800 p-0 h-auto underline"
+              className="text-body-text-gray hover:text-general-black p-0 h-auto underline"
               onClick={handleLearnMoreClick}
               disabled={!linkUrl}
             >
