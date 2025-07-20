@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ChevronDown, Plus } from "lucide-react";
+import { ChevronDown, Minus, Plus } from "lucide-react";
 import client from "@/lib/contentful";
 import type { FaqEntry, FaqSkeleton } from "@/types/contentful";
 import type { EntryCollection } from "contentful";
@@ -66,9 +66,7 @@ export default function FaqsPage() {
         <div className="grid lg:grid-cols-4 gap-8">
           <div className="lg:col-span-1">
             <div className="rounded-lg p-6 shadow-sm">
-              <h3 className="font-semibold text-general-black mb-4">
-                Categories
-              </h3>
+           
               <div className="space-y-2">
                 {loading
                   ? [1, 2, 3].map((i) => (
@@ -86,7 +84,7 @@ export default function FaqsPage() {
                           className={`w-full justify-start text-left ${
                             isActive
                               ? "bg-[--surface-card] text-general-black hover:bg-[--surface-card] hover:text-general-black"
-                              : "text-gray-text hover:bg-[--surface-card] hover:text-general-black"
+                              : "text-body-gray-text hover:bg-[--surface-card] hover:text-general-black"
                           }`}
                           onClick={() => setSelectedCategory(category)}
                         >
@@ -98,17 +96,14 @@ export default function FaqsPage() {
             </div>
           </div>
 
-          {/* Main FAQ Content */}
           <div className="lg:col-span-3">
             <div className="rounded-lg shadow-sm">
-              {/* Category Header */}
               <div className="p-6 border-b">
-                <h2 className="text-2xl font-bold text-general-black">
+                <h2 className="text-2xl font-extrabold text-general-black">
                   {selectedCategory}
                 </h2>
               </div>
 
-              {/* FAQ List */}
               <div className="divide-y">
                 {loading ? (
                   <FaqSkeletonLoader />
@@ -123,17 +118,17 @@ export default function FaqsPage() {
                         className="w-full flex items-center justify-between text-left"
                         onClick={() => toggleFaq(faq.sys.id)}
                       >
-                        <h3 className="text-lg font-semibold text-gray-900 pr-4">
+                        <h3 className="text-lg font-semibold text-general-black pr-4">
                           {faq.fields.question}
                         </h3>
                         <div className="flex-shrink-0">
                           {expandedFaq === faq.sys.id ? (
-                            <div className="w-8 h-8 bg-general-black rounded-full flex items-center justify-center">
-                              <ChevronDown className="w-4 h-4 text-general-white" />
+                            <div className="w-8 h-8 bg-general-black rounded-full flex items-center justify-center bg-[#000]">
+                              <Minus className="w-4 h-4 text-general-white" />
                             </div>
                           ) : (
-                            <div className="w-8 h-8  rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors">
-                              <Plus className="w-4 h-4 text-gray-text" />
+                            <div className="w-8 h-8  rounded-full flex items-center justify-center hover:bg-transparent transition-colors">
+                              <Plus className="w-4 h-4 text-body-gray-text" />
                             </div>
                           )}
                         </div>
@@ -141,7 +136,7 @@ export default function FaqsPage() {
 
                       {expandedFaq === faq.sys.id && (
                         <div className="mt-4 pt-4">
-                          <p className="text-gray-text leading-relaxed">
+                          <p className="text-body-gray-text leading-relaxed">
                             {faq.fields.answer}
                           </p>
                         </div>
@@ -163,9 +158,9 @@ function FaqSkeletonLoader() {
   return (
     <div>
       {[1, 2, 3].map((i) => (
-        <div key={i} className="p-6 bg-[--surface-card]  animate-pulse">
-          <div className="w-3/4 h-4 rounded mb-2"></div>
-          <div className="w-full h-4  rounded"></div>
+        <div key={i} className="p-6   animate-pulse">
+          <div className="w-3/4  bg-[--surface-card]h-4 rounded mb-2"></div>
+          <div className="w-full  bg-[--surface-card] h-4  rounded"></div>
         </div>
       ))}
     </div>
