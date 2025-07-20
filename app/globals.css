@@ -104,10 +104,10 @@
   --light-green: #51ca07;
   --badge: #fff5e9;
   --surface-card: #f2e9dd;
-  --gray-text: #aaa5a3;
+  --gray-text: #6b6b6b;
   --text-gray: #6b6b6b;
   --form-bg: #fff6f6;
---text-body:#333537;
+--text-body:#6b6b6b;
 --surface-card-bold:#D9D0C6
 
   --background: 0 0% 3.9%;
@@ -159,7 +159,7 @@
 
   body {
     font-family: var(--font-recoleta), sans-serif;
-    @apply bg-background text-body-text-gray;
+    @apply bg-background text-body-text-gray font-light;
   }
 
   h1, h2, h3 {

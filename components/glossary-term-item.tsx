@@ -18,22 +18,24 @@ export function GlossaryTermItem({ term }: GlossaryTermItemProps) {
   return (
     <div
       key={term.sys.id}
-      className="border-b border-gray-100 pb-4 flex justify-between flex-row items-center gap-10"
+      className="border-b border-gray-100 pb-4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-10"
     >
       <div className="">
-        <h3 className="text-lg font-semibold text-general-black mb-2">
+        <h3 className="text-lg font-extrabold text-general-black mb-2">
           {term.fields.title}
         </h3>
-        <p className="text-gray-text mb-2 max-w-xl">
+        <p className="text-body-text-gray mb-2 max-w-xl font-light">
           {term.fields.description}
         </p>
       </div>
-      <Link
-        href={`/resources/glossary/${createSlug(term.fields.title)}`}
-        className="text-gray-text border-b border-text-gray font-medium text-sm"
-      >
-        Read more
-      </Link>
+      <div className="mt-2 sm:mt-0">
+        <Link
+          href={`/resources/glossary/${createSlug(term.fields.title)}`}
+          className="text-body-gray-text border-b border-body-text-gray text-sm font-light"
+        >
+          Read more
+        </Link>
+      </div>
     </div>
   );
 }

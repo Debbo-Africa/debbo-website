@@ -28,12 +28,12 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
             {item.href ? (
               <Link
                 href={item.href}
-                className="hover:underline truncate max-w-[15rem] text-gray-text"
+                className="hover:underline truncate max-w-[15rem] text-body-gray-text"
               >
                 {item.label}
               </Link>
             ) : (
-              <span className="truncate  max-w-[10rem] text-general-black">
+              <span className="truncate  max-w-[10rem] text-general-black font-semibold">
                 {item.label}
               </span>
             )}

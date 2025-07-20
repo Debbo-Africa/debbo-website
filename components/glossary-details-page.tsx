@@ -21,7 +21,7 @@ const richTextOptions = {
       </h3>
     ),
     [BLOCKS.PARAGRAPH]: (node: any, children: any) => (
-      <p className="text-gray-text leading-relaxed mb-4">{children}</p>
+      <p className="text-body-gray-text leading-relaxed mb-4">{children}</p>
     ),
     [BLOCKS.UL_LIST]: (node: any, children: any) => (
       <ul className="list-disc ml-6 mb-4 space-y-2">{children}</ul>
@@ -30,7 +30,7 @@ const richTextOptions = {
       <ol className="list-decimal ml-6 mb-4 space-y-2">{children}</ol>
     ),
     [BLOCKS.LIST_ITEM]: (node: any, children: any) => (
-      <li className="text-gray-text leading-relaxed">{children}</li>
+      <li className="text-body-gray-text leading-relaxed">{children}</li>
     ),
   },
   renderMark: {
@@ -96,6 +96,20 @@ export default function GlossaryDetailPage({ slug }: GlossaryDetailPageProps) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  if (loading) {
+    return (
+      <div className="min-h-screen mt-20 max-w-7xl mx-auto px-4 lg:px-0 pb-12 animate-pulse">
+        <div className="h-8 bg-[--surface-card] rounded w-1/3 mb-4"></div>
+        <div className="h-4 bg-[--surface-card] rounded w-1/2 mb-8"></div>
+        <div className="h-64 bg-[--surface-card] rounded mb-8"></div>
+        <div className="space-y-4">
+          <div className="h-4 bg-[--surface-card] rounded w-full"></div>
+          <div className="h-4 bg-[--surface-card] rounded w-5/6"></div>
+          <div className="h-4 bg-[--surface-card] rounded w-3/4"></div>
+        </div>
+      </div>
+    );
+  }
 
   if (!glossaryTerm) {
     return (
@@ -104,7 +118,7 @@ export default function GlossaryDetailPage({ slug }: GlossaryDetailPageProps) {
           <h1 className="text-2xl font-bold text-general-black mb-4">
             Term Not Found
           </h1>
-          <p className="text-gray-text mb-6">
+          <p className="text-body-gray-text mb-6">
             The glossary term you're looking for doesn't exist.
           </p>
           <Link href="/glossary">
@@ -133,12 +147,11 @@ export default function GlossaryDetailPage({ slug }: GlossaryDetailPageProps) {
       <div className="max-w-7xl mx-auto px-4 lg:px-0 pb-12">
         <div className="">
           <div className="mb-8">
-            <p className="text-gray-text leading-relaxed">
+            <p className="text-body-gray-text leading-relaxed ">
               {glossaryTerm.fields.meaning}
             </p>
           </div>
 
-          {/* Detailed Explanation */}
           <div className="prose prose-lg max-w-none mb-12">
             {documentToReactComponents(
               glossaryTerm.fields.explanation,

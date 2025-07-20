@@ -11,28 +11,7 @@ interface NewsEventCardProps {
   layout?: "list" | "grid";
 }
 
-const richTextOptions = {
-  renderNode: {
-    [BLOCKS.PARAGRAPH]: (node: any, children: any) => {
-      const hyperlink = node.content.find(
-        (child: any) => child.nodeType === "hyperlink"
-      );
-      if (hyperlink) {
-        return (
-          <a
-            href={hyperlink.data.uri}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 hover:text-blue-800 underline"
-          >
-            {hyperlink.content[0]?.value || hyperlink.data.uri}
-          </a>
-        );
-      }
-      return null;
-    },
-  },
-};
+
 
 export function NewsEventCard({ item, layout = "list" }: NewsEventCardProps) {
   const formatDate = (dateString: string) => {
@@ -43,7 +22,6 @@ export function NewsEventCard({ item, layout = "list" }: NewsEventCardProps) {
     });
   };
 
-  // Extract URL from rich text link field
   const extractLinkUrl = (linkField: any) => {
     if (!linkField || !linkField.content) return null;
 
@@ -95,7 +73,7 @@ export function NewsEventCard({ item, layout = "list" }: NewsEventCardProps) {
                 </span>
               </div>
 
-              <h3 className="font-semibold text-xl md:text-2xl text-general-black mb-4 leading-tight">
+              <h3 className="font-semibold text-xl md:text-2xl text-general-black mb-4 leading-tight ">
                 {item.fields.description}
               </h3>
             </div>
@@ -156,7 +134,7 @@ export function NewsEventCard({ item, layout = "list" }: NewsEventCardProps) {
               </span>
             </div>
 
-            <h3 className="font-semibold text-xl md:text-2xl text-general-black mb-4 leading-tight">
+            <h3 className="font-semibold text-xl md:text-2xl text-general-black mb-4 leading-tight max-w-sm">
               {item.fields.description}
             </h3>
           </div>

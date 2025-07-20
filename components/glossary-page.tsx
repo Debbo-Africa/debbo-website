@@ -1,11 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Search, ChevronLeft, ChevronRight } from "lucide-react";
+import { Search } from "lucide-react";
 import client from "@/lib/contentful";
 import type { GlossaryEntry, GlossarySkeleton } from "@/types/contentful";
 import type { EntryCollection } from "contentful";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Breadcrumb } from "./breadcrumb";
 import { PageHero } from "./page-hero";
@@ -13,6 +12,17 @@ import { GlossaryTermItem } from "./glossary-term-item";
 import { Pagination } from "./pagination";
 
 const ITEMS_PER_PAGE = 3;
+
+const LoadingGlossaryPlaceholder = () => (
+  <div className="animate-pulse border-b border-gray-100 pb-4 flex justify-between flex-row items-center gap-10">
+    <div className="flex-1 space-y-4">
+      <div className="h-4 bg-[--surface-card] rounded w-1/4"></div>
+      <div className="h-6 bg-[--surface-card] rounded w-3/4"></div>
+      <div className="h-4 bg-[--surface-card] rounded w-1/2"></div>
+    </div>
+    <div className="h-6 w-24 bg-[--surface-card] rounded"></div>
+  </div>
+);
 
 export default function GlossaryPage() {
   const [glossaryTerms, setGlossaryTerms] = useState<GlossaryEntry[]>([]);
@@ -64,13 +74,6 @@ export default function GlossaryPage() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const createSlug = (title: string) => {
-    return title
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/(^-|-$)/g, "");
-  };
-
   return (
     <div className="min-h-screen mt-20">
       <Breadcrumb
@@ -84,9 +87,7 @@ export default function GlossaryPage() {
       <div className="mb-12 mx-auto relative px-4 lg:px-0">
         <PageHero
           title="DébboAfrica Glossary"
-          description=" Welcome to the DébboAfrica Glossary Blog, your go-to resource for
-              understanding women's health, the various conditions affecting the
-              female body, and the treatments available for these conditions."
+          description="Welcome to the DébboAfrica Glossary Blog, your go-to resource for understanding women's health, the various conditions affecting the female body, and the treatments available for these conditions."
           imageSrc="/images/faq.png"
           imageAlt="DébboAfrica Glossary"
         />
@@ -95,7 +96,7 @@ export default function GlossaryPage() {
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-text w-4 h-4" />
             <Input
               type="text"
-              placeholder="Search news"
+              placeholder="Search glossary"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10 pr-4 py-2 bg-[--surface-card] rounded-lg focus:ring-2 focus:ring-yellow focus:border-transparent max-w-xs"
@@ -106,7 +107,13 @@ export default function GlossaryPage() {
 
       <div className="max-w-7xl mx-auto px-4 lg:px-0 pb-12">
         <div className="">
-          {currentTerms.length === 0 ? (
+          {loading ? (
+            <div className="space-y-8">
+              {[...Array(ITEMS_PER_PAGE)].map((_, index) => (
+                <LoadingGlossaryPlaceholder key={index} />
+              ))}
+            </div>
+          ) : currentTerms.length === 0 ? (
             <div className="text-center py-12">
               <p className="text-gray-text text-lg">
                 No glossary terms found matching your search.
@@ -120,7 +127,7 @@ export default function GlossaryPage() {
             </div>
           )}
 
-          {totalPages > 1 && (
+          {!loading && totalPages > 1 && (
             <Pagination
               currentPage={currentPage}
               totalPages={totalPages}
