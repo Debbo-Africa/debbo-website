@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import ButtonComponent from "./Button";
 
@@ -11,9 +12,17 @@ export default function EnhancedNavbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const pathname = usePathname();
 
   const toggleDropdown = (dropdown: string) => {
     setOpenDropdown(openDropdown === dropdown ? null : dropdown);
+  };
+
+  const isActiveLink = (href: string) => {
+    if (href === "/") {
+      return pathname === "/";
+    }
+    return pathname.startsWith(href);
   };
 
   const aboutUsItems = [
@@ -73,20 +82,20 @@ export default function EnhancedNavbar() {
     {
       label: "Book a Test",
       href: "/individual",
-      image: "/images/resources-blog.jpg",
+      image: "/images/book-a-test.jpg",
       description: "Stay up to date with our news and Events.",
     },
     {
       label: "Book a Scan",
       href: "/individual/scan",
-      image: "/images/nav-blog.jpg",
+      image: "/images/book-a-scan.jpg",
       description:
         "Discover our expert radiology services for accurate & diagnosis",
     },
     {
       label: "Speak to a Doctor",
       href: "/individual/contact-a-doctor",
-      image: "/images/glossary.jpg",
+      image: "/images/speak-to-a-doctor.jpg",
       description: "Stay up to date with regular health tips",
     },
   ];
@@ -139,9 +148,9 @@ export default function EnhancedNavbar() {
 
             <div className="hidden lg:flex items-center space-x-8  text-body-text-gray hover:text-general-black">
               <div className="relative group">
-                <button className="flex items-center text-body-text-gray hover:text-general-black font-medium">
+                <button className="flex items-center text-body-text-gray hover:text-general-black hover:bg-[--surface-card] rounded-2xl p-2 px-3 font-medium">
                   individual
-                  <ChevronDown className="ml-1 h-4 w-4" />
+                  <ChevronDown className="ml-1 h-4 w-4 group-hover:rotate-180 transition-transform duration-200" />
                 </button>
                 <div className="absolute top-full left-0 mt-2 w-[600px] bg-badge -ml-[200px] rounded-2xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                   <div className="flex gap-4">
@@ -150,7 +159,11 @@ export default function EnhancedNavbar() {
                         <Link
                           key={index}
                           href={item.href}
-                          className="block px-6 py-3 text-sm text-body-text-gray hover:text-general-black hover:bg-[--surface-card] hover:rounded-xl transition-colors"
+                          className={`block px-6 py-3 text-sm hover:text-general-black hover:bg-[--surface-card] hover:rounded-xl transition-colors ${
+                            isActiveLink(item.href)
+                              ? "text-general-black bg-[--surface-card] rounded-xl"
+                              : "text-body-text-gray"
+                          }`}
                           onMouseEnter={() => setHoveredItem(item.label)}
                           onMouseLeave={() => setHoveredItem(null)}
                         >
@@ -169,7 +182,7 @@ export default function EnhancedNavbar() {
                               fill
                               className="object-cover"
                             />
-                            <div className="absolute inset-0 bg-black bg-opacity-40 flex items-end">
+                            <div className="absolute inset-0 bg-black bg-opacity-20 flex items-end">
                               <div className="p-4 text-white">
                                 <h3 className="font-semibold text-lg opacity-90">
                                   {currentImage.description}
@@ -185,16 +198,20 @@ export default function EnhancedNavbar() {
               </div>
               <Link
                 href="/corporate"
-                className="text-body-text-gray hover:text-general-black  font-medium"
+                className={`font-medium rounded-2xl p-2 px-3 hover:bg-[--surface-card] hover:text-general-black  ${
+                  isActiveLink("/corporate")
+                    ? "text-general-black bg-[--surface-card]  "
+                    : "text-body-text-gray hover:text-general-black  "
+                }`}
               >
                 Corporate
               </Link>
 
               {/* About Us Dropdown */}
               <div className="relative group">
-                <button className="flex items-center text-body-text-gray hover:text-general-black font-medium">
+                <button className="flex items-center text-body-text-gray hover:text-general-black hover:bg-[--surface-card] rounded-2xl px-3 p-2 font-medium">
                   About Us
-                  <ChevronDown className="ml-1 h-4 w-4" />
+                  <ChevronDown className="ml-1 h-4 w-4 group-hover:rotate-180 transition-transform duration-200" />
                 </button>
                 <div className="absolute top-full left-0 mt-2 w-[600px] bg-badge -ml-[300px] rounded-2xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                   <div className="flex gap-4">
@@ -203,7 +220,11 @@ export default function EnhancedNavbar() {
                         <Link
                           key={index}
                           href={item.href}
-                          className="block px-6 py-3 text-sm text-body-text-gray hover:text-general-black hover:bg-[--surface-card] hover:rounded-xl transition-colors"
+                          className={`block px-6 py-3 text-sm hover:text-general-black rounded-2xl p-2  hover:bg-[--surface-card] transition-colors ${
+                            isActiveLink(item.href)
+                              ? "text-general-black bg-[--surface-card]  "
+                              : "text-body-text-gray"
+                          }`}
                           onMouseEnter={() => setHoveredItem(item.label)}
                           onMouseLeave={() => setHoveredItem(null)}
                         >
@@ -238,9 +259,9 @@ export default function EnhancedNavbar() {
               </div>
 
               <div className="relative group">
-                <button className="flex items-center text-gray-700 hover:text-gray-900 font-medium">
+                <button className="flex items-center text-body-text-gray hover:text-gray-900 font-medium hover:bg-[--surface-card] px-3 p-2 rounded-2xl">
                   Resources
-                  <ChevronDown className="ml-1 h-4 w-4" />
+                  <ChevronDown className="ml-1 h-4 w-4 group-hover:rotate-180 transition-transform duration-200" />
                 </button>
                 <div className="absolute top-full left-0 mt-2 w-[600px] bg-badge -ml-[300px] rounded-2xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                   <div className="flex gap-4">
@@ -249,7 +270,11 @@ export default function EnhancedNavbar() {
                         <Link
                           key={index}
                           href={item.href}
-                          className="block px-6 py-3 text-sm text-body-text-gray hover:text-general-black hover:bg-[--surface-card] hover:rounded-xl transition-colors"
+                          className={`block px-6 py-3 text-sm  hover:bg-[--surface-card] hover:text-general-black  hover:rounded-xl transition-colors ${
+                            isActiveLink(item.href)
+                              ? "text-general-black bg-[--surface-card] rounded-xl"
+                              : "text-body-text-gray"
+                          }`}
                           onMouseEnter={() => setHoveredItem(item.label)}
                           onMouseLeave={() => setHoveredItem(null)}
                         >
@@ -268,7 +293,7 @@ export default function EnhancedNavbar() {
                               fill
                               className="object-cover"
                             />
-                            <div className="absolute inset-0 bg-black bg-opacity-40 flex items-end">
+                            <div className="absolute inset-0 bg-black bg-opacity-20 flex items-end">
                               <div className="p-4 text-white">
                                 <h3 className="font-semibold text-lg opacity-90">
                                   {currentImage.description}
@@ -288,7 +313,6 @@ export default function EnhancedNavbar() {
               <ButtonComponent />
             </div>
 
-            {/* Mobile Menu Button */}
             <Button
               size="icon"
               className="lg:hidden bg-transparent"
@@ -326,16 +350,26 @@ export default function EnhancedNavbar() {
             <div className="space-y-8">
               <Link
                 href="/"
-                className="block text-lg font-medium text-body-text-gray p-2"
+                className={`block text-lg font-medium p-2 rounded-xl ${
+                  isActiveLink("/")
+                    ? "text-general-black bg-[--surface-card]"
+                    : "text-body-text-gray"
+                }`}
                 onClick={() => setIsOpen(false)}
               >
                 Home
               </Link>
 
-              <div className="bg-[--surface-card] rounded-xl p-4">
+              <div
+                className={`rounded-xl p-4 hover:bg-[--surface-card] ${
+                  pathname.startsWith("/about")
+                    ? "bg-[--surface-card]"
+                    : "bg-surface-card"
+                }`}
+              >
                 <button
                   onClick={() => toggleDropdown("about")}
-                  className="flex items-center justify-between w-full text-lg font-medium text-gray-700"
+                  className="flex items-center justify-between w-full text-lg font-medium text-body-text-gray "
                 >
                   About us
                   <ChevronDown
@@ -361,7 +395,61 @@ export default function EnhancedNavbar() {
                         <Link
                           key={index}
                           href={item.href}
-                          className="block text-base text-gray-600"
+                          className={`block text-base p-2 rounded-xl  ${
+                            isActiveLink(item.href)
+                              ? "text-general-black bg-[--surface-card]"
+                              : "text-body-text-gray"
+                          }`}
+                          onClick={() => setIsOpen(false)}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div
+                className={`rounded-xl p-4 ${
+                  pathname.startsWith("/individual")
+                    ? "text-general-black bg-[--surface-card]"
+                    : "bg-surface-card"
+                }`}
+              >
+                <button
+                  onClick={() => toggleDropdown("individual")}
+                  className="flex items-center justify-between w-full text-lg font-medium text-body-text-gray"
+                >
+                  For Individuals
+                  <ChevronDown
+                    className={`h-5 w-5 transition-transform duration-200 ${
+                      openDropdown === "individual" ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                {openDropdown === "individual" && (
+                  <div className="mt-8 space-y-8">
+                    <div className="lg:block hidden mb-4">
+                      <div className="relative h-32 rounded-lg overflow-hidden">
+                        <Image
+                          src={getDefaultImage("individual")?.image || ""}
+                          alt="For Individuals"
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                    </div>
+                    <div className="space-y-8">
+                      {individualItems.map((item, index) => (
+                        <Link
+                          key={index}
+                          href={item.href}
+                          className={`block text-base p-2 rounded-xl ${
+                            isActiveLink(item.href)
+                              ? "text-general-black bg-[--surface-card]"
+                              : "text-body-text-gray"
+                          }`}
                           onClick={() => setIsOpen(false)}
                         >
                           {item.label}
@@ -373,33 +461,36 @@ export default function EnhancedNavbar() {
               </div>
 
               <Link
-                href="/individual"
-                className="block text-lg font-medium text-gray-700 p-2"
-                onClick={() => setIsOpen(false)}
-              >
-                For Individuals
-              </Link>
-
-              <Link
                 href="/corporate"
-                className="block text-lg font-medium text-gray-700 p-2"
+                className={`block text-lg font-medium p-2 rounded-xl ${
+                  isActiveLink("/corporate")
+                    ? "text-general-black bg-[--surface-card]"
+                    : "text-body-text-gray"
+                }`}
                 onClick={() => setIsOpen(false)}
               >
                 For Corporate
               </Link>
 
-              <div className="bg-[--surface-card] rounded-xl p-4">
+              <div
+                className={`rounded-xl p-4 ${
+                  pathname.startsWith("/resources")
+                    ? "text-general-black bg-[--surface-card]"
+                    : "bg-surface-card"
+                }`}
+              >
                 <button
                   onClick={() => toggleDropdown("resources")}
-                  className="flex items-center justify-between w-full text-lg font-medium text-gray-700"
+                  className="flex items-center justify-between w-full text-lg font-medium text-body-text-gray"
                 >
                   Resources
-                  <ChevronRight
+                  <ChevronDown
                     className={`h-5 w-5 transition-transform duration-200 ${
-                      openDropdown === "resources" ? "rotate-90" : ""
+                      openDropdown === "resources" ? "rotate-180" : ""
                     }`}
                   />
                 </button>
+
                 {openDropdown === "resources" && (
                   <div className="mt-8 space-y-8">
                     <div className="lg:block hidden mb-4">
@@ -417,7 +508,11 @@ export default function EnhancedNavbar() {
                         <Link
                           key={index}
                           href={item.href}
-                          className="block text-base text-gray-600"
+                          className={`block text-base p-2 rounded-xl ${
+                            isActiveLink(item.href)
+                              ? "text-general-black bg-[--surface-card]"
+                              : "text-body-text-gray"
+                          }`}
                           onClick={() => setIsOpen(false)}
                         >
                           {item.label}

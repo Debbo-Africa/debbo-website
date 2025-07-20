@@ -20,9 +20,12 @@ const ALL_CARDS: Card[] = [
 
 export function ValuesSection() {
   const [cards, setCards] = useState<Card[]>([]);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 1024);
+
       if (window.innerWidth < 1024) {
         const filteredCards: Card[] = [];
         let coloredCount = 0;
@@ -51,13 +54,13 @@ export function ValuesSection() {
       }
     };
 
-    handleResize(); // run on mount
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
-    <section className="py-16">
+    <section className=" py-0 md:py-16">
       <div className="max-w-5xl mx-auto px-4 lg:px-0">
         <div className="text-center mb-12">
           <h2 className="text-3xl lg:text-4xl font-bold text-general-black mb-8">
@@ -68,13 +71,12 @@ export function ValuesSection() {
             {cards.map((card, index) => (
               <div
                 key={`${card.text ?? "empty"}-${index}`}
-                className="rounded-full text-lg font-medium px-6 py-5 flex items-center justify-center slide-in transition-all duration-500 ease-in-out"
+                className="rounded-full text-lg font-medium px-6 py-4 md:py-5 flex items-center justify-center slide-in transition-all duration-500 ease-in-out"
                 style={{
                   backgroundColor:
                     card.color === "gray" ? "#f2e9dd" : card.color,
                   color: card.color !== "gray" ? "white" : "black",
-                  width: card.text ? "auto" : "200px",
-                  height: "66px",
+                  width: card.text ? "auto" : isSmallScreen ? "150px" : "200px",
                 }}
               >
                 {card.text}
@@ -84,21 +86,7 @@ export function ValuesSection() {
         </div>
       </div>
 
-      <style jsx>{`
-        @keyframes slideInLeft {
-          from {
-            transform: translateX(-50px);
-            opacity: 0;
-          }
-          to {
-            transform: translateX(0);
-            opacity: 1;
-          }
-        }
-        .slide-in {
-          animation: slideInLeft 0.8s ease-out forwards;
-        }
-      `}</style>
+    
     </section>
   );
 }

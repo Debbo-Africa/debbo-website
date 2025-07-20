@@ -1,4 +1,3 @@
-// components/SkeletonTestCard.tsx
 export function SkeletonTestCard() {
   return (
     <div className="animate-pulse p-4 border rounded-xl space-y-4 bg-[--surface-card]">
