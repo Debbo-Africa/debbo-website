@@ -20,6 +20,7 @@ import type { MedicalTestEntry, MedicalTestSkeleton } from "@/types/contentful";
 import type { EntryCollection } from "contentful";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { SkeletonTestCard } from "@/components/skeleton-test-card";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -87,16 +88,13 @@ export default function BookTestPage() {
     fetchTests();
   }, []);
 
-  // Effect to update available categories when tab changes
   useEffect(() => {
     if (tests.length === 0) return;
 
-    // Filter tests by current tab
-    const testsForCurrentTab = tests.filter((test) => {
-      return test.fields.type === tabMap[activeTab as keyof typeof tabMap];
-    });
+    const testsForCurrentTab = tests.filter(
+      (test) => test.fields.type === tabMap[activeTab as keyof typeof tabMap]
+    );
 
-    // Get unique categories for current tab
     const categoriesForTab = Array.from(
       new Set(
         testsForCurrentTab.map((test) => test.fields.category).filter(Boolean)
@@ -104,44 +102,30 @@ export default function BookTestPage() {
     );
 
     setAvailableCategories(categoriesForTab as any);
-
-    // Reset category filter and page when switching tabs
     setSelectedCategory("all");
     setCurrentPage(1);
   }, [tests, activeTab]);
 
-  // Effect to filter tests based on current filters
   useEffect(() => {
     if (tests.length === 0) return;
 
-    // Filter tests by current tab first
-    const testsForCurrentTab = tests.filter((test) => {
-      return test.fields.type === tabMap[activeTab as keyof typeof tabMap];
-    });
+    const testsForCurrentTab = tests.filter(
+      (test) => test.fields.type === tabMap[activeTab as keyof typeof tabMap]
+    );
 
-    // Then apply search and category filters
     const filtered = testsForCurrentTab.filter((test) => {
-      // Filter by search term
-      if (
-        searchTerm &&
-        !test.fields.testName.toLowerCase().includes(searchTerm.toLowerCase())
-      ) {
-        return false;
-      }
+      const matchesSearch = test.fields.testName
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
 
-      // Filter by category
-      if (
-        selectedCategory !== "all" &&
-        test.fields.category !== selectedCategory
-      ) {
-        return false;
-      }
+      const matchesCategory =
+        selectedCategory === "all" || test.fields.category === selectedCategory;
 
-      return true;
+      return matchesSearch && matchesCategory;
     });
 
     setFilteredTests(filtered);
-    setCurrentPage(1); // Reset to first page when filters change
+    setCurrentPage(1);
   }, [tests, activeTab, searchTerm, selectedCategory]);
 
   const totalPages = Math.ceil(filteredTests.length / ITEMS_PER_PAGE);
@@ -152,17 +136,6 @@ export default function BookTestPage() {
   );
 
   const currentTabContent = tabContent[activeTab as keyof typeof tabContent];
-
-  if (loading) {
-    return (
-      <div className="min-h-screen pt-20">
-        <TestHeader showTabs activeTab={activeTab} onTabChange={setActiveTab} />
-        <div className="flex items-center justify-center h-64">
-          <div className="text-lg">Loading...</div>
-        </div>
-      </div>
-    );
-  }
 
   // Special case for occupational health
   if (activeTab === "occupational") {
@@ -181,7 +154,7 @@ export default function BookTestPage() {
 
         <section className="py-16 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
-            <div className="lg:w-1/2 rounded-xl overflow-hidden ">
+            <div className="lg:w-1/2 rounded-xl overflow-hidden">
               <Image
                 src="/images/hero-grid.png"
                 alt="Corporate wellness team"
@@ -196,13 +169,14 @@ export default function BookTestPage() {
                 <span className="text-yellow">Empowering</span>
                 &nbsp;Your <br /> Workforce with <br /> Better Health
               </h1>
-
               <p className="text-lg text-body-text-gray mb-6">
                 At DébboAfrica, we believe your team is your greatest asset. Our
                 corporate wellness plans are designed to support employee
                 health, boost productivity, and build stronger organisations.
               </p>
-              <Button className="bg-[#0D0D0DFC] rounded-full">Explore → </Button>
+              <Button className="bg-[#0D0D0DFC] rounded-full">
+                Explore →{" "}
+              </Button>
             </div>
           </div>
         </section>
@@ -260,7 +234,6 @@ export default function BookTestPage() {
             </Select>
           </div>
 
-          {/* Right side: Sort */}
           <div className="hidden md:block">
             <Select defaultValue="high-to-low">
               <SelectTrigger className="w-full md:w-48 bg-[--surface-card]">
@@ -274,15 +247,17 @@ export default function BookTestPage() {
           </div>
         </div>
 
-        {/* Test Cards Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          {paginatedTests.map((test) => (
-            <TestCard key={test.sys.id} test={test} />
-          ))}
+          {loading
+            ? Array.from({ length: ITEMS_PER_PAGE }).map((_, index) => (
+                <SkeletonTestCard key={index} />
+              ))
+            : paginatedTests.map((test) => (
+                <TestCard key={test.sys.id} test={test} />
+              ))}
         </div>
 
-        {/* No results message */}
-        {filteredTests.length === 0 && (
+        {!loading && filteredTests.length === 0 && (
           <div className="text-center py-8">
             <p className="text-gray-500">
               No tests found matching your criteria.
@@ -290,7 +265,6 @@ export default function BookTestPage() {
           </div>
         )}
 
-        {/* Pagination */}
         {totalPages > 1 && (
           <Pagination
             currentPage={currentPage}

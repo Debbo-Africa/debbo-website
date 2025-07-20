@@ -18,6 +18,7 @@ import { Search } from "lucide-react";
 import client from "@/lib/contentful";
 import type { MedicalTestEntry, MedicalTestSkeleton } from "@/types/contentful";
 import type { EntryCollection } from "contentful";
+import { SkeletonTestCard } from "@/components/skeleton-test-card";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -88,17 +89,6 @@ export default function BookScanPage() {
     setCurrentPage(1);
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen pt-20">
-        <TestHeader />
-        <div className="flex items-center justify-center h-64">
-          <div className="text-lg">Loading...</div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen pt-20">
       <TestHeader />
@@ -150,17 +140,19 @@ export default function BookScanPage() {
               </Select>
             )}
           </div>
-
-         
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          {paginatedScans.map((scan) => (
-            <TestCard key={scan.sys.id} test={scan} />
-          ))}
+          {loading
+            ? Array.from({ length: ITEMS_PER_PAGE }).map((_, index) => (
+                <SkeletonTestCard key={index} />
+              ))
+            : paginatedScans.map((scan) => (
+                <TestCard key={scan.sys.id} test={scan} />
+              ))}
         </div>
 
-        {filteredScans.length === 0 && (
+        {!loading && filteredScans.length === 0 && (
           <div className="text-center py-8">
             <p className="text-gray-500">No scans found.</p>
           </div>

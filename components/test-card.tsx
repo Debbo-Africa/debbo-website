@@ -10,14 +10,14 @@ import type { MedicalTestEntry } from "@/types/contentful";
 
 interface TestCardProps {
   test: MedicalTestEntry;
-  hideCart?: boolean; 
+  hideCart?: boolean;
 }
 
 const richTextOptions = {
   renderNode: {
     [BLOCKS.LIST_ITEM]: (node: any, children: any) => (
       <li className="flex items-start gap-2 mb-2">
-        <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+        <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0 bg-[#FFF8F0] rounded-full p-1" />
         <span className="text-sm text-body-text-gray">{children}</span>
       </li>
     ),
@@ -53,10 +53,18 @@ export function TestCard({ test, hideCart }: TestCardProps) {
   const { addToCart, updateQuantity, isInCart, getItemQuantity } = useCart();
   const quantity = getItemQuantity(test.sys.id);
   const inCart = isInCart(test.sys.id);
-  const testCount = countTestsInRichText(test.fields.testList);
-  const scanCount = countTestsInRichText(test.fields.scan);
 
-  const useScan = test.fields.scan === true;
+  const testCount = countTestsInRichText(test.fields.testList);
+  const scanCount =
+    test.fields.scan && typeof test.fields.scan === "object"
+      ? countTestsInRichText(test.fields.scan)
+      : 0;
+
+  const isScan =
+    test.fields.scan === true ||
+    (test.fields.scan && typeof test.fields.scan === "object");
+
+  const finalCount = isScan && scanCount > 0 ? scanCount : testCount;
 
   const handleAddToCart = () => {
     addToCart({
@@ -65,7 +73,8 @@ export function TestCard({ test, hideCart }: TestCardProps) {
       price: test.fields.price,
       category: test.fields.category,
       type: test.fields.type,
-      testCount: useScan ? scanCount : testCount,
+      testCount: finalCount > 0 ? finalCount : 1,
+      isScan: isScan,
     });
   };
 
@@ -76,7 +85,7 @@ export function TestCard({ test, hideCart }: TestCardProps) {
   return (
     <Card className="h-full flex flex-col bg-[--surface-card] border-none rounded-2xl">
       <CardContent className="p-6 flex flex-col h-full">
-        <div className="flex justify-between items-start mb-4 ">
+        <div className="flex justify-between items-start mb-4">
           <div>
             <h3 className="font-semibold text-lg mb-1">
               {test.fields.testName}
@@ -92,9 +101,9 @@ export function TestCard({ test, hideCart }: TestCardProps) {
 
         <div className="mb-4">
           <span className="text-sm font-medium text-body-text-gray">
-            {useScan
+            {isScan
               ? `${scanCount > 0 ? scanCount : 1} Scan${
-                  scanCount !== 1 ? "" : "s"
+                  scanCount !== 1 ? "s" : ""
                 }`
               : `${testCount > 0 ? testCount : 1} Test${
                   testCount !== 1 ? "s" : ""
@@ -102,8 +111,9 @@ export function TestCard({ test, hideCart }: TestCardProps) {
           </span>
         </div>
 
-        <div className="mb-3 flex-grow">
-          {documentToReactComponents(test.fields.testList, richTextOptions)}
+        <div className="mb-3 flex-grow space-y-4">
+          {test.fields.testList &&
+            documentToReactComponents(test.fields.testList, richTextOptions)}
         </div>
 
         {!hideCart && (
