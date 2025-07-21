@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import QRCode from "qrcode";
+import ButtonComponent from "./Button";
 
 export const DownloadSection = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -39,53 +40,24 @@ export const DownloadSection = () => {
 
   return (
     <section className="px-4 mx-auto">
-      <div className="bg-[--surface-card]  gap-2 mb-10 md:mb-12 p-4 px-4 flex mx-auto justify-center items-center rounded-full w-fit">
-        <Image
-          src="/images/medical-badge.png"
-          alt="Medical certification"
-          width={16}
-          height={16}
-        />
-        <p className="text-body-text-gray text-sm">
-          Built with your health data privacy in mind.
-        </p>
-      </div>
+     
 
       <div className="space-y-6">
-        <div className="relative rounded-3xl overflow-hidden h-[550px] lg:h-[600px] w-full">
+        <div className="relative rounded-3xl overflow-hidden h-[550px] lg:h-[500px] w-full">
           <div className="absolute bg-[url('/images/app-download-mobile.png')] md:bg-[url('/images/app-download.png')] lg:bg-[url('/images/app-download.png')] inset-0 bg-cover bg-center bg-no-repeat" />
 
           <div className="relative z-10 p-6 sm:p-8 lg:p-10 h-full flex flex-col justify-between">
             <div className="flex flex-col sm:flex-row justify-between">
-              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-general-white mb-4 sm:mb-0 md:leading-relaxed">
-                Download
-                <br />
-                The MyDébbo
-                <br />
-                App Today
+              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-general-white mb-4 sm:mb-0 md:leading-loose max-w-xs">
+                Download The MyDébbo App Today
               </h2>
             </div>
 
             <div className="flex items-end md:justify-between justify-center">
-              <div className="flex gap-2">
-                <Image
-                  src="/images/android-download.png"
-                  alt="Download on Google Play"
-                  width={120}
-                  height={36}
-                  className="h-12 lg:h-16 w-auto"
-                />
-                <Image
-                  src="/images/app-store-download.png"
-                  alt="Download on App Store"
-                  width={120}
-                  height={36}
-                  className="h-12 lg:h-16 w-auto"
-                />
-              </div>
+              <ButtonComponent  />
 
               <div className="bg-general-white rounded-lg p-1.5 sm:p-2 md:flex md:static absolute top-4 right-4">
-                <canvas ref={canvasRef} className="w-24 h-24" />
+                <canvas ref={canvasRef} className="w-24 h-24 lg:w-44 lg:h-44" />
               </div>
             </div>
           </div>

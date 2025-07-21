@@ -24,14 +24,14 @@ const CollaborationSection = () => {
             At Debbo Africa, we firmly believe in the transformative power of
             collaboration and the strength that arises from working together.
           </h2>
-          <p className="text-gray-text mb-4">
+          <p className="text-body-gray-text mb-4">
             We take immense pride in partnering with like-minded brands and
             organizations that share our mission of empowering women and
             promoting holistic well-being across Africa. These alliances have
             not only shaped our journey but have also amplified our voice along
             the way.
           </p>
-          <p className="text-gray-text mb-8">
+          <p className="text-body-gray-text mb-8">
             Our esteemed Brand Allies are true champions in their respective
             fields, dedicated to tackling global issues for the betterment of
             communities worldwide. Through our collective efforts, we aim to

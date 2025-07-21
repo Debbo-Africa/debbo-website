@@ -1,10 +1,107 @@
 "use client";
 
+import { useRef, useEffect } from "react";
 import Image from "next/image";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const InsuranceSection = () => {
+  const sectionRef = useRef(null);
+  const mobileImageElementRef = useRef(null);
+  const desktopImageElementRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(sectionRef.current, {
+        y: 100,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%", 
+          end: "bottom top",
+          toggleActions: "play none none none",
+          once: true,
+        },
+      });
+
+      if (mobileImageElementRef.current) {
+        (mobileImageElementRef as any).current?.addEventListener("mouseenter", () => {
+          gsap.to(mobileImageElementRef.current, {
+            scale: 1.05,
+            duration: 0.3,
+            ease: "power1.out",
+          });
+        });
+        (mobileImageElementRef as any).current?.addEventListener("mouseleave", () => {
+          gsap.to(mobileImageElementRef.current, {
+            scale: 1,
+            duration: 0.3,
+            ease: "power1.out",
+          });
+        });
+      }
+
+      if ((desktopImageElementRef).current ) {
+        (desktopImageElementRef as any).current?.addEventListener("mouseenter", () => {
+          gsap.to(desktopImageElementRef.current, {
+            scale: 1.05,
+            duration: 0.3,
+            ease: "power1.out",
+          });
+        });
+        (desktopImageElementRef as any).current?.addEventListener("mouseleave", () => {
+          gsap.to(desktopImageElementRef.current, {
+            scale: 1,
+            duration: 0.3,
+            ease: "power1.out",
+          });
+        });
+      }
+    });
+
+    return () => {
+      ctx.revert(); 
+      if (mobileImageElementRef.current) {
+        (mobileImageElementRef as any).current?.removeEventListener("mouseenter", () => {
+          gsap.to(mobileImageElementRef.current, {
+            scale: 1.05,
+            duration: 0.3,
+            ease: "power1.out",
+          });
+        });
+        (mobileImageElementRef as any).current?.removeEventListener("mouseleave", () => {
+          gsap.to(mobileImageElementRef.current, {
+            scale: 1,
+            duration: 0.3,
+            ease: "power1.out",
+          });
+        });
+      }
+      if (desktopImageElementRef.current) {
+        (desktopImageElementRef as any).current?.removeEventListener("mouseenter", () => {
+          gsap.to(desktopImageElementRef.current, {
+            scale: 1.05,
+            duration: 0.3,
+            ease: "power1.out",
+          });
+        });
+        (desktopImageElementRef as any).current?.removeEventListener("mouseleave", () => {
+          gsap.to(desktopImageElementRef.current, {
+            scale: 1,
+            duration: 0.3,
+            ease: "power1.out",
+          });
+        });
+      }
+    };
+  }, []);
+
   return (
-    <>
+    <section className="py-16 px-0 " ref={sectionRef}>
       {/* Mobile */}
       <div className="block md:hidden space-y-8">
         <div>
@@ -20,7 +117,6 @@ export const InsuranceSection = () => {
             Mansard, Reliance, Leadway, BUPA and Allianz.
           </p>
         </div>
-
         <div className="flex flex-wrap justify-center gap-4">
           {[
             { src: "/images/AXA_Mansard.svg", alt: "AXA Mansard" },
@@ -31,7 +127,7 @@ export const InsuranceSection = () => {
           ].map((partner) => (
             <Image
               key={partner.alt}
-              src={partner.src}
+              src={partner.src || "/placeholder.svg"}
               alt={partner.alt}
               width={60}
               height={30}
@@ -39,13 +135,13 @@ export const InsuranceSection = () => {
             />
           ))}
         </div>
-
         <div className="relative rounded-3xl overflow-hidden min-h-[400px] text-white">
           <Image
             src="/images/woman-smiling.png"
             alt="Smiling woman"
             fill
             className="object-cover"
+            ref={mobileImageElementRef} 
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
           <div className="absolute bottom-0 left-0 p-6 z-10 text-left">
@@ -66,6 +162,7 @@ export const InsuranceSection = () => {
             alt="Smiling woman"
             fill
             className="object-cover"
+            ref={desktopImageElementRef} 
           />
           <div className="absolute bottom-0 left-0 right-0 p-8 z-10 max-w-xs text-general-black">
             <h3 className="text-2xl font-bold mb-1">No insurance?</h3>
@@ -75,7 +172,6 @@ export const InsuranceSection = () => {
             </p>
           </div>
         </div>
-
         <div className="space-y-8 flex flex-col justify-between">
           <div>
             <h2 className="text-4xl md:text-5xl font-bold text-general-black mb-4 leading-tight">
@@ -90,7 +186,6 @@ export const InsuranceSection = () => {
               Mansard, Reliance, Leadway, BUPA and Allianz.
             </p>
           </div>
-
           <div className="flex flex-wrap items-center gap-6">
             {[
               { src: "/images/AXA_Mansard.svg", alt: "AXA Mansard" },
@@ -101,7 +196,7 @@ export const InsuranceSection = () => {
             ].map((partner) => (
               <Image
                 key={partner.alt}
-                src={partner.src}
+                src={partner.src || "/placeholder.svg"}
                 alt={partner.alt}
                 width={80}
                 height={40}
@@ -111,6 +206,6 @@ export const InsuranceSection = () => {
           </div>
         </div>
       </div>
-    </>
+    </section>
   );
 };

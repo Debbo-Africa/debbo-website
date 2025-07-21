@@ -3,11 +3,11 @@ import { Check } from "lucide-react";
 
 export default function FiveCSection() {
   return (
-    <section className="px-4 py-20 sm:px-6 lg:px-8">
+    <section className=" py-12 px-2 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto flex flex-col lg:flex-row rounded-2xl overflow-hidden bg-[#d9542c] relative">
-        <div className="absolute inset-0 bg-[url('/images/bg-circles.png')] opacity-20 bg-cover bg-center"></div>
+        <div className="absolute left-0 right-0 bottom-0 lg:top-0 bg-[url('/images/footer-bg.png')] opacity-20 bg-center h-80 "></div>
 
-        <div className="relative z-10 lg:w-[45%] p-10 text-white">
+        <div className="relative z-10 lg:w-[45%] px-4 py-10 md:p-10 text-white">
           <h2 className="text-3xl sm:text-4xl font-semibold mb-6">
             We’re built on the 5 C’s
           </h2>

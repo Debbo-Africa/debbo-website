@@ -7,6 +7,7 @@ interface PageHeroProps {
   title: string;
   description: string;
   imageSrc?: string;
+  leftImageSrc?: string; // NEW PROP for left image small screen
   imageAlt?: string;
   imageWidth?: number;
   imageHeight?: number;
@@ -19,6 +20,7 @@ export function PageHero({
   title,
   description,
   imageSrc,
+  leftImageSrc,
   imageAlt = "",
   imageWidth = 400,
   imageHeight = 300,
@@ -30,8 +32,24 @@ export function PageHero({
     <div
       className={`mb-12 mx-auto relative px-4 mt-16 lg:mt-10 lg:px-0 ${className}`}
     >
+      {/* Left Image for small screen */}
+      {(leftImageSrc || imageSrc) && (
+        <div className="absolute left-0 -translate-y-1/2 block md:hidden">
+          <Image
+            src={leftImageSrc ? leftImageSrc : imageSrc!}
+            alt={imageAlt}
+            width={60}
+            height={60}
+            className={`w-40 md:w-56 h-auto ${
+              leftImageSrc ? "" : "rotate-180"
+            }`}
+          />
+        </div>
+      )}
+
       {imageSrc && (
         <>
+          {/* Existing images with rotation for md screens */}
           <div className="absolute left-0 rotate-180 -translate-y-1/2 hidden md:block lg:hidden">
             <Image
               src={imageSrc}
@@ -50,15 +68,8 @@ export function PageHero({
               className="w-40 md:w-56 h-auto"
             />
           </div>
-          <div className="absolute left-0 rotate-180 -translate-y-1/2 block md:hidden">
-            <Image
-              src={imageSrc}
-              alt={imageAlt}
-              width={60}
-              height={60}
-              className="w-40 md:w-56 h-auto"
-            />
-          </div>
+
+          {/* Existing small screen right image */}
           <div className="absolute right-0 -translate-y-1/2 block md:hidden">
             <Image
               src={imageSrc}

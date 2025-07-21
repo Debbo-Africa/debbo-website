@@ -1,6 +1,8 @@
 "use client";
 
+import { useLayoutEffect, useRef } from "react";
 import Image from "next/image";
+import gsap from "gsap";
 
 const SERVICES_DATA = [
   {
@@ -35,13 +37,25 @@ const SERVICES_DATA = [
 ];
 
 export function PersonalisedCareSection() {
-  const firstThree = SERVICES_DATA.slice(0, 3);
-  const nextTwo = SERVICES_DATA.slice(3, 5);
-  const lastOne = SERVICES_DATA.length > 5 ? SERVICES_DATA[5] : null;
+  const cardsContainerRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(".service-card", {
+        y: 60,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        stagger: 0.2,
+      });
+    }, cardsContainerRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section className="py-16">
-      <div className="max-w-6xl mx-auto px-4 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 lg:px-8" ref={cardsContainerRef}>
         <div className="text-center mb-12">
           <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
             Access Personalised Care.
@@ -57,23 +71,18 @@ export function PersonalisedCareSection() {
 
         {/* Large screens: 3 columns then 2 columns */}
         <div className="hidden lg:grid lg:grid-cols-3 gap-6 mb-6">
-          {firstThree.map((service, index) => (
+          {SERVICES_DATA.slice(0, 3).map((service, index) => (
             <CardItem key={index} service={service} />
           ))}
         </div>
 
         <div className="hidden lg:grid lg:grid-cols-2 gap-6 mb-6">
-          {nextTwo.map((service, index) => (
+          {SERVICES_DATA.slice(3, 5).map((service, index) => (
             <CardItem key={index + 3} service={service} />
           ))}
         </div>
 
-        {lastOne && (
-          <div className="hidden lg:block">
-            <CardItem service={lastOne} />
-          </div>
-        )}
-
+        {/* Medium screens */}
         <div className="hidden md:grid lg:hidden md:grid-cols-2 gap-6">
           {SERVICES_DATA.slice(0, 4).map((service, index) => (
             <CardItem key={index} service={service} />
@@ -85,7 +94,7 @@ export function PersonalisedCareSection() {
           </div>
         )}
 
-        {/* Small screens: 1 column */}
+        {/* Small screens */}
         <div className="grid grid-cols-1 md:hidden gap-6">
           {SERVICES_DATA.map((service, index) => (
             <CardItem key={index} service={service} />
@@ -104,7 +113,7 @@ type Service = {
 
 function CardItem({ service }: { service: Service }) {
   return (
-    <div className="hover:shadow-lg transition-shadow duration-300 rounded-xl bg-[--surface-card] p-10 min-h-[220px]">
+    <div className="service-card rounded-xl bg-[--surface-card] p-10 min-h-[120px] ">
       <div className="flex items-center gap-4 mb-2">
         <div className="flex-shrink-0">
           <Image
@@ -115,12 +124,11 @@ function CardItem({ service }: { service: Service }) {
             className="w-8 h-8 object-contain"
           />
         </div>
-        <h3 className="font-semibold text-general-black">{service.title}</h3>
+        <h3 className=" text-general-black font-bold">{service.title}</h3>
       </div>
-      <p className="text-gray-text text-sm leading-relaxed">
+      <p className="text-body-gray-text text-sm leading-relaxed">
         {service.description}
       </p>
     </div>
   );
 }
-

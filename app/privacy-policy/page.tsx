@@ -22,7 +22,7 @@ const richTextOptions = {
       </h3>
     ),
     [BLOCKS.PARAGRAPH]: (node: any, children: any) => (
-      <p className="text-gray-text leading-relaxed mb-4">{children}</p>
+      <p className="text-body-text-gray leading-relaxed mb-4">{children}</p>
     ),
   },
   renderMark: {
@@ -58,22 +58,6 @@ export default function PrivacyPolicyPage() {
     fetchPolicyData();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="min-h-screen mt-20 flex items-center justify-center">
-        <div className="text-lg">Loading...</div>
-      </div>
-    );
-  }
-
-  if (!policyData) {
-    return (
-      <div className="min-h-screen mt-20 flex items-center justify-center">
-        <div className="text-lg text-red-600">Failed to load policy data</div>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen mt-20">
       <Breadcrumb
@@ -91,55 +75,52 @@ export default function PrivacyPolicyPage() {
       />
 
       <div className="max-w-7xl mx-auto pb-12 px-4 lg:px-0">
-        <div className=" rounded-lg shadow-sm">
-          <Tabs
-            tabs={[
-              {
-                key: "privacy",
-                label: "Privacy Policy",
-                content: (
-                  <div className="prose prose-lg max-w-none">
-                    {documentToReactComponents(
-                      policyData.fields.privacyPolicy,
-                      richTextOptions
-                    )}
-                  </div>
-                ),
-              },
-              {
-                key: "terms",
-                label: "Terms of use",
-                content: (
-                  <div className="prose prose-lg max-w-none">
-                    {documentToReactComponents(
-                      policyData.fields.termsOfUse,
-                      richTextOptions
-                    )}
-                  </div>
-                ),
-              },
-            ]}
-          />
-
-          <div className="p-8">
-            {activeTab === "privacy" && (
-              <div className="prose prose-lg max-w-none">
-                {documentToReactComponents(
-                  policyData.fields.privacyPolicy,
-                  richTextOptions
-                )}
-              </div>
-            )}
-
-            {activeTab === "terms" && (
-              <div className="prose prose-lg max-w-none">
-                {documentToReactComponents(
-                  policyData.fields.termsOfUse,
-                  richTextOptions
-                )}
-              </div>
-            )}
-          </div>
+        <div className="rounded-lg shadow-sm">
+          {loading ? (
+            <div className="animate-pulse p-8 space-y-4">
+              <div className="h-6 bg-[--surface-card] rounded w-1/3 mx-auto"></div>
+              <div className="h-4 bg-[--surface-card] rounded w-1/2 mx-auto"></div>
+              <div className="h-4 bg-[--surface-card] rounded w-2/3 mx-auto"></div>
+              <div className="h-4 bg-[--surface-card] rounded w-1/4 mx-auto"></div>
+              <div className="h-4 bg-[--surface-card] rounded w-3/4 mx-auto"></div>
+            </div>
+          ) : policyData ? (
+            <Tabs
+              tabs={[
+                {
+                  key: "privacy",
+                  label: "Privacy Policy",
+                  content: (
+                    <div className="prose prose-lg max-w-none">
+                      {documentToReactComponents(
+                        policyData.fields.privacyPolicy,
+                        richTextOptions
+                      )}
+                    </div>
+                  ),
+                },
+                {
+                  key: "terms",
+                  label: "Terms of use",
+                  content: (
+                    <div className="prose prose-lg max-w-none">
+                      {documentToReactComponents(
+                        policyData.fields.termsOfUse,
+                        richTextOptions
+                      )}
+                    </div>
+                  ),
+                },
+              ]}
+              activeTab={activeTab as any}
+              setActiveTab={setActiveTab}
+              className="justify-center " 
+            />
+          ) : (
+            <div className="p-8 text-center text-red-600">
+              Failed to load policy data
+            </div>
+          )}
         </div>
       </div>
     </div>

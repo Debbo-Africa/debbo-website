@@ -11,12 +11,12 @@ const DebboAfricaHubSection = () => {
           src="/images/debbo-hub.jpg"
           alt="Student hub"
           fill
-          className="object-cover"
+          className="object-cover transform transition duration-300 hover:scale-105"
           sizes="(max-width: 768px) 100vw, 75vw"
           priority
         />
 
-        <div className="absolute bottom-4 left-4 text-white font-semibold text-2xl md:text-3xl">
+        <div className="absolute bottom-4 md:bottom-6 md:left-6 left-4 text-white font-semibold text-2xl md:text-4xl">
           Débbo Africa
           <br />
           Student Hub

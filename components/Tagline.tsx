@@ -5,11 +5,15 @@ import Image from "next/image";
 interface TaglineProps {
   bgColor?: string;
   textColor?: string;
+  imageSrc?: string; 
+  imageAlt?: string;
 }
 
 export default function Tagline({
   bgColor = "bg-[#2b1d18]",
   textColor = "text-gray-text",
+  imageSrc = "/images/Brand-Logo-Icon.png", 
+  imageAlt = "brand logo", 
 }: TaglineProps) {
   const taglineRef = useRef<HTMLDivElement>(null);
 
@@ -57,13 +61,11 @@ export default function Tagline({
               Rooted in Africa, Driven by AI, Built for Her.
             </h2>
             <Image
-              src="/images/Brand-Logo-Icon.png"
-              alt="brand logo"
-              className="w-10 h-10"
+              src={imageSrc}
+              alt={imageAlt}
+              className="w-10 h-10 mb-4"
               width={20}
               height={20}
-              placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkrHB0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
             />
           </div>
         ))}

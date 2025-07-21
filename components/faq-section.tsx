@@ -1,16 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import {
-  ChevronLeft,
-  ChevronRight,
-  Plus,
-  Minus,
-  Star,
-  MoveRight,
-  MoveLeft,
-} from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { Plus, Minus, MoveRight, MoveLeft } from "lucide-react";
 import Image from "next/image";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface Review {
   id: number;
@@ -83,6 +79,11 @@ export const FAQSection = () => {
   const [currentReview, setCurrentReview] = useState(0);
   const [openFAQ, setOpenFAQ] = useState<number | null>(1);
 
+  const sectionRef = useRef(null);
+  const reviewCardRef = useRef(null);
+  const mediaLogosCardRef = useRef(null);
+  const faqCardRef = useRef(null);
+
   const nextReview = () => {
     setCurrentReview((prev) => (prev + 1) % reviews.length);
   };
@@ -95,15 +96,47 @@ export const FAQSection = () => {
     setOpenFAQ(openFAQ === id ? null : id);
   };
 
-  return (
-    <section className="relative min-h-screen w-full overflow-hidden">
-      <div className="absolute inset-0 bg-cover bg-top bg-no-repeat bg-[url('/images/faq-background-small.png')] md:bg-[url('/images/faq-background.png')]" />
+  useEffect(() => {
+    const cardsToAnimate:any = [];
+    if (reviewCardRef.current) cardsToAnimate.push(reviewCardRef.current);
+    if (mediaLogosCardRef.current)
+      cardsToAnimate.push(mediaLogosCardRef.current);
+    if (faqCardRef.current) cardsToAnimate.push(faqCardRef.current);
 
+    const ctx = gsap.context(() => {
+      gsap.from(cardsToAnimate, {
+        y: 100,
+        opacity: 0,
+        stagger: 0.2,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 60%", 
+          end: "bottom top",
+          toggleActions: "play none none none",
+          once: true,
+        },
+      });
+    });
+
+    return () => ctx.revert(); 
+  }, []);
+
+  return (
+    <section
+      className="relative min-h-screen w-full overflow-hidden"
+      ref={sectionRef}
+    >
+      <div className="absolute inset-0 bg-cover bg-top bg-no-repeat bg-[url('/images/faq-background-small.png')] md:bg-[url('/images/faq-background.png')]" />
       <div className="relative z-10 min-h-screen flex items-end pb-16 px-4 pt-[28rem] md:pt-[25rem]">
         <div className="max-w-5xl mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
             <div className="flex flex-col gap-6 h-full">
-              <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-sm flex-1 flex flex-col">
+              <div
+                className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-sm flex-1 flex flex-col"
+                ref={reviewCardRef}
+              >
                 <div className="mb-6">
                   <div className="flex items-center gap-2 mb-2">
                     <Image
@@ -113,12 +146,11 @@ export const FAQSection = () => {
                       height={40}
                     />{" "}
                     <p className="text-sm ">
-                      99% of clients
-                      rated our health <br/> services as 'Excellent'
+                      99% of clients rated our health <br /> services as
+                      'Excellent'
                     </p>
                   </div>
                 </div>
-
                 {/* Review Content - Takes remaining space */}
                 <div className="flex-1 flex flex-col justify-center mb-6">
                   <p className="text-base text-gray-800 leading-relaxed mb-3">
@@ -127,7 +159,6 @@ export const FAQSection = () => {
                   <p className="text-sm font-medium text-gray-600 mb-4">
                     {reviews[currentReview].author}
                   </p>
-
                   <div className="flex items-center gap-3">
                     <button
                       onClick={prevReview}
@@ -146,9 +177,10 @@ export const FAQSection = () => {
                   </div>
                 </div>
               </div>
-
-              {/* Media Logos Card - Fixed Height */}
-              <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-sm">
+              <div
+                className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-sm"
+                ref={mediaLogosCardRef}
+              >
                 <p className="text-xs text-gray-600 mb-3">As Seen In</p>
                 <div className="flex items-center">
                   <img
@@ -159,8 +191,10 @@ export const FAQSection = () => {
                 </div>
               </div>
             </div>
-
-            <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-sm flex flex-col h-full">
+            <div
+              className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-sm flex flex-col h-full"
+              ref={faqCardRef}
+            >
               <div className="text-center mb-6">
                 <h2 className="text-2xl font-bold text-general-black mb-1">
                   Frequently Asked
@@ -169,7 +203,6 @@ export const FAQSection = () => {
                   Questions
                 </h2>
               </div>
-
               <div className="space-y-2 mb-6 flex-1">
                 {faqs.map((faq) => (
                   <div
@@ -191,7 +224,6 @@ export const FAQSection = () => {
                         )}
                       </div>
                     </button>
-
                     {openFAQ === faq.id && (
                       <div className="px-4 pb-3 border-t border-gray-100 ">
                         <p className="text-gray-700 text-sm leading-relaxed pt-3">
@@ -202,7 +234,6 @@ export const FAQSection = () => {
                   </div>
                 ))}
               </div>
-
               <div className="text-left">
                 <button className="bg-[#0D0D0DFC] w-full md:w-fit justify-center text-general-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition-colors inline-flex items-center gap-2 text-sm">
                   View all FAQs

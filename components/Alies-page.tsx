@@ -14,8 +14,9 @@ const BrandAliesPage = () => {
         description=""
         imageSrc="/images/alies.png"
         imageAlt="Faqs illustration"
+        leftImageSrc="/images/brand-alies.png"
         headingClassName="md:max-w-[15rem] md:leading-relaxed"
-        className="bg-secondary-debbo-dark1  rounded-3xl overflow-hidden py-20 md:py-24 lg:py-6 text-white "
+        className="bg-secondary-debbo-dark1  rounded-3xl overflow-hidden py-20 md:py-24 lg:py-20 text-white "
       />
       <CollaborationSection />
     </div>

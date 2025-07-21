@@ -11,6 +11,9 @@ interface LetsWorkTogetherProps {
   buttonLink?: string;
   imageSrc?: string;
   imageAlt?: string;
+  download?: boolean;
+  topImageSrc?: string; // NEW: image on top of right image
+  topImageAlt?: string;
 }
 
 export function LetsWorkTogetherSection({
@@ -20,27 +23,63 @@ export function LetsWorkTogetherSection({
   buttonLink = "/contact",
   imageSrc = "/images/lets-wrok.png",
   imageAlt = "Team member",
+  download = false,
+  topImageSrc = "/images/download-phone.png",
+  topImageAlt = "Top image",
 }: LetsWorkTogetherProps) {
   return (
     <section className="py-16">
-      <div className="max-w-6xl mx-auto px-4 lg:px-8">
-        <div className="bg-green rounded-3xl overflow-hidden">
-          <div className="flex flex-col lg:flex-row items-center min-h-[400px]">
+      <div className={`${!download && "max-w-6xl "}mx-auto px-4 lg:px-8`}>
+        <div
+          className={`rounded-3xl overflow-hidden ${
+            download ? "bg-[#FA9130]" : "bg-green"
+          }`}
+        >
+          <div
+            className={`flex flex-col lg:flex-row items-center min-h-[400px] ${
+              download && "min-h-[500px]"
+            }`}
+          >
             <div className="p-8 lg:p-12 text-white flex-1">
               <h2 className="text-3xl lg:text-4xl font-bold mb-6">{title}</h2>
               <p className="text-lg opacity-90 leading-relaxed mb-8">
                 {description}
               </p>
-              {buttonText && buttonLink && (
-                <Link href={buttonLink}>
-                  <Button className="bg-black hover:bg-gray-800 text-white px-6 py-3 rounded-full">
-                    {buttonText}
-                  </Button>
-                </Link>
+
+              {download ? (
+                <div className="flex gap-4">
+                  <Link href="#" target="_blank">
+                    <Image
+                      src="/images/appstore-large.svg"
+                      alt="Download on Play Store"
+                      width={150}
+                      height={50}
+                      className="h-12 w-auto"
+                    />
+                  </Link>
+                  <Link href="#" target="_blank">
+                    <Image
+                      src="/images/playstore-large.svg"
+                      alt="Download on App Store"
+                      width={150}
+                      height={50}
+                      className="h-12 w-auto"
+                    />
+                  </Link>
+                </div>
+              ) : (
+                buttonText &&
+                buttonLink && (
+                  <Link href={buttonLink}>
+                    <Button className="bg-black hover:bg-gray-900 text-white px-6 py-3 rounded-full">
+                      {buttonText}
+                    </Button>
+                  </Link>
+                )
               )}
             </div>
 
-            <div className="flex-1 w-full pb-6 md:pb-0">
+            <div className="flex-1 w-full relative">
               <Image
                 src={imageSrc}
                 alt={imageAlt}
@@ -48,6 +87,17 @@ export function LetsWorkTogetherSection({
                 height={600}
                 className="w-full h-auto object-cover"
               />
+
+              {topImageSrc && download && (
+                <Image
+                  src={topImageSrc}
+                  alt={topImageAlt}
+                  width={300}
+                  height={600}
+                  className="absolute left-1/2 transform -translate-x-1/2 w-64 lg:w-[30rem] h-auto
+                  top-1/2 -translate-y-1/2 lg:top-auto lg:-bottom-24 lg:translate-y-0"
+                />
+              )}
             </div>
           </div>
         </div>

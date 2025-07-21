@@ -1,6 +1,8 @@
 "use client";
 
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
+import gsap from "gsap";
 
 interface CareCategory {
   name: string;
@@ -19,6 +21,20 @@ const categories: CareCategory[] = [
 ];
 
 export default function CareCategoriesSection() {
+  const cardsRef = useRef<HTMLDivElement[]>([]);
+
+  useEffect(() => {
+    if (cardsRef.current) {
+      gsap.from(cardsRef.current, {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power3.out",
+      });
+    }
+  }, []);
+
   return (
     <section className="py-12">
       <div className="max-w-7xl mx-auto text-center">
@@ -37,6 +53,9 @@ export default function CareCategoriesSection() {
               key={category.name}
               category={category}
               isFaded={index >= 4}
+              ref={(el) => {
+                if (el) cardsRef.current[index] = el;
+              }}
             />
           ))}
         </div>
@@ -47,6 +66,9 @@ export default function CareCategoriesSection() {
               key={category.name}
               category={category}
               isFaded={index >= 2}
+              ref={(el) => {
+                if (el) cardsRef.current[index] = el;
+              }}
             />
           ))}
         </div>
@@ -57,6 +79,9 @@ export default function CareCategoriesSection() {
               key={category.name}
               category={category}
               isFaded={index >= 1}
+              ref={(el) => {
+                if (el) cardsRef.current[index] = el;
+              }}
             />
           ))}
         </div>
@@ -71,18 +96,16 @@ export default function CareCategoriesSection() {
   );
 }
 
-function CareCard({
-  category,
-  isFaded,
-}: {
-  category: CareCategory;
-  isFaded: boolean;
-}) {
+const CareCard = React.forwardRef<
+  HTMLDivElement,
+  { category: CareCategory; isFaded: boolean }
+>(({ category, isFaded }, ref) => {
   return (
     <div
+      ref={ref as any}
       className={`bg-[--surface-card] rounded-2xl p-4 flex flex-col items-center justify-center shadow-sm min-h-[200px] ${
         isFaded ? "opacity-30" : ""
-      }`}
+      } group`} 
     >
       <div className="w-20 h-20 mb-4">
         <Image
@@ -90,10 +113,12 @@ function CareCard({
           alt={category.name}
           width={80}
           height={80}
-          className="w-full h-full object-contain"
+          className="w-full h-full object-contain transform transition-transform duration-300 group-hover:scale-110"
         />
       </div>
       <p className="text-sm font-medium">{category.name}</p>
     </div>
   );
-}
+});
+
+CareCard.displayName = "CareCard";
