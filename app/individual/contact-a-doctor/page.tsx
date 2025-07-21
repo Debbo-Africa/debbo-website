@@ -21,6 +21,8 @@ import type { EntryCollection } from "contentful";
 import { InsuranceSection } from "@/components/insurance-section";
 import CareCategoriesSection from "@/components/careCategory";
 import { SkeletonTestCard } from "@/components/skeleton-test-card";
+import HorizontalProcessSection from "@/components/How-it-works";
+import BookAppointment from "@/components/book-appointment";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -100,6 +102,7 @@ export default function SpeakToDoctor() {
 
       <div className="max-w-7xl mx-auto px-4 py-8">
         <CareCategoriesSection />
+        <BookAppointment />
         <InsuranceSection />
 
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8 mt-12">

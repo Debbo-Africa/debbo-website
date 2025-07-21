@@ -10,39 +10,23 @@ gsap.registerPlugin(ScrollTrigger);
 const cards = [
   {
     id: 1,
-    title: "Triage",
-    description:
-      "Our AI-powered tool helps guide you to the right care quickly and safely.",
-    images: ["/images/triage-phone.png", ],
+    title: "Medical Officers",
+    description: "Virtual Consultations from ₦5,000",
+    images: ["/images/medical-offer.png"],
     alt: "Triage phone interface",
-    background: "bg-[--surface-card]", 
+    background: "bg-[#01AC9C]",
   },
   {
     id: 2,
-    title: "Consult",
-    description: "Speak with licensed doctors virtually or in person.",
-    images: ["/images/doctor.png"],
+    title: "Specialist Doctors",
+    description: "Virtual Consultations from ₦25,000",
+    images: ["/images/specailist-doctor.png"],
     alt: "Consult phone interface",
-  },
-  {
-    id: 3,
-    title: "Act",
-    description:
-      "Need a lab test or scan? We come to you, or you can visit our Lekki facility.",
-    images: ["/images/act-microscope.png"],
-    alt: "Lab test image",
-  },
-  {
-    id: 4,
-    title: "Support",
-    description:
-      "Track results, access health reminders, and learn from personalised content in the app.",
-    images: ["/images/consult-phone.png"],
-    alt: "Support care image",
+    background: "bg-[#D76441]",
   },
 ];
 
-export default function HorizontalProcessSection() {
+export default function BookAppointment() {
   const sectionRef = useRef(null);
   const cardRefs: any = useRef([]);
   const imageContainerRefs: any = useRef([]);
@@ -114,34 +98,29 @@ export default function HorizontalProcessSection() {
   return (
     <section className="py-16 px-4 md:px-8" ref={sectionRef}>
       <div className="text-center mb-16 max-w-4xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-bold text-general-black mb-6 leading-tight">
-          Discover the seamless process behind our approach.
+        <h2 className="text-2xl md:text-3xl font-bold text-general-black mb-6 leading-tight">
+          Book an Appointment with:
         </h2>
-        <p className="text-lg text-body-text-gray leading-relaxed">
-          Every woman&apos;s health story is different. We&apos;re here to
-          support your journey through our free AI-powered mobile app, a digital
-          health companion thoughtfully guided by doctors who care.
-        </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
         {cards.map((card, index) => (
           <div
             key={card.id}
             ref={(el: any) => (cardRefs.current[index] = el)}
-            className={`rounded-3xl overflow-hidden text-center pb-0 p-6 md:p-8 lg:pb-0 flex flex-col h-full ${
+            className={`rounded-3xl overflow-hidden text-center pb-0  flex flex-col h-full ${
               card.background || "bg-[--surface-card]"
             }`}
           >
             {(card.title || card.description) && (
-              <div className="mb-6 max-w-xs mx-auto">
+              <div className="mb-6  mx-auto pt-6">
                 {card.title && (
-                  <h3 className="text-2xl font-bold text-general-black mb-2">
+                  <h3 className="text-2xl  font-extrabold text-general-white mb-2">
                     {card.title}
                   </h3>
                 )}
                 {card.description && (
-                  <p className="text-base text-body-text-gray leading-relaxed mb-8 md:mb-0">
-                    {card.description}
+                  <p className="text-base text-general-white leading-relaxed mb-8 md:mb-0 font-bold">
+                    {card.description}{" "}<br/>
                   </p>
                 )}
               </div>
@@ -158,13 +137,13 @@ export default function HorizontalProcessSection() {
                       }
                       imageContainerRefs.current[index][imgIdx] = el;
                     }}
-                    className="w-full relative h-[350px] max-w-sm mx-auto rounded-t-2xl"
+                    className="w-full relative h-[290px] max-w-sm md:max-w-md mx-auto rounded-t-2xl"
                   >
                     <Image
                       src={imgSrc || "/placeholder.svg"}
                       alt={card.alt || `Card image ${imgIdx + 1}`}
                       fill
-                      className="object-contain rounded-xl"
+                      className="object-cover rounded-xl"
                     />
                   </div>
                 ))}
@@ -172,17 +151,6 @@ export default function HorizontalProcessSection() {
             )}
           </div>
         ))}
-      </div>
-      <div className="bg-[--surface-card] mt-4 gap-2 mb-10 md:mb-12 p-4 px-4 flex mx-auto justify-center items-center rounded-full w-fit">
-        <Image
-          src="/images/medical-badge.svg"
-          alt="Medical certification"
-          width={16}
-          height={16}
-        />
-        <p className="text-body-text-gray text-sm">
-          Built with your health data privacy in mind.
-        </p>
       </div>
     </section>
   );

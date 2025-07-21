@@ -58,7 +58,7 @@ export const WhyChooseSection = () => {
       ease: "power3.out",
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: "top 80%",
+        start: "top 60%",
         end: "bottom top",
         toggleActions: "play none none none",
         once: true,

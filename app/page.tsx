@@ -9,6 +9,7 @@ import DownloadSection from "@/components/download-app";
 import WhyChooseSection from "@/components/why-choose-section";
 
 export default function Home() {
+  
   return (
     <main className="min-h-screen bg-badge">
       <HeroSection />

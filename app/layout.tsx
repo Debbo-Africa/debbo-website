@@ -16,7 +16,7 @@ const dmSans = DM_Sans({
 const recoleta = localFont({
   src: [
     {
-      path: "./fonts/Recoleta-RegularDEMO.otf",
+      path: "./fonts/Recoleta-SemiBold.ttf",
       weight: "600",
       style: "normal",
     },

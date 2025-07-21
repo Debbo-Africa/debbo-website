@@ -11,12 +11,12 @@ interface CareCategory {
 
 const categories: CareCategory[] = [
   { name: "Family Medicine", imagePath: "/images/family_medicine.svg" },
-  { name: "Obstetrics", imagePath: "/images/obstetrics.svg" },
-  { name: "Gynaecology", imagePath: "/images/gynaecology.svg" },
-  { name: "Mental Health", imagePath: "/images/mental_health.svg" },
-  { name: "Nutrition & Dietetics", imagePath: "/images/nutrition.svg" },
+  { name: "Obstetrics & Gynaecology", imagePath: "/images/obstetrics.svg" },
   { name: "Dermatology", imagePath: "/images/dermatology.svg" },
+  { name: "Mental Health", imagePath: "/images/mental_health.svg" },
   { name: "Endocrinology", imagePath: "/images/endocrinology.svg" },
+  { name: "Haematology", imagePath: "/images/gynaecology.svg" },
+  { name: "Nutrition & Dietetics ", imagePath: "/images/nutrition.svg" },
   { name: "Neurology", imagePath: "/images/neurology.svg" },
 ];
 
@@ -104,7 +104,7 @@ const CareCard = React.forwardRef<
     <div
       ref={ref as any}
       className={`bg-[--surface-card] rounded-2xl p-4 flex flex-col items-center justify-center shadow-sm min-h-[200px] ${
-        isFaded ? "opacity-30" : ""
+        isFaded ? "" : ""
       } group`} 
     >
       <div className="w-20 h-20 mb-4">
