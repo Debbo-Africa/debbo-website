@@ -12,8 +12,9 @@ interface LetsWorkTogetherProps {
   imageSrc?: string;
   imageAlt?: string;
   download?: boolean;
-  topImageSrc?: string; // NEW: image on top of right image
+  topImageSrc?: string;
   topImageAlt?: string;
+  test?: boolean;
 }
 
 export function LetsWorkTogetherSection({
@@ -26,10 +27,15 @@ export function LetsWorkTogetherSection({
   download = false,
   topImageSrc = "/images/download-phone.png",
   topImageAlt = "Top image",
+  test = false,
 }: LetsWorkTogetherProps) {
   return (
     <section className="py-16">
-      <div className={`${!download && "max-w-6xl "}mx-auto px-4 lg:px-8`}>
+      <div
+        className={`${
+          (!download || !test) && "max-w-6xl "
+        }mx-auto px-4 lg:px-8`}
+      >
         <div
           className={`rounded-3xl overflow-hidden ${
             download ? "bg-[#FA9130]" : "bg-green"

@@ -76,7 +76,7 @@ export const WhyChooseSection = () => {
         gsap?.to(card, { scale: 1, duration: 0.3, ease: "power1.out" });
       };
 
-      card.addEventListener("mouseenter", () => {
+      card?.addEventListener("mouseenter", () => {
         gsap?.to(card, { scale: 1.03, duration: 0.3, ease: "power1.out" });
       });
       card?.addEventListener("mouseleave", () => {
@@ -87,10 +87,10 @@ export const WhyChooseSection = () => {
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       cardsRef.current.forEach((card:any) => {
-        card.removeEventListener("mouseenter", () => {
+        card?.removeEventListener("mouseenter", () => {
           gsap.to(card, { scale: 1.03, duration: 0.3, ease: "power1.out" });
         });
-        card.removeEventListener("mouseleave", () => {
+        card?.removeEventListener("mouseleave", () => {
           gsap.to(card, { scale: 1, duration: 0.3, ease: "power1.out" });
         });
       });

@@ -37,7 +37,7 @@ export default function BookScanPage() {
             content_type: "medicalTest",
             "fields.scan": true,
           });
-
+console.log(entries)
         setScans(entries.items as MedicalTestEntry[]);
       } catch (error) {
         console.error("Error fetching scans:", error);
@@ -100,7 +100,7 @@ export default function BookScanPage() {
       <PageHero
         title="Book a Scan"
         description="Sometimes, what's happening inside doesn't show on the outside, scans help fill in the gaps. From breast to abdominal and pelvic scans, our options offer powerful insights to detect issues early and keep you reassured."
-        imageSrc="/images/faq.png"
+        imageSrc="/images/teams-hero.png"
         imageAlt="Book a Scan"
       />
 

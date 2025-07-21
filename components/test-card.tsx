@@ -82,11 +82,21 @@ export function TestCard({ test, hideCart }: TestCardProps) {
     updateQuantity(test.sys.id, newQuantity);
   };
 
+
   return (
     <Card className="h-full flex flex-col bg-[--surface-card] border-none rounded-2xl">
       <CardContent className="p-6 flex flex-col h-full">
         <div className="flex justify-between items-start mb-4">
           <div>
+            {test.fields.scan &&
+              (test as any).fields.image &&
+              (test as any).fields.image.fields.file.url && (
+                <img
+                  src={`https:${(test as any).fields.image.fields.file.url}`}
+                  alt={(test as any).fields.image.fields.title}
+                  className="w-20 h-20 object-contain mb-2"
+                />
+              )}
             <h3 className="font-semibold text-lg mb-1">
               {test.fields.testName}
             </h3>
