@@ -95,7 +95,7 @@ export default function ScrollingCards() {
             ];
 
       const animation = element.animate(keyframes, {
-        duration: 20000,
+        duration: 40000,
         iterations: Infinity,
         easing: "linear",
       });

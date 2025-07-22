@@ -133,7 +133,6 @@ export const Trust = () => {
     });
     renderRef.current = render;
 
-    // Create boundaries
     const ground = Bodies.rectangle(width / 2, height - 25, width, 50, {
       isStatic: true,
       render: { fillStyle: "rgba(0, 0, 0, 0.1)", visible: false },
@@ -185,7 +184,7 @@ export const Trust = () => {
       } ${
         isSmallScreen
           ? "px-8 py-3 text-xs min-w-[120px]"
-          : "px-16 py-6 text-md min-w-[160px]"
+          : "px-8 py-4 text-md min-w-[160px]"
       }`;
       element.textContent = condition.text;
       element.style.userSelect = "none";
@@ -215,14 +214,12 @@ export const Trust = () => {
       element.addEventListener("mouseenter", () => {
         if (!isDragging) {
           element.style.transform = "scale(1.02)";
-          element.style.filter = "drop-shadow(0 12px 24px rgba(0,0,0,0.4))";
         }
       });
 
       element.addEventListener("mouseleave", () => {
         if (!isDragging) {
           element.style.transform = "scale(1)";
-          element.style.filter = "drop-shadow(0 8px 16px rgba(0,0,0,0.3))";
         }
       });
 
@@ -243,7 +240,6 @@ export const Trust = () => {
 
     setTags(newTags);
 
-    // Update DOM elements to match physics bodies
     const updateElements = () => {
       newTags.forEach(({ body, element }) => {
         const pos = body.position;
@@ -257,12 +253,10 @@ export const Trust = () => {
         element.style.left = "0px";
         element.style.top = "0px";
 
-        // Add settling effect when velocity is low
         if (
           Math.abs(body.velocity.y) < 0.1 &&
           Math.abs(body.velocity.x) < 0.1
         ) {
-          element.style.filter = "drop-shadow(0 4px 8px rgba(0,0,0,0.2))";
         }
       });
     };
@@ -278,7 +272,6 @@ export const Trust = () => {
       }
     };
 
-    // Animation loop
     const animate = () => {
       Engine.update(engine);
       updateElements();
@@ -286,11 +279,9 @@ export const Trust = () => {
       requestAnimationFrame(animate);
     };
 
-    // Start everything
     Render.run(render);
     animate();
 
-    // Cleanup
     return () => {
       newTags.forEach(({ element }) => {
         element.remove();
@@ -306,11 +297,10 @@ export const Trust = () => {
   }, [shouldStartAnimation]);
 
   return (
-    <section className="relative h-[100vh] overflow-hidden  m-4 rounded-3xl ">
-      {/* Rain effect overlay */}
+    <section className="relative h-[100vh] overflow-hidden  m- rounded-3xl bg-[--surface-card]">
       {isRaining && (
         <div className="absolute inset-0 pointer-events-none z-5">
-          <div className="rain-overlay"></div>
+          <div className="rain-overlay "></div>
         </div>
       )}
       <div className="max-w-6xl mx-auto px-4 sm:px-8 relative z-10 pt-20">
@@ -327,14 +317,11 @@ export const Trust = () => {
           <ButtonComponent />
         </div>
       </div>
-      {/* Physics Container */}
-      <div
+      <h1
         ref={sceneRef}
         className="absolute inset-0 w-full h-full pointer-events-none"
         style={{ height: "100vh", zIndex: 15 }}
       />
-      {/* Visual floor indicator */}
-      <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-gray-200 to-transparent pointer-events-none z-10" />
       <style jsx>{`
         @keyframes fall {
           0% {

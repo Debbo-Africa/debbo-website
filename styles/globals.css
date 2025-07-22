@@ -4,8 +4,7 @@
 
 body {
   @apply bg-background text-body-text-gray font-light;
-    scroll-behavior: smooth;
-
+  scroll-behavior: smooth;
 }
 
 @layer utilities {
@@ -92,7 +91,6 @@ body {
   }
   body {
     @apply bg-background  text-body-text-gray font-recoleta;
-  
   }
 }
 @keyframes fall {
@@ -125,11 +123,26 @@ body {
   animation: rain-shimmer 2s ease-in-out infinite;
 }
 
-  h1, h2, h3 {
-    font-family: var(--font-recoleta), sans-serif !important;
-  }
+h1,
+h2,
+h3 {
+  font-family: var(--font-recoleta), sans-serif !important;
+}
 
-  h4, h5, h6, p, span, div, a, button, input, textarea, label {
-     font-family: var(--font-satoshi) , sans-serif !important;
-  }
+h4,
+h5,
+h6,div {
+  font-family: var(--font-satoshi), sans-serif !important;
+  font-weight: 400;
+}
+p,
+span,
 
+a,
+button,
+input,
+textarea,
+label {
+  font-family: var(--font-satoshi), sans-serif !important;
+  font-weight:300
+}

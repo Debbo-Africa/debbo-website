@@ -284,7 +284,7 @@ export default function BookTestPage() {
             title=""
             description1="We also offer fertility testing for men, helping couples get a complete picture of their reproductive health. Contact Us to learn more."
             description2=""
-            imageStyle="md:h-[350px]"
+            imageStyle="md:h-[320px]"
           />
           <LetsWorkTogetherSection
             test

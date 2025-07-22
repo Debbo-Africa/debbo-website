@@ -43,8 +43,8 @@ export const DownloadSection = () => {
      
 
       <div className="space-y-6">
-        <div className="relative rounded-3xl overflow-hidden h-[550px] lg:h-[500px] w-full">
-          <div className="absolute bg-[url('/images/app-download-mobile.png')] md:bg-[url('/images/app-download.png')] lg:bg-[url('/images/app-download.png')] inset-0 bg-cover bg-center bg-no-repeat" />
+<div className="relative rounded-3xl overflow-hidden h-[550px] lg:h-[500px] w-full group">
+  <div className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-[url('/images/app-download-mobile.png')] md:bg-[url('/images/app-download.png')] lg:bg-[url('/images/app-download.png')] transform transition-transform duration-500 ease-in-out group-hover:scale-105" />
 
           <div className="relative z-10 p-6 sm:p-8 lg:p-10 h-full flex flex-col justify-between">
             <div className="flex flex-col sm:flex-row justify-between">
@@ -57,7 +57,7 @@ export const DownloadSection = () => {
               <ButtonComponent  />
 
               <div className="bg-general-white rounded-lg p-1.5 sm:p-2 md:flex md:static absolute top-4 right-4">
-                <canvas ref={canvasRef} className="w-24 h-24 lg:w-44 lg:h-44" />
+                <canvas ref={canvasRef} className="w-24 h-24 lg:w-32 lg:h-32" />
               </div>
             </div>
           </div>

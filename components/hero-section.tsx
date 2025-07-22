@@ -93,7 +93,7 @@ export default function HeroSection() {
       <div className="max-w-6xl mx-auto">
         <div className="text-center">
           {" "}
-          <h1 className="text-4xl lg:text-6xl font-extrabold text-general-black mb-6 leading-normal inline-block">
+          <h1 className="text-4xl lg:text-6xl font-medium text-general-black mb-6 leading-normal inline-block">
             <div className="flex flex-col md:flex-row items-center justify-center">
               <span className="flex items-center text-yellow md:mr-2">
                 <span ref={animatedWordRef}></span>
@@ -112,9 +112,9 @@ export default function HeroSection() {
 
         <div className="text-center max-w-xl mx-auto">
           {" "}
-          <p className="text-md sm:text-xl text-body-text-gray mb-8 font-medium">
+          <h4 className="text-md sm:text-xl text-body-text-gray mb-8 font-medium">
             Cutting-Edge Care for African Women's Health
-          </p>
+          </h4>
           <ButtonComponent />
         </div>
       </div>

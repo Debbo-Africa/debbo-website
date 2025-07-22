@@ -76,7 +76,7 @@ const config: Config = {
         /* General colors */
         "general-white": "var(--general-white)",
         "general-black": "var(--general-black)",
-        "body-text-gray": "var(--body-text-gray)",
+        "body-text-gray": "var(--gray-text)",
         "gray-text": "var(--gray-text)",
         "text-gray": "var(--text-body)",
         "surface-card-bold": "var(--surface-card-bold)",

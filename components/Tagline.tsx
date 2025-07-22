@@ -11,9 +11,9 @@ interface TaglineProps {
 
 export default function Tagline({
   bgColor = "bg-[#2b1d18]",
-  textColor = "text-gray-text",
-  imageSrc = "/images/Brand-Logo-Icon.png", 
-  imageAlt = "brand logo", 
+  textColor = "text-[#AAA5A3]",
+  imageSrc = "/images/Brand-Logo-Icon.png",
+  imageAlt = "brand logo",
 }: TaglineProps) {
   const taglineRef = useRef<HTMLDivElement>(null);
 
@@ -28,7 +28,7 @@ export default function Tagline({
         { transform: `translateX(-${taglineWidth}px)` },
       ],
       {
-        duration: 20000,
+        duration: 30000,
         iterations: Infinity,
         easing: "linear",
       }

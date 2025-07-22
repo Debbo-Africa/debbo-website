@@ -141,7 +141,7 @@ export const InsuranceSection = () => {
             alt="Smiling woman"
             fill
             className="object-cover"
-            ref={mobileImageElementRef} 
+            ref={mobileImageElementRef}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
           <div className="absolute bottom-0 left-0 p-6 z-10 text-left">
@@ -162,7 +162,7 @@ export const InsuranceSection = () => {
             alt="Smiling woman"
             fill
             className="object-cover"
-            ref={desktopImageElementRef} 
+            ref={desktopImageElementRef}
           />
           <div className="absolute bottom-0 left-0 right-0 p-8 z-10 max-w-xs text-general-black">
             <h3 className="text-2xl font-bold mb-1">No insurance?</h3>
@@ -177,7 +177,7 @@ export const InsuranceSection = () => {
             <h2 className="text-4xl md:text-5xl font-bold text-general-black mb-4 leading-tight">
               Start for free.
             </h2>
-            <h2 className="text-4xl md:text-5xl font-bold text-body-text-gray mb-10 leading-tight">
+            <h2 className="text-4xl md:text-5xl font-bold text-general-black mb-10 leading-tight">
               Stay in control.
             </h2>
             <p className="text-lg text-body-text-gray mb-8 leading-relaxed">

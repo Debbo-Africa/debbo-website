@@ -7,28 +7,27 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer-section";
 
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-dm-sans",
-  display: "swap",
-});
-
 const recoleta = localFont({
   src: [
     {
-      path: "./fonts/Recoleta-SemiBold.ttf",
-      weight: "600",
+      path: "./fonts/Recoleta-Medium.ttf",
+      weight: "500",
       style: "normal",
     },
   ],
   variable: "--font-recoleta",
   display: "swap",
 });
-const satoshi = localFont({
+const outfit = localFont({
   src: [
     {
-      path: "./fonts/Satoshi-Medium.otf",
-      weight: "600",
+      path: "./fonts/Outfit-VariableFont_wght.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Outfit-VariableFont_wght.ttf",
+      weight: "300",
       style: "normal",
     },
   ],
@@ -47,8 +46,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${dmSans.variable}  ${recoleta.variable}`}>
-      <body className="min-h-screen   text-general-black  transition-colors bg-badge">
+    <html lang="en" className={`${recoleta.variable}`}>
+      <body
+        className={`min-h-screen text-general-black  transition-colors bg-badge`}
+      >
         <ThemeProvider>
           <Navbar />
           {children}
@@ -58,5 +59,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-

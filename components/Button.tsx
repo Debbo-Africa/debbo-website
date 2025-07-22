@@ -13,7 +13,7 @@ const ButtonComponent: React.FC<ButtonComponentProps> = ({
   return (
     <Link href="/download">
       <Button
-        className={`bg-[#0D0D0DFC] text-sm text-general-white  rounded-full px-4 py-6 font-medium ${
+        className={`bg-[#0D0D0DFC] hover:bg-yellow cursor-move duration-75 text-sm text-general-white  rounded-full px-4 py-6 font-medium ${
           fullWidth ? "w-full" : ""
         }`}
       >

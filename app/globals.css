@@ -71,8 +71,8 @@
   --light-green: #51ca07;
   --badge: #fff5e9;
   --surface-card: #f2e9dd;
-  --gray-text: #aaa5a3;
-  --text-gray: #6b6b6b;
+  --gray-text: #525252;
+  --text-gray: #525252;
   --form-bg: #fff6f6;
 }
 
@@ -164,11 +164,14 @@
 
   h1, h2, h3 {
     font-family: var(--font-recoleta), sans-serif !important;
+    font-weight: 500;
+  }
+  h4, h5, h6{
     font-weight: 400;
   }
-
-  h4, h5, h6, p, span, div, a, button, input, textarea, label {
+ p, span, div, a, button, input, textarea, label {
      font-family: var(--font-satoshi), sans-serif !important;
+     font-weight: 600;
   }
 }
 

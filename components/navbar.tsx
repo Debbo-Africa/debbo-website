@@ -35,7 +35,7 @@ export default function EnhancedNavbar() {
     {
       label: "Our team",
       href: "/about/our-team",
-      image: "/images/our-story.png",
+      image: "/images/our-story.jpeg",
       description: "Exceptional team of female healthcare professionals",
     },
     {
@@ -182,7 +182,7 @@ export default function EnhancedNavbar() {
                               fill
                               className="object-cover"
                             />
-                            <div className="absolute inset-0 bg-black bg-opacity-20 flex items-end">
+                            <div className="absolute inset-0  flex items-end">
                               <div className="p-4 text-white">
                                 <h3 className="font-semibold text-lg opacity-90">
                                   {currentImage.description}
@@ -243,7 +243,7 @@ export default function EnhancedNavbar() {
                               fill
                               className="object-cover"
                             />
-                            <div className="absolute inset-0 bg-black bg-opacity-40 flex items-end">
+                            <div className="absolute inset-0 flex items-end">
                               <div className="p-4 text-white">
                                 <h3 className="font-semibold text-lg opacity-90">
                                   {currentImage.description}
@@ -293,7 +293,7 @@ export default function EnhancedNavbar() {
                               fill
                               className="object-cover"
                             />
-                            <div className="absolute inset-0 bg-black bg-opacity-20 flex items-end">
+                            <div className="absolute inset-0  flex items-end">
                               <div className="p-4 text-white">
                                 <h3 className="font-semibold text-lg opacity-90">
                                   {currentImage.description}

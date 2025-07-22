@@ -140,7 +140,7 @@ export default function HorizontalProcessSection() {
                   </h3>
                 )}
                 {card.description && (
-                  <p className="text-base text-body-text-gray leading-relaxed mb-8 md:mb-0">
+                  <p className="text-base text-body-text-gray leading-tight mb-8 md:mb-0">
                     {card.description}
                   </p>
                 )}
