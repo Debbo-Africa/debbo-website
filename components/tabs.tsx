@@ -8,8 +8,8 @@ interface Tab {
 
 interface TabsProps {
   tabs: Tab[];
-  activeTab: string| any;
-  setActiveTab: React.Dispatch<React.SetStateAction<string>>|any;
+  activeTab: string | any;
+  setActiveTab: React.Dispatch<React.SetStateAction<string>> | any;
   className?: string;
 }
 
@@ -21,20 +21,24 @@ export function Tabs({
 }: TabsProps) {
   return (
     <div className={`flex flex-col ${className}`}>
-      <div className="flex justify-center gap-4 border-b">
-        {tabs.map((tab) => (
-          <button
-            key={tab.key}
-            onClick={() => setActiveTab(tab.key)}
-            className={`py-2 px-4 ${
-              activeTab === tab.key
-                ? "border-b-2 border-yellow font-semibold"
-                : "text-body-text-gray"
-            }`}
-          >
-            {tab.label}
-          </button>
-        ))}
+      <div className="overflow-x-auto">
+        <div
+          className={`flex justify-start gap-4 border-b w-max min-w-full ${className}`}
+        >
+          {tabs.map((tab) => (
+            <button
+              key={tab.key}
+              onClick={() => setActiveTab(tab.key)}
+              className={`py-2 px-4 whitespace-nowrap ${
+                activeTab === tab.key
+                  ? "border-b-2 border-yellow font-semibold"
+                  : "text-body-text-gray"
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="mt-8">

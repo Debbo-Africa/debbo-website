@@ -160,15 +160,17 @@
   body {
     font-family: var(--font-recoleta), sans-serif;
     @apply bg-background text-body-text-gray font-light;
+    scroll-behavior: smooth;
+    scroll-snap-stop:  always;
   }
 
   h1, h2, h3 {
-    font-family: var(--font-recoleta), monospace;
+    font-family: var(--font-recoleta), sans-serif;
     font-weight: 400;
   }
 
   h4, h5, h6, p, span, div, a, button, input, textarea, label {
-    font-family: var(--font-dm-sans), sans-serif;
+     font-family: var(--font-recoleta), sans-serif;
   }
 }
 

@@ -23,6 +23,7 @@ import CareCategoriesSection from "@/components/careCategory";
 import { SkeletonTestCard } from "@/components/skeleton-test-card";
 import HorizontalProcessSection from "@/components/How-it-works";
 import BookAppointment from "@/components/book-appointment";
+import ContraceptionTable from "@/components/contreption-table";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -103,76 +104,8 @@ export default function SpeakToDoctor() {
       <div className="max-w-7xl mx-auto px-4 py-8">
         <CareCategoriesSection />
         <BookAppointment />
-        <InsuranceSection />
-
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8 mt-12">
-          <div className="flex flex-col md:flex-row md:items-center gap-4 flex-1">
-            <div className="relative w-full md:w-auto">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-body-text-gray w-4 h-4" />
-              <Input
-                placeholder="Search tests..."
-                value={searchQuery}
-                onChange={handleSearchChange}
-                className="pl-10 w-full md:max-w-xs bg-[--surface-card] border-none focus:outline-none focus:border-none focus:ring-none"
-              />
-            </div>
-
-            {categories.length > 0 && (
-              <Select
-                value={selectedCategory}
-                onValueChange={handleCategoryChange}
-              >
-                <SelectTrigger className="w-full md:w-48 bg-[--surface-card]">
-                  <SelectValue placeholder="All Categories" />
-                </SelectTrigger>
-                <SelectContent className="bg-[--surface-card]">
-                  <SelectItem value="all">All Categories</SelectItem>
-                  {categories.map((category) => (
-                    <SelectItem
-                      key={category}
-                      value={category}
-                      className="hover:bg-[#D9D0C6]"
-                    >
-                      {category}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            )}
-          </div>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          {loading
-            ? Array.from({ length: ITEMS_PER_PAGE }).map((_, index) => (
-                <SkeletonTestCard key={index} />
-              ))
-            : paginatedTests.map((test) => (
-                <TestCard key={test.sys.id} test={test} hideCart={true} />
-              ))}
-        </div>
-
-        {!loading && filteredTests.length === 0 && medicalTest.length > 0 && (
-          <div className="text-center py-8">
-            <p className="text-gray-500">
-              No tests found matching your criteria.
-            </p>
-          </div>
-        )}
-
-        {!loading && medicalTest.length === 0 && (
-          <div className="text-center py-8">
-            <p className="text-gray-500">No medical tests available.</p>
-          </div>
-        )}
-
-        {totalPages > 1 && (
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={setCurrentPage}
-          />
-        )}
+        <InsuranceSection />        
+      <ContraceptionTable/>
       </div>
     </div>
   );

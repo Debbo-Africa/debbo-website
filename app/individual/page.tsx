@@ -170,10 +170,10 @@ export default function BookTestPage() {
             </div>
           </div>
         </section>
-          <LetsWorkTogetherSection
-            title="​​Looking for a specific test?"
-            description="While we offer test panels for convenience, you can also request individual tests. Just get in touch with us to order."
-          />
+        <LetsWorkTogetherSection
+          title="​​Looking for a specific test?"
+          description="While we offer test panels for convenience, you can also request individual tests. Just get in touch with us to order."
+        />
       </div>
     );
   }
@@ -192,7 +192,7 @@ export default function BookTestPage() {
       />
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
-          <div className="flex flex-col md:flex-row md:items-center gap-4 flex-1">
+          <div className="flex flex-col-reverse md:flex-row md:items-center gap-4 flex-1">
             <div className="relative w-full md:w-auto">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-body-text-gray w-4 h-4" />
               <Input
@@ -276,25 +276,41 @@ export default function BookTestPage() {
           />
         )}
       </div>
-      {(activeTab === "women" ||
-        activeTab === "sexual" ) && (
+      {activeTab === "women" && (
         <>
           <WideningAccessSection
-            buttonText="Explore →"
-            imageSrc="/images/test.jpg"
-            description1="We also offer pre-marital health packages for couples who want to take a proactive step toward their future. These packages include essential screenings such as genotype testing, helping you make informed decisions together.  "
-            description2="To learn more about our sexual health and pre-marital screening options, contact us today."
+            buttonText="Contact Us →"
+            imageSrc="/images/couple.jpg"
+            title=""
+            description1="We also offer fertility testing for men, helping couples get a complete picture of their reproductive health. Contact Us to learn more."
+            description2=""
+            imageStyle="md:h-[350px]"
           />
           <LetsWorkTogetherSection
+            test
             title="​​Looking for a specific test?"
             description="While we offer test panels for convenience, you can also request individual tests. Just get in touch with us to order."
           />
         </>
       )}
-      {(
-        activeTab === "general" )&& (
+      {activeTab === "sexual" && (
         <>
-         
+          <WideningAccessSection
+            buttonText="Explore →"
+            imageSrc="/images/test.jpg"
+            title="Thinking About the Future Together?"
+            description1="We also offer pre-marital health packages for couples who want to take a proactive step toward their future. These packages include essential screenings such as genotype testing, helping you make informed decisions together.  "
+            description2="To learn more about our sexual health and pre-marital screening options, contact us today."
+          />
+          <LetsWorkTogetherSection
+            test
+            title="​​Looking for a specific test?"
+            description="While we offer test panels for convenience, you can also request individual tests. Just get in touch with us to order."
+          />
+        </>
+      )}
+      {activeTab === "general" && (
+        <>
           <LetsWorkTogetherSection
             title="​​Looking for a specific test?"
             description="While we offer test panels for convenience, you can also request individual tests. Just get in touch with us to order."

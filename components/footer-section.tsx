@@ -63,12 +63,14 @@ export const Footer = () => {
 
   return (
     <footer className="relative bg-secondary-debbo1 rounded-t-3xl mt-10 overflow-hidden">
-      <Tagline bgColor="none" textColor="text-secondary-debbo" />
+      <Tagline
+        bgColor="none"
+        textColor="text-secondary-debbo"
+        imageSrc="/images/brand-icon.svg"
+      />
       <div className="relative z-10 px-4 pb-8">
         <div className="mx-auto">
-          {/* Top CTA Section */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
-            {/* Subscription Form */}
             <div className="rounded-3xl p-6 md:p-10 relative overflow-hidden min-h-[450px] flex items-center bg-[url('/images/woman-headphones.png')] bg-cover bg-no-repeat bg-center ">
               <div className="absolute md:relative top-6 md:top-0 z-10 max-w-[18rem] md:max-w-[16rem] max-auto">
                 <h3 className="text-xl md:text-2xl font-bold text-general-black mb-4">
@@ -118,14 +120,14 @@ export const Footer = () => {
 
                 <div className="absolute bottom-4 md:static md:mt-10 flex items-center gap-2">
                   <Image
-                    src="/images/playstore-small.svg"
+                    src="/images/playstore-large.svg"
                     alt="Download on Google Play"
                     width={160}
                     height={48}
                     className="h-12 w-auto"
                   />
                   <Image
-                    src="/images/appstore-small.svg"
+                    src="/images/appstore-large.svg"
                     alt="Download on App Store"
                     width={160}
                     height={48}
@@ -146,11 +148,13 @@ export const Footer = () => {
                 height={40}
                 className="mb-4"
               />
-              <div className="text-white text-sm space-y-2">
-                <p>info@debboafrica.com</p>
-                <p>Block 82, Plot 4 Omorinre Johnson,</p>
-                <p>Lekki phase 1, Lagos</p>
-                <p>+2349090076330</p>
+              <div className="text-white/80 text-sm space-y-2">
+                <p className="hover:text-white">info@debboafrica.com</p>
+                <p className="hover:text-white">
+                  Block 82, Plot 4 Omorinre Johnson,
+                </p>
+                <p className="hover:text-white">Lekki phase 1, Lagos</p>
+                <p className="hover:text-white">+2349090076330</p>
               </div>
               <div className="mt-4 flex items-center gap-2 bg-[#DF8367] rounded-3xl w-fit px-6 py-2">
                 <Image
@@ -168,7 +172,7 @@ export const Footer = () => {
             {/* Quick Links */}
             <div>
               <h5 className="text-white font-bold mb-4">Quick Links</h5>
-              <ul className="space-y-2 text-white text-sm">
+              <ul className="space-y-2 text-white/80 text-sm">
                 {[
                   { href: "/about/who-we-are", label: "About Us" },
                   { href: "/contact-us", label: "Contact Us" },
@@ -189,7 +193,7 @@ export const Footer = () => {
 
             <div>
               <h5 className="text-white font-bold mb-4">Individual</h5>
-              <ul className="space-y-2 text-white text-sm">
+              <ul className="space-y-2 text-white/80 text-sm">
                 {[
                   { href: "/corporate", label: "Corporate" },
                   { href: "/individual", label: "Individual" },
@@ -257,13 +261,13 @@ export const Footer = () => {
               <p>Copyright © 2024 Debbo. All rights reserved.</p>
               <div className="flex gap-4 mt-2">
                 <FooterLink
-                  href="/privary-policy"
+                  href="/privacy-policy"
                   className="hover:text-white transition-colors"
                 >
                   Privacy policy
                 </FooterLink>
                 <FooterLink
-                  href="/terms-of-use"
+                  href="/privacy-policy"
                   className="hover:text-white transition-colors"
                 >
                   Terms of use

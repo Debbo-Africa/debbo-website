@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
+import ButtonComponent from "./Button";
 
 interface CareCategory {
   name: string;
@@ -28,7 +29,7 @@ export default function CareCategoriesSection() {
       gsap.from(cardsRef.current, {
         y: 50,
         opacity: 0,
-        duration: 0.8,
+        duration: 1.5,
         stagger: 0.2,
         ease: "power3.out",
       });
@@ -36,7 +37,7 @@ export default function CareCategoriesSection() {
   }, []);
 
   return (
-    <section className="py-12">
+    <section className="py-6">
       <div className="max-w-7xl mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-general-black">
           Your Care, Your Way
@@ -47,12 +48,11 @@ export default function CareCategoriesSection() {
           health:
         </p>
 
-        <div className="hidden lg:grid grid-cols-4 gap-4">
+        <div className="grid md:grid-cols-2  lg:grid-cols-4 gap-4">
           {categories.map((category, index) => (
             <CareCard
               key={category.name}
               category={category}
-              isFaded={index >= 4}
               ref={(el) => {
                 if (el) cardsRef.current[index] = el;
               }}
@@ -60,65 +60,37 @@ export default function CareCategoriesSection() {
           ))}
         </div>
 
-        <div className="hidden md:grid lg:hidden grid-cols-2 gap-4">
-          {categories.slice(0, 4).map((category, index) => (
-            <CareCard
-              key={category.name}
-              category={category}
-              isFaded={index >= 2}
-              ref={(el) => {
-                if (el) cardsRef.current[index] = el;
-              }}
-            />
-          ))}
-        </div>
-
-        <div className="grid md:hidden grid-cols-1 gap-4">
-          {categories.slice(0, 2).map((category, index) => (
-            <CareCard
-              key={category.name}
-              category={category}
-              isFaded={index >= 1}
-              ref={(el) => {
-                if (el) cardsRef.current[index] = el;
-              }}
-            />
-          ))}
-        </div>
-
-        <p className="text-sm text-body-text-gray mt-10 max-w-xl mx-auto">
+        <p className="text-sm text-body-text-gray mt-10 max-w-xl mx-auto mb-6">
           Whether you’re seeking general advice, therapy, specialist
           consultations, or family planning services — you can access quality
           care, your way.
         </p>
+        <ButtonComponent/>
       </div>
     </section>
   );
 }
 
-const CareCard = React.forwardRef<
-  HTMLDivElement,
-  { category: CareCategory; isFaded: boolean }
->(({ category, isFaded }, ref) => {
-  return (
-    <div
-      ref={ref as any}
-      className={`bg-[--surface-card] rounded-2xl p-4 flex flex-col items-center justify-center shadow-sm min-h-[200px] ${
-        isFaded ? "" : ""
-      } group`} 
-    >
-      <div className="w-20 h-20 mb-4">
-        <Image
-          src={category.imagePath}
-          alt={category.name}
-          width={80}
-          height={80}
-          className="w-full h-full object-contain transform transition-transform duration-300 group-hover:scale-110"
-        />
+const CareCard = React.forwardRef<HTMLDivElement, { category: CareCategory }>(
+  ({ category }, ref) => {
+    return (
+      <div
+        ref={ref as any}
+        className={`bg-[--surface-card] rounded-2xl p-4 flex flex-col items-center justify-center shadow-sm min-h-[200px]  group`}
+      >
+        <div className="w-20 h-20 mb-4">
+          <Image
+            src={category.imagePath}
+            alt={category.name}
+            width={80}
+            height={80}
+            className="w-full h-full object-contain transform transition-transform duration-300 group-hover:scale-110"
+          />
+        </div>
+        <p className="text-sm font-medium">{category.name}</p>
       </div>
-      <p className="text-sm font-medium">{category.name}</p>
-    </div>
-  );
-});
+    );
+  }
+);
 
 CareCard.displayName = "CareCard";

@@ -131,13 +131,13 @@ export default function EnhancedNavbar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#FFF5E9B2] rounded-b-3xl backdrop-blur-sm border-b border-gray-100">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#FFF5E9B2] rounded-b-3xl ">
         <div className="mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <Link href="/">
                 <Image
-                  src="/images/logo.png"
+                  src="/images/logo.svg"
                   alt="DébboAfrica"
                   width={150}
                   height={40}
@@ -315,7 +315,7 @@ export default function EnhancedNavbar() {
 
             <Button
               size="icon"
-              className="lg:hidden bg-transparent"
+              className="lg:hidden bg-transparent hover:bg-transparent"
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle menu"
             >

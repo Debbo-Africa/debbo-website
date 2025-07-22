@@ -33,7 +33,7 @@ export function LetsWorkTogetherSection({
     <section className="py-16">
       <div
         className={`${
-          (!download || !test) && "max-w-6xl "
+          (!download || !test) && "max-w-7xl "
         }mx-auto px-4 lg:px-8`}
       >
         <div

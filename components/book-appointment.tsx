@@ -78,14 +78,14 @@ export default function BookAppointment() {
             cardElement.removeEventListener("mouseenter", () => {
               gsap.to(imageContainer, {
                 scale: 1.05,
-                duration: 0.3,
+                duration: 0.5,
                 ease: "power1.out",
               });
             });
             cardElement.removeEventListener("mouseleave", () => {
               gsap.to(imageContainer, {
                 scale: 1,
-                duration: 0.3,
+                duration: 1,
                 ease: "power1.out",
               });
             });
@@ -96,13 +96,13 @@ export default function BookAppointment() {
   }, []);
 
   return (
-    <section className="py-16 px-4 md:px-8" ref={sectionRef}>
-      <div className="text-center mb-16 max-w-4xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-bold text-general-black mb-6 leading-tight">
+    <section className="py-16 " ref={sectionRef}>
+      <div className="text-center mb-6 max-w-4xl mx-auto">
+        <h2 className="text-2xl md:text-3xl font-bold text-general-black mb-2 leading-tight">
           Book an Appointment with:
         </h2>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-7xl mx-auto">
         {cards.map((card, index) => (
           <div
             key={card.id}
@@ -143,7 +143,7 @@ export default function BookAppointment() {
                       src={imgSrc || "/placeholder.svg"}
                       alt={card.alt || `Card image ${imgIdx + 1}`}
                       fill
-                      className="object-cover rounded-xl"
+                      className="md:object-cover rounded-xl"
                     />
                   </div>
                 ))}

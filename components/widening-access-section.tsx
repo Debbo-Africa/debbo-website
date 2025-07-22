@@ -11,11 +11,12 @@ const WideningAccessSection = ({
   buttonText = "Join Our Mission →",
   imageSrc = "/images/widening-access.jpg",
   imageAlt = "Women smiling",
+  imageStyle=""
 }) => {
   return (
     <section className="flex flex-col md:flex-row items-center gap-8 py-20 px-6 max-w-7xl mx-auto">
       <div className="flex-shrink-0 w-full md:w-1/2">
-        <div className="relative rounded-xl overflow-hidden bg-gray-200 h-80 md:h-[400px]">
+        <div className={`relative rounded-xl overflow-hidden bg-gray-200 h-80 md:h-[400px] ${imageStyle}`}>
           <Image
             src={imageSrc}
             alt={imageAlt}
