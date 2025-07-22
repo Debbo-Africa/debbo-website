@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 body {
-   font-family: var(--font-recoleta), sans-serif;
-   font-weight: 400;
+  @apply bg-background text-body-text-gray font-light;
+    scroll-behavior: smooth;
 
 }
 
@@ -126,10 +126,10 @@ body {
 }
 
   h1, h2, h3 {
-    font-family: var(--font-recoleta), sans-serif;
+    font-family: var(--font-recoleta), sans-serif !important;
   }
 
   h4, h5, h6, p, span, div, a, button, input, textarea, label {
-     font-family: var(--font-recoleta), sans-serif;
+     font-family: var(--font-satoshi) , sans-serif !important;
   }
 

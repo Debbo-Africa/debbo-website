@@ -24,6 +24,17 @@ const recoleta = localFont({
   variable: "--font-recoleta",
   display: "swap",
 });
+const satoshi = localFont({
+  src: [
+    {
+      path: "./fonts/Satoshi-Medium.otf",
+      weight: "600",
+      style: "normal",
+    },
+  ],
+  variable: "--font-satoshi",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "DébboAfrica - Empowering African Women Through Smart Health",
@@ -36,7 +47,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${recoleta.variable}`}>
+    <html lang="en" className={`${dmSans.variable}  ${recoleta.variable}`}>
       <body className="min-h-screen   text-general-black  transition-colors bg-badge">
         <ThemeProvider>
           <Navbar />

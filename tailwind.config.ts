@@ -20,6 +20,7 @@ const config: Config = {
       fontFamily: {
         "dm-sans": ["var(--font-dm-sans)", "sans-serif"],
         recoleta: ["var(--font-recoleta)", "sans-serif"],
+        satoshi: ["var(--font-satoshi)", "sans-serif"],
       },
       colors: {
         /* Core colors */
