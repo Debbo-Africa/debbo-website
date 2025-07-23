@@ -60,7 +60,7 @@ export default function HowItWorksAndFAQSection() {
           How It Works
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-16">
           {steps.map((step) => (
             <div
               key={step.number}
