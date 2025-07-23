@@ -27,7 +27,7 @@ export default function CursorFollower() {
 
   return (
     <div
-      className={`hidden md:fixed w-4 h-4 rounded-full bg-yellow pointer-events-none transition-opacity duration-100 ease-out z-[9999] ${
+      className={`hiddem md:block fixed w-4 h-4 rounded-full bg-yellow pointer-events-none transition-opacity duration-100 ease-out z-[9999] ${
         isVisible ? "opacity-100" : "opacity-0"
       }`}
       style={{
