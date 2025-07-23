@@ -118,7 +118,7 @@ export default function HealthFeatureCards() {
           />
         </div>
 
-        <div className="relative z-10  md:p-12 md:px-6 lg:px-12 pb-0 flex flex-col lg:flex-row lg:items-center">
+        <div className="relative z-10  md:p-12 p-4 py-12 lg:px-12 pb-0 flex flex-col lg:flex-row lg:items-center">
           <div className="flex-1 text-white mb-8 lg:mb-0 lg:mr-8">
             <h2 className="text-3xl md:text-4xl font-semibold mb-4">
               Track What Truly
@@ -158,8 +158,8 @@ export default function HealthFeatureCards() {
             </div>
           </div>
 
-          <div className="flex-shrink-0">
-            <div className="w-64 h-72 md:w-96 md:h-96  relative md:absolute md:-bottom-1/4 md:left-1/2">
+          <div className="flex-shrink-0 md:hidden lg:block">
+            <div className="w-64 h-72 md:w-96 md:h-96 left-6 relative md:absolute md:-bottom-1/4 md:left-1/2">
               <Image
                 src="/images/iphone.png"
                 alt="Track matters phone mockup"

@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Minus } from "lucide-react"; // ✅ Import icons
-
+import { Plus, Minus } from "lucide-react"; 
 const steps = [
   {
     number: "01",
