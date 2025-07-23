@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const DonwloadHeroSection = () => {
   return (
-    <section className="w-full rounded-2xl overflow-hidden max-w-7xl mx-auto ">
+    <section className="w-full md:px-4  rounded-2xl overflow-hidden lg:max-w-7xl mx-auto ">
       <div className="hidden md:flex relative w-full h-[500px] aspect-[4/3]">
         <Image
           src="/images/hero-bg-large.png"

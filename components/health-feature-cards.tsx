@@ -118,14 +118,14 @@ export default function HealthFeatureCards() {
           />
         </div>
 
-        <div className="relative z-10 p-8 md:p-12 pb-0 flex flex-col lg:flex-row items-center">
+        <div className="relative z-10  md:p-12 md:px-6 lg:px-12 pb-0 flex flex-col lg:flex-row lg:items-center">
           <div className="flex-1 text-white mb-8 lg:mb-0 lg:mr-8">
             <h2 className="text-3xl md:text-4xl font-semibold mb-4">
               Track What Truly
               <br />
               Matters
             </h2>
-            <p className="text-white/90 text-lg leading-relaxed max-w-md">
+            <p className="text-white/90 text-lg leading-relaxed max-w-xs lg:max-w-md">
               Our AI-powered triage tool assesses your symptoms and connects you
               to the care you need, when you need it.
             </p>

@@ -23,7 +23,7 @@ export function LetsWorkTogetherSection({
   description = "Contact us to learn more or request a custom wellness package.",
   buttonText = "Contact Us ",
   buttonLink = "/contact",
-  imageSrc = "/images/lets-wrok.png",
+  imageSrc = "/images/sharps.svg",
   imageAlt = "Team member",
   download = false,
   topImageSrc = "/images/download-phone.png",
@@ -43,7 +43,7 @@ export function LetsWorkTogetherSection({
           }`}
         >
           <div
-            className={`flex flex-col lg:flex-row items-center min-h-[650px] md:min-h-[400px] ${
+            className={`flex flex-col lg:flex-row items-center min-h-[670px] md:min-h-[400px] ${
               download && "min-h-[500px]"
             }`}
           >
@@ -54,7 +54,7 @@ export function LetsWorkTogetherSection({
               </p>
 
               {download ? (
-                <div className="flex gap-4">
+                <div className="flex gap-4 justify-center md:justify-start">
                   <Link href="#" target="_blank">
                     <Image
                       src="/images/appstore-large.svg"
@@ -94,14 +94,24 @@ export function LetsWorkTogetherSection({
               />
 
               {topImageSrc && download && (
+                <>
                 <Image
                   src={topImageSrc}
                   alt={topImageAlt}
                   width={300}
                   height={600}
-                  className="absolute left-1/2 transform -translate-x-1/2 w-80 lg:w-[30rem] h-auto
-                  top-1/2 -translate-y-1/2 lg:top-auto lg:-bottom-24 lg:translate-y-0"
+                  className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-80 md:w-[30rem] h-auto
+                  top-1/2 -translate-y-1/2 md:top-auto md:-bottom-28 lg:translate-y-0"
                 />
+                <Image
+                  src={topImageSrc}
+                  alt={topImageAlt}
+                  width={300}
+                  height={600}
+                  className="absolute md:hidden right-0 transform w-[27rem] h-auto
+                  top-1/2 -translate-y-[65%]  left-[30%]"
+                  />
+                  </>
               )}
             </div>
           </div>
