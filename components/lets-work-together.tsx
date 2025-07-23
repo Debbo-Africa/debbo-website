@@ -35,7 +35,7 @@ export function LetsWorkTogetherSection({
       <div
         className={`${
           (!download || !test) && "max-w-7xl "
-        }mx-auto px-4 lg:px-8`}
+        } mx-auto px-2 lg:px-8`}
       >
         <div
           className={`rounded-3xl overflow-hidden ${
@@ -43,7 +43,7 @@ export function LetsWorkTogetherSection({
           }`}
         >
           <div
-            className={`flex flex-col lg:flex-row items-center min-h-[400px] ${
+            className={`flex flex-col lg:flex-row items-center min-h-[650px] md:min-h-[400px] ${
               download && "min-h-[500px]"
             }`}
           >
@@ -99,7 +99,7 @@ export function LetsWorkTogetherSection({
                   alt={topImageAlt}
                   width={300}
                   height={600}
-                  className="absolute left-1/2 transform -translate-x-1/2 w-64 lg:w-[30rem] h-auto
+                  className="absolute left-1/2 transform -translate-x-1/2 w-80 lg:w-[30rem] h-auto
                   top-1/2 -translate-y-1/2 lg:top-auto lg:-bottom-24 lg:translate-y-0"
                 />
               )}

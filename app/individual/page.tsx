@@ -60,6 +60,25 @@ const tabMap = {
   occupational: "Occupational Health",
 };
 
+// Helper function to extract text from Contentful Rich Text or return string directly
+function extractRichTextValue(richText: any): string {
+  if (typeof richText === "string") {
+    return richText.trim();
+  }
+  if (!richText || !richText.content) return "";
+  let fullText = "";
+  richText.content.forEach((node: any) => {
+    if (node.nodeType === "paragraph" && node.content) {
+      node.content.forEach((textNode: any) => {
+        if (textNode.nodeType === "text" && textNode.value) {
+          fullText += textNode.value;
+        }
+      });
+    }
+  });
+  return fullText.trim();
+}
+
 export default function BookTestPage() {
   const [activeTab, setActiveTab] = useState("women");
   const [tests, setTests] = useState<MedicalTestEntry[]>([]);
@@ -69,6 +88,9 @@ export default function BookTestPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
   const [availableCategories, setAvailableCategories] = useState<string[]>([]);
+  const [categoryInfoMap, setCategoryInfoMap] = useState<
+    Record<string, string>
+  >({}); // State for category info
 
   useEffect(() => {
     const fetchTests = async () => {
@@ -76,7 +98,9 @@ export default function BookTestPage() {
         const entries: EntryCollection<MedicalTestSkeleton> =
           await client.getEntries<MedicalTestSkeleton>({
             content_type: "medicalTest",
+            limit: 1000, // Fetch up to 1000 items to get all category info
           });
+        console.log(entries)
         const testEntries = entries.items as MedicalTestEntry[];
         setTests(testEntries);
       } catch (error) {
@@ -90,15 +114,32 @@ export default function BookTestPage() {
 
   useEffect(() => {
     if (tests.length === 0) return;
+
     const testsForCurrentTab = tests.filter(
       (test) => test.fields.type === tabMap[activeTab as keyof typeof tabMap]
     );
-    const categoriesForTab = Array.from(
-      new Set(
-        testsForCurrentTab.map((test) => test.fields.category).filter(Boolean)
-      )
-    );
-    setAvailableCategories(categoriesForTab as any);
+
+    const categoriesForTab = new Set<string>();
+    const newCategoryInfoMap: Record<string, string> = {};
+
+    testsForCurrentTab.forEach((test) => {
+      if (test.fields.category) {
+        categoriesForTab.add(test.fields.category);
+        // Store categoryInfo if it exists and is not already set for this category
+        if (
+          (test as any).fields.categoryInfo &&
+          !newCategoryInfoMap[test.fields.category]
+        ) {
+          const infoText = extractRichTextValue((test as any).fields.categoryInfo);
+          if (infoText) {
+            newCategoryInfoMap[test.fields.category] = infoText;
+          }
+        }
+      }
+    });
+
+    setAvailableCategories(Array.from(categoriesForTab));
+    setCategoryInfoMap(newCategoryInfoMap); // Set the new map
     setSelectedCategory("all");
     setCurrentPage(1);
   }, [tests, activeTab]);
@@ -126,7 +167,6 @@ export default function BookTestPage() {
     startIndex,
     startIndex + ITEMS_PER_PAGE
   );
-
   const currentTabContent = tabContent[activeTab as keyof typeof tabContent];
 
   if (activeTab === "occupational") {
@@ -210,6 +250,7 @@ export default function BookTestPage() {
                     key: category,
                     label: category,
                     content: null,
+                    infoContent: categoryInfoMap[category], 
                   })),
                 ]}
                 activeTab={selectedCategory}
@@ -217,7 +258,6 @@ export default function BookTestPage() {
                 className="w-full md:w-auto mt-4"
               />
             ) : (
-              // Keep the Select dropdown for other health types
               <Select
                 value={selectedCategory}
                 onValueChange={setSelectedCategory}
@@ -299,7 +339,9 @@ export default function BookTestPage() {
             buttonText="Explore "
             imageSrc="/images/test.jpg"
             title="Thinking About the Future Together?"
-            description1="We also offer pre-marital health packages for couples who want to take a proactive step toward their future. These packages include essential screenings such as genotype testing, helping you make informed decisions together.  "
+            description1="We also offer pre-marital health packages for couples who want to take a proactive step toward their future. These packages include essential screenings such as genotype testing, helping you make informed decisions together.
+
+"
             description2="To learn more about our sexual health and pre-marital screening options, contact us today."
           />
           <LetsWorkTogetherSection

@@ -86,7 +86,7 @@ export default function HowItWorksAndFAQSection() {
                 onClick={() => toggleFAQ(index)}
                 className="flex justify-between items-center w-full text-left font-medium text-body-text-gray py-4"
               >
-                <span>{faq.question}</span>
+                <h3 className="font-bold">{faq.question}</h3>
                 {openIndex === index ? (
                   <Minus className="h-5 w-5 bg-black text-white rounded-full " />
                 ) : (
@@ -94,7 +94,7 @@ export default function HowItWorksAndFAQSection() {
                 )}
               </button>
               {openIndex === index && (
-                <p className="text-sm text-body-text-gray mt-2">{faq.answer}</p>
+                <p className="text-md text-body-text-gray mt-2">{faq.answer}</p>
               )}
             </div>
           ))}

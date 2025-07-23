@@ -112,7 +112,7 @@ export default function HeroSection() {
 
         <div className="text-center max-w-xl mx-auto">
           {" "}
-          <h4 className="text-md sm:text-xl text-body-text-gray mb-8 font-medium">
+          <h4 className="text-md sm:text-xl text-body-text-gray mb-8 font-bold">
             Cutting-Edge Care for African Women's Health
           </h4>
           <ButtonComponent />

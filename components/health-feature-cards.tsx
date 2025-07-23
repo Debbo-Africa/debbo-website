@@ -102,13 +102,19 @@ export default function HealthFeatureCards() {
         </div>
       </div>
 
-      <Card className="overflow-hidden rounded-3xl relative min-h-[420px] md:min-h-[490px]">
+      <Card className="overflow-hidden rounded-3xl relative min-h-[420px] md:min-h-[450px]">
         <div className="absolute inset-0">
           <Image
             src="/images/old-woman-bg.png"
             alt="Track matters background"
             fill
-            className="object-cover "
+            className="hidden md:block object-cover "
+          />
+          <Image
+            src="/images/old-woman-bg-small.png"
+            alt="Track matters background"
+            fill
+            className="object-cover md:hidden"
           />
         </div>
 
@@ -153,7 +159,7 @@ export default function HealthFeatureCards() {
           </div>
 
           <div className="flex-shrink-0">
-            <div className="w-64 h-72 relative md:absolute md:-bottom-1/4 md:left-1/2">
+            <div className="w-64 h-72 md:w-96 md:h-96  relative md:absolute md:-bottom-1/4 md:left-1/2">
               <Image
                 src="/images/iphone.png"
                 alt="Track matters phone mockup"

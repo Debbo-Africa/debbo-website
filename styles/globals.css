@@ -136,7 +136,7 @@
   }
   h1,
   h2,
-  h3
+  h3,  button
  {
     font-family: var(--font-recoleta), sans-serif !important;
     font-weight: 500;
@@ -145,7 +145,7 @@
   span,
   div,
   a,
-  button,
+
   input,
   textarea,p,
   label {
