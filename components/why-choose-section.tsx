@@ -98,7 +98,7 @@ export const WhyChooseSection = () => {
   }, []);
 
   return (
-    <section className="py-16 px-4" ref={sectionRef}>
+    <section className="pb-6 px-4" ref={sectionRef}>
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-2xl md:text-5xl font-bold text-general-black">

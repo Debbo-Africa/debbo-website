@@ -259,7 +259,7 @@ export default function EnhancedNavbar() {
               </div>
 
               <div className="relative group">
-                <button className="flex items-center text-body-text-gray hover:text-gray-900 font-medium hover:bg-[--surface-card] px-3 p-2 rounded-2xl">
+                <button className="flex items-center text-body-text-gray hover:text-gray-900 font-bold  hover:bg-[--surface-card] px-3 p-2 rounded-2xl">
                   Resources
                   <ChevronDown className="ml-1 h-4 w-4 group-hover:rotate-180 transition-transform duration-200" />
                 </button>
@@ -431,7 +431,7 @@ export default function EnhancedNavbar() {
                 {openDropdown === "individual" && (
                   <div className="mt-8 space-y-8">
                     <div className="lg:block hidden mb-4">
-                      <div className="relative h-32 rounded-lg overflow-hidden">
+                      <div className="relative h-32 rounded-lg overflow-hidden bg-black bg-opacity-30">
                         <Image
                           src={getDefaultImage("individual")?.image || ""}
                           alt="For Individuals"
@@ -445,7 +445,7 @@ export default function EnhancedNavbar() {
                         <Link
                           key={index}
                           href={item.href}
-                          className={`block text-base p-2 rounded-xl ${
+                          className={`block text-base p-2 rounded-xl  ${
                             isActiveLink(item.href)
                               ? "text-general-black bg-[--surface-card]"
                               : "text-body-text-gray"

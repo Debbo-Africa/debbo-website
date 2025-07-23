@@ -1,11 +1,11 @@
 import type React from "react";
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer-section";
+import CursorFollower from "@/components/cursur-follow";
 
 const recoleta = localFont({
   src: [
@@ -18,6 +18,7 @@ const recoleta = localFont({
   variable: "--font-recoleta",
   display: "swap",
 });
+
 const outfit = localFont({
   src: [
     {
@@ -31,7 +32,7 @@ const outfit = localFont({
       style: "normal",
     },
   ],
-  variable: "--font-satoshi",
+  variable: "--font-outfit",
   display: "swap",
 });
 
@@ -46,14 +47,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${recoleta.variable}`}>
+    <html lang="en" className={`${recoleta.variable} ${outfit.variable}`}>
       <body
-        className={`min-h-screen text-general-black  transition-colors bg-badge`}
+        className={`min-h-screen text-general-black transition-colors bg-badge ${outfit.variable}`}
       >
         <ThemeProvider>
           <Navbar />
           {children}
           <Footer />
+        <CursorFollower />
         </ThemeProvider>
       </body>
     </html>

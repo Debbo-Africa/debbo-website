@@ -7,6 +7,7 @@ import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 import QRCode from "qrcode";
 import Tagline from "./Tagline";
 import Link from "next/link";
+import ButtonComponent from "./Button";
 
 type FooterLinkProps = {
   href: string;
@@ -97,12 +98,8 @@ export const Footer = () => {
                       required
                     />
                   </div>
-                  <button
-                    type="submit"
-                    className="w-full bg-[#0D0D0DFC] text-general-white py-3 px-6 rounded-full font-semibold hover:bg-gray-800 transition-colors"
-                  >
-                    Subscribe →
-                  </button>
+                 
+                  <ButtonComponent text="Subscribe" className="w-full mt-3" />
                 </form>
               </div>
             </div>

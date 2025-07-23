@@ -297,7 +297,7 @@ export const Trust = () => {
   }, [shouldStartAnimation]);
 
   return (
-    <section className="relative h-[100vh] overflow-hidden  m- rounded-3xl bg-[--surface-card]">
+    <section className="relative h-[93vh] overflow-hidden  m- rounded-3xl bg-[--surface-card]">
       {isRaining && (
         <div className="absolute inset-0 pointer-events-none z-5">
           <div className="rain-overlay "></div>
@@ -320,7 +320,7 @@ export const Trust = () => {
       <h1
         ref={sceneRef}
         className="absolute inset-0 w-full h-full pointer-events-none"
-        style={{ height: "100vh", zIndex: 15 }}
+        style={{ height: "100vh", zIndex: 1 }}
       />
       <style jsx>{`
         @keyframes fall {

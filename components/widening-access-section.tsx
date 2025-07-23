@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { Button } from "./ui/button";
+import ButtonComponent from "./Button";
 
 const WideningAccessSection = ({
   title = "Widening access to quality healthcare.",
@@ -16,7 +17,9 @@ const WideningAccessSection = ({
   return (
     <section className="flex flex-col md:flex-row items-center gap-8 py-20 px-6 max-w-7xl mx-auto">
       <div className="flex-shrink-0 w-full md:w-1/2">
-        <div className={`relative rounded-xl overflow-hidden bg-gray-200 h-80 md:h-[400px] ${imageStyle}`}>
+        <div
+          className={`relative rounded-xl overflow-hidden bg-gray-200 h-80 md:h-[400px] ${imageStyle}`}
+        >
           <Image
             src={imageSrc}
             alt={imageAlt}
@@ -32,17 +35,12 @@ const WideningAccessSection = ({
         <h2 className="text-3xl md:text-4xl font-semibold mb-4 leading-snug">
           {title}
         </h2>
-        <p className="text-body-text-gray mb-6">
-          {description1}
-        </p>
+        <p className="text-body-text-gray mb-6">{description1}</p>
         {description2 && (
-          <p className="text-body-text-gray mb-6">
-            {description2}
-          </p>
+          <p className="text-body-text-gray mb-6">{description2}</p>
         )}
-        <Button className="px-5 py-3 w-full md:w-fit bg-black text-white rounded-full hover:bg-gray-900 transition">
-          {buttonText}
-        </Button>
+       
+        <ButtonComponent text={buttonText} className="w-full md:w-fit" />
       </div>
     </section>
   );

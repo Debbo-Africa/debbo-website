@@ -5,6 +5,7 @@ import { Plus, Minus, MoveRight, MoveLeft } from "lucide-react";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ButtonComponent from "./Button";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -235,10 +236,11 @@ export const FAQSection = () => {
                 ))}
               </div>
               <div className="text-left">
-                <button className="bg-[#0D0D0DFC] w-full md:w-fit justify-center text-general-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition-colors inline-flex items-center gap-2 text-sm">
-                  View all FAQs
-                  <MoveRight className="w-4 h-4" />
-                </button>
+               
+                <ButtonComponent
+                  text="View all FAQs"
+                  className="w-full md:w-fit justify-center"
+                />
               </div>
             </div>
           </div>

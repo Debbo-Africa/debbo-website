@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
+import ButtonComponent from "./Button";
 
 interface LetsWorkTogetherProps {
   title?: string;
@@ -20,7 +21,7 @@ interface LetsWorkTogetherProps {
 export function LetsWorkTogetherSection({
   title = "Let's Work Together",
   description = "Contact us to learn more or request a custom wellness package.",
-  buttonText = "Contact Us →",
+  buttonText = "Contact Us ",
   buttonLink = "/contact",
   imageSrc = "/images/lets-wrok.png",
   imageAlt = "Team member",
@@ -77,9 +78,7 @@ export function LetsWorkTogetherSection({
                 buttonText &&
                 buttonLink && (
                   <Link href={buttonLink}>
-                    <Button className="bg-black hover:bg-gray-900 text-white px-6 py-3 rounded-full">
-                      {buttonText}
-                    </Button>
+                    <ButtonComponent text={buttonText} />
                   </Link>
                 )
               )}

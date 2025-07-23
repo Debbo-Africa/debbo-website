@@ -279,7 +279,7 @@ export default function BookTestPage() {
       {activeTab === "women" && (
         <>
           <WideningAccessSection
-            buttonText="Contact Us →"
+            buttonText="Contact Us "
             imageSrc="/images/couple.jpg"
             title=""
             description1="We also offer fertility testing for men, helping couples get a complete picture of their reproductive health. Contact Us to learn more."
@@ -296,7 +296,7 @@ export default function BookTestPage() {
       {activeTab === "sexual" && (
         <>
           <WideningAccessSection
-            buttonText="Explore →"
+            buttonText="Explore "
             imageSrc="/images/test.jpg"
             title="Thinking About the Future Together?"
             description1="We also offer pre-marital health packages for couples who want to take a proactive step toward their future. These packages include essential screenings such as genotype testing, helping you make informed decisions together.  "

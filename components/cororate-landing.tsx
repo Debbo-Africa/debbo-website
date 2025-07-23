@@ -76,14 +76,15 @@ export default function HeroSection() {
     <section className="py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12">
         <div className="lg:w-1/2">
-          <h1 className="text-4xl lg:text-6xl font-bold leading-tight text-black mb-6">
-            <span className="text-yellow">
-              <span ref={animatedWordRef}></span>
-              <span ref={cursorRef} className="animate-blink">
+          <h1 className="text-4xl lg:text-6xl font-bold leading-relaxed text-general-black mb-6">
+            <h1 className="flex mb-1">
+              <h1 ref={animatedWordRef as any} className="text-yellow "></h1>
+              <h1 ref={cursorRef as any} className="animate-blink text-yellow">
                 |
-              </span>
-            </span>
-            &nbsp;Your <br /> Workforce with <br /> Better Health
+              </h1>
+              &nbsp;Your
+            </h1>
+            Workforce with <br /> Better Health
           </h1>
 
           <p className="text-lg text-gray-700 mb-6">

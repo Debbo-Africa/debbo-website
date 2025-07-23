@@ -93,10 +93,10 @@ export default function HeroSection() {
       <div className="max-w-6xl mx-auto">
         <div className="text-center">
           {" "}
-          <h1 className="text-4xl lg:text-6xl font-medium text-general-black mb-6 leading-normal inline-block">
+          <div className="text-4xl lg:text-6xl font-medium text-general-black mb-6 leading-normal inline-block ">
             <div className="flex flex-col md:flex-row items-center justify-center">
               <span className="flex items-center text-yellow md:mr-2">
-                <span ref={animatedWordRef}></span>
+                <h1 ref={animatedWordRef as any}></h1>
                 <span
                   ref={cursorRef}
                   className="ml-1 animate-blink md:leading-normal"
@@ -104,10 +104,10 @@ export default function HeroSection() {
                   |
                 </span>
               </span>
-              <span>African Women</span>
+              <h1>African Women</h1>
             </div>
-            <span className="block">Through Smart Health</span>
-          </h1>
+            <h1 className="block">Through Smart Health</h1>
+          </div>
         </div>
 
         <div className="text-center max-w-xl mx-auto">

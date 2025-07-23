@@ -1,4 +1,4 @@
-import type { Config } from "tailwindcss";
+  import type { Config } from "tailwindcss";
 
 const config: Config = {
   darkMode: ["class", '[data-theme="dark"]'],
@@ -18,9 +18,8 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
-        "dm-sans": ["var(--font-dm-sans)", "sans-serif"],
+        outfit: ["var(--font-outfit)", "sans-serif"],
         recoleta: ["var(--font-recoleta)", "sans-serif"],
-        satoshi: ["var(--font-satoshi)", "sans-serif"],
       },
       colors: {
         /* Core colors */
@@ -29,7 +28,6 @@ const config: Config = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-
         /* Primary and Secondary */
         primary: {
           DEFAULT: "hsl(var(--primary))",
@@ -39,7 +37,6 @@ const config: Config = {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
         },
-
         /* Muted and Accent */
         muted: {
           DEFAULT: "hsl(var(--muted))",
@@ -49,13 +46,11 @@ const config: Config = {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
         },
-
         /* Destructive */
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
         },
-
         /* Popover and Card */
         popover: {
           DEFAULT: "hsl(var(--popover))",
@@ -65,14 +60,12 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-
         /* Charts */
         "chart-1": "hsl(var(--chart-1))",
         "chart-2": "hsl(var(--chart-2))",
         "chart-3": "hsl(var(--chart-3))",
         "chart-4": "hsl(var(--chart-4))",
         "chart-5": "hsl(var(--chart-5))",
-
         /* General colors */
         "general-white": "var(--general-white)",
         "general-black": "var(--general-black)",
@@ -80,11 +73,9 @@ const config: Config = {
         "gray-text": "var(--gray-text)",
         "text-gray": "var(--text-body)",
         "surface-card-bold": "var(--surface-card-bold)",
-
         /* Forms */
         "form-bg": "var(--form-bg)",
         "form-bg-gray": "var(--form-bg-gray)",
-
         /* Secondary Debbo Palette */
         "secondary-debbo": "var(--color-secondary-debbo)",
         "secondary-debbo1": "var(--color-secondary-debbo1)",
@@ -101,14 +92,12 @@ const config: Config = {
         "secondary-debbo-dark": "var(--color-secondary-debbo-dark)",
         "secondary-debbo-dark1": "var(--color-secondary-debbo-dark1)",
         "text-body": "var(--text-body)",
-
         /* Other specific colors */
         green: "var(--green)",
         yellow: "var(--yellow)",
         "light-green": "var(--light-green)",
         badge: "var(--badge)",
         "surface-card": "var(--suface-card)",
-
         /* Light selections and outline */
         "light-orange": "var(--light-orange)",
         "selected-light-green": "var(--selected-light-green)",
