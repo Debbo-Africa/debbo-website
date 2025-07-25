@@ -102,7 +102,7 @@ export function OrderSuccessModal({
         <Link href="/individual" className="mt-auto flex justify-center">
           <Button
             onClick={handleClose}
-            className="w-fit mx-auto bg-[#FFF8F0] text-general-black rounded-full py-3"
+            className="w-fit mx-auto bg-[#FFF8F0] text-general-black rounded-full py-3 hover:bg-[#FFF8F0]"
           >
             Back to Book a Test
           </Button>

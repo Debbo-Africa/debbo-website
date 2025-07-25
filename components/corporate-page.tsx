@@ -18,7 +18,7 @@ const Corporate = () => {
           <StatsSection />
           <PersonalisedCareSection />
           <TrustedBySection />
-          <LetsWorkTogetherSection/>
+          <LetsWorkTogetherSection buttonLink='/contact-us' imageSrc='/images/sharps1.png'/>
     </div>
   );
 }

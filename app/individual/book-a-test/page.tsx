@@ -23,30 +23,31 @@ import { SkeletonTestCard } from "@/components/skeleton-test-card";
 import { Tabs } from "@/components/tabs";
 import { LetsWorkTogetherSection } from "@/components/lets-work-together";
 import WideningAccessSection from "@/components/widening-access-section";
+import ButtonComponent from "@/components/Button";
 
 const ITEMS_PER_PAGE = 6;
 
 const tabContent = {
   women: {
-    title: "Women's Health Test",
+    title: "Women's Health Tests",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae sem placerat. In id cursus mi pretium tellus duis convallis.",
+      "From fertility to menopause and cancer screening, we offer personalised testing and support through every stage of a woman’s health journey. Book a test package today.",
     imageSrc: "/images/teams-hero.png",
   },
   sexual: {
-    title: "Sexual Health Test",
+    title: "Sexual Health Tests",
     description:
       "Sexual health is a vital part of overall wellbeing. We offer discreet testing for common sexually transmitted infections (STIs), along with expert support and private counselling.",
     imageSrc: "/images/teams-hero.png",
   },
   general: {
-    title: "General Health Test",
+    title: "General Health Tests",
     description:
       "Our general health tests cover vital areas like blood sugar, cholesterol, liver and kidney function, and more. Whether you're doing a routine check-up or feeling fresh, early testing helps with prevention and peace of mind.",
     imageSrc: "/images/teams-hero.png",
   },
   occupational: {
-    title: "Occupational Health Test",
+    title: "Occupational Health Tests",
     description:
       "We offer pre-employment health screening for corporate employees, domestic staff, and food handlers. Ensure your team starts strong with reliable, efficient medical checks tailored to your organisation's needs.",
     imageSrc: "/images/teams-hero.png",
@@ -60,11 +61,8 @@ const tabMap = {
   occupational: "Occupational Health",
 };
 
-// Helper function to extract text from Contentful Rich Text or return string directly
 function extractRichTextValue(richText: any): string {
-  if (typeof richText === "string") {
-    return richText.trim();
-  }
+  if (typeof richText === "string") return richText.trim();
   if (!richText || !richText.content) return "";
   let fullText = "";
   richText.content.forEach((node: any) => {
@@ -90,7 +88,7 @@ export default function BookTestPage() {
   const [availableCategories, setAvailableCategories] = useState<string[]>([]);
   const [categoryInfoMap, setCategoryInfoMap] = useState<
     Record<string, string>
-  >({}); // State for category info
+  >({});
 
   useEffect(() => {
     const fetchTests = async () => {
@@ -98,9 +96,8 @@ export default function BookTestPage() {
         const entries: EntryCollection<MedicalTestSkeleton> =
           await client.getEntries<MedicalTestSkeleton>({
             content_type: "medicalTest",
-            limit: 1000, // Fetch up to 1000 items to get all category info
+            limit: 1000,
           });
-        console.log(entries)
         const testEntries = entries.items as MedicalTestEntry[];
         setTests(testEntries);
       } catch (error) {
@@ -125,21 +122,20 @@ export default function BookTestPage() {
     testsForCurrentTab.forEach((test) => {
       if (test.fields.category) {
         categoriesForTab.add(test.fields.category);
-        // Store categoryInfo if it exists and is not already set for this category
         if (
           (test as any).fields.categoryInfo &&
           !newCategoryInfoMap[test.fields.category]
         ) {
-          const infoText = extractRichTextValue((test as any).fields.categoryInfo);
-          if (infoText) {
-            newCategoryInfoMap[test.fields.category] = infoText;
-          }
+          const infoText = extractRichTextValue(
+            (test as any).fields.categoryInfo
+          );
+          if (infoText) newCategoryInfoMap[test.fields.category] = infoText;
         }
       }
     });
 
     setAvailableCategories(Array.from(categoriesForTab));
-    setCategoryInfoMap(newCategoryInfoMap); // Set the new map
+    setCategoryInfoMap(newCategoryInfoMap);
     setSelectedCategory("all");
     setCurrentPage(1);
   }, [tests, activeTab]);
@@ -173,9 +169,10 @@ export default function BookTestPage() {
     return (
       <div className="min-h-screen pt-20">
         <TestHeader showTabs activeTab={activeTab} onTabChange={setActiveTab} />
+
         <Breadcrumb
           items={[{ label: "Home", href: "/" }, { label: "Book a Test" }]}
-        />
+          />
         <PageHero
           title={currentTabContent.title}
           description={currentTabContent.description}
@@ -196,23 +193,22 @@ export default function BookTestPage() {
             </div>
             <div className="lg:w-1/2">
               <h1 className="text-4xl lg:text-5xl font-bold leading-tight text-black mb-6">
-                <span className="text-yellow">Empowering</span>&nbsp;Your <br />{" "}
-                Workforce with <br /> Better Health
+                <h1 className="text-yellow inline">Empowering</h1>&nbsp;Your{" "}
+                <br /> Workforce with <br /> Better Health
               </h1>
               <p className="text-lg text-body-text-gray mb-6">
                 At DébboAfrica, we believe your team is your greatest asset. Our
                 corporate wellness plans are designed to support employee
                 health, boost productivity, and build stronger organisations.
               </p>
-              <Button className="bg-[#0D0D0DFC] rounded-full">
-                Explore →{" "}
-              </Button>
+              <ButtonComponent text="Explore" />
             </div>
           </div>
         </section>
         <LetsWorkTogetherSection
           title="​​Looking for a specific test?"
           description="While we offer test panels for convenience, you can also request individual tests. Just get in touch with us to order."
+          imageSrc="/images/sharps1.png"
         />
       </div>
     );
@@ -230,60 +226,45 @@ export default function BookTestPage() {
         imageSrc={currentTabContent.imageSrc}
         imageAlt={`${currentTabContent.title} illustration`}
       />
+
       <div className="max-w-7xl mx-auto px-4 py-8">
+        {/* Tabs at top */}
+        {activeTab === "women" && (
+          <Tabs
+            tabs={[
+              { key: "all", label: "All", content: null },
+              ...availableCategories.map((category) => ({
+                key: category,
+                label: category,
+                content: null,
+                infoContent: categoryInfoMap[category],
+              })),
+            ]}
+            activeTab={selectedCategory}
+            setActiveTab={setSelectedCategory}
+            className="justify-center"
+          />
+        )}
+
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
-          <div className="flex flex-col-reverse md:flex-row md:items-center gap-4 flex-1">
-            <div className="relative w-full md:w-auto">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-body-text-gray w-4 h-4" />
-              <Input
-                placeholder="Search Test"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 w-full md:max-w-xs bg-[--surface-card] border-none focus:outline-none focus:border-none"
-              />
-            </div>
-            {activeTab === "women" ? (
-              <Tabs
-                tabs={[
-                  { key: "all", label: "All", content: null },
-                  ...availableCategories.map((category) => ({
-                    key: category,
-                    label: category,
-                    content: null,
-                    infoContent: categoryInfoMap[category], 
-                  })),
-                ]}
-                activeTab={selectedCategory}
-                setActiveTab={setSelectedCategory}
-                className="w-full md:w-auto mt-4"
-              />
-            ) : (
-              <Select
-                value={selectedCategory}
-                onValueChange={setSelectedCategory}
-              >
-                <SelectTrigger className="w-full md:w-48 bg-[--surface-card]">
-                  <SelectValue placeholder="All category" />
-                </SelectTrigger>
-                <SelectContent className="bg-[--surface-card]">
-                  <SelectItem value="all">All Categories</SelectItem>
-                  {availableCategories.map((category) => (
-                    <SelectItem
-                      key={category}
-                      value={category}
-                      className="hover:bg-[#D9D0C6]"
-                    >
-                      {category}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            )}
+          {/* Search */}
+          <div className="relative w-full md:max-w-xs">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-body-text-gray w-4 h-4" />
+            <Input
+              placeholder="Search Test"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="pl-10 w-full bg-[--surface-card] border-none focus:outline-none focus:border-none"
+            />
           </div>
-          <div className="hidden md:block">
+
+          <div className="w-full md:w-48 flex items-center">
+            <p className="text-xs md:text-sm whitespace-nowrap inline-flex">
+              Sort By :
+            </p>
             <Select defaultValue="high-to-low">
-              <SelectTrigger className="w-full md:w-48 bg-[--surface-card]">
-                <SelectValue />
+              <SelectTrigger className="w-full bg-transparent">
+                <SelectValue placeholder="Sort by" />
               </SelectTrigger>
               <SelectContent className="bg-[--surface-card]">
                 <SelectItem value="high-to-low">High to Low</SelectItem>
@@ -292,6 +273,8 @@ export default function BookTestPage() {
             </Select>
           </div>
         </div>
+
+        {/* Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {loading
             ? Array.from({ length: ITEMS_PER_PAGE }).map((_, index) => (
@@ -301,6 +284,8 @@ export default function BookTestPage() {
                 <TestCard key={test.sys.id} test={test} />
               ))}
         </div>
+
+        {/* No results */}
         {!loading && filteredTests.length === 0 && (
           <div className="text-center py-8">
             <p className="text-gray-500">
@@ -308,6 +293,7 @@ export default function BookTestPage() {
             </p>
           </div>
         )}
+
         {totalPages > 1 && (
           <Pagination
             currentPage={currentPage}
@@ -316,6 +302,7 @@ export default function BookTestPage() {
           />
         )}
       </div>
+
       {activeTab === "women" && (
         <>
           <WideningAccessSection
@@ -329,6 +316,7 @@ export default function BookTestPage() {
           <LetsWorkTogetherSection
             test
             title="​​Looking for a specific test?"
+            imageSrc="/images/sharps1.png"
             description="While we offer test panels for convenience, you can also request individual tests. Just get in touch with us to order."
           />
         </>
@@ -337,27 +325,26 @@ export default function BookTestPage() {
         <>
           <WideningAccessSection
             buttonText="Explore "
+            
             imageSrc="/images/test.jpg"
             title="Thinking About the Future Together?"
-            description1="We also offer pre-marital health packages for couples who want to take a proactive step toward their future. These packages include essential screenings such as genotype testing, helping you make informed decisions together.
-
-"
+            description1="We also offer pre-marital health packages for couples who want to take a proactive step toward their future. These packages include essential screenings such as genotype testing, helping you make informed decisions together."
             description2="To learn more about our sexual health and pre-marital screening options, contact us today."
           />
           <LetsWorkTogetherSection
             test
             title="​​Looking for a specific test?"
+            imageSrc="/images/sharps1.png"
             description="While we offer test panels for convenience, you can also request individual tests. Just get in touch with us to order."
           />
         </>
       )}
       {activeTab === "general" && (
-        <>
-          <LetsWorkTogetherSection
-            title="​​Looking for a specific test?"
-            description="While we offer test panels for convenience, you can also request individual tests. Just get in touch with us to order."
-          />
-        </>
+        <LetsWorkTogetherSection
+          title="​​Looking for a specific test?"
+          description="While we offer test panels for convenience, you can also request individual tests. Just get in touch with us to order."
+          imageSrc="/images/sharps1.png"
+        />
       )}
     </div>
   );

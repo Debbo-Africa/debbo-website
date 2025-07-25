@@ -98,7 +98,7 @@ export const FAQSection = () => {
   };
 
   useEffect(() => {
-    const cardsToAnimate:any = [];
+    const cardsToAnimate: any = [];
     if (reviewCardRef.current) cardsToAnimate.push(reviewCardRef.current);
     if (mediaLogosCardRef.current)
       cardsToAnimate.push(mediaLogosCardRef.current);
@@ -113,7 +113,7 @@ export const FAQSection = () => {
         ease: "power3.out",
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 60%", 
+          start: "top 60%",
           end: "bottom top",
           toggleActions: "play none none none",
           once: true,
@@ -121,7 +121,15 @@ export const FAQSection = () => {
       });
     });
 
-    return () => ctx.revert(); 
+    return () => ctx.revert();
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextReview();
+    }, 10000); 
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -135,7 +143,7 @@ export const FAQSection = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
             <div className="flex flex-col gap-6 h-full">
               <div
-                className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-sm flex-1 flex flex-col"
+                className="bg-white/60 backdrop-blur-sm rounded-2xl md:rounded-3xl p-6 shadow-sm flex-1 flex flex-col"
                 ref={reviewCardRef}
               >
                 <div className="mb-6">
@@ -163,14 +171,14 @@ export const FAQSection = () => {
                   <div className="flex items-center gap-3">
                     <button
                       onClick={prevReview}
-                      className="w-8 h-8 rounded-full flex items-center justify-center  transition-colors"
+                      className="w-8 h-8 rounded-full flex items-center justify-center transition-colors"
                       aria-label="Previous review"
                     >
                       <MoveLeft className="w-6 h-6 text-gray-600 bg-[#FFF8F04D] p-1 rounded-full" />
                     </button>
                     <button
                       onClick={nextReview}
-                      className="w-8 h-8 rounded-fullflex items-center justify-center transition-colors"
+                      className="w-8 h-8 rounded-full flex items-center justify-center transition-colors"
                       aria-label="Next review"
                     >
                       <MoveRight className="w-6 h-6 text-gray-600 bg-[#FFF8F04D] p-1 rounded-full " />
@@ -179,7 +187,7 @@ export const FAQSection = () => {
                 </div>
               </div>
               <div
-                className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-sm"
+                className="bg-white/60 backdrop-blur-sm rounded-2xl md:rounded-3xl p-6 shadow-sm"
                 ref={mediaLogosCardRef}
               >
                 <p className="text-xs text-gray-600 mb-3">As Seen In</p>
@@ -193,10 +201,10 @@ export const FAQSection = () => {
               </div>
             </div>
             <div
-              className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-sm flex flex-col h-full"
+              className="bg-white/60 backdrop-blur-sm rounded-2xl  md:rounded-3xl p-6 shadow-sm flex flex-col h-full"
               ref={faqCardRef}
             >
-              <div className="text-center mb-6">
+              <div className="text-left mb-6">
                 <h2 className="text-2xl font-bold text-general-black mb-1">
                   Frequently Asked
                 </h2>
@@ -236,7 +244,6 @@ export const FAQSection = () => {
                 ))}
               </div>
               <div className="text-left">
-               
                 <ButtonComponent
                   text="View all FAQs"
                   className="w-full md:w-fit justify-center"

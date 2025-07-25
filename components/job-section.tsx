@@ -5,8 +5,7 @@ import client from "@/lib/contentful";
 import type { JobEntry, JobSkeleton } from "@/types/contentful";
 import type { EntryCollection } from "contentful";
 import { JobCard } from "./job-card";
-import { Loader2 } from "lucide-react";
-import { Building } from "lucide-react"; // Import Building component
+import { Building } from "lucide-react";
 import { DepartmentFilter } from "./ui/department-filter";
 
 export function JobsSection() {
@@ -48,29 +47,15 @@ export function JobsSection() {
     ? jobs.filter((job) => job.fields.department === selectedDepartment)
     : jobs;
 
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center py-12">
-        <Loader2 className="w-8 h-8 animate-spin text-gray-600" />
-        <span className="ml-2 text-gray-600">Loading opportunities...</span>
-      </div>
-    );
-  }
-
   return (
     <section className="py-16">
       <div className="max-w-7xl mx-auto px-4 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-            Current Opportunities
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 max-w-lg mx-auto leading-loose">
+            Join us in shaping the future of healthcare for African women.
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Join our mission to transform healthcare for women across Africa.
-            Explore our current openings and find your perfect role.
-          </p>
         </div>
 
-        {/* Filter Dropdown */}
         <div className="mb-8">
           <DepartmentFilter
             departments={departments}
@@ -80,11 +65,16 @@ export function JobsSection() {
           />
         </div>
 
-        {/* Jobs Grid */}
-        {filteredJobs.length === 0 ? (
+        {loading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3].map((i) => (
+              <JobCardPlaceholder key={i} />
+            ))}
+          </div>
+        ) : filteredJobs.length === 0 ? (
           <div className="text-center py-12">
             <div className="max-w-md mx-auto">
-              <div className="w-24 h-24 mx-auto mb-4  rounded-full flex items-center justify-center">
+              <div className="w-24 h-24 mx-auto mb-4 rounded-full flex items-center justify-center">
                 <Building className="w-12 h-12 text-gray-400" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
@@ -106,5 +96,18 @@ export function JobsSection() {
         )}
       </div>
     </section>
+  );
+}
+
+function JobCardPlaceholder() {
+  return (
+    <div className="animate-pulse  rounded-lg p-6 space-y-4">
+      <div className="h-4 bg-[--surface-card] rounded w-1/3"></div>
+      <div className="h-6 bg-[--surface-card] rounded w-2/3"></div>
+      <div className="h-4 bg-[--surface-card] rounded w-1/2"></div>
+      <div className="h-4 bg-[--surface-card] rounded w-full"></div>
+      <div className="h-4 bg-[--surface-card] rounded w-5/6"></div>
+      <div className="h-10 bg-[--surface-card] rounded w-1/2 mt-4"></div>
+    </div>
   );
 }

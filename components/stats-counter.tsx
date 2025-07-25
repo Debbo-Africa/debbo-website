@@ -52,7 +52,6 @@ export function StatsSection() {
       },
     });
 
-    // Animate each stat counter
     statsRefs.current.forEach((statRef, index) => {
       if (statRef) {
         const targetValue = STATS_DATA[index].value;
@@ -68,7 +67,7 @@ export function StatsSection() {
               statRef.textContent = Math.round(counter.value).toString();
             },
           },
-          index * 0.2 // Stagger the animations
+          index * 0.2 
         );
       }
     });
@@ -80,16 +79,18 @@ export function StatsSection() {
 
   return (
     <section ref={sectionRef} className="py-16 ">
-      <div className="max-w-6xl mx-auto px-4 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
           {STATS_DATA.map((stat, index) => (
             <div key={index} className="text-left">
-              <div
-                className={`text-5xl lg:text-6xl font-bold mb-4 ${stat.color}`}
+              <h1
+                className={`text-5xl lg:text-6xl font-bold mb-4  ${stat.color}`}
               >
-                <span ref={(el:any) => (statsRefs.current[index] = el)}>0</span>
+                <span ref={(el: any) => (statsRefs.current[index] = el)}>
+                  0
+                </span>
                 {stat.suffix}
-              </div>
+              </h1>
               <p className="text-general-black text-lg leading-relaxed mb-3">
                 {stat.title}
               </p>

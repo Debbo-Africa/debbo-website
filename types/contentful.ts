@@ -117,6 +117,7 @@ export interface MedicalTestFields {
   price: EntryFieldTypes.Text;
   testList: Document;
   scan?: EntryFieldTypes.Boolean;
+  description:string
 }
 
 export interface MedicalTestSkeleton {

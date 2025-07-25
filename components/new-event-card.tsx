@@ -4,14 +4,11 @@ import Image from "next/image";
 import { Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { NewsEventsEntry } from "@/types/contentful";
-import { BLOCKS } from "@contentful/rich-text-types";
 
 interface NewsEventCardProps {
   item: NewsEventsEntry;
   layout?: "list" | "grid";
 }
-
-
 
 export function NewsEventCard({ item, layout = "list" }: NewsEventCardProps) {
   const formatDate = (dateString: string) => {
@@ -41,15 +38,25 @@ export function NewsEventCard({ item, layout = "list" }: NewsEventCardProps) {
   const tagImageUrl = (item as any).fields.tagImage?.fields?.file?.url;
   const linkUrl = extractLinkUrl(item.fields.link);
 
-  const handleLearnMoreClick = () => {
+  const handleLearnMoreClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // prevent parent onClick
     if (linkUrl) {
       window.open(linkUrl, "_blank", "noopener,noreferrer");
     }
   };
 
+  const handleCardClick = () => {
+    if (linkUrl) {
+      window.open(linkUrl, "_blank", "noopener,noreferrer");
+    }
+  };
+
+  const cardClasses =
+    "w-full mb-8 transform transition duration-300 hover:scale-[1.02] cursor-pointer";
+
   if (layout === "grid") {
     return (
-      <div className="w-full mb-8">
+      <div className={cardClasses} onClick={handleCardClick}>
         <div className="flex flex-col md:flex-row gap-6 w-full">
           <div className="w-full md:w-80 flex-shrink-0">
             {imageUrl && (
@@ -110,7 +117,7 @@ export function NewsEventCard({ item, layout = "list" }: NewsEventCardProps) {
   }
 
   return (
-    <div className="w-full mb-8">
+    <div className={cardClasses} onClick={handleCardClick}>
       <div className="flex flex-col md:flex-row gap-6 w-full">
         <div className="w-full md:w-72 flex-shrink-0">
           {imageUrl && (

@@ -9,7 +9,7 @@ const WideningAccessSection = ({
   title = "Widening access to quality healthcare.",
   description1 = "DébboCares is our dedicated foundation focused on expanding access to quality healthcare for women in underserved communities. We’re committed to breaking down barriers by promoting health education, empowering informed decisions, and supporting proactive wellness.",
   description2 = "Partner with us to expand access to quality care for all women.",
-  buttonText = "Join Our Mission →",
+  buttonText = "Join Our Mission ",
   imageSrc = "/images/widening-access.jpg",
   imageAlt = "Women smiling",
   imageStyle=""
@@ -40,7 +40,7 @@ const WideningAccessSection = ({
           <p className="text-body-text-gray mb-6">{description2}</p>
         )}
        
-        <ButtonComponent text={buttonText} className="w-full md:w-fit" />
+        <ButtonComponent text={buttonText} className="w-full md:w-fit" linkTo="/contact-us"/>
       </div>
     </section>
   );

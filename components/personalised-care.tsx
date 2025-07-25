@@ -1,8 +1,8 @@
 "use client";
-
 import { useLayoutEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
+import { useEffect } from "react"; // Import useEffect for CardItem
 
 const SERVICES_DATA = [
   {
@@ -49,13 +49,12 @@ export function PersonalisedCareSection() {
         stagger: 0.2,
       });
     }, cardsContainerRef);
-
     return () => ctx.revert();
   }, []);
 
   return (
     <section className="py-16">
-      <div className="max-w-6xl mx-auto px-4 lg:px-8" ref={cardsContainerRef}>
+      <div className="max-w-7xl mx-auto px-4 lg:px-8" ref={cardsContainerRef}>
         <div className="text-center mb-12">
           <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
             Access Personalised Care.
@@ -68,21 +67,16 @@ export function PersonalisedCareSection() {
             team's physical, mental, and emotional health.
           </p>
         </div>
-
-        {/* Large screens: 3 columns then 2 columns */}
         <div className="hidden lg:grid lg:grid-cols-3 gap-6 mb-6">
           {SERVICES_DATA.slice(0, 3).map((service, index) => (
             <CardItem key={index} service={service} />
           ))}
         </div>
-
         <div className="hidden lg:grid lg:grid-cols-2 gap-6 mb-6">
           {SERVICES_DATA.slice(3, 5).map((service, index) => (
             <CardItem key={index + 3} service={service} />
           ))}
         </div>
-
-        {/* Medium screens */}
         <div className="hidden md:grid lg:hidden md:grid-cols-2 gap-6">
           {SERVICES_DATA.slice(0, 4).map((service, index) => (
             <CardItem key={index} service={service} />
@@ -93,8 +87,6 @@ export function PersonalisedCareSection() {
             <CardItem service={SERVICES_DATA[4]} />
           </div>
         )}
-
-        {/* Small screens */}
         <div className="grid grid-cols-1 md:hidden gap-6">
           {SERVICES_DATA.map((service, index) => (
             <CardItem key={index} service={service} />
@@ -112,12 +104,38 @@ type Service = {
 };
 
 function CardItem({ service }: { service: Service }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const card = cardRef.current;
+    if (!card) return;
+
+    const handleMouseEnter = () => {
+      gsap.to(card, { scale: 1.03, duration: 0.3, ease: "power1.out" });
+    };
+
+    const handleMouseLeave = () => {
+      gsap.to(card, { scale: 1, duration: 0.3, ease: "power1.out" });
+    };
+
+    card.addEventListener("mouseenter", handleMouseEnter);
+    card.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      card.removeEventListener("mouseenter", handleMouseEnter);
+      card.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, []);
+
   return (
-    <div className="service-card rounded-xl bg-[--surface-card] p-10 min-h-[120px] ">
+    <div
+      ref={cardRef}
+      className="service-card rounded-xl bg-[--surface-card] p-10 min-h-[120px] cursor-pointer" 
+    >
       <div className="flex items-center gap-4 mb-2">
         <div className="flex-shrink-0">
           <Image
-            src={service.icon}
+            src={service.icon || "/placeholder.svg"}
             alt={service.title}
             width={32}
             height={32}

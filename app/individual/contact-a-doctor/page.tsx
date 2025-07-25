@@ -24,6 +24,7 @@ import { SkeletonTestCard } from "@/components/skeleton-test-card";
 import HorizontalProcessSection from "@/components/How-it-works";
 import BookAppointment from "@/components/book-appointment";
 import ContraceptionTable from "@/components/contreption-table";
+import LetsWorkTogetherSection from "@/components/lets-work-together";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -104,8 +105,13 @@ export default function SpeakToDoctor() {
       <div className="max-w-7xl mx-auto px-4 py-8">
         <CareCategoriesSection />
         <BookAppointment />
-        <InsuranceSection />        
-      <ContraceptionTable/>
+        <ContraceptionTable />
+        <LetsWorkTogetherSection
+          title="Need a vaccine?"
+          description="Protect your health with our recommended vaccines for long-term disease prevention. We offer safe, medically approved options for adults and eligible adolescents. Contact us to learn more or book an appointment."
+          imageSrc="/images/speak-to-a-doctor.png"
+        />
+        <InsuranceSection />
       </div>
     </div>
   );

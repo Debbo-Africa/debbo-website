@@ -3,6 +3,7 @@
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import ButtonComponent from "./Button";
 
 export default function ContactForm() {
   return (
@@ -84,12 +85,14 @@ export default function ContactForm() {
         />
       </div>
 
-      <Button
+     
+      <ButtonComponent
+        text="Send Message"
         type="submit"
-        className="sm:col-span-2 bg-[#0D0D0DFC] hover:bg-slate-950 text-white py-3 rounded-full text-sm hover:opacity-90 transition"
-      >
-        Send Message →
-      </Button>
+        linkTo=""
+        fullWidth
+        className="sm:col-span-2 "
+      />
     </form>
   );
 }

@@ -83,7 +83,6 @@ export default function GlossaryPage() {
         ]}
       />
 
-      {/* Hero Section */}
       <div className="mb-12 mx-auto relative px-4 lg:px-0">
         <PageHero
           title="DébboAfrica Glossary"
@@ -93,13 +92,13 @@ export default function GlossaryPage() {
         />
         <div className="max-w-7xl mx-auto">
           <div className="relative max-w-md">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-text w-4 h-4" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-text w-4 h-4 outline-none " />
             <Input
               type="text"
               placeholder="Search glossary"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 pr-4 py-2 bg-[--surface-card] rounded-lg focus:ring-2 focus:ring-yellow focus:border-transparent max-w-xs"
+              className="pl-10 pr-4 py-2 bg-[--surface-card] rounded-lg focus:ring-2 focus:ring-yellow focus:border-transparent max-w-xs outline-none"
             />
           </div>
         </div>

@@ -12,10 +12,10 @@ const ALL_CARDS: Card[] = [
   { text: null, color: "gray" },
   { text: "Collaboration", color: "#01AC9C" },
   { text: null, color: "gray" },
+  { text: null, color: "gray" },
   { text: "Empathy", color: "#2B1D18" },
   { text: null, color: "gray" },
   { text: "Excellence", color: "#D76441" },
-  { text: null, color: "gray" },
 ];
 
 export function ValuesSection() {
@@ -61,26 +61,26 @@ export function ValuesSection() {
 
   return (
     <section className="py-0">
-      <div className="max-w-5xl mx-auto px-4 lg:px-0">
+      <div className="max-w-6xl mx-auto px-4 lg:px-0">
         <div className="text-center mb-12">
           <h2 className="text-3xl lg:text-4xl font-bold text-general-black mb-8">
             Our Values
           </h2>
 
-          <div className="flex flex-wrap justify-center gap-4 lg:gap-6">
+          <div className="flex flex-wrap justify-center  gap-4 lg:gap-6">
             {cards.map((card, index) => (
-              <div
+              <h3
                 key={`${card.text ?? "empty"}-${index}`}
-                className="rounded-full text-lg font-medium px-6 py-4 md:py-5 flex items-center justify-center slide-in transition-all duration-500 ease-in-out"
+                className="rounded-full text-xl font-bold px-6 py-4 md:py-5 flex items-center justify-center slide-in transition-all duration-500 ease-in-out"
                 style={{
                   backgroundColor:
                     card.color === "gray" ? "#f2e9dd" : card.color,
                   color: card.color !== "gray" ? "white" : "black",
-                  width: card.text ? "auto" : isSmallScreen ? "150px" : "200px",
+                  width: card.text ? "auto" : isSmallScreen ? "150px" : "300px",
                 }}
               >
                 {card.text}
-              </div>
+              </h3>
             ))}
           </div>
         </div>

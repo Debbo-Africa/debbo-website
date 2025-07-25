@@ -131,28 +131,32 @@
   }
   body {
     @apply bg-background text-body-text-gray font-light;
-    font-family: var(--font-outfit), sans-serif; 
+    font-family: var(--font-outfit), sans-serif;
     scroll-behavior: smooth;
-    cursor:all-scroll;
+    cursor: none;
   }
   h1,
   h2,
-  h3, button {
+  h3 {
     font-family: var(--font-recoleta), sans-serif !important;
     font-weight: 500;
   }
-  span,p,h4
+  span,
+  p,
   div,
-  a,
- 
-  input,
   textarea,
-  label {
+  label,blockquote {
     font-family: var(--font-outfit), sans-serif !important;
-    font-weight: 300; 
+    font-weight: 300;
   }
 }
-
+a,
+input,
+h4,
+button {
+  font-family: var(--font-outfit), sans-serif !important;
+  font-weight: 400;
+}
 @layer utilities {
   .text-balance {
     text-wrap: balance;

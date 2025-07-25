@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface BreadcrumbItem {
   label: string;
@@ -13,11 +14,17 @@ interface BreadcrumbProps {
 }
 
 export function Breadcrumb({ items }: BreadcrumbProps) {
+  const pathname = usePathname();
+  const marginTopClass =
+    pathname.includes("individual") || pathname.includes("cart")
+      ? "mt-10"
+      : "mt-0";
+
   return (
-    <div className="max-w-7xl mx-auto px-4 pt-4">
+    <div className={`max-w-7xl mx-auto px-4 pt-4 ${marginTopClass}`}>
       <nav
         className="
-          text-sm  mb-4
+          text-sm mb-4
           flex flex-wrap
           lg:justify-start justify-center 
           truncate
@@ -33,7 +40,7 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
                 {item.label}
               </Link>
             ) : (
-              <span className="truncate  max-w-[10rem] text-general-black font-semibold">
+              <span className="truncate max-w-[10rem] text-general-black font-semibold">
                 {item.label}
               </span>
             )}

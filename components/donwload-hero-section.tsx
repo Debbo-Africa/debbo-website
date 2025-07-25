@@ -4,13 +4,14 @@ import Image from "next/image";
 
 const DonwloadHeroSection = () => {
   return (
-    <section className="w-full md:px-4  rounded-2xl overflow-hidden lg:max-w-7xl mx-auto ">
-      <div className="hidden md:flex relative w-full h-[500px] aspect-[4/3]">
+    <section className="w-full md:px-4 rounded-2xl overflow-hidden lg:max-w-7xl mx-auto">
+      <div className="hidden md:flex relative w-full h-[550px] aspect-[4/3] group overflow-hidden rounded-2xl">
         <Image
           src="/images/hero-bg-large.png"
           alt="Health app background"
           fill
           priority
+          className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
         />
         <div className="relative z-10 flex items-center justify-between w-full px-16">
           <div className="max-w-md text-general-white space-y-6">
@@ -30,6 +31,7 @@ const DonwloadHeroSection = () => {
                 height={45}
                 className="h-auto w-auto"
               />
+              
               <Image
                 src="/images/appstore-large.svg"
                 alt="App Store"
@@ -67,13 +69,13 @@ const DonwloadHeroSection = () => {
             className="h-auto w-auto"
           />
         </div>
-        <div className="w-full rounded-2xl overflow-hidden">
+        <div className="w-full rounded-2xl overflow-hidden group">
           <Image
             src="/images/hero-bg-large.png"
             alt="App preview"
             width={400}
             height={600}
-            className="mx-auto rounded-2xl object-cover h-72"
+            className="mx-auto rounded-2xl object-cover h-72 transition-transform duration-500 ease-in-out group-hover:scale-105"
           />
         </div>
       </div>

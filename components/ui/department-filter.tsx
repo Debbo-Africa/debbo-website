@@ -26,27 +26,30 @@ export function DepartmentFilter({
     0
   );
 
-  return (
-    <div className="w-full max-w-sm flex gap-2 items-center">
-      <p className="block text-sm">Filter by department</p>
-      <Select
-        value={selectedDepartment || "all"}
-        onValueChange={(value) =>
-          onDepartmentChange(value === "all" ? null : value)
-        }
-      >
-        <SelectTrigger className="w-full bg-[--surface-card]">
-          <SelectValue placeholder="Filter by Department" />
-        </SelectTrigger>
-        <SelectContent className="bg-[--surface-card]">
-          <SelectItem value="all">All ({totalJobs})</SelectItem>
-          {departments.map((department) => (
-            <SelectItem key={department} value={department}>
-              {department} ({jobCounts[department] || 0})
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-    </div>
-  );
+ return (
+   <div className="w-full max-w-[15rem] justify-center md:justify-start mx-auto md:mx-0 md:max-w-sm md:flex gap-2 items-center gap-2">
+     <p className="text-sm whitespace-nowrap mb-4 md:mb-0">
+       Filter by department
+     </p>
+     <Select
+       value={selectedDepartment || "all"}
+       onValueChange={(value) =>
+         onDepartmentChange(value === "all" ? null : value)
+       }
+     >
+       <SelectTrigger className="w-full bg-[--surface-card]">
+         <SelectValue placeholder="Filter by Department" />
+       </SelectTrigger>
+       <SelectContent className="bg-[--surface-card]">
+         <SelectItem value="all">All ({totalJobs})</SelectItem>
+         {departments.map((department) => (
+           <SelectItem key={department} value={department}>
+             {department} ({jobCounts[department] || 0})
+           </SelectItem>
+         ))}
+       </SelectContent>
+     </Select>
+   </div>
+ );
+
 }

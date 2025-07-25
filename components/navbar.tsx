@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 import Image from "next/image";
@@ -55,7 +54,7 @@ export default function EnhancedNavbar() {
   const resourcesItems = [
     {
       label: "News & Events",
-      href: "/resources",
+      href: "/resources/news-and-event",
       image: "/images/resources-blog.jpg",
       description: "Stay up to date with our news and Events.",
     },
@@ -78,10 +77,11 @@ export default function EnhancedNavbar() {
       description: "Frequently Asked Questions",
     },
   ];
+
   const individualItems = [
     {
       label: "Book a Test",
-      href: "/individual",
+      href: "/individual/book-a-test",
       image: "/images/book-a-test.jpg",
       description: "Stay up to date with our news and Events.",
     },
@@ -103,7 +103,7 @@ export default function EnhancedNavbar() {
   const getDefaultImage = (dropdown: string) => {
     if (dropdown === "about") return aboutUsItems[0];
     if (dropdown === "resources") return resourcesItems[0];
-    if (dropdown === "individual") return resourcesItems[0];
+    if (dropdown === "individual") return individualItems[0];
     return null;
   };
 
@@ -131,7 +131,13 @@ export default function EnhancedNavbar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#FFF5E9B2] rounded-b-3xl ">
+      <nav
+        className={`fixed top-0 left-0 right-0 z-[100] bg-[#FFF5E9B2] ${
+          !pathname.includes("individual") && !pathname.includes("cart")
+            ? "rounded-b-3xl"
+            : ""
+        }`}
+      >
         <div className="mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
@@ -146,23 +152,27 @@ export default function EnhancedNavbar() {
               </Link>
             </div>
 
-            <div className="hidden lg:flex items-center space-x-8  text-body-text-gray hover:text-general-black">
+            <div className="hidden lg:flex items-center space-x-8 text-general-black hover:text-general-black">
               <div className="relative group">
-                <button className="flex items-center text-body-text-gray hover:text-general-black hover:bg-[--surface-card] rounded-2xl p-2 px-3 font-medium">
-                  individual
+                <button
+                  className={`flex items-center z-50 text-general-black font-medium rounded-3xl px-3 p-2 hover:bg-[--surface-card] transition-colors ${
+                    isActiveLink("/individual") ? " bg-[--surface-card]" : ""
+                  }`}
+                >
+                  For Individual
                   <ChevronDown className="ml-1 h-4 w-4 group-hover:rotate-180 transition-transform duration-200" />
                 </button>
-                <div className="absolute top-full left-0 mt-2 w-[600px] bg-badge -ml-[200px] rounded-2xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div className="absolute top-full left-0 mt-2 w-[600px] bg-badge -ml-[200px] z-[999] rounded-3xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                   <div className="flex gap-4">
                     <div className="w-1/2 py-4 ml-4">
                       {individualItems.map((item, index) => (
                         <Link
                           key={index}
                           href={item.href}
-                          className={`block px-6 py-3 text-sm hover:text-general-black hover:bg-[--surface-card] hover:rounded-xl transition-colors ${
+                          className={`block px-6 py-3 text-general-black text-sm hover:text-general-black hover:bg-[--surface-card] hover:rounded-xl transition-colors ${
                             isActiveLink(item.href)
-                              ? "text-general-black bg-[--surface-card] rounded-xl"
-                              : "text-body-text-gray"
+                              ? " bg-[--surface-card] rounded-xl"
+                              : ""
                           }`}
                           onMouseEnter={() => setHoveredItem(item.label)}
                           onMouseLeave={() => setHoveredItem(null)}
@@ -175,68 +185,7 @@ export default function EnhancedNavbar() {
                       {(() => {
                         const currentImage = getCurrentImage("individual");
                         return currentImage ? (
-                          <div className="relative h-64 rounded-2xl overflow-hidden">
-                            <Image
-                              src={currentImage.image || "/placeholder.svg"}
-                              alt={currentImage.label}
-                              fill
-                              className="object-cover"
-                            />
-                            <div className="absolute inset-0  flex items-end">
-                              <div className="p-4 text-white">
-                                <h3 className="font-semibold text-lg opacity-90">
-                                  {currentImage.description}
-                                </h3>
-                              </div>
-                            </div>
-                          </div>
-                        ) : null;
-                      })()}
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <Link
-                href="/corporate"
-                className={`font-medium rounded-2xl p-2 px-3 hover:bg-[--surface-card] hover:text-general-black  ${
-                  isActiveLink("/corporate")
-                    ? "text-general-black bg-[--surface-card]  "
-                    : "text-body-text-gray hover:text-general-black  "
-                }`}
-              >
-                Corporate
-              </Link>
-
-              {/* About Us Dropdown */}
-              <div className="relative group">
-                <button className="flex items-center text-body-text-gray hover:text-general-black hover:bg-[--surface-card] rounded-2xl px-3 p-2 font-medium">
-                  About Us
-                  <ChevronDown className="ml-1 h-4 w-4 group-hover:rotate-180 transition-transform duration-200" />
-                </button>
-                <div className="absolute top-full left-0 mt-2 w-[600px] bg-badge -ml-[300px] rounded-2xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                  <div className="flex gap-4">
-                    <div className="w-1/2 py-4 ml-4">
-                      {aboutUsItems.map((item, index) => (
-                        <Link
-                          key={index}
-                          href={item.href}
-                          className={`block px-6 py-3 text-sm hover:text-general-black rounded-2xl p-2  hover:bg-[--surface-card] transition-colors ${
-                            isActiveLink(item.href)
-                              ? "text-general-black bg-[--surface-card]  "
-                              : "text-body-text-gray"
-                          }`}
-                          onMouseEnter={() => setHoveredItem(item.label)}
-                          onMouseLeave={() => setHoveredItem(null)}
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
-                    </div>
-                    <div className="w-1/2 p-4">
-                      {(() => {
-                        const currentImage = getCurrentImage("about");
-                        return currentImage ? (
-                          <div className="relative h-64 rounded-2xl overflow-hidden">
+                          <div className="relative h-64 rounded-3xl overflow-hidden">
                             <Image
                               src={currentImage.image || "/placeholder.svg"}
                               alt={currentImage.label}
@@ -258,22 +207,89 @@ export default function EnhancedNavbar() {
                 </div>
               </div>
 
+              <Link
+                href="/corporate"
+                className={`font-medium rounded-3xl text-general-black p-2 px-3 hover:bg-[--surface-card] hover:text-general-black font-recoleta ${
+                  isActiveLink("/corporate") ? "bg-[--surface-card]" : ""
+                }`}
+              >
+                For Corporate
+              </Link>
+
               <div className="relative group">
-                <button className="flex items-center text-body-text-gray hover:text-gray-900 font-bold  hover:bg-[--surface-card] px-3 p-2 rounded-2xl">
+                <button
+                  className={`flex items-center font-medium text-general-black rounded-3xl px-3 p-2 hover:bg-[--surface-card] transition-colors ${
+                    isActiveLink("/about") ? " bg-[--surface-card]" : ""
+                  }`}
+                >
+                  About Us
+                  <ChevronDown className="ml-1 h-4 w-4 group-hover:rotate-180 transition-transform duration-200" />
+                </button>
+                <div className="absolute top-full left-0 mt-2 w-[600px] bg-badge -ml-[300px] rounded-3xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-[999]">
+                  <div className="flex gap-4">
+                    <div className="w-1/2 py-4 ml-4">
+                      {aboutUsItems.map((item, index) => (
+                        <Link
+                          key={index}
+                          href={item.href}
+                          className={`block px-6 py-3 text-general-black text-sm hover:text-general-black rounded-3xl p-2 hover:bg-[--surface-card] transition-colors ${
+                            isActiveLink(item.href)
+                              ? " bg-[--surface-card]"
+                              : ""
+                          }`}
+                          onMouseEnter={() => setHoveredItem(item.label)}
+                          onMouseLeave={() => setHoveredItem(null)}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                    <div className="w-1/2 p-4">
+                      {(() => {
+                        const currentImage = getCurrentImage("about");
+                        return currentImage ? (
+                          <div className="relative h-64 rounded-3xl overflow-hidden">
+                            <Image
+                              src={currentImage.image || "/placeholder.svg"}
+                              alt={currentImage.label}
+                              fill
+                              className="object-cover"
+                            />
+                            <div className="absolute inset-0 flex items-end">
+                              <div className="p-4 text-white">
+                                <h3 className="font-semibold text-lg">
+                                  {currentImage.description}
+                                </h3>
+                              </div>
+                            </div>
+                          </div>
+                        ) : null;
+                      })()}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="relative group">
+                <button
+                  className={`flex items-center text-general-black font-medium rounded-3xl px-3 p-2 hover:bg-[--surface-card] transition-colors ${
+                    isActiveLink("/resources") ? " bg-[--surface-card]" : ""
+                  }`}
+                >
                   Resources
                   <ChevronDown className="ml-1 h-4 w-4 group-hover:rotate-180 transition-transform duration-200" />
                 </button>
-                <div className="absolute top-full left-0 mt-2 w-[600px] bg-badge -ml-[300px] rounded-2xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div className="absolute top-full left-0 mt-2 w-[600px] bg-badge -ml-[300px] rounded-3xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-[999]">
                   <div className="flex gap-4">
                     <div className="w-1/2 py-4 ml-4">
                       {resourcesItems.map((item, index) => (
                         <Link
                           key={index}
                           href={item.href}
-                          className={`block px-6 py-3 text-sm  hover:bg-[--surface-card] hover:text-general-black  hover:rounded-xl transition-colors ${
+                          className={`block px-6 py-3 text-sm hover:bg-[--surface-card] text-general-black hover:rounded-xl transition-colors ${
                             isActiveLink(item.href)
-                              ? "text-general-black bg-[--surface-card] rounded-xl"
-                              : "text-body-text-gray"
+                              ? " bg-[--surface-card] rounded-xl"
+                              : ""
                           }`}
                           onMouseEnter={() => setHoveredItem(item.label)}
                           onMouseLeave={() => setHoveredItem(null)}
@@ -286,14 +302,14 @@ export default function EnhancedNavbar() {
                       {(() => {
                         const currentImage = getCurrentImage("resources");
                         return currentImage ? (
-                          <div className="relative  h-64 rounded-lg overflow-hidden">
+                          <div className="relative h-64 rounded-3xl overflow-hidden">
                             <Image
                               src={currentImage.image || "/placeholder.svg"}
                               alt={currentImage.label}
                               fill
                               className="object-cover"
                             />
-                            <div className="absolute inset-0  flex items-end">
+                            <div className="absolute inset-0 flex items-end">
                               <div className="p-4 text-white">
                                 <h3 className="font-semibold text-lg opacity-90">
                                   {currentImage.description}
@@ -330,12 +346,12 @@ export default function EnhancedNavbar() {
       </nav>
 
       <div
-        className={`fixed inset-0 z-50 lg:hidden transition-transform duration-300 ease-in-out  ${
+        className={`fixed inset-0 z-[90] lg:hidden transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="bg-badge min-h-screen ml-auto w-[22rem] shadow-xl rounded-l-3xl ">
-          <div className="flex justify-end items-center p-4  hover:bg-transparent">
+        <div className="bg-badge min-h-screen ml-auto w-[22rem] shadow-xl rounded-l-3xl">
+          <div className="flex justify-end items-center p-4 hover:bg-transparent">
             <Button
               variant="ghost"
               size="icon"
@@ -350,18 +366,17 @@ export default function EnhancedNavbar() {
             <div className="space-y-8">
               <Link
                 href="/"
-                className={`block text-lg font-medium p-2 rounded-xl ${
-                  isActiveLink("/")
-                    ? "text-general-black bg-[--surface-card]"
-                    : "text-body-text-gray"
+                className={`block text-lg font-medium p-2 rounded-xl text-general-black ${
+                  isActiveLink("/") ? "bg-[--surface-card]" : ""
                 }`}
                 onClick={() => setIsOpen(false)}
               >
-                Home
+                <h3>Home</h3>
               </Link>
 
+              {/* About Us */}
               <div
-                className={`rounded-xl p-4 hover:bg-[--surface-card] ${
+                className={`rounded-xl p-4 ${
                   pathname.startsWith("/about")
                     ? "bg-[--surface-card]"
                     : "bg-surface-card"
@@ -369,7 +384,7 @@ export default function EnhancedNavbar() {
               >
                 <button
                   onClick={() => toggleDropdown("about")}
-                  className="flex items-center justify-between w-full text-lg font-medium text-body-text-gray "
+                  className="flex items-center justify-between w-full text-lg font-medium text-general-black"
                 >
                   About us
                   <ChevronDown
@@ -379,7 +394,7 @@ export default function EnhancedNavbar() {
                   />
                 </button>
                 {openDropdown === "about" && (
-                  <div className="mt-6 space-y-3 ">
+                  <div className="mt-6 space-y-3">
                     <div className="lg:block hidden mb-4">
                       <div className="relative h-32 rounded-lg overflow-hidden">
                         <Image
@@ -390,15 +405,13 @@ export default function EnhancedNavbar() {
                         />
                       </div>
                     </div>
-                    <div className=" space-y-8">
+                    <div className="space-y-8">
                       {aboutUsItems.map((item, index) => (
                         <Link
                           key={index}
                           href={item.href}
-                          className={`block text-base p-2 rounded-xl  ${
-                            isActiveLink(item.href)
-                              ? "text-general-black bg-[--surface-card]"
-                              : "text-body-text-gray"
+                          className={`block text-base p-2 rounded-xl text-general-black ${
+                            isActiveLink(item.href) ? "bg-[--surface-card]" : ""
                           }`}
                           onClick={() => setIsOpen(false)}
                         >
@@ -410,16 +423,17 @@ export default function EnhancedNavbar() {
                 )}
               </div>
 
+              {/* For Individuals */}
               <div
                 className={`rounded-xl p-4 ${
                   pathname.startsWith("/individual")
-                    ? "text-general-black bg-[--surface-card]"
+                    ? "bg-[--surface-card]"
                     : "bg-surface-card"
                 }`}
               >
                 <button
                   onClick={() => toggleDropdown("individual")}
-                  className="flex items-center justify-between w-full text-lg font-medium text-body-text-gray"
+                  className="flex items-center justify-between w-full text-lg font-medium text-general-black"
                 >
                   For Individuals
                   <ChevronDown
@@ -445,10 +459,8 @@ export default function EnhancedNavbar() {
                         <Link
                           key={index}
                           href={item.href}
-                          className={`block text-base p-2 rounded-xl  ${
-                            isActiveLink(item.href)
-                              ? "text-general-black bg-[--surface-card]"
-                              : "text-body-text-gray"
+                          className={`block text-base p-2 rounded-xl text-general-black ${
+                            isActiveLink(item.href) ? "bg-[--surface-card]" : ""
                           }`}
                           onClick={() => setIsOpen(false)}
                         >
@@ -460,28 +472,28 @@ export default function EnhancedNavbar() {
                 )}
               </div>
 
+              {/* For Corporate */}
               <Link
                 href="/corporate"
-                className={`block text-lg font-medium p-2 rounded-xl ${
-                  isActiveLink("/corporate")
-                    ? "text-general-black bg-[--surface-card]"
-                    : "text-body-text-gray"
+                className={`block text-lg font-medium p-2 rounded-xl text-general-black ${
+                  isActiveLink("/corporate") ? "bg-[--surface-card]" : ""
                 }`}
                 onClick={() => setIsOpen(false)}
               >
                 For Corporate
               </Link>
 
+              {/* Resources */}
               <div
                 className={`rounded-xl p-4 ${
                   pathname.startsWith("/resources")
-                    ? "text-general-black bg-[--surface-card]"
+                    ? "bg-[--surface-card]"
                     : "bg-surface-card"
                 }`}
               >
                 <button
                   onClick={() => toggleDropdown("resources")}
-                  className="flex items-center justify-between w-full text-lg font-medium text-body-text-gray"
+                  className="flex items-center justify-between w-full text-lg font-medium text-general-black"
                 >
                   Resources
                   <ChevronDown
@@ -490,7 +502,6 @@ export default function EnhancedNavbar() {
                     }`}
                   />
                 </button>
-
                 {openDropdown === "resources" && (
                   <div className="mt-8 space-y-8">
                     <div className="lg:block hidden mb-4">
@@ -503,15 +514,13 @@ export default function EnhancedNavbar() {
                         />
                       </div>
                     </div>
-                    <div className=" space-y-8">
+                    <div className="space-y-8">
                       {resourcesItems.map((item, index) => (
                         <Link
                           key={index}
                           href={item.href}
-                          className={`block text-base p-2 rounded-xl ${
-                            isActiveLink(item.href)
-                              ? "text-general-black bg-[--surface-card]"
-                              : "text-body-text-gray"
+                          className={`block text-base p-2 rounded-xl text-general-black ${
+                            isActiveLink(item.href) ? "bg-[--surface-card]" : ""
                           }`}
                           onClick={() => setIsOpen(false)}
                         >
@@ -534,7 +543,7 @@ export default function EnhancedNavbar() {
 
       {isOpen && (
         <div
-          className="fixed inset-0 z-30 bg-black bg-opacity-50 lg:hidden"
+          className="fixed inset-0 z-[80] bg-black bg-opacity-50 lg:hidden"
           onClick={() => setIsOpen(false)}
         />
       )}

@@ -32,13 +32,12 @@ export function Tabs({
     <div className={`flex flex-col ${className}`}>
       <div className="overflow-x-auto">
         <div
-          className={`flex justify-start gap-4 border-b w-max min-w-full ${className}`}
+          className={`flex justify-start gap-4 border-b border-[#F2E9DD] w-max min-w-full ${className}`}
         >
           {tabs.map((tab) => (
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
-              // Added 'group' class for hover effect
               className={`group py-2 px-4 whitespace-nowrap flex items-center gap-1 ${
                 activeTab === tab.key
                   ? "border-b-2 border-yellow font-semibold"
@@ -54,7 +53,7 @@ export function Tabs({
                     </TooltipTrigger>
                     <TooltipContent
                       side="bottom"
-                      className="w-auto max-w-[15rem] fomnt-light text-body-text-gray text-sm p-4 bg-badge shadow-md rounded-lg whitespace-normal break-words"
+                      className="w-auto max-w-[15rem] font-light  text-sm p-4 bg-badge shadow-md rounded-lg whitespace-normal break-words"
                     >
                       {tab.infoContent}
                     </TooltipContent>

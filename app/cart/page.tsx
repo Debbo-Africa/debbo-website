@@ -14,6 +14,7 @@ import { useToast } from "@/hooks/use-toast";
 import { OrderSuccessModal } from "@/components/order-success-modal";
 import Link from "next/link";
 import { Toaster } from "@/components/toast";
+import ButtonComponent from "@/components/Button";
 
 export default function CartPage() {
   const { cartItems, updateQuantity, removeFromCart, getCartTotal, clearCart } =
@@ -131,10 +132,11 @@ export default function CartPage() {
         <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Cart" }]} />
         <div className="max-w-7xl mx-auto px-4 py-12 text-center">
           <h1 className="text-2xl font-bold mb-4">Your cart is empty</h1>
-          <p className="text-body-text-gray mb-8">Add some tests to get started</p>
-          <Link href="/individual">
-            <Button className="rounded-full">Browse Tests</Button>
-          </Link>
+          <p className="text-body-text-gray mb-8">
+            Add some tests to get started
+          </p>
+          <ButtonComponent text="Browse Tests" linkTo="/individual"arrow={false} />
+         
         </div>
         <Toaster toasts={toasts as any} onDismiss={dismiss} />
       </div>
@@ -148,14 +150,14 @@ export default function CartPage() {
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
-            <h1 className="text-2xl font-bold mb-6">
-              Cart ({cartItems.length})
-            </h1>
-            <div className="space-y-4 shadow-sm">
+            <div className="space-y-4 shadow-none border-2 border-[#fcf0e2] rounded-2xl md:rounded-3xl overflow-hidden">
+              <h1 className="text-2xl font-bold mb-6 p-4">
+                Cart ({cartItems.length})
+              </h1>
               {cartItems.map((item) => (
                 <Card
                   key={item.id}
-                  className="bg-transparent border-none border-b-2 shadow-none"
+                  className="bg-transparent  border-b-2 shadow-none border-[#fcf0e2] rounded-none"
                 >
                   <CardContent className="p-6">
                     <div className="flex justify-between items-start mb-4">
@@ -171,7 +173,10 @@ export default function CartPage() {
                           </p>
                         )}
                       </div>
-                      <p className="font-bold">{item.price}</p>
+                      <p className="font-bold">
+                        &#8358;
+                        {item.price}
+                      </p>
                     </div>
                     <div className="flex items-center justify-between">
                       <button
@@ -214,9 +219,9 @@ export default function CartPage() {
           </div>
 
           <div>
-            <Card className="bg-transparent">
+            <Card className="bg-transparent shadow-none border-2 border-[#fcf0e2] rounded-2xl md:rounded-3xl">
               <CardHeader>
-                <CardTitle>Cart Summary</CardTitle>
+                <h2 className="text-2xl font-bold ">Cart Summary</h2>
                 <p className="text-sm text-gray-600">
                   Here's a summary of your cart. Please provide your details so
                   we can process your order.
@@ -225,7 +230,7 @@ export default function CartPage() {
               <CardContent className="space-y-6">
                 <div className="flex justify-between items-center font-bold text-lg">
                   <span>Subtotal</span>
-                  <span>₦{total.toLocaleString()}</span>
+                  <span className="font-bold">₦{total.toLocaleString()}</span>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -308,25 +313,27 @@ export default function CartPage() {
                     />
                   </div>
 
-                  <Button
+                
+                  <ButtonComponent
+                    fullWidth
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full rounded-full bg-yellow hover:bg-yellow text-general-black"
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                        Submitting Order...
-                      </>
-                    ) : (
-                      "Order Now →"
-                    )}
-                  </Button>
+                    text={
+                      isSubmitting ? (
+                        <>
+                          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        
+                        </>
+                      ) : (
+                        "Order Now "
+                      )
+                    }
+                  />
 
                   <p className="text-xs text-gray-500 text-center">
                     By placing order you agree to the{" "}
                     <Link
-                      href="/terms"
+                      href="/privacy-policy"
                       className="text-orange-500 hover:underline"
                     >
                       Terms & Conditions

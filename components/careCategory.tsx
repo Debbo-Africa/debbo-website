@@ -48,7 +48,7 @@ export default function CareCategoriesSection() {
           health:
         </p>
 
-        <div className="grid md:grid-cols-2  lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 gap-2 lg:grid-cols-4 lg:gap-4">
           {categories.map((category, index) => (
             <CareCard
               key={category.name}
@@ -76,7 +76,7 @@ const CareCard = React.forwardRef<HTMLDivElement, { category: CareCategory }>(
     return (
       <div
         ref={ref as any}
-        className={`bg-[--surface-card] rounded-2xl p-4 flex flex-col items-center justify-center shadow-sm min-h-[200px]  group`}
+        className={`bg-[--surface-card] rounded-2xl p-4 flex flex-col items-center justify-center shadow-sm min-h-[150px] md:min-h-[200px] group`}
       >
         <div className="w-20 h-20 mb-4">
           <Image

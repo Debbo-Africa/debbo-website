@@ -7,7 +7,7 @@ import { WelcomeSection } from "./welcome-section";
 
 const CareerPage = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen mx-2">
       <div className="mt-16 md:mt-20">
         <Breadcrumb
           items={[{ label: "Home", href: "/" }, { label: "Career" }]}
@@ -16,9 +16,9 @@ const CareerPage = () => {
           title="At DébboAfrica, we value our people as our greatest asset."
           description="If you're driven to make a difference in healthcare, we invite you to join our team of talented professionals. Experience a rewarding career that combines your skills with a deep sense of purpose."
           imageSrc="/images/career.png"
-          leftImageSrc="/images/career.png"
+          leftImageSrc="/images/career1.png"
           imageAlt="page illustration"
-          className="bg-yellow rounded-2xl mx-5 overflow-hidden py-20 md:py-24 lg:py-12 "
+          className="mx-2 bg-yellow rounded-2xl max-w-7xl overflow-hidden py-20 md:py-24 lg:py-12 "
           headingClassName="text-white px-0 text-xl md:my-4"
           textClassName="text-white"
         />

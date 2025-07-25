@@ -7,6 +7,7 @@ import { useCart } from "@/hooks/use-cart";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { BLOCKS } from "@contentful/rich-text-types";
 import type { MedicalTestEntry } from "@/types/contentful";
+import ButtonComponent from "./Button";
 
 interface TestCardProps {
   test: MedicalTestEntry;
@@ -82,9 +83,8 @@ export function TestCard({ test, hideCart }: TestCardProps) {
     updateQuantity(test.sys.id, newQuantity);
   };
 
-
   return (
-    <Card className="h-full flex flex-col bg-[--surface-card] border-none rounded-2xl">
+    <Card className="h-full flex flex-col bg-[--surface-card] border-none rounded-2xl md:rounded-3xl hover:shadow-lg transition-all duration-300">
       <CardContent className="p-6 flex flex-col h-full">
         <div className="flex justify-between items-start mb-4">
           <div>
@@ -97,13 +97,21 @@ export function TestCard({ test, hideCart }: TestCardProps) {
                   className="w-20 h-20 object-contain mb-2"
                 />
               )}
-            <h3 className="font-semibold text-lg mb-1">
+            <h3 className="font-semibold text-md mb-1 max-w-[15rem]">
               {test.fields.testName}
             </h3>
-            <p className="text-xl font-bold">{test.fields.price}</p>
+            <p className="text-xl font-bold">
+              &#8358;
+              {test.fields.price}
+            </p>
+            {test.fields.description && (
+              <p className=" text-body-text-gray mt-2 text-xs md:text-sm">
+                {test.fields.description}
+              </p>
+            )}
           </div>
           {test.fields.category && (
-            <span className="bg-[#FFF8F0] text-general-black px-3 py-1 rounded-full text-xs md:text-sm">
+            <span className="bg-[#FFF8F0] text-general-black px-3 py-1 rounded-full text-xs md:text-sm whitespace-nowrap inline-flex">
               {test.fields.category}
             </span>
           )}
@@ -129,13 +137,17 @@ export function TestCard({ test, hideCart }: TestCardProps) {
         {!hideCart && (
           <div className="mt-auto">
             {!inCart ? (
-              <Button
+              <ButtonComponent
+                text="Add to Cart"
+                defaultColor="#f2e9dd"
+                hoverColor="#0D0D0DFC"
+                icon={<Plus size={16} />}
+                className="text-general-black hover:text-general-white "
+                fullWidth
                 onClick={handleAddToCart}
-                variant="outline"
-                className="w-full hover:bg-[#0D0D0DFC] rounded-full hover:text-white transition-colors bg-transparent"
-              >
-                Add to cart +
-              </Button>
+                arrow={false}
+                linkTo=""
+              />
             ) : (
               <div className="flex items-center justify-center gap-4">
                 <Button

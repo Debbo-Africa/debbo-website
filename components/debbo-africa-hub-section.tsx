@@ -16,13 +16,13 @@ const DebboAfricaHubSection = () => {
           priority
         />
 
-        <div className="absolute bottom-4 md:bottom-6 md:left-6 left-4 text-white font-semibold text-2xl md:text-4xl">
+        <h1 className="absolute bottom-4 md:bottom-6 md:left-6 left-4 text-white font-semibold text-2xl md:text-4xl">
           Débbo Africa
           <br />
           Student Hub
           <br />
           DASH
-        </div>
+        </h1>
       </div>
     </section>
   );

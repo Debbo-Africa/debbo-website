@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "./ui/button";
+import ButtonComponent from "./Button";
 
 const EmpoweringWomenSection = () => {
   return (
@@ -34,9 +35,11 @@ const EmpoweringWomenSection = () => {
         <div className="px-3 py-2  bg-[--surface-card] rounded-lg">
           Champion wellness, innovation, and education within your community
         </div>
-        <Button className="px-5 py-3 w-full md:w-fit bg-black text-white rounded-full hover:bg-gray-800 transition">
-          Become an Ambassador →
-        </Button>
+     
+        <ButtonComponent
+          text="Become an Ambassador "
+          className="w-full md:w-fit"
+        />
       </div>
     </section>
   );

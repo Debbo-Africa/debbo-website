@@ -65,8 +65,35 @@ export default function TeamDetailPage({ slug }: TeamDetailPageProps) {
 
   if (loading) {
     return (
-      <div className="min-h-screen mt-20 flex items-center justify-center">
-        <div className="text-lg">Loading...</div>
+      <div className="min-h-screen mx-4 mt-20">
+        <div className="max-w-6xl mx-auto px-4 md:px-10 pt-10 pb-0  rounded-2xl mt-10 animate-pulse">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <div className="space-y-6">
+              <div>
+                <div className="h-8 w-48 bg-[--surface-card] rounded mb-2" />
+                <div className="h-6 w-32 bg-[--surface-card] rounded mb-2" />
+                <div className="h-6 w-40 bg-[--surface-card] rounded mb-4" />
+                <div className="h-10 w-10 bg-[--surface-card] rounded-full" />
+              </div>
+              <div className="hidden lg:block">
+                <div className="space-y-3">
+                  <div className="h-4 w-full bg-[--surface-card] rounded" />
+                  <div className="h-4 w-5/6 bg-[--surface-card] rounded" />
+                  <div className="h-4 w-3/4 bg-[--surface-card] rounded" />
+                </div>
+              </div>
+            </div>
+
+            <div className="flex justify-center lg:justify-end md:mt-44">
+              <div className="relative w-80 h-80 bg-[--surface-card] rounded-2xl" />
+            </div>
+          </div>
+        </div>
+        <div className="px-6 py-16  lg:hidden mt-6 rounded-2xl animate-pulse space-y-3">
+          <div className="h-4 w-full bg-[--surface-card] rounded" />
+          <div className="h-4 w-5/6 bg-[--surface-card] rounded" />
+          <div className="h-4 w-3/4 bg-[--surface-card] rounded" />
+        </div>
       </div>
     );
   }
@@ -105,7 +132,7 @@ export default function TeamDetailPage({ slug }: TeamDetailPageProps) {
           ]}
         />
 
-        <div className="max-w-6xl mx-auto px-4 md:px-10 pt-10 pb-0 bg-[--surface-card] rounded-2xl mt-10 ">
+        <div className="max-w-6xl mx-auto px-4 md:px-10 pt-10 pb-0 bg-[--surface-card] rounded-2xl mt-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             <div className="space-y-6">
               <div>
@@ -124,7 +151,7 @@ export default function TeamDetailPage({ slug }: TeamDetailPageProps) {
                     href={linkedInUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2  text-gray-text px-4 py-2  transition-colors"
+                    className="inline-flex items-center gap-2 text-gray-text px-4 py-2 transition-colors"
                   >
                     <Linkedin className="w-4 h-4" />
                   </a>
@@ -145,13 +172,14 @@ export default function TeamDetailPage({ slug }: TeamDetailPageProps) {
                     src={`https:${imageUrl}`}
                     alt={teamMember.fields.name}
                     fill
-                    className="object-cover"
+                    className="object-cover rounded-2xl"
                   />
                 )}
               </div>
             </div>
           </div>
         </div>
+
         <div className="px-6 py-16 bg-[--surface-card] lg:hidden mt-6 rounded-2xl">
           <p className="text-gray-text leading-relaxed text-lg">
             {teamMember.fields.about}

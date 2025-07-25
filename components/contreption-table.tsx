@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import ButtonComponent from "./Button";
 
 interface Service {
   name: string;
@@ -9,9 +10,9 @@ interface Service {
 
 const services: Service[] = [
   {
-    name: "Levonorgestrel 1.5mg (Emergency Contraception)",
+    name: "Levornogestrel 1.5mg (Emergency Contraception)",
     description:
-      "A single-dose emergency contraceptive pill used to prevent pregnancy after unprotected sex. Most effective when taken within 72 hours.",
+      "A single-dose oral contraceptive pill used to prevent pregnancy after unprotected sex. Most effective when taken within 72 hours.",
   },
   {
     name: "IUD Insertion",
@@ -42,7 +43,7 @@ const services: Service[] = [
 
 export default function ContraceptionTable() {
   return (
-    <section className="px-4 py-16 max-w-7xl mx-auto">
+    <section className="px-4 py-16 max-w-7xl mx-auto lg:px-0">
       <h2 className="text-3xl font-semibold text-center mb-4">
         Contraception & Family Planning Services
       </h2>
@@ -51,7 +52,9 @@ export default function ContraceptionTable() {
         medical experts. Whether you’re starting, switching, or just exploring
         options — we’re here to help. Prices available on request.
       </p>
-
+      <div className="flex justify-center mb-8">
+        <ButtonComponent text="Get Started" linkTo="/contact-us" arrow={ false} />
+      </div>
       <div className="overflow-x-auto">
         <table className="min-w-full text-left">
           <thead>
@@ -64,7 +67,9 @@ export default function ContraceptionTable() {
             {services.map((service, index) => (
               <tr
                 key={service.name}
-                className={`${index % 2 === 0 ? "" : "bg-[--surface-card]"} w-full`}
+                className={`${
+                  index % 2 === 0 ? "" : "bg-[--surface-card]"
+                } w-full`}
               >
                 <td className="py-4 px-4 align-top w-1/2">{service.name}</td>
                 <td className="py-4 px-4 text-body-text-gray w-1/2">

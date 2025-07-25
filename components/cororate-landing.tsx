@@ -74,8 +74,8 @@ export default function HeroSection() {
 
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12">
-        <div className="lg:w-1/2">
+      <div className="max-w-7xl  mx-auto flex flex-col lg:flex-row items-center gap-12">
+        <div className="lg:w-1/2 ">
           <h1 className="text-4xl lg:text-6xl font-bold leading-relaxed text-general-black mb-6">
             <h1 className="flex mb-1">
               <h1 ref={animatedWordRef as any} className="text-yellow "></h1>
@@ -94,9 +94,29 @@ export default function HeroSection() {
           </p>
         </div>
 
-        <div className="lg:w-1/2 rounded-xl overflow-hidden">
+        <div className="hidden lg:block lg:w-1/2 rounded-xl overflow-hidden">
           <Image
             src="/images/hero-grid.png"
+            alt="Corporate wellness team"
+            width={600}
+            height={400}
+            className="rounded-lg w-full  transform transition duration-500 hover:scale-105"
+            priority
+          />
+        </div>
+        <div className="hidden md:block lg:hidden lg:w-1/2 rounded-xl overflow-hidden">
+          <Image
+            src="/images/hero-grid.png"
+            alt="Corporate wellness team"
+            width={600}
+            height={400}
+            className="rounded-lg w-full  transform transition duration-500 hover:scale-105"
+            priority
+          />
+        </div>
+        <div className="md:hidden lg:w-1/2 rounded-xl overflow-hidden">
+          <Image
+            src="/images/hero-grid-small.png"
             alt="Corporate wellness team"
             width={600}
             height={400}

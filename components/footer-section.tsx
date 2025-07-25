@@ -72,15 +72,13 @@ export const Footer = () => {
       <div className="relative z-10 px-4 pb-8">
         <div className="mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
-            <div className="rounded-3xl p-6 md:p-10 relative overflow-hidden min-h-[450px] flex items-center bg-[url('/images/woman-headphones.png')] bg-cover bg-no-repeat bg-center ">
-              <div className="absolute md:relative top-6 md:top-0 z-10 max-w-[18rem] md:max-w-[16rem] max-auto">
-                <h3 className="text-xl md:text-2xl font-bold text-general-black mb-4">
+            <div className="rounded-2xl md:rounded-3xl p-6 md:p-10 relative overflow-hidden min-h-[450px] md:min-h-[400px] flex justify-between bg-[url('/images/woman-headphones.png')] bg-cover bg-no-repeat bg-center">
+              <div className="flex flex-col justify-between  space-y-6 max-w-[18rem] md:max-w-[16rem]">
+                <h3 className="text-xl md:text-2xl font-bold text-general-black">
                   Stay connected with DébboAfrica!
                 </h3>
-                <form
-                  onSubmit={handleSubscribe}
-                  className="space-y-4 mt-[10rem] md:mt-0"
-                >
+
+                <form onSubmit={handleSubscribe} className="space-y-4">
                   <div>
                     <label
                       htmlFor="email"
@@ -98,21 +96,20 @@ export const Footer = () => {
                       required
                     />
                   </div>
-                 
+
                   <ButtonComponent text="Subscribe" className="w-full mt-3" />
                 </form>
               </div>
             </div>
 
-            {/* App Download */}
-            <div className="text-white rounded-3xl p-6 md:p-10 relative overflow-hidden min-h-[450px] bg-[url('/images/phone-app-mobile.png')] md:bg-[url('/images/phone-app.png')] bg-cover bg-no-repeat bg-right flex items-center md:items-start">
+            <div className="text-white rounded-2xl md:rounded-3xl p-6 md:p-10 relative overflow-hidden min-h-[450px] md:min-h-[400px] bg-[url('/images/phone-app-mobile.png')] md:bg-[url('/images/phone-app.png')] bg-cover bg-no-repeat bg-right flex items-center md:items-start">
               <div className="relative z-10 w-full h-full">
                 <div className="absolute top-4 right-2 md:static md:mb-4 w-24 h-24 bg-white rounded-lg p-2 mx-auto md:mx-0">
                   <canvas ref={canvasRef} className="w-full h-full rounded" />
                 </div>
 
                 <h3 className="absolute top-4 left-2 max-w-44 md:w-fit md:static text-xl md:text-2xl font-bold mb-6">
-                  Download My Debbo <br /> App Today
+                  Download The MyDébbo <br /> App Today
                 </h3>
 
                 <div className="absolute bottom-4 md:static md:mt-10 flex items-center gap-2">
@@ -134,110 +131,158 @@ export const Footer = () => {
               </div>
             </div>
           </div>
-
-          {/* Links and Info */}
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 mb-8">
-            <div className="col-span-2">
-              <Image
-                src="/images/debbo-logo.svg"
-                alt="DébboAfrica"
-                width={120}
-                height={40}
-                className="mb-4"
-              />
-              <div className="text-white/80 text-sm space-y-2">
-                <p className="hover:text-white">info@debboafrica.com</p>
-                <p className="hover:text-white">
-                  Block 82, Plot 4 Omorinre Johnson,
-                </p>
-                <p className="hover:text-white">Lekki phase 1, Lagos</p>
-                <p className="hover:text-white">+2349090076330</p>
-              </div>
-              <div className="mt-4 flex items-center gap-2 bg-[#DF8367] rounded-3xl w-fit px-6 py-2">
+          <div className="mx-auto max-w-7xl">
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 mb-8">
+              <div className="col-span-2">
                 <Image
-                  src="/images/medical-badge.svg"
-                  alt="Medical certification"
-                  width={24}
-                  height={24}
+                  src="/images/debbo-logo.svg"
+                  alt="DébboAfrica"
+                  width={120}
+                  height={40}
+                  className="mb-4"
                 />
-                <span className="text-white/80 text-xs">
-                  Built with your health <br /> data privacy in mind.
-                </span>
+                <div className="text-white/80 text-sm space-y-2">
+                  <p className="hover:text-white">info@debboafrica.com</p>
+                  <p className="hover:text-white">
+                    Block 82, Plot 4 Omorinre Johnson,
+                  </p>
+                  <p className="hover:text-white">Lekki phase 1, Lagos</p>
+                  <p className="hover:text-white">+2349090076330</p>
+                </div>
+                <div className="mt-4 flex items-center gap-2 bg-[#DF8367] rounded-3xl w-fit px-6 py-2">
+                  <Image
+                    src="/images/medical-badge.svg"
+                    alt="Medical certification"
+                    width={24}
+                    height={24}
+                  />
+                  <span className="text-white/80 text-xs">
+                    Built with your health <br /> data privacy in mind.
+                  </span>
+                </div>
+              </div>
+
+              {/* Quick Links */}
+              <div>
+                <h5 className="text-white font-bold mb-4">Quick Links</h5>
+                <ul className="space-y-2 text-white/80 text-sm">
+                  {[
+                    { href: "/about/who-we-are", label: "About Us" },
+                    { href: "/contact-us", label: "Contact Us" },
+                    { href: "/download", label: "Download App" },
+                    { href: "/brand-alies", label: "Our Brand Alias" },
+                  ].map((link) => (
+                    <li key={link.href}>
+                      <FooterLink
+                        href={link.href}
+                        className="hover:text-white transition-colors"
+                      >
+                        {link.label}
+                      </FooterLink>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <h5 className="text-white font-bold mb-4">Individual</h5>
+                <ul className="space-y-2 text-white/80 text-sm">
+                  {[
+                    { href: "/corporate", label: "Corporate" },
+                    { href: "/individual", label: "Individual" },
+                  ].map((link) => (
+                    <li key={link.href}>
+                      <FooterLink
+                        href={link.href}
+                        className="hover:text-white transition-colors"
+                      >
+                        {link.label}
+                      </FooterLink>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <h5 className="text-white font-bold mb-4">Resources & legal</h5>
+                <ul className="space-y-2 text-white/80 font-semibold text-sm">
+                  {[
+                    {
+                      href: "/resources/news-and-event",
+                      label: "News & Events",
+                    },
+                    { href: "/blog", label: "Blog" },
+                    { href: "/glossary", label: "Glossary" },
+                    { href: "/faqs", label: "FAQs" },
+                  ].map((link) => (
+                    <li key={link.href}>
+                      <FooterLink
+                        href={link.href}
+                        className="hover:text-white transition-colors"
+                      >
+                        {link.label}
+                      </FooterLink>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <h4 className="text-white mb-4">HMO partners</h4>
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    { src: "/images/AXA_Mansard1.svg", alt: "AXA Mansard" },
+                    { src: "/images/reliance1.svg", alt: "Reliance" },
+                    { src: "/images/leadway1.svg", alt: "Leadway" },
+                    { src: "/images/Allianz-11.svg", alt: "Allianz" },
+                    { src: "/images/bupa1.svg", alt: "BUPA" },
+                  ].map((partner) => (
+                    <Image
+                      key={partner.alt}
+                      src={partner.src}
+                      alt={partner.alt}
+                      width={80}
+                      height={40}
+                      className="h-8 w-auto"
+                    />
+                  ))}
+                </div>
+                <h3 className="text-white/80 mt-6 mb-4">HEFAMAA accredited</h3>
+                <Image
+                  src="/images/Hefamaa.svg"
+                  alt="Hefamaa"
+                  width={80}
+                  height={40}
+                  className="h-10 w-auto "
+                />
               </div>
             </div>
 
-            {/* Quick Links */}
-            <div>
-              <h5 className="text-white font-bold mb-4">Quick Links</h5>
-              <ul className="space-y-2 text-white/80 text-sm">
+            <div className=" pt-6 flex flex-col md:flex-row justify-between md:items-center gap-4">
+              <div className="text-white/70 text-sm block md:flex flex-cols items-center gap-2">
+                <p>Copyright © 2024 Debbo. All rights reserved.</p>
+                <div className="flex gap-4 ">
+                  <FooterLink
+                    href="/privacy-policy"
+                    className="hover:text-white transition-colors"
+                  >
+                    Privacy policy
+                  </FooterLink>
+                  <FooterLink
+                    href="/privacy-policy"
+                    className="hover:text-white transition-colors"
+                  >
+                    Terms of use
+                  </FooterLink>
+                </div>
+              </div>
+              <div className="flex items-center gap-4 mt-4">
                 {[
-                  { href: "/about/who-we-are", label: "About Us" },
-                  { href: "/contact-us", label: "Contact Us" },
-                  { href: "/download", label: "Download App" },
-                  { href: "/brand-alies", label: "Our Brand Alias" },
-                ].map((link) => (
-                  <li key={link.href}>
-                    <FooterLink
-                      href={link.href}
-                      className="hover:text-white transition-colors"
-                    >
-                      {link.label}
-                    </FooterLink>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h5 className="text-white font-bold mb-4">Individual</h5>
-              <ul className="space-y-2 text-white/80 text-sm">
-                {[
-                  { href: "/corporate", label: "Corporate" },
-                  { href: "/individual", label: "Individual" },
-                ].map((link) => (
-                  <li key={link.href}>
-                    <FooterLink
-                      href={link.href}
-                      className="hover:text-white transition-colors"
-                    >
-                      {link.label}
-                    </FooterLink>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h5 className="text-white font-bold mb-4">Resources & legal</h5>
-              <ul className="space-y-2 text-white/80 font-semibold text-sm">
-                {[
-                  { href: "/resources", label: "News & Events" },
-                  { href: "/blog", label: "Blog" },
-                  { href: "/glossary", label: "Glossary" },
-                  { href: "/faqs", label: "FAQs" },
-                ].map((link) => (
-                  <li key={link.href}>
-                    <FooterLink
-                      href={link.href}
-                      className="hover:text-white transition-colors"
-                    >
-                      {link.label}
-                    </FooterLink>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* HMO partners */}
-            <div>
-              <h4 className="text-white/80 mb-4">HMO partners</h4>
-              <div className="grid grid-cols-2 gap-3">
-                {[
-                  { src: "/images/AXA_Mansard.svg", alt: "AXA Mansard" },
-                  { src: "/images/reliance.svg", alt: "Reliance" },
-                  { src: "/images/leadway.svg", alt: "Leadway" },
-                  { src: "/images/Allianz-1.svg", alt: "Allianz" },
-                  { src: "/images/bupa.svg", alt: "BUPA" },
+                  { src: "/images/Facebook.svg", alt: "AXA Mansard" },
+                  { src: "/images/LinkedIn.svg", alt: "Reliance" },
+                  { src: "/images/Instagram.svg", alt: "Leadway" },
+                  { src: "/images/YouTube.svg", alt: "Allianz" },
+                  { src: "/images/Twitter.svg", alt: "BUPA" },
                 ].map((partner) => (
                   <Image
                     key={partner.alt}
@@ -249,37 +294,6 @@ export const Footer = () => {
                   />
                 ))}
               </div>
-            </div>
-          </div>
-
-          {/* Bottom Section */}
-          <div className="border-t border-white/20 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-white/70 text-sm">
-              <p>Copyright © 2024 Debbo. All rights reserved.</p>
-              <div className="flex gap-4 mt-2">
-                <FooterLink
-                  href="/privacy-policy"
-                  className="hover:text-white transition-colors"
-                >
-                  Privacy policy
-                </FooterLink>
-                <FooterLink
-                  href="/privacy-policy"
-                  className="hover:text-white transition-colors"
-                >
-                  Terms of use
-                </FooterLink>
-              </div>
-            </div>
-            <div className="flex items-center gap-4">
-              {[Facebook, Instagram, Linkedin, Twitter, Youtube].map(
-                (Icon, idx) => (
-                  <Icon
-                    key={idx}
-                    className="w-5 h-5 text-white/70 hover:text-white cursor-pointer transition-colors"
-                  />
-                )
-              )}
             </div>
           </div>
         </div>

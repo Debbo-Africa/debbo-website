@@ -85,7 +85,7 @@ export function PageHero({
       <div className="relative grid lg:grid-cols-2 gap-32 items-center">
         <div className="lg:pl-20 text-center lg:text-left mt-20 lg:mt-0">
           <h1
-            className={`${headingClassName} text-3xl md:text-4xl font-bold text-general-black mb-4 px-10 lg:px-0`}
+            className={`${headingClassName} text-3xl md:text-4xl font-bold text-general-black mb-4 px-10 lg:px-0 `}
           >
             {title}
           </h1>

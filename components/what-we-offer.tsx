@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import ButtonComponent from "./Button";
 
 const OFFER_ITEMS = [
   {
@@ -31,25 +31,41 @@ const OFFER_ITEMS = [
   },
 ];
 
+const customOrder = [0, 2, 1];
+
 export function WhatWeOfferSection() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentOrderIndex, setCurrentOrderIndex] = useState(0);
   const [progress, setProgress] = useState(0);
+  const [screenSize, setScreenSize] = useState("desktop");
 
   useEffect(() => {
-    const intervalDuration = 100; // ms
-    const totalDuration = 30000; // 30 seconds
+    const updateScreenSize = () => {
+      if (window.innerWidth < 768) {
+        setScreenSize("mobile");
+      } else if (window.innerWidth < 1024) {
+        setScreenSize("tablet");
+      } else {
+        setScreenSize("desktop");
+      }
+    };
+
+    updateScreenSize();
+    window.addEventListener("resize", updateScreenSize);
+    return () => window.removeEventListener("resize", updateScreenSize);
+  }, []);
+
+  useEffect(() => {
+    const intervalDuration = 100;
+    const totalDuration = 2000;
     const increment = (intervalDuration / totalDuration) * 100;
 
     const progressInterval = setInterval(() => {
       setProgress((prev) => {
         const next = prev + increment;
         if (next >= 100) {
-          setCurrentIndex((current) => {
-            if (current === 0) return 1; // 1 → 2
-            if (current === 1) return 2; // 2 → 3
-            if (current === 2) return 1; // 3 → 2
-            return 0;
-          });
+          setCurrentOrderIndex(
+            (prevIndex) => (prevIndex + 1) % customOrder.length
+          );
           return 0;
         }
         return next;
@@ -59,131 +75,125 @@ export function WhatWeOfferSection() {
     return () => clearInterval(progressInterval);
   }, []);
 
+  const currentIndex = customOrder[currentOrderIndex];
   const currentItem = OFFER_ITEMS[currentIndex];
 
   const handleCategoryClick = (category: string) => {
     const index = OFFER_ITEMS.findIndex((item) => item.category === category);
     if (index !== -1) {
-      setCurrentIndex(index);
-      setProgress(0);
+      const orderIndex = customOrder.indexOf(index);
+      if (orderIndex !== -1) {
+        setCurrentOrderIndex(orderIndex);
+        setProgress(0);
+      }
     }
   };
 
+  const shiftMap: any = {
+    mobile: { 0: 0, 1: 40, 2: 75 },
+    tablet: { 0: 0, 1: 90, 2: 150 },
+    desktop: { 0: 0, 1: 90, 2: 180 },
+  };
+
+  const extraShift = shiftMap[screenSize][currentIndex] || 0;
+
   return (
     <section className="py-16">
-      <div className="max-w-7xl mx-auto px-4 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-4 items-start">
-          <div className="space-y-8">
-            <div>
-              <h2 className="text-3xl lg:text-4xl font-bold text-black mb-6">
-                What We Offer
-              </h2>
-              <p className="text-gray-700 text-lg leading-relaxed mb-8">
-                Through our products, programs, and communities, we meet women
-                exactly where they are, providing comprehensive and
-                compassionate healthcare solutions.
-              </p>
-            </div>
+      <div className="max-w-7xl mx-auto px-4 lg:px-0 flex flex-col lg:flex-row gap-4">
+        {/* LEFT SECTION (30%) */}
+        <div className="w-full lg:w-[30%] space-y-8">
+          <div>
+            <h2 className="text-3xl lg:text-4xl font-bold text-general-black mb-6">
+              What We Offer
+            </h2>
+            <p className="text-body-text-gray text-lg leading-relaxed mb-8">
+              Through our products, programs, and communities, we meet women
+              exactly where they are, providing comprehensive and compassionate
+              healthcare solutions.
+            </p>
+          </div>
 
-            <div className="flex flex-row space-x-3 overflow-x-auto md:flex-col md:space-x-0 md:space-y-3 ">
-              {OFFER_ITEMS.map((item, index) => {
-                const isActive = index === currentIndex;
+          <div className="flex flex-row space-x-2 overflow-x-auto lg:flex-col md:space-x-0 md:space-y-2">
+            {OFFER_ITEMS.map((item, index) => {
+              const isActive = index === currentIndex;
 
-                return (
-                  <div
-                    key={item.category}
-                    className="flex-shrink-0 md:relative"
+              return (
+                <div key={item.category} className="flex-shrink-0 md:relative">
+                  <button
+                    onClick={() => handleCategoryClick(item.category)}
+                    className={`block text-left px-4 py-3 rounded-full transition-all duration-300 relative overflow-hidden ${
+                      isActive
+                        ? "bg-[--surface-card]"
+                        : "text-general-black hover:bg-[--surface-card]"
+                    }`}
                   >
-                    <button
-                      onClick={() => handleCategoryClick(item.category)}
-                      className={`block text-left px-6 py-4 rounded-full mb-4 transition-all duration-300 relative overflow-hidden ${
-                        isActive
-                          ? "bg-[--surface-card]"
-                          : "text-general-black hover:bg-[--surface-card]"
-                      }`}
+                    {isActive && (
+                      <div
+                        className="absolute inset-0 bg-[#D9D0C6] transition-all duration-100 ease-linear"
+                        style={{ width: `${progress}%` }}
+                      />
+                    )}
+                    <span className="font-medium relative z-10">
+                      {item.category}
+                    </span>
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="w-full lg:w-[60%] relative bg-[--surface-card] pr-0 rounded-2xl lg:rounded-3xl">
+          <div className="relative overflow-hidden rounded-3xl">
+            <div className="flex items-center justify-center">
+              <div
+                className="flex transition-transform duration-300 ease-in-out"
+                style={{
+                  transform: `translateX(calc(-${
+                    currentIndex * 100
+                  }% + ${extraShift}px))`,
+                  width: `${OFFER_ITEMS.length * 100}%`,
+                }}
+              >
+                {OFFER_ITEMS.map((item, index) => {
+                  const isActive = index === currentIndex;
+
+                  return (
+                    <div
+                      key={item.id}
+                      className="flex-shrink-0 transition-all duration-300 ease-in-out py-4 ml-2"
+                      style={{
+                        width: "90%",
+                      }}
                     >
-                      {isActive && (
-                        <div
-                          className="absolute inset-0 bg-gray-200 transition-all duration-100 ease-linear"
-                          style={{ width: `${progress}%` }}
+                      <div
+                        className="relative aspect-[5/3] rounded-3xl overflow-hidden cursor-pointer transition-all duration-200"
+                        onClick={() => handleCategoryClick(item.category)}
+                      >
+                        <Image
+                          src={item.image || "/placeholder.svg"}
+                          alt={item.title}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, 50vw"
                         />
-                      )}
-                      <span className="font-medium relative z-10">
-                        {item.category}
-                      </span>
-                    </button>
-                  </div>
-                );
-              })}
+
+                        {!isActive && (
+                          <div className="absolute inset-0 bg-black/20 transition-opacity duration-300" />
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
 
-          <div className="relative bg-[--surface-card] p-6 pr-0 rounded-xl">
-            <div className="relative overflow-hidden rounded-2xl">
-              <div className="flex items-center justify-center">
-                <div
-                  className="flex transition-transform duration-300 ease-in-out"
-                  style={{
-                    transform: `translateX(calc(-${currentIndex * 90}% + ${
-                      currentIndex * 5
-                    }%))`,
-                    width: `${
-                      OFFER_ITEMS.length * 90 + (OFFER_ITEMS.length - 1) * 5
-                    }%`,
-                  }}
-                >
-                  {OFFER_ITEMS.map((item, index) => {
-                    const isActive = index === currentIndex;
-                    const isAdjacent = Math.abs(index - currentIndex) === 1;
-
-                    return (
-                      <div
-                        key={item.id}
-                        className="flex-shrink-0 transition-all duration-300 ease-in-out"
-                        style={{
-                          width: "90%",
-                          opacity: isActive ? 1 : isAdjacent ? 0.6 : 0.3,
-                          transform: isActive ? "scale(1)" : "scale(0.9)",
-                        }}
-                      >
-                        <div
-                          className={`relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer transition-all duration-200 ${
-                            isActive
-                              ? "shadow-2xl"
-                              : "shadow-lg hover:shadow-xl"
-                          }`}
-                          onClick={() => {
-                            setCurrentIndex(index);
-                            setProgress(0);
-                          }}
-                        >
-                          <Image
-                            src={item.image || "/placeholder.svg"}
-                            alt={item.title}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 768px) 100vw, 50vw"
-                          />
-
-                          {!isActive && (
-                            <div className="absolute inset-0 bg-black/20 transition-opacity duration-300" />
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-6 mt-4">
-              <p className="text-gray-700 leading-relaxed text-base">
-                {currentItem.description}
-              </p>
-              <Button className="bg-black text-white hover:bg-gray-800 rounded-full px-6 py-3">
-                Download App →
-              </Button>
-            </div>
+          <div className="space-y-6 mt-4 p-4">
+            <p className="text-body-text-gray leading-relaxed text-base mb-4">
+              {currentItem.description}
+            </p>
+            <ButtonComponent />
           </div>
         </div>
       </div>

@@ -22,7 +22,7 @@ export function LetsWorkTogetherSection({
   title = "Let's Work Together",
   description = "Contact us to learn more or request a custom wellness package.",
   buttonText = "Contact Us ",
-  buttonLink = "/contact",
+  buttonLink = "/contact-us",
   imageSrc = "/images/sharps.svg",
   imageAlt = "Team member",
   download = false,
@@ -31,11 +31,11 @@ export function LetsWorkTogetherSection({
   test = false,
 }: LetsWorkTogetherProps) {
   return (
-    <section className="py-16">
+    <section className="pb-16">
       <div
         className={`${
           (!download || !test) && "max-w-7xl "
-        } mx-auto px-2 lg:px-8`}
+        } mx-auto px-2 lg:px-0`}
       >
         <div
           className={`rounded-3xl overflow-hidden ${
@@ -47,9 +47,12 @@ export function LetsWorkTogetherSection({
               download && "min-h-[500px]"
             }`}
           >
-            <div className="p-8 lg:p-12 text-white flex-1">
-              <h2 className="text-3xl lg:text-4xl font-bold mb-6">{title}</h2>
-              <p className="text-lg opacity-90 leading-relaxed mb-8">
+            {/* Left text section */}
+            <div className="p-8 lg:p-12 text-white flex-1 ">
+              <h2 className="text-3xl lg:text-4xl font-bold mb-6 max-w-[20rem]">
+                {title}
+              </h2>
+              <p className="text-lg opacity-90 leading-relaxed mb-8 max-w-md">
                 {description}
               </p>
 
@@ -58,7 +61,7 @@ export function LetsWorkTogetherSection({
                   <Link href="#" target="_blank">
                     <Image
                       src="/images/appstore-large.svg"
-                      alt="Download on Play Store"
+                      alt="Download on App Store"
                       width={150}
                       height={50}
                       className="h-12 w-auto"
@@ -67,7 +70,7 @@ export function LetsWorkTogetherSection({
                   <Link href="#" target="_blank">
                     <Image
                       src="/images/playstore-large.svg"
-                      alt="Download on App Store"
+                      alt="Download on Play Store"
                       width={150}
                       height={50}
                       className="h-12 w-auto"
@@ -77,13 +80,12 @@ export function LetsWorkTogetherSection({
               ) : (
                 buttonText &&
                 buttonLink && (
-                  <Link href={buttonLink}>
-                    <ButtonComponent text={buttonText} />
-                  </Link>
+                  <ButtonComponent text={buttonText} linkTo={buttonLink} />
                 )
               )}
             </div>
 
+            {/* Right image section */}
             <div className="flex-1 w-full relative">
               <Image
                 src={imageSrc}
@@ -95,23 +97,24 @@ export function LetsWorkTogetherSection({
 
               {topImageSrc && download && (
                 <>
-                <Image
-                  src={topImageSrc}
-                  alt={topImageAlt}
-                  width={300}
-                  height={600}
-                  className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-80 md:w-[30rem] h-auto
-                  top-1/2 -translate-y-1/2 md:top-auto md:-bottom-28 lg:translate-y-0"
-                />
-                <Image
-                  src={topImageSrc}
-                  alt={topImageAlt}
-                  width={300}
-                  height={600}
-                  className="absolute md:hidden right-0 transform w-[27rem] h-auto
-                  top-1/2 -translate-y-[65%]  left-[30%]"
+                  {/* Desktop / Tablet phone image */}
+                  <Image
+                    src={topImageSrc}
+                    alt={topImageAlt}
+                    width={300}
+                    height={600}
+                    className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-60 lg:w-[30rem] h-auto top-1/2 -translate-y-1/2 md:top-auto md:-bottom-28 lg:translate-y-0"
                   />
-                  </>
+
+                  {/* Mobile phone image */}
+                  <Image
+                    src={topImageSrc}
+                    alt={topImageAlt}
+                    width={300}
+                    height={600}
+                    className="block md:hidden absolute right-0 bottom-0 w-[20rem] h-auto"
+                  />
+                </>
               )}
             </div>
           </div>
@@ -120,3 +123,5 @@ export function LetsWorkTogetherSection({
     </section>
   );
 }
+
+export default LetsWorkTogetherSection;

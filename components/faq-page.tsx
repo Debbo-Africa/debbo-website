@@ -1,14 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { ChevronDown, Minus, Plus } from "lucide-react";
-import client from "@/lib/contentful";
-import type { FaqEntry, FaqSkeleton } from "@/types/contentful";
+import { useEffect, useState, useRef } from "react";
+import { Minus, Plus } from "lucide-react";
+import gsap from "gsap";
+
+import client from "@/lib/contentful"; 
+import type { FaqEntry, FaqSkeleton } from "@/types/contentful"; 
 import type { EntryCollection } from "contentful";
+
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import { Breadcrumb } from "./breadcrumb";
-import { PageHero } from "./page-hero";
+import { Breadcrumb } from "@/components/breadcrumb"; 
+import { PageHero } from "@/components/page-hero"; 
 
 export default function FaqsPage() {
   const [faqs, setFaqs] = useState<FaqEntry[]>([]);
@@ -16,14 +18,15 @@ export default function FaqsPage() {
   const [expandedFaq, setExpandedFaq] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
+  const answerRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const iconContainerRefs = useRef<Record<string, HTMLDivElement | null>>({});
+
   useEffect(() => {
     const fetchFaqs = async () => {
       try {
         const entries: EntryCollection<FaqSkeleton> =
           await client.getEntries<FaqSkeleton>({ content_type: "faqs" });
-
         setFaqs(entries.items as FaqEntry[]);
-
         const uniqueCategories = Array.from(
           new Set(entries.items.map((faq) => faq.fields.category))
         );
@@ -36,7 +39,6 @@ export default function FaqsPage() {
         setLoading(false);
       }
     };
-
     fetchFaqs();
   }, []);
 
@@ -52,10 +54,61 @@ export default function FaqsPage() {
     setExpandedFaq(expandedFaq === faqId ? null : faqId);
   };
 
+  useEffect(() => {
+    filteredFaqs.forEach((faq) => {
+      const answerEl = answerRefs.current[faq.sys.id];
+      const iconContainerEl = iconContainerRefs.current[faq.sys.id];
+
+      if (!answerEl || !iconContainerEl) return;
+
+      const plusIcon = iconContainerEl.querySelector(".plus-icon");
+      const minusIcon = iconContainerEl.querySelector(".minus-icon");
+
+      const isOpen = expandedFaq === faq.sys.id;
+
+      if (isOpen) {
+        gsap.fromTo(
+          answerEl,
+          { height: 0, opacity: 0 },
+          { height: "auto", opacity: 1, duration: 0.3, ease: "power2.out" }
+        );
+        gsap.to(plusIcon, {
+          rotate: 90,
+          opacity: 0,
+          duration: 0.3,
+          ease: "power2.inOut",
+        });
+        gsap.fromTo(
+          minusIcon,
+          { opacity: 0, scale: 0.8 },
+          { opacity: 1, scale: 1, duration: 0.3, ease: "power2.inOut" }
+        );
+      } else {
+        gsap.to(answerEl, {
+          height: 0,
+          opacity: 0,
+          duration: 0.3,
+          ease: "power2.in",
+        });
+        gsap.to(plusIcon, {
+          rotate: 0,
+          opacity: 1,
+          duration: 0.3,
+          ease: "power2.inOut",
+        });
+        gsap.to(minusIcon, {
+          opacity: 0,
+          scale: 0.8,
+          duration: 0.3,
+          ease: "power2.inOut",
+        });
+      }
+    });
+  }, [expandedFaq, filteredFaqs]); 
+
   return (
     <div className="min-h-screen mt-20 ">
       <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "FAQs" }]} />
-
       <PageHero
         title="Frequently asked questions"
         description="Get to know all the most asked questions"
@@ -66,7 +119,6 @@ export default function FaqsPage() {
         <div className="grid lg:grid-cols-4 gap-8">
           <div className="lg:col-span-1">
             <div className="rounded-lg p-6 shadow-sm">
-           
               <div className="space-y-2">
                 {loading
                   ? [1, 2, 3].map((i) => (
@@ -95,7 +147,6 @@ export default function FaqsPage() {
               </div>
             </div>
           </div>
-
           <div className="lg:col-span-3">
             <div className="rounded-lg shadow-sm">
               <div className="p-6 border-b">
@@ -103,7 +154,6 @@ export default function FaqsPage() {
                   {selectedCategory}
                 </h2>
               </div>
-
               <div className="divide-y">
                 {loading ? (
                   <FaqSkeletonLoader />
@@ -112,37 +162,45 @@ export default function FaqsPage() {
                     No FAQs found for this category.
                   </div>
                 ) : (
-                  filteredFaqs.map((faq) => (
-                    <div key={faq.sys.id} className="p-6">
-                      <button
-                        className="w-full flex items-center justify-between text-left"
-                        onClick={() => toggleFaq(faq.sys.id)}
-                      >
-                        <h3 className="text-lg font-semibold text-general-black pr-4">
-                          {faq.fields.question}
-                        </h3>
-                        <div className="flex-shrink-0">
-                          {expandedFaq === faq.sys.id ? (
-                            <div className="w-8 h-8 bg-general-black rounded-full flex items-center justify-center bg-[#000]">
-                              <Minus className="w-4 h-4 text-general-white" />
-                            </div>
-                          ) : (
-                            <div className="w-8 h-8  rounded-full flex items-center justify-center hover:bg-transparent transition-colors">
-                              <Plus className="w-4 h-4 text-body-gray-text" />
-                            </div>
-                          )}
-                        </div>
-                      </button>
-
-                      {expandedFaq === faq.sys.id && (
-                        <div className="mt-4 pt-4">
-                          <p className="text-body-gray-text leading-relaxed">
+                  filteredFaqs.map((faq) => {
+                    const isOpen = expandedFaq === faq.sys.id;
+                    return (
+                      <div key={faq.sys.id} className="p-6">
+                        <button
+                          className="w-full flex items-center justify-between text-left"
+                          onClick={() => toggleFaq(faq.sys.id)}
+                        >
+                          <h3 className="text-lg font-semibold text-general-black pr-4">
+                            {faq.fields.question}
+                          </h3>
+                          <div
+                            ref={(el:any) =>
+                              (iconContainerRefs.current[faq.sys.id] = el)
+                            }
+                            className="relative h-8 w-8 flex-shrink-0 flex items-center justify-center"
+                          >
+                            <Plus className="plus-icon absolute w-4 h-4 text-body-gray-text" />
+                            <Minus
+                              className="minus-icon absolute w-4 h-4 bg-black text-white rounded-full"
+                              style={{ opacity: isOpen ? 1 : 0 }} 
+                            />
+                          </div>
+                        </button>
+                        <div
+                          ref={(el:any) => (answerRefs.current[faq.sys.id] = el)}
+                          className="overflow-hidden"
+                          style={{
+                            height: isOpen ? "auto" : 0,
+                            opacity: isOpen ? 1 : 0,
+                          }}
+                        >
+                          <p className="text-body-gray-text leading-relaxed mt-4 pt-4">
                             {faq.fields.answer}
                           </p>
                         </div>
-                      )}
-                    </div>
-                  ))
+                      </div>
+                    );
+                  })
                 )}
               </div>
             </div>
@@ -153,14 +211,13 @@ export default function FaqsPage() {
   );
 }
 
-
 function FaqSkeletonLoader() {
   return (
     <div>
       {[1, 2, 3].map((i) => (
-        <div key={i} className="p-6   animate-pulse">
-          <div className="w-3/4  bg-[--surface-card]h-4 rounded mb-2"></div>
-          <div className="w-full  bg-[--surface-card] h-4  rounded"></div>
+        <div key={i} className="p-6 animate-pulse">
+          <div className="w-3/4 bg-[--surface-card] h-4 rounded mb-2"></div>
+          <div className="w-full bg-[--surface-card] h-4 rounded"></div>
         </div>
       ))}
     </div>

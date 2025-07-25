@@ -111,7 +111,7 @@ export default function NewsEventsPage() {
         <div className="max-w-7xl mx-auto pb-12 px-4">
           <div className="flex flex-col gap-4">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-              <div className="flex space-x-6 border-b w-full">
+              <div className="flex space-x-6 border-b-[0.2px] w-full">
                 {["News", "Events"].map((tab) => (
                   <button
                     key={tab}
@@ -128,13 +128,13 @@ export default function NewsEventsPage() {
               </div>
 
               <div className="relative w-full lg:w-80">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-body-text-gray outline-none h-4 w-4" />
                 <Input
                   type="text"
                   placeholder={`Search ${activeTab.toLowerCase()}`}
                   value={searchQuery}
                   onChange={handleSearchChange}
-                  className="pl-10 bg-[--surface-card]"
+                  className="pl-10 bg-[--surface-card] outline-none border-none"
                 />
               </div>
             </div>

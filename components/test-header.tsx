@@ -46,7 +46,7 @@ export function TestHeader({
   const activeTabData = tabs.find((tab) => tab.key === activeTab);
 
   return (
-    <header className="bg-[--surface-card] ">
+    <header className="bg-[--surface-card] fixed top-16 w-full z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-12">
           <div className="flex items-center space-x-8">
@@ -97,7 +97,7 @@ export function TestHeader({
                     </DropdownMenuTrigger>
                     <DropdownMenuContent
                       align="start"
-                      className="w-56 bg-[#D9D0C6] hover:bg-[#D9D0C6]"
+                      className="w-56 bg-[#D9D0C6]"
                     >
                       {tabs.map((tab) => (
                         <DropdownMenuItem

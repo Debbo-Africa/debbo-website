@@ -1,27 +1,116 @@
+"use client";
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
+import { useEffect, useRef } from "react";
 
 export default function HealthFeatureCards() {
+  const animatedWordRef = useRef<HTMLSpanElement>(null);
+  const cursorRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const words = ["Body.", "Rhythm.", "Care."];
+    let currentWordIndex = 0;
+    let isPageVisible = true;
+    let isTyping = false;
+
+    const sleep = (ms: number) =>
+      new Promise((resolve) => setTimeout(resolve, ms));
+
+    const handleVisibilityChange = () => {
+      isPageVisible = !document.hidden;
+      if (isPageVisible && !isTyping) {
+        typeWord(words[currentWordIndex]);
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    const typeWord = async (word: string) => {
+      if (!animatedWordRef.current) return;
+      isTyping = true;
+
+      if (cursorRef.current) cursorRef.current.style.opacity = "0";
+      animatedWordRef.current.textContent = "";
+
+      for (let i = 0; i <= word.length; i++) {
+        if (!isPageVisible) {
+          isTyping = false;
+          return;
+        }
+        if (animatedWordRef.current) {
+          animatedWordRef.current.textContent = word.substring(0, i);
+        }
+        await sleep(150);
+      }
+
+      if (cursorRef.current) cursorRef.current.style.opacity = "1";
+
+      await sleep(2000);
+      await eraseWord();
+    };
+
+    const eraseWord = async () => {
+      if (!animatedWordRef.current) return;
+
+      const word = animatedWordRef.current.textContent || "";
+      if (cursorRef.current) cursorRef.current.style.opacity = "0";
+
+      for (let i = word.length; i >= 0; i--) {
+        if (!isPageVisible) {
+          isTyping = false;
+          return;
+        }
+        if (animatedWordRef.current) {
+          animatedWordRef.current.textContent = word.substring(0, i);
+        }
+        await sleep(100);
+      }
+
+      if (cursorRef.current) cursorRef.current.style.opacity = "1";
+
+      currentWordIndex = (currentWordIndex + 1) % words.length;
+      await sleep(500);
+      await typeWord(words[currentWordIndex]);
+    };
+
+    typeWord(words[currentWordIndex]);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       <div className="text-center mb-8">
         <h1 className="text-3xl md:text-4xl font-light text-general-black mb-4">
-          Your <span className="text-yellow font-medium">Body.</span>
+          Your{" "}
+          <span
+            className="text-yellow font-medium"
+            ref={animatedWordRef as any}
+          ></span>
+          <span
+            ref={cursorRef}
+            className="ml-1 animate-blink md:leading-normal text-yellow"
+          >
+            |
+          </span>
         </h1>
-        <p className=" max-w-2xl mx-auto leading-relaxed">
+        <p className="max-w-2xl mx-auto leading-relaxed">
           At DelibalAfrica, we understand that African women's health journeys
           are unique. That's why we created a mobile app that cares for your
           health needs, so you can live well and on your own terms.
         </p>
       </div>
 
-      <div className="mb-6 overflow-hidden rounded-3xl relative min-h-[400px] md:min-h-[500px]">
+      {/* Virtual Care Card */}
+      <div className="mb-6 overflow-hidden rounded-3xl relative min-h-[400px] md:min-h-[500px] group">
         <div className="absolute inset-0">
           <Image
             src="/images/virtual-care.png"
             alt="Virtual care background"
             fill
-            className="object-cover"
+            className="object-cover transform transition-transform duration-300 ease-in-out scale-105 group-hover:scale-100"
           />
         </div>
 
@@ -56,8 +145,9 @@ export default function HealthFeatureCards() {
         </div>
       </div>
 
+      {/* Book Tests and Checkup Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        <div className="overflow-hidden text-center rounded-3xl bg-yellow min-h-[480px]">
+        <div className="overflow-hidden text-center rounded-3xl bg-yellow min-h-[480px] group">
           <div className="p-6 pb-0 h-full flex flex-col">
             <h2 className="text-white text-2xl md:text-3xl font-semibold mb-4">
               Book Tests in Minutes
@@ -67,18 +157,18 @@ export default function HealthFeatureCards() {
               reliable.
             </p>
 
-            <div className="w-full h-72 lg:h-96 relative">
+            <div className="w-full h-[15rem] lg:h-96 relative mx-auto">
               <Image
                 src="/images/book-test-mockup.png"
                 alt="Book tests phone mockup"
                 fill
-                className="lg:object-cover"
+                className="object-contain transform transition-transform duration-300 ease-in-out scale-105 group-hover:scale-100 "
               />
             </div>
           </div>
         </div>
 
-        <div className="overflow-hidden rounded-3xl bg-secondary-debbo1 text-center min-h-[480px]">
+        <div className="overflow-hidden rounded-3xl bg-secondary-debbo1 text-center min-h-[480px] group">
           <div className="p-6 pb-0 h-full flex flex-col">
             <h2 className="text-white text-2xl md:text-3xl font-semibold mb-4">
               Never Miss a Checkup
@@ -89,12 +179,12 @@ export default function HealthFeatureCards() {
             </p>
 
             <div className="flex justify-center mt-4">
-              <div className="w-full  h-72 lg:h-96 relative">
+              <div className="w-full h-72 lg:h-[28rem] relative">
                 <Image
                   src="/images/miss-cehckup-mockup.png"
                   alt="Checkup reminder phone mockup"
                   fill
-                  className="lg:object-cover"
+                  className="object-contain transform transition-transform duration-300 ease-in-out scale-105 group-hover:scale-100"
                 />
               </div>
             </div>
@@ -102,23 +192,23 @@ export default function HealthFeatureCards() {
         </div>
       </div>
 
-      <Card className="overflow-hidden rounded-3xl relative min-h-[420px] md:min-h-[450px]">
+      <Card className="overflow-hidden rounded-3xl relative min-h-[420px] md:min-h-[450px] group">
         <div className="absolute inset-0">
           <Image
             src="/images/old-woman-bg.png"
             alt="Track matters background"
             fill
-            className="hidden md:block object-cover "
+            className="hidden md:block object-cover transform transition-transform duration-300 ease-in-out scale-105 group-hover:scale-100"
           />
           <Image
             src="/images/old-woman-bg-small.png"
             alt="Track matters background"
             fill
-            className="object-cover md:hidden"
+            className="object-cover md:hidden transform transition-transform duration-300 ease-in-out scale-105 group-hover:scale-100"
           />
         </div>
 
-        <div className="relative z-10  md:p-12 p-4 py-12 lg:px-12 pb-0 flex flex-col lg:flex-row lg:items-center">
+        <div className="relative z-10 md:p-12 p-4 py-12 lg:px-12 pb-0 flex flex-col lg:flex-row lg:items-center">
           <div className="flex-1 text-white mb-8 lg:mb-0 lg:mr-8">
             <h2 className="text-3xl md:text-4xl font-semibold mb-4">
               Track What Truly
@@ -129,7 +219,7 @@ export default function HealthFeatureCards() {
               Our AI-powered triage tool assesses your symptoms and connects you
               to the care you need, when you need it.
             </p>
-            <div className=" flex gap-1 mb-8 ">
+            <div className="flex gap-1 mb-6 md:mb-24">
               <Image
                 src="/images/icon-logo.svg"
                 alt="Track matters phone mockup"
@@ -159,7 +249,7 @@ export default function HealthFeatureCards() {
           </div>
 
           <div className="flex-shrink-0 md:hidden lg:block">
-            <div className="w-64 h-72 md:w-96 md:h-96 left-6 relative md:absolute md:-bottom-1/4 md:left-1/2">
+            <div className="w-64 h-72 md:w-96 md:h-96 left-6 relative md:absolute md:-bottom-[5%] md:left-1/2">
               <Image
                 src="/images/iphone.png"
                 alt="Track matters phone mockup"

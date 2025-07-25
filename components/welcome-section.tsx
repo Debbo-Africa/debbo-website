@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import ButtonComponent from "./Button";
 
 export function WelcomeSection() {
   return (
@@ -31,12 +32,11 @@ export function WelcomeSection() {
               </div>
             </div>
 
-            <button className="mt-6 mb-6 px-6 py-3 bg-black text-white rounded-full text-sm">
-              Learn More →
-            </button>
+           
+            <ButtonComponent text="Learn More" className="mt-4 mb-8 w-full md:w-fit"/>
           </div>
 
-          <div className="relative h-[400px] lg:h-[600px] group overflow-hidden">
+          <div className="relative h-[400px] lg:h-[600px] group overflow-hidden rounded-3xl">
             <Image
               src="/images/welcome-section.jpg"
               alt="Débbo Docs"
@@ -47,10 +47,10 @@ export function WelcomeSection() {
 
             <div className="absolute inset-0 bg-black bg-opacity-20 rounded-3xl transition duration-500 "></div>
 
-            <p className="absolute bottom-8 left-8 text-white text-lg max-w-sm z-10 transition duration-500 group-hover:scale-105">
+            <h3 className="absolute bottom-8 left-8 text-white text-lg max-w-sm z-10 transition duration-500 group-hover:scale-105">
               Whether you’re based in Nigeria or abroad, we welcome licensed
               female doctors from all specialties.
-            </p>
+            </h3>
           </div>
         </div>
       </div>

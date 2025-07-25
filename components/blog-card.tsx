@@ -135,7 +135,7 @@ export function BlogCard({
           <div className="text-xs mb-2 bg-[--surface-card] w-fit px-3 py-1 rounded-full">
             {blog.fields.category}
           </div>
-          <Link href={`/blog/${createSlug(blog.fields.title)}`}>
+          <Link href={`/resources/blog/${createSlug(blog.fields.title)}`}>
             <h3 className="text-lg font-semibold text-general-black transition-colors leading-tight mb-2 max-w-sm">
               {blog.fields.title}
             </h3>
@@ -161,7 +161,7 @@ export function BlogCard({
   }
 
   return (
-    <div className="group">
+    <div className="group ">
       <Link href={`/resources/blog/${createSlug(blog.fields.title)}`}>
         <div className="aspect-[4/2] relative rounded-2xl overflow-hidden mb-4">
           {imageUrl && (

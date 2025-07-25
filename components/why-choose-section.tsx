@@ -98,7 +98,7 @@ export const WhyChooseSection = () => {
   }, []);
 
   return (
-    <section className="pb-6 px-4" ref={sectionRef}>
+    <section className="pb-16 px-4" ref={sectionRef}>
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-2xl md:text-5xl font-bold text-general-black">
@@ -109,8 +109,8 @@ export const WhyChooseSection = () => {
           {features.slice(0, 3).map((feature, index) => (
             <div
               key={feature.id}
-              ref={(el:any) => ((cardsRef as any).current[index] = el)}
-              className="bg-[--surface-card] rounded-2xl p-8 flex flex-col"
+              ref={(el: any) => ((cardsRef as any).current[index] = el)}
+              className="bg-[--surface-card] rounded-2xl md:rounded-3xl p-8 flex flex-col"
             >
               <div className="flex items-center gap-3 mb-4">
                 <Image
@@ -136,8 +136,8 @@ export const WhyChooseSection = () => {
           {features.slice(3).map((feature, index) => (
             <div
               key={feature.id}
-              ref={(el:any) => ((cardsRef as any).current[index + 3] = el)} 
-              className="bg-[--surface-card] rounded-2xl p-8 flex flex-col"
+              ref={(el: any) => ((cardsRef as any).current[index + 3] = el)}
+              className="bg-[--surface-card] rounded-2xl  md:rounded-3xl  p-8 flex flex-col"
             >
               <div className="flex items-center gap-3 mb-4">
                 <Image
