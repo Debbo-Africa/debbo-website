@@ -11,8 +11,8 @@ export const DownloadSection = () => {
   const appUrl =
     "https://play.google.com/store/apps/details?id=com.debboafrica.app";
 
-  // const youtubeEmbedUrl = "https://www.youtube.com/embed/v8XzQ2_tIZM";
-  const youtubeEmbedUrl = "";
+  const youtubeEmbedUrl = "https://www.youtube.com/embed/v8XzQ2_tIZM";
+  // const youtubeEmbedUrl = "";
 
   useEffect(() => {
     const generateQRCode = async () => {

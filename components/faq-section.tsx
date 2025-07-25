@@ -247,6 +247,7 @@ export const FAQSection = () => {
                 <ButtonComponent
                   text="View all FAQs"
                   className="w-full md:w-fit justify-center"
+                  linkTo="/faqs"
                 />
               </div>
             </div>
