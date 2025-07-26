@@ -20,7 +20,7 @@ import type { MedicalTestEntry, MedicalTestSkeleton } from "@/types/contentful";
 import type { EntryCollection } from "contentful";
 import { SkeletonTestCard } from "@/components/skeleton-test-card";
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 20;
 
 export default function BookScanPage() {
   const [scans, setScans] = useState<MedicalTestEntry[]>([]);

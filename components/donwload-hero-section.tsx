@@ -4,10 +4,10 @@ import Image from "next/image";
 
 const DonwloadHeroSection = () => {
   return (
-    <section className="w-full md:px-4 rounded-2xl overflow-hidden lg:max-w-7xl mx-auto">
+    <section className="w-full md:px-4 rounded-2xl md:rounded-3xl  overflow-hidden lg:max-w-7xl mx-auto">
       <div className="hidden md:flex relative w-full h-[550px] aspect-[4/3] group overflow-hidden rounded-2xl">
         <Image
-          src="/images/hero-bg-large.png"
+          src="/images/hero-bg-large.jpg"
           alt="Health app background"
           fill
           priority
@@ -31,7 +31,7 @@ const DonwloadHeroSection = () => {
                 height={45}
                 className="h-auto w-auto"
               />
-              
+
               <Image
                 src="/images/appstore-large.svg"
                 alt="App Store"

@@ -61,9 +61,9 @@ export function ValuesSection() {
 
   return (
     <section className="py-0">
-      <div className="max-w-6xl mx-auto px-4 lg:px-0">
+      <div className="max-w-7xl mx-auto px-4 lg:px-0">
         <div className="text-center mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold text-general-black mb-8">
+          <h2 className="text-3xl lg:text-5xl font-bold text-general-black mb-8">
             Our Values
           </h2>
 
@@ -71,12 +71,12 @@ export function ValuesSection() {
             {cards.map((card, index) => (
               <h3
                 key={`${card.text ?? "empty"}-${index}`}
-                className="rounded-full text-xl font-bold px-6 py-4 md:py-5 flex items-center justify-center slide-in transition-all duration-500 ease-in-out"
+                className="rounded-full text-xl md:text-4xl font-bold px-6 py-4 md:py-5 flex items-center justify-center slide-in transition-all duration-500 ease-in-out"
                 style={{
                   backgroundColor:
                     card.color === "gray" ? "#f2e9dd" : card.color,
                   color: card.color !== "gray" ? "white" : "black",
-                  width: card.text ? "auto" : isSmallScreen ? "150px" : "300px",
+                  width: card.text ? "auto" : isSmallScreen ? "150px" : "380px",
                 }}
               >
                 {card.text}

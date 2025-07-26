@@ -38,7 +38,7 @@ export function BlogCard({
 
   if (featured) {
     return (
-      <div className="relative group cursor-pointer">
+      <div className="relative group ">
         <Link href={`/resourses/blog/${createSlug(blog.fields.title)}`}>
           <div className="aspect-[4/3] lg:aspect-[16/12] relative rounded-2xl overflow-hidden">
             {imageUrl && (

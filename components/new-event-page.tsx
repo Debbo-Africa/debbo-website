@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { NewsEventCard } from "./new-event-card";
 import { Pagination } from "./pagination";
 
-const ITEMS_PER_PAGE = 3;
+const ITEMS_PER_PAGE = 20;
 
 const LoadingCardPlaceholder = () => (
   <div className="animate-pulse flex flex-col lg:flex-row gap-4 mb-6 border rounded-lg p-4 border-[--surface-card]">

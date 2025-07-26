@@ -11,7 +11,7 @@ import { PageHero } from "./page-hero";
 import { GlossaryTermItem } from "./glossary-term-item";
 import { Pagination } from "./pagination";
 
-const ITEMS_PER_PAGE = 3;
+const ITEMS_PER_PAGE = 20;
 
 const LoadingGlossaryPlaceholder = () => (
   <div className="animate-pulse border-b border-gray-100 pb-4 flex justify-between flex-row items-center gap-10">

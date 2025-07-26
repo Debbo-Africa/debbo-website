@@ -53,7 +53,7 @@ const ButtonComponent: React.FC<ButtonComponentProps> = ({
       onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`relative overflow-hidden cursor-pointer text-sm text-general-white rounded-full px-4 py-6 font-extrabold ${
+      className={`relative overflow-hidden cursor-none  text-sm text-general-white rounded-full px-4 py-6 font-extrabold ${
         fullWidth ? "w-full" : ""
       } ${className}`}
       style={{ backgroundColor: defaultColor }} // ✅ set base bg

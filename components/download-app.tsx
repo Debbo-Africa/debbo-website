@@ -12,8 +12,8 @@ export const DownloadSection = () => {
     "https://play.google.com/store/apps/details?id=com.debboafrica.app";
 
   const youtubeEmbedUrl = "https://www.youtube.com/embed/v8XzQ2_tIZM";
+  
   // const youtubeEmbedUrl = "";
-
   useEffect(() => {
     const generateQRCode = async () => {
       try {
@@ -70,7 +70,7 @@ export const DownloadSection = () => {
           </div>
         </div>
 
-        <div className="relative rounded-3xl overflow-hidden h-[500px] sm:h-[320px] lg:h-[600px] w-full">
+        <div className="relative rounded-3xl overflow-hidden h-[500px] sm:h-[320px] lg:h-[788px] w-full">
           {playVideo ? (
             <iframe
               src={`${youtubeEmbedUrl}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&playsinline=1&enablejsapi=1`}

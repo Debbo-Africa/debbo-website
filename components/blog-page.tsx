@@ -19,7 +19,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const ITEMS_PER_PAGE = 2;
+const ITEMS_PER_PAGE = 20;
 
 export default function BlogPage() {
   const [blogs, setBlogs] = useState<BlogEntry[]>([]);

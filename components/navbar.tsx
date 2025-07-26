@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,6 +11,8 @@ export default function EnhancedNavbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
   const toggleDropdown = (dropdown: string) => {
@@ -80,25 +82,64 @@ export default function EnhancedNavbar() {
 
   const individualItems = [
     {
-      label: "Book a Test",
-      href: "/individual/book-a-test",
-      image: "/images/book-a-test.jpg",
-      description: "Stay up to date with our news and Events.",
+      label: "Speak to a Doctor",
+      href: "/individual/contact-a-doctor",
+      image: "/images/speak-to-a-doctor.jpg",
+      description: "Access Healthcare, Anywhere with virtual consultations",
     },
     {
       label: "Book a Scan",
       href: "/individual/scan",
       image: "/images/book-a-scan.jpg",
       description:
-        "Discover our expert radiology services for accurate & diagnosis",
+        "Discover our expert radiology services for accurate imaging and timely diagnosis.",
     },
     {
-      label: "Speak to a Doctor",
-      href: "/individual/contact-a-doctor",
-      image: "/images/speak-to-a-doctor.jpg",
-      description: "Stay up to date with regular health tips",
+      label: "Book a Test",
+      href: "/individual/book-a-test",
+      image: "/images/book-a-test.jpg",
+      description:
+        "Lab tests at home or in person, with results you can trust.",
     },
   ];
+
+  useEffect(() => {
+    const preloadImages = async () => {
+      const allImages = [
+        ...aboutUsItems.map((item) => item.image),
+        ...resourcesItems.map((item) => item.image),
+        ...individualItems.map((item) => item.image),
+      ];
+
+      const imagePromises = allImages.map((src) => {
+        return new Promise((resolve, reject) => {
+          const img = new window.Image();
+          img.onload = resolve;
+          img.onerror = reject;
+          img.src = src;
+        });
+      });
+
+      try {
+        await Promise.all(imagePromises);
+        setImagesLoaded(true);
+      } catch (error) {
+        setImagesLoaded(true); 
+      }
+    };
+
+    preloadImages();
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      setIsScrolled(scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const getDefaultImage = (dropdown: string) => {
     if (dropdown === "about") return aboutUsItems[0];
@@ -155,7 +196,7 @@ export default function EnhancedNavbar() {
             <div className="hidden lg:flex items-center space-x-8 text-general-black hover:text-general-black">
               <div className="relative group">
                 <button
-                  className={`flex items-center z-50 text-general-black font-medium rounded-3xl px-3 p-2 hover:bg-[--surface-card] transition-colors ${
+                  className={`flex items-center z-50 text-general-black font-medium rounded-full px-3 p-2 hover:bg-[--surface-card] transition-colors ${
                     isActiveLink("/individual") ? " bg-[--surface-card]" : ""
                   }`}
                 >
@@ -169,9 +210,9 @@ export default function EnhancedNavbar() {
                         <Link
                           key={index}
                           href={item.href}
-                          className={`block px-6 py-3 text-general-black text-sm hover:text-general-black hover:bg-[--surface-card] hover:rounded-xl transition-colors ${
+                          className={`block px-6 py-3 text-general-black text-sm hover:text-general-black hover:bg-[--surface-card] hover:rounded-full transition-colors ${
                             isActiveLink(item.href)
-                              ? " bg-[--surface-card] rounded-xl"
+                              ? " bg-[--surface-card] rounded-full"
                               : ""
                           }`}
                           onMouseEnter={() => setHoveredItem(item.label)}
@@ -209,7 +250,7 @@ export default function EnhancedNavbar() {
 
               <Link
                 href="/corporate"
-                className={`font-medium rounded-3xl text-general-black p-2 px-3 hover:bg-[--surface-card] hover:text-general-black font-recoleta ${
+                className={`font-medium rounded-full text-general-black p-2 px-3 hover:bg-[--surface-card] hover:text-general-black font-recoleta ${
                   isActiveLink("/corporate") ? "bg-[--surface-card]" : ""
                 }`}
               >
@@ -218,7 +259,7 @@ export default function EnhancedNavbar() {
 
               <div className="relative group">
                 <button
-                  className={`flex items-center font-medium text-general-black rounded-3xl px-3 p-2 hover:bg-[--surface-card] transition-colors ${
+                  className={`flex items-center font-medium text-general-black rounded-full px-3 p-2 hover:bg-[--surface-card] transition-colors ${
                     isActiveLink("/about") ? " bg-[--surface-card]" : ""
                   }`}
                 >
@@ -232,7 +273,7 @@ export default function EnhancedNavbar() {
                         <Link
                           key={index}
                           href={item.href}
-                          className={`block px-6 py-3 text-general-black text-sm hover:text-general-black rounded-3xl p-2 hover:bg-[--surface-card] transition-colors ${
+                          className={`block px-6 py-3 text-general-black text-sm hover:text-general-black rounded-full p-2 hover:bg-[--surface-card] transition-colors ${
                             isActiveLink(item.href)
                               ? " bg-[--surface-card]"
                               : ""
@@ -272,7 +313,7 @@ export default function EnhancedNavbar() {
 
               <div className="relative group">
                 <button
-                  className={`flex items-center text-general-black font-medium rounded-3xl px-3 p-2 hover:bg-[--surface-card] transition-colors ${
+                  className={`flex items-center text-general-black font-medium rounded-3xl px-3 p-2 hover:bg-[--surface-card] transition-colors cursor-none ${
                     isActiveLink("/resources") ? " bg-[--surface-card]" : ""
                   }`}
                 >
@@ -286,9 +327,9 @@ export default function EnhancedNavbar() {
                         <Link
                           key={index}
                           href={item.href}
-                          className={`block px-6 py-3 text-sm hover:bg-[--surface-card] text-general-black hover:rounded-xl transition-colors ${
+                          className={`block px-6 py-3 text-sm hover:bg-[--surface-card] text-general-black hover:rounded-full transition-colors  ${
                             isActiveLink(item.href)
-                              ? " bg-[--surface-card] rounded-xl"
+                              ? " bg-[--surface-card] rounded-full"
                               : ""
                           }`}
                           onMouseEnter={() => setHoveredItem(item.label)}
@@ -325,20 +366,20 @@ export default function EnhancedNavbar() {
               </div>
             </div>
 
-            <div className="hidden lg:block">
+            <div className="hidden lg:block cursor-none">
               <ButtonComponent />
             </div>
 
             <Button
               size="icon"
-              className="lg:hidden bg-transparent hover:bg-transparent"
+              className="lg:hidden bg-transparent hover:bg-transparent "
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle menu"
             >
               {isOpen ? (
-                <X className="h-6 w-6" color="#000" />
+                <X className="w-8 h-8" color="#000" />
               ) : (
-                <Menu className="h-6 w-6" color="#000" />
+                <Menu className="w-8 h-8" color="#000" />
               )}
             </Button>
           </div>
@@ -346,7 +387,7 @@ export default function EnhancedNavbar() {
       </nav>
 
       <div
-        className={`fixed inset-0 z-[90] lg:hidden transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-0 z-[110] lg:hidden transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -357,8 +398,9 @@ export default function EnhancedNavbar() {
               size="icon"
               onClick={() => setIsOpen(false)}
               aria-label="Close menu"
+              className="hover:bg-transparent"
             >
-              <X className="h-16 w-16" />
+              <X className="w-8 h-8" />
             </Button>
           </div>
 
@@ -366,7 +408,7 @@ export default function EnhancedNavbar() {
             <div className="space-y-8">
               <Link
                 href="/"
-                className={`block text-lg font-medium p-2 rounded-xl text-general-black ${
+                className={`block text-lg font-medium p-2 py-4 ml-2 rounded-full text-general-black ${
                   isActiveLink("/") ? "bg-[--surface-card]" : ""
                 }`}
                 onClick={() => setIsOpen(false)}
@@ -376,7 +418,7 @@ export default function EnhancedNavbar() {
 
               {/* About Us */}
               <div
-                className={`rounded-xl p-4 ${
+                className={`rounded-3xl p-4 ${
                   pathname.startsWith("/about")
                     ? "bg-[--surface-card]"
                     : "bg-surface-card"
@@ -425,7 +467,7 @@ export default function EnhancedNavbar() {
 
               {/* For Individuals */}
               <div
-                className={`rounded-xl p-4 ${
+                className={`rounded-3xl p-4 ${
                   pathname.startsWith("/individual")
                     ? "bg-[--surface-card]"
                     : "bg-surface-card"
@@ -472,10 +514,9 @@ export default function EnhancedNavbar() {
                 )}
               </div>
 
-              {/* For Corporate */}
               <Link
                 href="/corporate"
-                className={`block text-lg font-medium p-2 rounded-xl text-general-black ${
+                className={`block text-lg font-medium ml-2 p-2 py-4 rounded-xl text-general-black ${
                   isActiveLink("/corporate") ? "bg-[--surface-card]" : ""
                 }`}
                 onClick={() => setIsOpen(false)}
@@ -483,7 +524,6 @@ export default function EnhancedNavbar() {
                 For Corporate
               </Link>
 
-              {/* Resources */}
               <div
                 className={`rounded-xl p-4 ${
                   pathname.startsWith("/resources")
@@ -532,7 +572,6 @@ export default function EnhancedNavbar() {
                 )}
               </div>
 
-              {/* Download App Button */}
               <div className="pt-6">
                 <ButtonComponent fullWidth />
               </div>
@@ -543,7 +582,7 @@ export default function EnhancedNavbar() {
 
       {isOpen && (
         <div
-          className="fixed inset-0 z-[80] bg-black bg-opacity-50 lg:hidden"
+          className="fixed inset-0 z-[105] bg-black bg-opacity-50 lg:hidden"
           onClick={() => setIsOpen(false)}
         />
       )}

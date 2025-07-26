@@ -32,13 +32,13 @@ export function OurStorySection({
             </div>
           </div>
 
-          <div className="relative rounded-3xl">
-            <div className="relative aspect-[4/3] rounded-3xl ">
+          <div className="relative rounded-2xl md:rounded-3xl">
+            <div className="relative aspect-[4/3] rounded-2xl md:rounded-3xl ">
               <Image
                 src={imageSrc}
                 alt={imageAlt}
                 fill
-                className="object-cover hover:scale-95 duration-500 cursor-pointer rounded-[3rem] overflow-hidden"
+                className="object-cover hover:scale-95 duration-500  rounded-[3rem] overflow-hidden"
               />
             </div>
           </div>

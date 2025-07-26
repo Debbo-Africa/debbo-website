@@ -85,16 +85,16 @@ export default function HealthFeatureCards() {
       <div className="text-center mb-8">
         <h1 className="text-3xl md:text-4xl font-light text-general-black mb-4">
           Your{" "}
-          <span
-            className="text-yellow font-medium"
+          <h1
+            className="text-yellow font-medium inline"
             ref={animatedWordRef as any}
-          ></span>
-          <span
-            ref={cursorRef}
-            className="ml-1 animate-blink md:leading-normal text-yellow"
+          ></h1>
+          <h1
+            ref={cursorRef as any}
+            className="ml-1 animate-blink md:leading-normal text-yellow inline"
           >
             |
-          </span>
+          </h1>
         </h1>
         <p className="max-w-2xl mx-auto leading-relaxed">
           At DelibalAfrica, we understand that African women's health journeys
