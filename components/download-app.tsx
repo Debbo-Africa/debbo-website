@@ -6,14 +6,9 @@ import ButtonComponent from "./Button";
 
 export const DownloadSection = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [playVideo, setPlayVideo] = useState(false);
-
   const appUrl =
     "https://play.google.com/store/apps/details?id=com.debboafrica.app";
 
-  // const youtubeEmbedUrl = "https://www.youtube.com/embed/v8XzQ2_tIZM";
-  
-  const youtubeEmbedUrl = "";
   useEffect(() => {
     const generateQRCode = async () => {
       try {
@@ -35,21 +30,15 @@ export const DownloadSection = () => {
 
     generateQRCode();
     window.addEventListener("resize", generateQRCode);
-
     return () => {
       window.removeEventListener("resize", generateQRCode);
     };
   }, [appUrl]);
 
-  useEffect(() => {
-    if (youtubeEmbedUrl) {
-      setPlayVideo(true);
-    }
-  }, [youtubeEmbedUrl]);
-
   return (
     <section className="px-4 mx-auto mb-16">
       <div className="space-y-6">
+        {/* First Banner Section */}
         <div className="relative rounded-3xl overflow-hidden h-[550px] lg:h-[500px] w-full group">
           <div className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-[url('/images/app-download-mobile.png')] md:bg-[url('/images/app-download.png')] lg:bg-[url('/images/app-download.png')] transform transition-transform duration-500 ease-in-out group-hover:scale-105" />
 
@@ -62,7 +51,6 @@ export const DownloadSection = () => {
 
             <div className="flex items-end md:justify-between justify-center">
               <ButtonComponent />
-
               <div className="bg-general-white rounded-lg p-1.5 sm:p-2 md:flex md:static absolute top-4 right-4">
                 <canvas ref={canvasRef} className="w-24 h-24 lg:w-32 lg:h-32" />
               </div>
@@ -70,19 +58,18 @@ export const DownloadSection = () => {
           </div>
         </div>
 
-        <div className="relative rounded-3xl overflow-hidden h-[500px] sm:h-[320px] lg:h-[788px] w-full">
-          {playVideo ? (
-            <iframe
-              src={`${youtubeEmbedUrl}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&playsinline=1&enablejsapi=1`}
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="absolute inset-0 w-full h-full"
-            ></iframe>
-          ) : (
-            <div className="absolute bg-[url('/images/woman-smiling-bg.png')] inset-0 bg-cover bg-center bg-no-repeat" />
-          )}
+        {/* Local Video Background Section */}
+        <div className="relative rounded-3xl overflow-hidden h-[500px] sm:h-[320px] lg:h-[600px] w-full">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src="/images/download.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
 
           <div className="absolute inset-0 bg-black/30" />
 
