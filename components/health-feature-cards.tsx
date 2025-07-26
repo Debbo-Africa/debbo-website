@@ -81,7 +81,7 @@ export default function HealthFeatureCards() {
   }, []);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-4 py-8">
       <div className="text-center mb-8">
         <h1 className="text-3xl md:text-4xl font-light text-general-black mb-4">
           Your{" "}
@@ -209,7 +209,7 @@ export default function HealthFeatureCards() {
         </div>
 
         <div className="relative z-10 md:p-12 p-4 py-12 lg:px-12 pb-0 flex flex-col lg:flex-row lg:items-center">
-          <div className="flex-1 text-white mb-8 lg:mb-0 lg:mr-8">
+          <div className="flex-1 text-center md:text-left text-white mb-8 lg:mb-0 lg:mr-8">
             <h2 className="text-3xl md:text-4xl font-semibold mb-4">
               Track What Truly
               <br />
@@ -219,7 +219,7 @@ export default function HealthFeatureCards() {
               Our AI-powered triage tool assesses your symptoms and connects you
               to the care you need, when you need it.
             </p>
-            <div className="flex gap-1 mb-6 md:mb-24">
+            <div className="flex justify-center md:justify-start mt-2 gap-1 mb-6 md:mb-24">
               <Image
                 src="/images/icon-logo.svg"
                 alt="Track matters phone mockup"

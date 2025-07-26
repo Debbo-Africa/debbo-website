@@ -48,7 +48,7 @@ export function LetsWorkTogetherSection({
             }`}
           >
             {/* Left text section */}
-            <div className="p-8 lg:p-12 text-white flex-1 ">
+            <div className="p-8  text-center lg:text-left lg:p-12 text-white flex-1 ">
               <h2 className="text-3xl lg:text-4xl font-bold mb-6 max-w-[20rem]">
                 {title}
               </h2>

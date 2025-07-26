@@ -6,10 +6,10 @@ import Image from "next/image";
 export function TrustedBySection() {
   return (
     <section className="py-16">
-      <div className="max-w-7xl mx-auto px-4 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 lg:px-8 text-center lg:text-left">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
           <div className="flex flex-col justify-center">
-            <h1 className="text-3xl lg:text-5xl font-bold text-gray-900 mb-8 max-w-[15rem] md:leading-loose">
+            <h1 className="text-3xl lg:text-5xl font-bold text-gray-900 mb-8 lg:max-w-[15rem] md:leading-loose">
               Trusted by Leading Employers
             </h1>
             <p className="text-gray-600 mb-8 leading-relaxed">

@@ -241,7 +241,7 @@ export default function HowItWorksAndFAQSection() {
 
   return (
     <section className="py-16 px-4 lg:px-0">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <h2 className="text-3xl lg:text-4xl font-serif text-center mb-12">
           How It Works
         </h2>

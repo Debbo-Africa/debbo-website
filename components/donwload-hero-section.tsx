@@ -71,7 +71,7 @@ const DonwloadHeroSection = () => {
         </div>
         <div className="w-full rounded-2xl overflow-hidden group">
           <Image
-            src="/images/hero-bg-large.png"
+            src="/images/hero-bg-large.jpg"
             alt="App preview"
             width={400}
             height={600}

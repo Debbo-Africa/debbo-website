@@ -26,6 +26,12 @@ export default function EnhancedNavbar() {
     return pathname.startsWith(href);
   };
 
+  // Function to close mobile menu
+  const closeMobileMenu = () => {
+    setIsOpen(false);
+    setOpenDropdown(null);
+  };
+
   const aboutUsItems = [
     {
       label: "Who we are",
@@ -124,7 +130,7 @@ export default function EnhancedNavbar() {
         await Promise.all(imagePromises);
         setImagesLoaded(true);
       } catch (error) {
-        setImagesLoaded(true); 
+        setImagesLoaded(true);
       }
     };
 
@@ -411,7 +417,7 @@ export default function EnhancedNavbar() {
                 className={`block text-lg font-medium p-2 py-4 ml-2 rounded-full text-general-black ${
                   isActiveLink("/") ? "bg-[--surface-card]" : ""
                 }`}
-                onClick={() => setIsOpen(false)}
+                onClick={closeMobileMenu}
               >
                 <h3>Home</h3>
               </Link>
@@ -455,7 +461,7 @@ export default function EnhancedNavbar() {
                           className={`block text-base p-2 rounded-xl text-general-black ${
                             isActiveLink(item.href) ? "bg-[--surface-card]" : ""
                           }`}
-                          onClick={() => setIsOpen(false)}
+                          onClick={closeMobileMenu}
                         >
                           {item.label}
                         </Link>
@@ -504,7 +510,7 @@ export default function EnhancedNavbar() {
                           className={`block text-base p-2 rounded-xl text-general-black ${
                             isActiveLink(item.href) ? "bg-[--surface-card]" : ""
                           }`}
-                          onClick={() => setIsOpen(false)}
+                          onClick={closeMobileMenu}
                         >
                           {item.label}
                         </Link>
@@ -519,7 +525,7 @@ export default function EnhancedNavbar() {
                 className={`block text-lg font-medium ml-2 p-2 py-4 rounded-xl text-general-black ${
                   isActiveLink("/corporate") ? "bg-[--surface-card]" : ""
                 }`}
-                onClick={() => setIsOpen(false)}
+                onClick={closeMobileMenu}
               >
                 For Corporate
               </Link>
@@ -562,7 +568,7 @@ export default function EnhancedNavbar() {
                           className={`block text-base p-2 rounded-xl text-general-black ${
                             isActiveLink(item.href) ? "bg-[--surface-card]" : ""
                           }`}
-                          onClick={() => setIsOpen(false)}
+                          onClick={closeMobileMenu}
                         >
                           {item.label}
                         </Link>
@@ -583,7 +589,7 @@ export default function EnhancedNavbar() {
       {isOpen && (
         <div
           className="fixed inset-0 z-[105] bg-black bg-opacity-50 lg:hidden"
-          onClick={() => setIsOpen(false)}
+          onClick={closeMobileMenu}
         />
       )}
     </>
