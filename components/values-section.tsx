@@ -67,11 +67,11 @@ export function ValuesSection() {
             Our Values
           </h2>
 
-          <div className="flex flex-wrap justify-center  gap-4 lg:gap-6">
+          <div className="flex flex-wrap justify-center  gap-4 lg:gap-6 md:space-y-4">
             {cards.map((card, index) => (
               <h3
                 key={`${card.text ?? "empty"}-${index}`}
-                className="rounded-full text-xl md:text-4xl font-bold px-6 py-4 md:py-5 flex items-center justify-center slide-in transition-all duration-500 ease-in-out"
+                className="rounded-full text-xl md:text-4xl font-bold px-6 py-4 md:py-7 flex items-center justify-center slide-in transition-all duration-500 ease-in-out"
                 style={{
                   backgroundColor:
                     card.color === "gray" ? "#f2e9dd" : card.color,

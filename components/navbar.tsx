@@ -179,7 +179,9 @@ export default function EnhancedNavbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-[100] bg-[#FFF5E9B2] ${
+        className={`fixed top-0 left-0 right-0 z-[100] transition-colors duration-300 ${
+          isScrolled ? "bg-[#FFF5E9B3]" : "bg-[#fff5e9"
+        } ${
           !pathname.includes("individual") && !pathname.includes("cart")
             ? "rounded-b-3xl"
             : ""
@@ -417,11 +419,11 @@ export default function EnhancedNavbar() {
               <Link
                 href="/"
                 className={`block text-lg font-medium p-2 py-4 ml-2 rounded-full text-general-black ${
-                  isActiveLink("/") ? "bg-[--surface-card]" : ""
+                  isActiveLink("/") ? "bg-[--surface-card] px-4 ml-0" : ""
                 }`}
                 onClick={closeMobileMenu}
               >
-                <h3>Home</h3>
+                Home
               </Link>
 
               <div
@@ -523,8 +525,10 @@ export default function EnhancedNavbar() {
 
               <Link
                 href="/corporate"
-                className={`block text-lg font-medium ml-2 p-2 py-4 rounded-xl text-general-black ${
-                  isActiveLink("/corporate") ? "bg-[--surface-card]" : ""
+                className={`block text-lg font-medium ml-2 p-2 py-4 rounded-full  text-general-black ${
+                  isActiveLink("/corporate")
+                    ? "bg-[--surface-card] px-4 ml-0"
+                    : ""
                 }`}
                 onClick={closeMobileMenu}
               >

@@ -247,7 +247,7 @@ export const Footer = () => {
                     />
                   ))}
                 </div>
-                <h3 className="text-white/80 mt-6 mb-4">HEFAMAA accredited</h3>
+                <p className="text-white/80 mt-6 mb-4 font-bold">HEFAMAA accredited</p>
                 <Image
                   src="/images/Hefamaa.svg"
                   alt="Hefamaa"

@@ -55,7 +55,9 @@ export default function RootLayout({
           <Navbar />
           {children}
           <Footer />
-        <CursorFollower />
+          <div className="hidden lg:block">
+            <CursorFollower />
+          </div>
         </ThemeProvider>
       </body>
     </html>

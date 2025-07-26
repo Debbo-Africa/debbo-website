@@ -36,7 +36,7 @@ export function OrderSuccessModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-md mx-auto bg-[--surface-card] border-none p-8 rounded-3xl h-[90%] flex flex-col">
+      <DialogContent className="max-w-md mx-auto bg-[--surface-card] border-none p-8 rounded-3xl h-[80%] md:h-[90%] flex flex-col z-[99999]">
         <div className="text-center mb-8">
           <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
             <Check className="w-8 h-8 text-white" />

@@ -268,7 +268,7 @@ export default function HowItWorksAndFAQSection() {
             const isOpen = openIndex === index;
 
             return (
-              <div key={index} className="border-b">
+              <div key={index} className="border-b border-[#f2e9dd]">
                 <button
                   onClick={() => toggleFAQ(index)}
                   className="flex justify-between items-center w-full text-left font-medium py-4"

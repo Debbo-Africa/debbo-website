@@ -317,6 +317,7 @@ export default function CartPage() {
                   <ButtonComponent
                     fullWidth
                     type="submit"
+                    linkTo=""
                     disabled={isSubmitting}
                     text={
                       isSubmitting ? (

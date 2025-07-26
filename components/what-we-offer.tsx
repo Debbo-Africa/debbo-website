@@ -56,7 +56,7 @@ export function WhatWeOfferSection() {
 
   useEffect(() => {
     const intervalDuration = 100;
-    const totalDuration = 2000;
+    const totalDuration = 40000;
     const increment = (intervalDuration / totalDuration) * 100;
 
     const progressInterval = setInterval(() => {
@@ -91,8 +91,8 @@ export function WhatWeOfferSection() {
 
   const shiftMap: any = {
     mobile: { 0: 0, 1: 40, 2: 75 },
-    tablet: { 0: 0, 1: 90, 2: 150 },
-    desktop: { 0: 0, 1: 90, 2: 180 },
+    tablet: { 0: 0, 1: 100, 2: 200 },
+    desktop: { 0: 0, 1: 130, 2: 250 },
   };
 
   const extraShift = shiftMap[screenSize][currentIndex] || 0;
@@ -101,7 +101,7 @@ export function WhatWeOfferSection() {
     <section className="py-16">
       <div className="max-w-7xl mx-auto px-4 lg:px-0 flex flex-col lg:flex-row gap-4">
         {/* LEFT SECTION (30%) */}
-        <div className="w-full lg:w-[30%] space-y-8">
+        <div className="w-full lg:w-[30%] space-y-8 text-center lg:text-left">
           <div>
             <h2 className="text-3xl lg:text-4xl font-bold text-general-black mb-6">
               What We Offer
@@ -118,7 +118,7 @@ export function WhatWeOfferSection() {
               const isActive = index === currentIndex;
 
               return (
-                <div key={item.category} className="flex-shrink-0 md:relative">
+                <div key={item.category} className="flex-shrink-0 md:relative mb-4 lg:mb-0">
                   <button
                     onClick={() => handleCategoryClick(item.category)}
                     className={`block text-left px-4 py-3 rounded-full transition-all duration-300 relative overflow-hidden ${
@@ -143,11 +143,11 @@ export function WhatWeOfferSection() {
           </div>
         </div>
 
-        <div className="w-full lg:w-[60%] relative bg-[--surface-card] pr-0 rounded-2xl lg:rounded-3xl">
+        <div className="w-full lg:w-[70%] relative bg-[--surface-card] pr-0 rounded-2xl lg:rounded-3xl">
           <div className="relative overflow-hidden rounded-3xl">
             <div className="flex items-center justify-center">
               <div
-                className="flex transition-transform duration-300 ease-in-out"
+                className="flex transition-transform duration-300 ease-in-out md:px-4 lg:p-4"
                 style={{
                   transform: `translateX(calc(-${
                     currentIndex * 100
@@ -161,13 +161,13 @@ export function WhatWeOfferSection() {
                   return (
                     <div
                       key={item.id}
-                      className="flex-shrink-0 transition-all duration-300 ease-in-out py-4 ml-2"
+                      className="flex-shrink-0 transition-all duration-300 ease-in-out py-4 ml-2 md:ml-4 "
                       style={{
                         width: "90%",
                       }}
                     >
                       <div
-                        className="relative aspect-[5/3] rounded-3xl overflow-hidden cursor-pointer transition-all duration-200"
+                        className="relative aspect-[3/2] rounded-3xl overflow-hidden cursor-pointer transition-all duration-200"
                         onClick={() => handleCategoryClick(item.category)}
                       >
                         <Image
@@ -189,7 +189,7 @@ export function WhatWeOfferSection() {
             </div>
           </div>
 
-          <div className="space-y-6 mt-4 p-4">
+          <div className="space-y-6 mt-4 p-4 px-4 md:px-10 mb-4">
             <p className="text-body-text-gray leading-relaxed text-base mb-4">
               {currentItem.description}
             </p>

@@ -147,12 +147,12 @@ export default function HealthFeatureCards() {
 
       {/* Book Tests and Checkup Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        <div className="overflow-hidden text-center rounded-3xl bg-yellow min-h-[480px] group">
+        <div className="overflow-hidden text-center rounded-3xl bg-yellow min-h-[440px] md:min-h-[480px] group">
           <div className="p-6 pb-0 h-full flex flex-col">
             <h2 className="text-white text-2xl md:text-3xl font-semibold mb-4">
               Book Tests in Minutes
             </h2>
-            <p className="text-white/90 leading-relaxed flex-grow">
+            <p className="text-white/90 leading-relaxed flex-grow max-w-md mx-auto">
               Skip the queues. Schedule lab tests from anywhere—fast, easy, and
               reliable.
             </p>
@@ -173,13 +173,13 @@ export default function HealthFeatureCards() {
             <h2 className="text-white text-2xl md:text-3xl font-semibold mb-4">
               Never Miss a Checkup
             </h2>
-            <p className="text-white/90 leading-relaxed flex-grow">
+            <p className="text-white/90 leading-relaxed flex-grow max-w-md mx-auto">
               Set reminders to stay on top of your wellness checks and
               appointments, no more guesswork.
             </p>
 
             <div className="flex justify-center mt-4">
-              <div className="w-full h-72 lg:h-[28rem] relative">
+              <div className="w-full h-72 lg:h-[27rem] relative">
                 <Image
                   src="/images/miss-cehckup-mockup.png"
                   alt="Checkup reminder phone mockup"
@@ -230,7 +230,7 @@ export default function HealthFeatureCards() {
               <p>Dr Déb</p>
             </div>
 
-            <div className="flex flex-row gap-4">
+            <div className="flex flex-row gap-2">
               <Image
                 src="/images/playstore-large.svg"
                 alt="Play Store"
@@ -249,7 +249,7 @@ export default function HealthFeatureCards() {
           </div>
 
           <div className="flex-shrink-0 md:hidden lg:block">
-            <div className="w-64 h-72 md:w-96 md:h-96 left-6 relative md:absolute md:-bottom-[5%] md:left-1/2">
+            <div className="w-64 h-72 md:w-96 md:h-96 mx-auto relative md:absolute md:-bottom-[5%] md:left-1/2">
               <Image
                 src="/images/iphone.png"
                 alt="Track matters phone mockup"
