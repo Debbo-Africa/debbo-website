@@ -377,15 +377,14 @@ export default function EnhancedNavbar() {
             </div>
 
             <Button
-              size="icon"
-              className="lg:hidden bg-transparent hover:bg-transparent "
+              className="lg:hidden bg-transparent hover:bg-transparent w-8 h-8 p-0 flex items-center justify-center"
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle menu"
             >
               {isOpen ? (
-                <X className="w-8 h-8" color="#000" />
+                <X style={{ width: "2rem", height: "2rem" }} color="#000" />
               ) : (
-                <Menu className="w-8 h-8" color="#000" />
+                <Menu style={{ width: "2rem", height: "2rem" }} color="#000" />
               )}
             </Button>
           </div>
@@ -406,7 +405,10 @@ export default function EnhancedNavbar() {
               aria-label="Close menu"
               className="hover:bg-transparent"
             >
-              <X className="w-8 h-8" />
+              <X
+                className="w-8 h-8"
+                style={{ width: "2rem", height: "2rem" }}
+              />
             </Button>
           </div>
 
@@ -422,7 +424,6 @@ export default function EnhancedNavbar() {
                 <h3>Home</h3>
               </Link>
 
-              {/* About Us */}
               <div
                 className={`rounded-3xl p-4 ${
                   pathname.startsWith("/about")

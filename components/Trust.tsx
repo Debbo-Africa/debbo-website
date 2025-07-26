@@ -165,78 +165,85 @@ export const Trust = () => {
     const cardWidth = isSmallScreen ? 120 : 160;
     const cardHeight = isSmallScreen ? 45 : 60;
 
-    // Create physics bodies and DOM elements for each tag - ALL AT ONCE like rain
-    const newTags = healthConditions.map((condition, index) => {
-      // Random starting positions across the width
-      const x = Math.random() * (width - cardWidth - 40) + cardWidth / 2 + 20;
-      const y = -100 - Math.random() * 50; // Small random offset but all start high
+ const newTags = healthConditions.map((condition, index) => {
+  // Spread pills horizontally across width with spacing
+  const spacing = cardWidth + 20;
+  const x = (index * spacing) % (width - spacing) + spacing;
+  const y = -150 - Math.random() * 100; // add variation to fall start
 
-      const body = Bodies.rectangle(x, y, cardWidth, cardHeight, {
-        restitution: 0.6,
-        friction: 0.3,
-        frictionAir: 0.02,
-        render: { visible: false },
-      });
+  const body = Bodies.rectangle(x, y, cardWidth, cardHeight, {
+    restitution: 0.7,
+    friction: 0.2,
+    frictionAir: 0.02,
+    slop: 0.1,
+    collisionFilter: {
+      group: 0,
+      category: 0x0001,
+      mask: 0xFFFFFFFF,
+    },
+    render: { visible: false },
+  });
 
-      const element = document.createElement("div");
-      element.className = `absolute text-black rounded-full  font-semibold cursor-grab active:cursor-grabbing transform-gpu z-20 ${
-        condition.color
-      } ${
-        isSmallScreen
-          ? "px-8 py-3 text-xs min-w-[120px]"
-          : "px-8 py-4 text-md min-w-[160px]"
-      }`;
-      element.textContent = condition.text;
-      element.style.userSelect = "none";
-      element.style.pointerEvents = "auto";
-      element.style.position = "absolute";
-      element.style.zIndex = "30";
-      element.style.textAlign = "center";
+  const element = document.createElement("div");
+  element.className = `absolute text-black rounded-full font-semibold cursor-grab active:cursor-grabbing transform-gpu z-20 ${
+    condition.color
+  } ${
+    isSmallScreen
+      ? "px-8 py-3 text-xs min-w-[120px]"
+      : "px-8 py-4 text-md min-w-[160px]"
+  }`;
+  element.textContent = condition.text;
+  element.style.userSelect = "none";
+  element.style.pointerEvents = "auto";
+  element.style.position = "absolute";
+  element.style.zIndex = "30";
+  element.style.textAlign = "center";
+  element.style.opacity = "0";
+  element.style.transform = "translateY(-20px) scale(0.8)";
 
-      element.style.opacity = "0";
-      element.style.transform = "translateY(-20px) scale(0.8)";
+  setTimeout(() => {
+    element.style.opacity = "1";
+    element.style.animation = "fall 0.5s ease-out";
+  }, index * 80);
 
-      setTimeout(() => {
-        element.style.opacity = "1";
-        element.style.animation = "fall 0.5s ease-out";
-      }, index * 100); 
+  let isDragging = false;
 
-      let isDragging = false;
+  element.addEventListener("mousedown", (e) => {
+    isDragging = true;
+    element.style.cursor = "grabbing";
+    element.style.transform = "scale(1.05)";
+    element.style.zIndex = "30";
+    e.preventDefault();
+  });
 
-      element.addEventListener("mousedown", (e) => {
-        isDragging = true;
-        element.style.cursor = "grabbing";
-        element.style.transform = "scale(1.05)";
-        element.style.zIndex = "30";
-        e.preventDefault();
-      });
+  element.addEventListener("mouseenter", () => {
+    if (!isDragging) {
+      element.style.transform = "scale(1.02)";
+    }
+  });
 
-      element.addEventListener("mouseenter", () => {
-        if (!isDragging) {
-          element.style.transform = "scale(1.02)";
-        }
-      });
+  element.addEventListener("mouseleave", () => {
+    if (!isDragging) {
+      element.style.transform = "scale(1)";
+    }
+  });
 
-      element.addEventListener("mouseleave", () => {
-        if (!isDragging) {
-          element.style.transform = "scale(1)";
-        }
-      });
+  document.addEventListener("mouseup", () => {
+    if (isDragging) {
+      isDragging = false;
+      element.style.cursor = "grab";
+      element.style.transform = "scale(1)";
+      element.style.zIndex = "20";
+    }
+  });
 
-      document.addEventListener("mouseup", () => {
-        if (isDragging) {
-          isDragging = false;
-          element.style.cursor = "grab";
-          element.style.transform = "scale(1)";
-          element.style.zIndex = "20";
-        }
-      });
+  sceneRef.current?.appendChild(element);
+  World.add(engine.world, body);
 
-      sceneRef.current?.appendChild(element);
-      World.add(engine.world, body);
+  return { body, element, data: condition, isDragging: false };
+});
 
-      return { body, element, data: condition, isDragging: false };
-    });
+
 
     setTags(newTags);
 
@@ -261,7 +268,6 @@ export const Trust = () => {
       });
     };
 
-    // Check if rain has stopped
     const checkRainStopped = () => {
       const allSettled = newTags.every(
         ({ body }) =>
