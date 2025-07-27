@@ -1,338 +1,179 @@
 "use client";
+
 import { useEffect, useRef, useState } from "react";
-import Matter from "matter-js";
 import ButtonComponent from "./Button";
 
+// Pills data with responsive position and rotation
 const healthConditions = [
   {
     text: "Menopause Care",
     color: "bg-[--color-secondary-debbo2]",
-    finalPos: { x: 180, y: 520 },
+    x: { default: 40, md: 130, lg: 400 },
+    finalY: { default: 450, md: 840, lg: 420 },
+    rotate: { default: 0, md: 4, lg: 0 },
   },
   {
     text: "Endometriosis",
     color: "bg-[--color-secondary-debbo3]",
-    finalPos: { x: 420, y: 480 },
+    x: { default: 120, md: -10, lg: 0 },
+    finalY: { default: 500, md: 800, lg: 580 },
+    rotate: { default: -8, md: -90, lg: 12 },
   },
   {
     text: "Mental Health",
     color: "bg-[--color-secondary-debbo4]",
-    finalPos: { x: 650, y: 520 },
+    x: { default: -100, md: 140, lg: 280 },
+    finalY: { default: 580, md: 750, lg: 540 },
+    rotate: { default: 5, md: 8, lg: 10 },
   },
   {
     text: "Skin & Gut Concerns",
     color: "bg-[--color-secondary-debbo9]",
-    finalPos: { x: 720, y: 420 },
-  },
-  {
-    text: "Hormonal Disorders",
-    color: "bg-[--color-secondary-debbo4]",
-    finalPos: { x: 1050, y: 480 },
-  },
-  {
-    text: "Gynaecology",
-    color: "bg-[--color-secondary-debbo5]",
-    finalPos: { x: 1280, y: 440 },
+    x: { default: 280, md: 320, lg: 960 },
+    finalY: { default: 500, md: 660, lg: 440 },
+    rotate: { default: -20, md: -18, lg: -16 },
   },
   {
     text: "Fibroids",
     color: "bg-[--color-secondary-debbo9]",
-    finalPos: { x: 140, y: 580 },
+    x: { default: 520, md: 560, lg: 580 },
+    finalY: { default: 420, md: 700, lg: 550 },
+    rotate: { default: 10, md: 8, lg: 6 },
   },
   {
     text: "Sexual Health",
     color: "bg-[--color-secondary-debbo6]",
-    finalPos: { x: 480, y: 600 },
+    x: { default: -100, md: 640, lg: 230 },
+    finalY: { default: 650, md: 850, lg: 650 },
+    rotate: { default: 0, md: -12, lg: -10 },
   },
   {
     text: "General Health",
     color: "bg-[--color-secondary-debbo10]",
-    finalPos: { x: 750, y: 580 },
+    x: { default: 80, md: 720, lg: 1140 },
+    finalY: { default: 680, md: 700, lg: 540 },
+    rotate: { default: -10, md: 6, lg: 5 },
+  },
+  {
+    text: "Hormonal Disorders",
+    color: "bg-[--color-secondary-debbo4]",
+    x: { default: 360, md: 400, lg: 760 },
+    finalY: { default: 420, md: 780, lg: 550 },
+    rotate: { default: 12, md: 10, lg: 20 },
   },
   {
     text: "PCOS",
     color: "bg-[--color-secondary-debbo6]",
-    finalPos: { x: 980, y: 540 },
+    x: { default: 300, md: 800, lg: 840 },
+    finalY: { default: 640, md: 650, lg: 650 },
+    rotate: { default: 3, md: 4, lg: 5 },
   },
   {
     text: "Cervical Cancer",
     color: "bg-[--color-secondary-debbo3]",
-    finalPos: { x: 900, y: 600 },
+    x: { default: 100, md: 880, lg: 510 },
+    finalY: { default: 590, md: 650, lg: 650 },
+    rotate: { default: -12, md: -14, lg: 0 },
+  },
+  {
+    text: "Gynaecology",
+    color: "bg-[--color-secondary-debbo5]",
+    x: { default: 440, md: 400, lg: 1150 },
+    finalY: { default: 420, md: 850, lg: 650 },
+    rotate: { default: -8, md: -6, lg: -10 },
   },
 ];
 
-interface Tag {
-  body: Matter.Body;
-  element: HTMLElement;
-  data: (typeof healthConditions)[0];
-  isDragging: boolean;
-}
+const getResponsiveValue = (val: any) => {
+  const width = window.innerWidth;
+  if (width >= 1024 && val.lg !== undefined) return val.lg;
+  if (width >= 768 && val.md !== undefined) return val.md;
+  return val.default;
+};
 
 export const Trust = () => {
-  const sceneRef = useRef<HTMLDivElement>(null);
-  const engineRef = useRef<Matter.Engine | null>(null);
-  const renderRef = useRef<Matter.Render | null>(null);
-  const mouseConstraintRef = useRef<Matter.MouseConstraint | null>(null);
-  const [isRaining, setIsRaining] = useState(true);
-  const [tags, setTags] = useState<Tag[]>([]);
-  const [shouldStartAnimation, setShouldStartAnimation] = useState(false);
+  const sceneRef = useRef(null);
+  const pillsRef: any = useRef([]);
+  const [shouldAnimate, setShouldAnimate] = useState(false);
 
-  // Intersection Observer for animation trigger
   useEffect(() => {
-    if (!sceneRef.current || shouldStartAnimation) return;
-
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setShouldStartAnimation(true);
-          }
-        });
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldAnimate(true);
+          observer.disconnect();
+        }
       },
-      {
-        threshold: 0.2,
-        rootMargin: "0px 0px -100px 0px",
-      }
+      { threshold: 0.2 }
     );
+    if (sceneRef.current) observer.observe(sceneRef.current);
+  }, []);
 
-    observer.observe(sceneRef.current);
-
-    return () => observer.disconnect();
-  }, [shouldStartAnimation]);
-
-  // Main physics and animation setup
   useEffect(() => {
-    if (!sceneRef.current || !shouldStartAnimation) return;
+    if (!shouldAnimate) return;
 
-    const { Engine, Render, World, Bodies, Mouse, MouseConstraint } = Matter;
+    const pills = pillsRef.current;
+    const gravity = 0.3;
+    const baseDelay = 300;
+    const staggerSpeed = 50; 
 
-    const width = sceneRef.current.clientWidth;
-    const height = sceneRef.current.clientHeight;
-    const isSmallScreen = width < 768;
-
-    // Create physics engine
-    const engine = Engine.create();
-    engineRef.current = engine;
-    engine.world.gravity.y = 1;
-    engine.world.gravity.scale = 0.001;
-
-    // Create renderer
-    const render = Render.create({
-      element: sceneRef.current,
-      engine: engine,
-      options: {
-        width,
-        height,
-        wireframes: false,
-        background: "transparent",
-        showVelocity: false,
-        showAngleIndicator: false,
-        showDebug: false,
-      },
-    });
-    renderRef.current = render;
-
-    // Create boundaries
-    const boundaries = [
-      Bodies.rectangle(width / 2, height - 25, width, 50, {
-        isStatic: true,
-        render: { visible: false },
-      }),
-      Bodies.rectangle(-10, height / 2, 20, height, {
-        isStatic: true,
-        render: { visible: false },
-      }),
-      Bodies.rectangle(width + 10, height / 2, 20, height, {
-        isStatic: true,
-        render: { visible: false },
-      }),
-    ];
-    World.add(engine.world, boundaries);
-
-    // Create mouse constraint for dragging
-    const mouse = Mouse.create(render.canvas);
-    const mouseConstraint = MouseConstraint.create(engine, {
-      mouse: mouse,
-      constraint: {
-        stiffness: 0.8,
-        render: { visible: false },
-      },
-    });
-    mouseConstraintRef.current = mouseConstraint;
-    World.add(engine.world, mouseConstraint);
-
-    // Card dimensions based on screen size
-    const cardWidth = isSmallScreen ? 120 : 180;
-    const cardHeight = isSmallScreen ? 45 : 70;
-
-    // Create physics tags
-    const newTags = createPhysicsTags(
-      healthConditions,
-      width,
-      cardWidth,
-      cardHeight,
-      isSmallScreen
-    );
-    setTags(newTags);
-
-    // Animation loop
-    const animate = () => {
-      Engine.update(engine);
-      updateTagPositions(newTags, isSmallScreen);
-      checkIfRainStopped(newTags);
-      requestAnimationFrame(animate);
-    };
-
-    Render.run(render);
-    animate();
-
-    // Cleanup
-    return () => {
-      newTags.forEach(({ element }) => element.remove());
-      if (renderRef.current) {
-        Render.stop(renderRef.current);
-        renderRef.current.canvas.remove();
-      }
-      if (engineRef.current) {
-        Engine.clear(engineRef.current);
-      }
-    };
-  }, [shouldStartAnimation]);
-
-  const createPhysicsTags = (
-    conditions: typeof healthConditions,
-    width: number,
-    cardWidth: number,
-    cardHeight: number,
-    isSmallScreen: boolean
-  ): Tag[] => {
-    const { Bodies, World } = Matter;
-    return conditions.map((condition, index) => {
-      // Calculate initial positions
-      const spacing = cardWidth + 30;
-      const x = ((index * spacing) % (width - spacing)) + spacing;
-      const y = -150 - Math.random() * 100;
-
-      // Create physics body
-      const body = Bodies.rectangle(x, y, cardWidth, cardHeight, {
-        restitution: 0.7,
-        friction: 0.2,
-        frictionAir: 0.02,
-        slop: 0.1,
-        render: { visible: false },
-      });
-
-      // Create DOM element
-      const element = createTagElement(condition, isSmallScreen, index);
-      sceneRef.current?.appendChild(element);
-      World.add(engineRef.current!.world, body);
-
-      return { body, element, data: condition, isDragging: false };
-    });
-  };
-
-  const createTagElement = (
-    condition: (typeof healthConditions)[0],
-    isSmallScreen: boolean,
-    index: number
-  ): HTMLElement => {
-    const element = document.createElement("div");
-    const baseClasses =
-      "absolute text-black rounded-full font-semibold cursor-grab active:cursor-grabbing transform-gpu";
-    const sizeClasses = isSmallScreen
-      ? "px-6 py-3 text-xs min-w-[120px]"
-      : "px-10 py-5 text-2xl min-w-[180px]"; // Increased text size and padding
-    element.className = `${baseClasses} ${condition.color} ${sizeClasses}`;
-    element.textContent = condition.text;
-
-    // Initial styles
-    Object.assign(element.style, {
-      userSelect: "none",
-      pointerEvents: "auto",
-      position: "absolute",
-      zIndex: "10", // Pills z-index
-      textAlign: "center",
-      opacity: "0",
-      transform: "translateY(-20px) scale(0.8)",
+    const responsivePositions = healthConditions.map((pill, index) => {
+      return {
+        index,
+        x: getResponsiveValue(pill.x),
+        y: -100,
+        vy: 0,
+        angle: getResponsiveValue(pill.rotate),
+        vAngle: Math.random() * 0.5 - 0.25,
+        finalY: getResponsiveValue(pill.finalY),
+      };
     });
 
-    // Staggered animation entrance
-    setTimeout(() => {
-      element.style.opacity = "1";
-      element.style.animation = "fall 0.5s ease-out";
-    }, index * 80);
+    const sorted = [...responsivePositions].sort((a, b) => b.finalY - a.finalY);
 
-    setupTagInteractions(element);
-    return element;
-  };
+    sorted.forEach((p, orderIndex) => {
+      setTimeout(() => {
+        const animatePill = () => {
+          if (p.y < p.finalY) {
+            p.vy += gravity;
+            p.y += p.vy;
+            if (p.y > p.finalY) p.y = p.finalY;
+            p.angle += p.vAngle;
 
-  const setupTagInteractions = (element: HTMLElement) => {
-    let isDragging = false;
-    element.addEventListener("mousedown", (e) => {
-      isDragging = true;
-      element.style.cursor = "grabbing";
-      element.style.transform = "scale(1.05)";
-      element.style.zIndex = "15"; // z-index when dragging
-      e.preventDefault();
-    });
-    element.addEventListener("mouseenter", () => {
-      if (!isDragging) {
-        element.style.transform = "scale(1.02)";
-      }
-    });
-    element.addEventListener("mouseleave", () => {
-      if (!isDragging) {
-        element.style.transform = "scale(1)";
-      }
-    });
-    document.addEventListener("mouseup", () => {
-      if (isDragging) {
-        isDragging = false;
-        element.style.cursor = "grab";
-        element.style.transform = "scale(1)";
-        element.style.zIndex = "10"; // Reset z-index after dragging
-      }
-    });
-  };
+            const pill = pills[p.index];
+            if (pill)
+              pill.style.transform = `translate(${p.x}px, ${p.y}px) rotate(${p.angle}deg)`;
 
-  const updateTagPositions = (tags: Tag[], isSmallScreen: boolean) => {
-    const offsetX = isSmallScreen ? 60 : 90; // Adjusted for larger cards
-    const offsetY = isSmallScreen ? 22.5 : 35; // Adjusted for larger cards
-    tags.forEach(({ body, element }) => {
-      const { x, y } = body.position;
-      const angle = body.angle;
-      element.style.transform = `translate(${x - offsetX}px, ${
-        y - offsetY
-      }px) rotate(${angle}rad)`;
-      element.style.left = "0px";
-      element.style.top = "0px";
+            requestAnimationFrame(animatePill);
+          }
+        };
+        requestAnimationFrame(animatePill);
+      }, baseDelay + orderIndex * staggerSpeed);
     });
-  };
-
-  const checkIfRainStopped = (tags: Tag[]) => {
-    const allSettled = tags.every(
-      ({ body }) =>
-        Math.abs(body.velocity.y) < 0.1 && Math.abs(body.velocity.x) < 0.1
-    );
-    if (allSettled && isRaining) {
-      setIsRaining(false);
-    }
-  };
+  }, [shouldAnimate]);
 
   return (
-    <section className="relative h-[93vh] overflow-hidden rounded-3xl bg-[--surface-card]">
+    <section className="relative h-[100vh] overflow-hidden rounded-3xl bg-[--surface-card]">
       <div
         ref={sceneRef}
-        className="absolute inset-0 w-full h-full pointer-events-none"
-        style={{ height: "100vh", zIndex: 1 }}
-      />
-
-      {isRaining && (
-        <div className="absolute inset-0 pointer-events-none z-2">
-          <div className="rain-overlay"></div>
-        </div>
-      )}
-
+        className="absolute inset-0 w-full h-full z-10 pointer-events-none"
+      >
+        {healthConditions.map((item, index) => (
+          <h1
+            key={index}
+            ref={(el: any) => (pillsRef.current[index] = el)}
+            className={`absolute text-general-black rounded-full font-bold px-8 py-4 text-lg sm:text-xl md:text-2xl lg:text-4xl ${item.color}`}
+            style={{
+              top: 0,
+              transform: `translateY(-100px) rotate(0deg)`,
+              whiteSpace: "nowrap",
+              pointerEvents: "auto",
+            }}
+          >
+            {item.text}
+          </h1>
+        ))}
+      </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-8 relative z-20 pt-20">
         <div className="text-center mb-8">
@@ -348,8 +189,6 @@ export const Trust = () => {
           <ButtonComponent />
         </div>
       </div>
-
-      
     </section>
   );
 };
