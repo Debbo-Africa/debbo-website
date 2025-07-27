@@ -12,7 +12,6 @@ export default function HeroSection() {
       "Empowering",
       "Supporting",
       "Uplifting",
-      "Inspiring",
       "Transforming",
     ];
     let currentWordIndex = 0;

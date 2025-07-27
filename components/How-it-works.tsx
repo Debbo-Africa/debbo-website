@@ -28,7 +28,7 @@ const cards = [
     id: 3,
     title: "Act",
     description:
-      "Need a lab test or scan? We come to you, or you can visit our Lekki facility.",
+      "Need a lab test or scan? We come to you, or you can visit our  facility.",
     images: ["/images/act-microscope.png"],
     alt: "Lab test image",
   },
