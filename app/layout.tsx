@@ -51,14 +51,12 @@ export default function RootLayout({
       <body
         className={`min-h-screen text-general-black transition-colors bg-badge ${outfit.variable}`}
       >
-        <ThemeProvider>
           <Navbar />
           {children}
           <Footer />
           <div className="hidden lg:block">
             <CursorFollower />
           </div>
-        </ThemeProvider>
       </body>
     </html>
   );
