@@ -127,18 +127,18 @@ function CardItem({ service }: { service: (typeof SERVICES_DATA)[0] }) {
 
 const steps = [
   {
-    number: "01",
+    number: "1",
     title: "Download MyDébbo app",
     description: "Available on Google Play and the App Store.",
   },
   {
-    number: "02",
+    number: "2",
     title: "Signup & create your profile",
     description:
       "Tell us a bit about you - your measurements, symptoms and health goals",
   },
   {
-    number: "03",
+    number: "3",
     title: "Book, Track, & Connect",
     description:
       "Start booking tests, tracking your symptoms, or talk to a specialist - all from your phone.",

@@ -1,4 +1,4 @@
-import BrandAliesPage from '@/components/Alies-page'
+import BrandAliesPage from '@/components/brand-allies-page'
 import React from 'react'
 
 const page = () => {

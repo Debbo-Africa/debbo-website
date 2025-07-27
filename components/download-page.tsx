@@ -10,7 +10,7 @@ const DownloadPage = () => {
     <div className="min-h-screen">
       <div className="mt-20">
         <Breadcrumb
-          items={[{ label: "Home", href: "/" }, { label: "Donnload App" }]}
+          items={[{ label: "Home", href: "/" }, { label: "Download App" }]}
         />
         <DonwloadHeroSection />
         <HealthFeatureCards />
@@ -18,7 +18,7 @@ const DownloadPage = () => {
         <LetsWorkTogetherSection
           download
           title="Rooted in Culture, Powered by Care"
-          description="MyDébbo app was built to feel like home. Because your health shouldn’t feel foreign, it should feel familiar, soft, and truly yours. Take one small step toward your wellness today."
+          description="The MyDébbo app was built to feel like home. Because your health shouldn’t feel foreign — it should feel familiar, soft, and truly yours. Take one small step toward your wellness today."
         />
       </div>
     </div>

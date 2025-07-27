@@ -1,13 +1,14 @@
 "use client";
-
 import { useState, useEffect, useRef } from "react";
+import type React from "react";
+
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 import QRCode from "qrcode";
 import Tagline from "./Tagline";
 import Link from "next/link";
 import ButtonComponent from "./Button";
+import { useToast } from "@/hooks/use-toast"; // Import useToast
 
 type FooterLinkProps = {
   href: string;
@@ -21,7 +22,6 @@ const FooterLink = ({ href, children, className }: FooterLinkProps) => {
     e.preventDefault();
     router.push(href);
   };
-
   return (
     <Link href={href} onClick={handleClick} className={className}>
       {children}
@@ -31,10 +31,12 @@ const FooterLink = ({ href, children, className }: FooterLinkProps) => {
 
 export const Footer = () => {
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false); // Add loading state
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const appUrl =
     "https://play.google.com/store/apps/details?id=com.debboafrica.app";
+  const { toast } = useToast(); // Initialize toast
 
   useEffect(() => {
     const generateQRCode = async () => {
@@ -56,10 +58,46 @@ export const Footer = () => {
     generateQRCode();
   }, [appUrl]);
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Subscribed:", email);
-    setEmail("");
+    setLoading(true); // Set loading to true on submission
+
+    try {
+      const response = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        toast({
+          title: "Success!",
+          description: result.message,
+          variant: "default",
+        });
+        setEmail(""); 
+      } else {
+        toast({
+          title: "Error!",
+          description:
+            result.message || "Something went wrong with your subscription.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error("Subscription form submission error:", error);
+      toast({
+        title: "Error!",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false); // Set loading to false after submission
+    }
   };
 
   return (
@@ -77,7 +115,6 @@ export const Footer = () => {
                 <h3 className="text-xl md:text-2xl font-bold text-general-black">
                   Stay connected with DébboAfrica!
                 </h3>
-
                 <form onSubmit={handleSubscribe} className="space-y-4">
                   <div>
                     <label
@@ -89,29 +126,32 @@ export const Footer = () => {
                     <input
                       type="email"
                       id="email"
+                      name="email" // Add name attribute
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="e.g. test@debboafrica.com"
                       className="w-full px-4 py-3 rounded-lg outline-none bg-[--surface-card] focus:ring-none focus:border-transparent"
                       required
+                      disabled={loading} // Disable input while loading
                     />
                   </div>
-
-                  <ButtonComponent text="Subscribe" className="w-full mt-3" />
+                  <ButtonComponent
+                    text={loading ? "Subscribing..." : "Subscribe"}
+                    className="w-full mt-3"
+                    disabled={loading}
+                    linkTo=""
+                  />{" "}
                 </form>
               </div>
             </div>
-
             <div className="text-white rounded-2xl md:rounded-3xl p-6 md:p-10 relative overflow-hidden min-h-[450px] md:min-h-[400px] bg-[url('/images/phone-app-mobile.png')] md:bg-[url('/images/phone-app.png')] bg-cover bg-no-repeat bg-right flex items-center md:items-start">
               <div className="relative z-10 w-full h-full">
                 <div className="absolute top-4 right-2 md:static md:mb-4 w-24 h-24 bg-white rounded-lg p-2 mx-auto md:mx-0">
                   <canvas ref={canvasRef} className="w-full h-full rounded" />
                 </div>
-
                 <h3 className="absolute top-4 left-2 max-w-44 md:w-fit md:static text-xl md:text-2xl font-bold mb-6">
                   Download The MyDébbo <br /> App Today
                 </h3>
-
                 <div className="absolute bottom-4 md:static md:mt-10 flex items-center gap-2">
                   <Image
                     src="/images/playstore-large.svg"
@@ -161,7 +201,6 @@ export const Footer = () => {
                   </span>
                 </div>
               </div>
-
               {/* Quick Links */}
               <div>
                 <h5 className="text-white font-bold mb-4">Quick Links</h5>
@@ -170,7 +209,7 @@ export const Footer = () => {
                     { href: "/about/who-we-are", label: "About Us" },
                     { href: "/contact-us", label: "Contact Us" },
                     { href: "/download", label: "Download App" },
-                    { href: "/brand-alies", label: "Our Brand Alias" },
+                    { href: "/brand-allies", label: "Our Brand Allies" },
                   ].map((link) => (
                     <li key={link.href}>
                       <FooterLink
@@ -183,13 +222,12 @@ export const Footer = () => {
                   ))}
                 </ul>
               </div>
-
               <div>
-                <h5 className="text-white font-bold mb-4">Individual</h5>
+                <h5 className="text-white font-bold mb-4"> Who We Serve</h5>
                 <ul className="space-y-2 text-white/80 text-sm">
                   {[
+                    { href: "/individual", label: "Individuals" },
                     { href: "/corporate", label: "Corporate" },
-                    { href: "/individual", label: "Individual" },
                   ].map((link) => (
                     <li key={link.href}>
                       <FooterLink
@@ -202,7 +240,6 @@ export const Footer = () => {
                   ))}
                 </ul>
               </div>
-
               <div>
                 <h5 className="text-white font-bold mb-4">Resources & legal</h5>
                 <ul className="space-y-2 text-white/80 font-semibold text-sm">
@@ -226,7 +263,6 @@ export const Footer = () => {
                   ))}
                 </ul>
               </div>
-
               <div>
                 <h4 className="text-white mb-4">HMO partners</h4>
                 <div className="grid grid-cols-2 gap-3">
@@ -239,7 +275,7 @@ export const Footer = () => {
                   ].map((partner) => (
                     <Image
                       key={partner.alt}
-                      src={partner.src}
+                      src={partner.src || "/placeholder.svg"}
                       alt={partner.alt}
                       width={80}
                       height={40}
@@ -247,7 +283,9 @@ export const Footer = () => {
                     />
                   ))}
                 </div>
-                <p className="text-white/80 mt-6 mb-4 font-bold">HEFAMAA accredited</p>
+                <p className="text-white/80 mt-6 mb-4 font-bold">
+                  HEFAMAA accredited
+                </p>
                 <Image
                   src="/images/Hefamaa.svg"
                   alt="Hefamaa"
@@ -257,7 +295,6 @@ export const Footer = () => {
                 />
               </div>
             </div>
-
             <div className=" pt-6 flex flex-col md:flex-row justify-between md:items-center gap-4">
               <div className="text-white/70 text-sm block md:flex flex-cols items-center gap-2">
                 <p>Copyright © 2024 Debbo. All rights reserved.</p>
@@ -278,27 +315,52 @@ export const Footer = () => {
               </div>
               <div className="flex items-center gap-4 mt-4">
                 {[
-                  { src: "/images/Facebook.svg", alt: "AXA Mansard" },
-                  { src: "/images/LinkedIn.svg", alt: "Reliance" },
-                  { src: "/images/Instagram.svg", alt: "Leadway" },
-                  { src: "/images/YouTube.svg", alt: "Allianz" },
-                  { src: "/images/Twitter.svg", alt: "BUPA" },
+                  {
+                    src: "/images/Facebook.svg",
+                    alt: "Facebook",
+                    href: "https://www.facebook.com/debboCD/",
+                  },
+                  {
+                    src: "/images/LinkedIn.svg",
+                    alt: "LinkedIn",
+                    href: "https://www.linkedin.com/company/d%C3%A8bbo-by-cell-diagnostics/?originalSubdomain=ng",
+                  },
+                  {
+                    src: "/images/Instagram.svg",
+                    alt: "Instagram",
+                    href: "https://www.instagram.com/debbo_africa/?hl=en",
+                  },
+                  {
+                    src: "/images/YouTube.svg",
+                    alt: "YouTube",
+                    href: "https://www.youtube.com/@DebboAfrica",
+                  },
+                  {
+                    src: "/images/Twitter.svg",
+                    alt: "Twitter",
+                    href: "https://x.com/debbo_africa/status/1921954003199369354",
+                  },
                 ].map((partner) => (
-                  <Image
+                  <Link
                     key={partner.alt}
-                    src={partner.src}
-                    alt={partner.alt}
-                    width={80}
-                    height={40}
-                    className="h-6 w-auto"
-                  />
+                    href={partner.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Image
+                      src={partner.src || "/placeholder.svg"}
+                      alt={partner.alt}
+                      width={80}
+                      height={40}
+                      className="h-6 w-auto"
+                    />
+                  </Link>
                 ))}
               </div>
             </div>
           </div>
         </div>
       </div>
-
       <div className="mt-6 relative bg-[url('/images/footer-bg.png')] bg-cover bg-no-repeat w-full h-[200px]"></div>
     </footer>
   );

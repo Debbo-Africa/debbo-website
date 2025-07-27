@@ -91,7 +91,8 @@ export default function EnhancedNavbar() {
       label: "Speak to a Doctor",
       href: "/individual/contact-a-doctor",
       image: "/images/speak-to-a-doctor.jpg",
-      description: "Access Healthcare, Anywhere with virtual consultations",
+      description:
+        "Access health care anytime, anywhere through virtual consultations",
     },
     {
       label: "Book a Scan",
@@ -208,7 +209,7 @@ export default function EnhancedNavbar() {
                     isActiveLink("/individual") ? " bg-[--surface-card]" : ""
                   }`}
                 >
-                  For Individual
+                  For Individuals
                   <ChevronDown className="ml-1 h-4 w-4 group-hover:rotate-180 transition-transform duration-200" />
                 </button>
                 <div className="absolute top-full left-0 mt-2 w-[600px] bg-badge -ml-[200px] z-[999] rounded-3xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">

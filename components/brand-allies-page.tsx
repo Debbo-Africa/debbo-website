@@ -7,7 +7,10 @@ const BrandAliesPage = () => {
   return (
     <div className="min-h-screen mt-20 mx-2 md:mx-6">
       <Breadcrumb
-        items={[{ label: "Home", href: "/" }, { label: "Our Brand Alies" }]}
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Our Brand Allies" },
+        ]}
       />
       <PageHero
         title={"Harnessing the Power of Collaboration"}

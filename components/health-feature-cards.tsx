@@ -97,7 +97,7 @@ export default function HealthFeatureCards() {
           </h1>
         </h1>
         <p className="max-w-2xl mx-auto leading-relaxed">
-          At DelibalAfrica, we understand that African women's health journeys
+          At Débbo Africa, we understand that African women's health journeys
           are unique. That's why we created a mobile app that cares for your
           health needs, so you can live well and on your own terms.
         </p>
