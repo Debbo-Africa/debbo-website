@@ -21,7 +21,7 @@ const DebboAfricaHubSection = () => {
           <br />
           Student Hub
           <br />
-          DASH
+          (DASH)
         </h1>
       </div>
     </section>

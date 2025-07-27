@@ -34,28 +34,28 @@ export default function EnhancedNavbar() {
 
   const aboutUsItems = [
     {
-      label: "Who we are",
+      label: "Who We Are",
       href: "/about/who-we-are",
       image: "/images/about-who-we-are.jpg",
       description: "A modern healthcare company for African women.",
     },
     {
-      label: "Our team",
+      label: "Our Team",
       href: "/about/our-team",
       image: "/images/our-story.jpeg",
-      description: "Exceptional team of female healthcare professionals",
+      description: "Meet our team of exceptional female health professionals",
     },
     {
       label: "Careers",
       href: "/about/careers",
       image: "/images/career.jpg",
-      description: "Join our mission to transform healthcare",
+      description: "Join our mission to transform women’s health",
     },
     {
-      label: "Debbo cares foundation",
+      label: "Débbo Cares Foundation",
       href: "/about/foundation",
       image: "/images/debbo-cares.jpg",
-      description: "Debbo Africa foundation initiatives",
+      description: "Débbo Africa Foundation Initiatives",
     },
   ];
 

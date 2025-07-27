@@ -9,7 +9,7 @@ const DebboCaresPage = () => {
   return (
     <div className="min-h-screen mt-20">
       <Breadcrumb
-        items={[{ label: "Home", href: "/" }, { label: "debbocares" }]}
+        items={[{ label: "Home", href: "/" }, { label: "Débbo Cares" }]}
       />
       <PageHero
         title={"DébboCares Foundation"}
@@ -20,7 +20,7 @@ const DebboCaresPage = () => {
       />
 
       <WideningAccessSection />
-      <DebboAfricaHubSection/>
+      <DebboAfricaHubSection />
       <EmpoweringWomenSection />
     </div>
   );

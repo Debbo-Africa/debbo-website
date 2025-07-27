@@ -39,6 +39,7 @@ const EmpoweringWomenSection = () => {
         <ButtonComponent
           text="Become an Ambassador "
           className="w-full md:w-fit"
+          linkTo="/contact-us"
         />
       </div>
     </section>

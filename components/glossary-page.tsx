@@ -11,7 +11,7 @@ import { PageHero } from "./page-hero";
 import { GlossaryTermItem } from "./glossary-term-item";
 import { Pagination } from "./pagination";
 
-const ITEMS_PER_PAGE = 20;
+const ITEMS_PER_PAGE = 10;
 
 const LoadingGlossaryPlaceholder = () => (
   <div className="animate-pulse border-b border-gray-100 pb-4 flex justify-between flex-row items-center gap-10">
@@ -86,7 +86,7 @@ export default function GlossaryPage() {
       <div className="mb-12 mx-auto relative px-4 lg:px-0">
         <PageHero
           title="DébboAfrica Glossary"
-          description="Welcome to the DébboAfrica Glossary Blog, your go-to resource for understanding women's health, the various conditions affecting the female body, and the treatments available for these conditions."
+          description="Welcome to the Débbo Africa Glossary, your go-to resource for understanding women’s health, the various conditions affecting the female body, and the treatments available for these conditions."
           imageSrc="/images/faq.png"
           imageAlt="DébboAfrica Glossary"
         />

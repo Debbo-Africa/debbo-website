@@ -201,7 +201,7 @@ export default function BookTestPage() {
                 corporate wellness plans are designed to support employee
                 health, boost productivity, and build stronger organisations.
               </p>
-              <ButtonComponent text="Explore" />
+              <ButtonComponent text="Explore" linkTo="/corporate" />
             </div>
           </div>
         </section>
