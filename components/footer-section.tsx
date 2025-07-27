@@ -8,7 +8,7 @@ import QRCode from "qrcode";
 import Tagline from "./Tagline";
 import Link from "next/link";
 import ButtonComponent from "./Button";
-import { useToast } from "@/hooks/use-toast"; // Import useToast
+import { useToast } from "@/hooks/use-toast";
 
 type FooterLinkProps = {
   href: string;
@@ -31,12 +31,12 @@ const FooterLink = ({ href, children, className }: FooterLinkProps) => {
 
 export const Footer = () => {
   const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false); // Add loading state
+  const [loading, setLoading] = useState(false);
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const appUrl =
     "https://play.google.com/store/apps/details?id=com.debboafrica.app";
-  const { toast } = useToast(); // Initialize toast
+  const { toast } = useToast(); 
 
   useEffect(() => {
     const generateQRCode = async () => {
@@ -60,7 +60,7 @@ export const Footer = () => {
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true); // Set loading to true on submission
+    setLoading(true); 
 
     try {
       const response = await fetch("/api/subscribe", {
@@ -126,13 +126,13 @@ export const Footer = () => {
                     <input
                       type="email"
                       id="email"
-                      name="email" // Add name attribute
+                      name="email" 
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="e.g. test@debboafrica.com"
+                      placeholder="e.g. test@débboafrica.com"
                       className="w-full px-4 py-3 rounded-lg outline-none bg-[--surface-card] focus:ring-none focus:border-transparent"
                       required
-                      disabled={loading} // Disable input while loading
+                      disabled={loading} 
                     />
                   </div>
                   <ButtonComponent
@@ -140,6 +140,7 @@ export const Footer = () => {
                     className="w-full mt-3"
                     disabled={loading}
                     linkTo=""
+                    type="submit"
                   />{" "}
                 </form>
               </div>

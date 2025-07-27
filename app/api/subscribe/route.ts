@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
     formData.append("email", email);
 
     const response = await fetch(
-      "YOUR_GOOGLE_SHEET_WEB_APP_URL_FOR_SUBSCRIPTIONS",
+      "https://script.google.com/macros/s/AKfycbzbvdBeHgw9YBG4sNL9A0TFbt-XFbyBriWa8NpkEg2WKXYUWCszuFV1L6u81d_7kkmr/exec",
       {
         method: "POST",
         body: formData,
