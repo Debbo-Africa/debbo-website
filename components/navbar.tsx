@@ -95,18 +95,18 @@ export default function EnhancedNavbar() {
         "Access health care anytime, anywhere through virtual consultations",
     },
     {
-      label: "Book a Scan",
-      href: "/individual/scan",
-      image: "/images/book-a-scan.jpg",
-      description:
-        "Discover our expert radiology services for accurate imaging and timely diagnosis.",
-    },
-    {
       label: "Book a Test",
       href: "/individual/book-a-test",
       image: "/images/book-a-test.jpg",
       description:
         "Lab tests at home or in person, with results you can trust.",
+    },
+    {
+      label: "Book a Scan",
+      href: "/individual/scan",
+      image: "/images/book-a-scan.jpg",
+      description:
+        "Discover our expert radiology services for accurate imaging and timely diagnosis.",
     },
   ];
 
