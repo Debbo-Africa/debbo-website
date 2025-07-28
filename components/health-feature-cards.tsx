@@ -215,7 +215,7 @@ export default function HealthFeatureCards() {
               <br />
               Matters
             </h2>
-            <p className="text-white/90 text-lg leading-relaxed max-w-xs lg:max-w-md">
+            <p className="text-white/90 text-lg leading-relaxed max-w-xs lg:max-w-md text-center md:text-left">
               Our AI-powered triage tool assesses your symptoms and connects you
               to the care you need, when you need it.
             </p>
@@ -230,7 +230,7 @@ export default function HealthFeatureCards() {
               <p>Dr Déb</p>
             </div>
 
-            <div className="flex flex-row gap-2">
+            <div className="flex flex-row gap-2 justify-center md:justify-start">
               <Image
                 src="/images/playstore-large.svg"
                 alt="Play Store"

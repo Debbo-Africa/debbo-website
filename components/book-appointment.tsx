@@ -120,7 +120,7 @@ export default function BookAppointment() {
                 )}
                 {card.description && (
                   <p className="text-base text-general-white leading-relaxed mb-8 md:mb-0 font-bold">
-                    {card.description}{" "}<br/>
+                    {card.description} <br />
                   </p>
                 )}
               </div>
@@ -137,7 +137,7 @@ export default function BookAppointment() {
                       }
                       imageContainerRefs.current[index][imgIdx] = el;
                     }}
-                    className="w-full relative h-[330px] max-w-sm md:max-w-md mx-auto rounded-t-2xl"
+                    className="w-full relative h-[260px] md:h-[330px] max-w-sm md:max-w-md mx-auto rounded-t-2xl"
                   >
                     <Image
                       src={imgSrc || "/placeholder.svg"}

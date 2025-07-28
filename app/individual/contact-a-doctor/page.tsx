@@ -8,23 +8,19 @@ import CareCategoriesSection from "@/components/careCategory";
 import BookAppointment from "@/components/book-appointment";
 import ContraceptionTable from "@/components/contreption-table";
 import LetsWorkTogetherSection from "@/components/lets-work-together";
-
+import { useBanner } from "@/hooks/use-banner";
 
 export default function SpeakToDoctor() {
-  
-
- 
-
-
-
+ const { bannerVisible } = useBanner();
 
   return (
     <div className="min-h-screen pt-20">
       <TestHeader />
-
-      <Breadcrumb
-        items={[{ label: "Home", href: "/" }, { label: "Speak to a Doctor" }]}
-      />
+      <div className={`${bannerVisible && "mt-16"} `}>
+        <Breadcrumb
+          items={[{ label: "Home", href: "/" }, { label: "Speak to a Doctor" }]}
+        />
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 py-8">
         <CareCategoriesSection />

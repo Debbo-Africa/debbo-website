@@ -15,11 +15,14 @@ import { OrderSuccessModal } from "@/components/order-success-modal";
 import Link from "next/link";
 import { Toaster } from "@/components/toast";
 import ButtonComponent from "@/components/Button";
+import { useBanner } from "@/hooks/use-banner";
 
 export default function CartPage() {
   const { cartItems, updateQuantity, removeFromCart, getCartTotal, clearCart } =
     useCart();
   const { toasts, toast, dismiss } = useToast();
+ const { bannerVisible } = useBanner();
+
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -68,13 +71,11 @@ export default function CartPage() {
       const result = await response.json();
 
       if (result.success) {
-        // Store order data before showing modal
         setSubmittedOrder({
           cartItems: [...cartItems],
           total: total,
         });
 
-        // Show success toast
         toast({
           type: "success" as any,
           title: "Order Submitted Successfully!",
@@ -82,7 +83,6 @@ export default function CartPage() {
           duration: 6000,
         });
 
-        // Show modal
         setShowSuccessModal(true);
       } else {
         toast({
@@ -106,12 +106,10 @@ export default function CartPage() {
     }
   };
 
-  // Handle modal close properly for shadcn Dialog
   const handleModalClose = (open: boolean) => {
     if (!open) {
       setShowSuccessModal(false);
       setSubmittedOrder(null);
-      // Clear cart and form when modal closes
       clearCart();
       setFormData({
         firstName: "",
@@ -129,14 +127,21 @@ export default function CartPage() {
     return (
       <div className="min-h-screen pt-20">
         <TestHeader />
-        <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Cart" }]} />
+        <div className={`${bannerVisible && "mt-16"} `}>
+          <Breadcrumb
+            items={[{ label: "Home", href: "/" }, { label: "Cart" }]}
+          />
+        </div>
         <div className="max-w-7xl mx-auto px-4 py-12 text-center">
           <h1 className="text-2xl font-bold mb-4">Your cart is empty</h1>
           <p className="text-body-text-gray mb-8">
             Add some tests to get started
           </p>
-          <ButtonComponent text="Browse Tests" linkTo="/individual"arrow={false} />
-         
+          <ButtonComponent
+            text="Browse Tests"
+            linkTo="/individual"
+            arrow={false}
+          />
         </div>
         <Toaster toasts={toasts as any} onDismiss={dismiss} />
       </div>
@@ -146,7 +151,10 @@ export default function CartPage() {
   return (
     <div className="min-h-screen pt-20">
       <TestHeader />
+      <div className="mt-16">
+        
       <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Cart" }]} />
+        </div>
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
@@ -313,7 +321,6 @@ export default function CartPage() {
                     />
                   </div>
 
-                
                   <ButtonComponent
                     fullWidth
                     type="submit"
@@ -323,7 +330,6 @@ export default function CartPage() {
                       isSubmitting ? (
                         <>
                           <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                        
                         </>
                       ) : (
                         "Order Now "

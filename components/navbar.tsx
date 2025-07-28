@@ -402,7 +402,7 @@ export default function EnhancedNavbar() {
       </nav>
 
       <div
-        className={`fixed inset-0 z-[110] lg:hidden transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-0 z-[11333330] lg:hidden transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -422,7 +422,7 @@ export default function EnhancedNavbar() {
             </Button>
           </div>
 
-          <div className="overflow-y-auto h-[calc(100vh-80px)] px-4 py-8">
+          <div className="overflow-y-auto h-[calc(100vh-80px)] px-4 py-8 ">
             <div className="space-y-8">
               <Link
                 href="/"

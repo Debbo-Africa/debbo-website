@@ -56,7 +56,7 @@ export function WhatWeOfferSection() {
 
   useEffect(() => {
     const intervalDuration = 100;
-    const totalDuration = 40000;
+    const totalDuration = 10000;
     const increment = (intervalDuration / totalDuration) * 100;
 
     const progressInterval = setInterval(() => {
