@@ -30,7 +30,7 @@ export function Tabs({
 }: TabsProps) {
   return (
     <div className={`flex flex-col ${className}`}>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto hide-scrollbar">
         <div
           className={`flex justify-start gap-4 border-b border-[#F2E9DD] w-max min-w-full ${className}`}
         >
