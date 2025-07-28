@@ -244,7 +244,7 @@ export default function EnhancedNavbar() {
                             />
                             <div className="absolute inset-0 flex items-end">
                               <div className="p-4 text-white">
-                                <p className="font-semibold text-lg opacity-90">
+                                <p className="font-semibold text-md opacity-90">
                                   {currentImage.description}
                                 </p>
                               </div>
@@ -307,9 +307,9 @@ export default function EnhancedNavbar() {
                             />
                             <div className="absolute inset-0 flex items-end">
                               <div className="p-4 text-white">
-                                <h3 className="font-semibold text-lg">
+                                <p className="font-semibold text-md">
                                   {currentImage.description}
-                                </h3>
+                                </p>
                               </div>
                             </div>
                           </div>
@@ -361,9 +361,9 @@ export default function EnhancedNavbar() {
                             />
                             <div className="absolute inset-0 flex items-end">
                               <div className="p-4 text-white">
-                                <h3 className="font-semibold text-lg opacity-90">
+                                <p className="font-semibold text-md opacity-90">
                                   {currentImage.description}
-                                </h3>
+                                </p>
                               </div>
                             </div>
                           </div>
