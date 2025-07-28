@@ -175,7 +175,7 @@ export const Trust = () => {
         ))}
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-8 relative z-20 pt-20">
+      <div className=" mx-auto px-4 sm:px-8 relative z-20 pt-20 bg-[--surface-card]">
         <div className="text-center mb-8">
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-general-black mb-6">
             We focus on conditions that
