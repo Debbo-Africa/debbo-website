@@ -244,9 +244,9 @@ export default function EnhancedNavbar() {
                             />
                             <div className="absolute inset-0 flex items-end">
                               <div className="p-4 text-white">
-                                <h3 className="font-semibold text-lg opacity-90">
+                                <p className="font-semibold text-lg opacity-90">
                                   {currentImage.description}
-                                </h3>
+                                </p>
                               </div>
                             </div>
                           </div>

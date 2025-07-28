@@ -38,6 +38,7 @@ export default function GlossaryPage() {
           await client.getEntries<GlossarySkeleton>({
             content_type: "dbboAfricaGlossary",
             order: "fields.title" as any,
+            
           });
 
         setGlossaryTerms(entries.items as GlossaryEntry[]);
