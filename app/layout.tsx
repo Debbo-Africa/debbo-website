@@ -36,8 +36,20 @@ const outfit = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "DébboAfrica - Empowering African Women Through Smart Health",
+  title: {
+    default: "DébboAfrica - Empowering African Women with Smart Health",
+    template: "%s - Health",
+  },
   description: "Cutting-Edge Care for African Women's Health",
+  icons: {
+    icon: "/images/banner-logo.svg",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
+  openGraph: {
+    images: "/images/5cs-woman1.jpg",
+  },
 };
 
 export default function RootLayout({
