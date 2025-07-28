@@ -100,7 +100,7 @@ export default function HeroSection() {
               </span>
               <h1>African Women</h1>
             </div>
-            <h1 className="block">Through Smart Health</h1>
+            <h1 className="block">With Smart Health</h1>
           </div>
         </div>
 
