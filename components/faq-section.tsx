@@ -161,10 +161,10 @@ export const FAQSection = () => {
                   </div>
                 </div>
                 <div className="flex-1 flex flex-col justify-center mb-6">
-                  <p className="text-base text-general-black text-md leading-relaxed mb-3">
+                  <p className="text-general-black text-lg leading-relaxed mb-3">
                     "{reviews[currentReview].text}"
                   </p>
-                  <p className="text-md font-medium text-body-text-gray mb-4">
+                  <p className="text-lg font-medium text-body-text-gray mb-4">
                     {reviews[currentReview].author}
                   </p>
                   <div className="flex items-center gap-3">

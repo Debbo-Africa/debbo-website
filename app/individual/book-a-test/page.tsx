@@ -24,6 +24,7 @@ import { Tabs } from "@/components/tabs";
 import { LetsWorkTogetherSection } from "@/components/lets-work-together";
 import WideningAccessSection from "@/components/widening-access-section";
 import ButtonComponent from "@/components/Button";
+import { useBanner } from "@/hooks/use-banner";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -89,7 +90,7 @@ export default function BookTestPage() {
   const [categoryInfoMap, setCategoryInfoMap] = useState<
     Record<string, string>
   >({});
-
+ const { bannerVisible } = useBanner();
   useEffect(() => {
     const fetchTests = async () => {
       try {
@@ -169,10 +170,12 @@ export default function BookTestPage() {
     return (
       <div className="min-h-screen pt-20">
         <TestHeader showTabs activeTab={activeTab} onTabChange={setActiveTab} />
+        <div className={`${bannerVisible ? "mt-16" : ""} `}>
 
         <Breadcrumb
           items={[{ label: "Home", href: "/" }, { label: "Book a Test" }]}
           />
+          </div>
         <PageHero
           title={currentTabContent.title}
           description={currentTabContent.description}
@@ -217,9 +220,11 @@ export default function BookTestPage() {
   return (
     <div className="min-h-screen pt-20">
       <TestHeader showTabs activeTab={activeTab} onTabChange={setActiveTab} />
-      <Breadcrumb
-        items={[{ label: "Home", href: "/" }, { label: "Book a Test" }]}
-      />
+      <div className={`${bannerVisible ? "mt-16" : ""} `}>
+        <Breadcrumb
+          items={[{ label: "Home", href: "/" }, { label: "Book a Test" }]}
+        />
+      </div>
       <PageHero
         title={currentTabContent.title}
         description={currentTabContent.description}
@@ -325,7 +330,6 @@ export default function BookTestPage() {
         <>
           <WideningAccessSection
             buttonText="Explore "
-            
             imageSrc="/images/test.jpg"
             title="Thinking About the Future Together?"
             description1="We also offer pre-marital health packages for couples who want to take a proactive step toward their future. These packages include essential screenings such as genotype testing, helping you make informed decisions together."

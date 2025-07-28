@@ -8,6 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useBanner } from "@/hooks/use-banner";
 
 interface TestHeaderProps {
   showTabs?: boolean;
@@ -44,15 +45,19 @@ export function TestHeader({
   onTabChange,
 }: TestHeaderProps) {
   const activeTabData = tabs.find((tab) => tab.key === activeTab);
+  const { bannerVisible } = useBanner();
 
   return (
-    <header className="bg-[--surface-card] fixed top-16 w-full z-50 shadow-sm">
+    <header
+      className={`bg-[--surface-card] fixed ${
+        bannerVisible ? "top-24" : "top-16"
+      }  w-full z-50 shadow-sm`}
+    >
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-12">
           <div className="flex items-center space-x-8">
             {showTabs && (
               <>
-                {/* Desktop Tabs */}
                 <nav className="hidden md:flex space-x-6">
                   {tabs.map((tab) => (
                     <button

@@ -8,12 +8,7 @@ export default function HeroSection() {
   const cursorRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    const words = [
-      "Empowering",
-      "Supporting",
-      "Uplifting",
-      "Transforming",
-    ];
+    const words = ["Empowering", "Connecting", "Supporting", "Uplifting"];
     let currentWordIndex = 0;
     let isPageVisible = true;
     let isTyping = false;
@@ -112,7 +107,7 @@ export default function HeroSection() {
         <div className="text-center max-w-xl mx-auto">
           {" "}
           <h4 className="text-md sm:text-xl text-body-text-gray mb-8 font-bold">
-            Cutting-Edge Care for African Women's Health
+            Your all-in-one platform for personalised, quality care
           </h4>
           <ButtonComponent />
         </div>

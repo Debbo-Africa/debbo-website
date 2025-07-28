@@ -72,7 +72,7 @@ export const DownloadSection = () => {
           <div className="absolute inset-0 bg-black/30" />
 
           <div className="relative z-10 p-6 sm:p-8 lg:p-10 h-full flex items-end">
-            <h1 className="hidden md:block sm:text-2xl lg:text-4xl font-bold text-general-white leading-relaxed">
+            <h1 className="hidden md:block sm:text-2xl lg:text-8xl font-bold text-general-white leading-relaxed">
               Closing
               <br />
               the gender

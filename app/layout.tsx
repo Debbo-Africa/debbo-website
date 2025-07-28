@@ -2,7 +2,6 @@ import type React from "react";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer-section";
 import CursorFollower from "@/components/cursur-follow";
@@ -51,12 +50,13 @@ export default function RootLayout({
       <body
         className={`min-h-screen text-general-black transition-colors bg-badge ${outfit.variable}`}
       >
-          <Navbar />
-          {children}
-          <Footer />
-          <div className="hidden lg:block">
-            <CursorFollower />
-          </div>
+        <Navbar />
+
+        {children}
+        <Footer />
+        <div className="hidden lg:block">
+          <CursorFollower />
+        </div>
       </body>
     </html>
   );

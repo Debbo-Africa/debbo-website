@@ -39,7 +39,7 @@ const CollaborationSection = () => {
             transformative journey towards overall wellness.
           </p>
 
-          <div className="flex flex-wrap items-center gap-6">
+          <div className="flex flex-wrap items-center gap-4 md:gap-8">
             <Image
               src="/images/timon-logo.svg"
               alt="Timon Capital"
@@ -60,6 +60,12 @@ const CollaborationSection = () => {
             />
             <Image
               src="/images/thecamp-logo.svg"
+              alt="The Camp"
+              width={70}
+              height={30}
+            />
+            <Image
+              src="/images/qstudio-logo.svg"
               alt="The Camp"
               width={70}
               height={30}

@@ -3,12 +3,7 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 
-const words = [
-  "Empowering",
-  "Supporting",
-  "Uplifting",
-  "Transforming",
-];
+const words = ["Empowering", "Connecting", "Supporting", "Uplifting"];
 
 export default function HeroSection() {
   const animatedWordRef = useRef<HTMLSpanElement>(null);

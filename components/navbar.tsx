@@ -6,6 +6,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import ButtonComponent from "./Button";
+import { DismissibleBanner } from "./dismissable-banner";
+import { useBanner } from "@/hooks/use-banner";
 
 export default function EnhancedNavbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,6 +16,9 @@ export default function EnhancedNavbar() {
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+
+  // Use Zustand store instead of local state
+  const { bannerVisible, closeBanner } = useBanner();
 
   const toggleDropdown = (dropdown: string) => {
     setOpenDropdown(openDropdown === dropdown ? null : dropdown);
@@ -49,7 +54,7 @@ export default function EnhancedNavbar() {
       label: "Careers",
       href: "/about/careers",
       image: "/images/career.jpg",
-      description: "Join our mission to transform women’s health",
+      description: "Join our mission to transform women's health",
     },
     {
       label: "Débbo Cares Foundation",
@@ -179,10 +184,12 @@ export default function EnhancedNavbar() {
 
   return (
     <>
+      {bannerVisible && <DismissibleBanner onClose={closeBanner} />}
+
       <nav
-        className={`fixed top-0 left-0 right-0 z-[100] transition-colors duration-300 ${
-          isScrolled ? "bg-[#FFF5E9F7]" : "bg-[#fff5e9"
-        } ${
+        className={`fixed left-0 right-0 z-[100] transition-colors duration-300 mb-40 ${
+          bannerVisible ? "top-[32px] mb-64" : "top-0"
+        } ${isScrolled ? "bg-[#FFF5E9F7]" : "bg-[#fff5e9"} ${
           !pathname.includes("individual") && !pathname.includes("cart")
             ? "rounded-b-3xl"
             : ""
