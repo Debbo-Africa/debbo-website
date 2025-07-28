@@ -8,6 +8,15 @@ import { Breadcrumb } from "./breadcrumb";
 import { PageHero } from "./page-hero";
 import { TeamCard } from "./team-card";
 
+// Helper function to split teamMembers into rows
+function chunkArray<T>(arr: T[], chunkSize: number): T[][] {
+  const chunks: T[][] = [];
+  for (let i = 0; i < arr.length; i += chunkSize) {
+    chunks.push(arr.slice(i, i + chunkSize));
+  }
+  return chunks;
+}
+
 export default function TeamsPage() {
   const [teamMembers, setTeamMembers] = useState<TeamEntry[]>([]);
   const [loading, setLoading] = useState(true);
@@ -61,11 +70,73 @@ export default function TeamsPage() {
               <p className="text-gray-500 text-lg">No team members found.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {teamMembers.map((member) => (
-                <TeamCard key={member.sys.id} member={member} />
-              ))}
-            </div>
+            (() => {
+              const count = teamMembers.length;
+
+              if (count === 3) {
+                return (
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    {teamMembers.map((member) => (
+                      <TeamCard key={member.sys.id} member={member} />
+                    ))}
+                  </div>
+                );
+              }
+
+              if (count === 4) {
+                const rows = chunkArray(teamMembers, 2);
+                return (
+                  <div className="space-y-8">
+                    {rows.map((row, idx) => (
+                      <div
+                        key={idx}
+                        className="grid grid-cols-1 lg:grid-cols-2 gap-8"
+                      >
+                        {row.map((member) => (
+                          <TeamCard key={member.sys.id} member={member} />
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                );
+              }
+
+              if (count === 5) {
+                const firstRow = teamMembers.slice(0, 3);
+                const secondRow = teamMembers.slice(3);
+                return (
+                  <div className="space-y-8">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                      {firstRow.map((member) => (
+                        <TeamCard key={member.sys.id} member={member} />
+                      ))}
+                    </div>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                      {secondRow.map((member) => (
+                        <TeamCard key={member.sys.id} member={member} />
+                      ))}
+                    </div>
+                  </div>
+                );
+              }
+
+              // Default layout for 6 and above: 3 per row
+              const rows = chunkArray(teamMembers, 3);
+              return (
+                <div className="space-y-8">
+                  {rows.map((row, idx) => (
+                    <div
+                      key={idx}
+                      className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+                    >
+                      {row.map((member) => (
+                        <TeamCard key={member.sys.id} member={member} />
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              );
+            })()
           )}
         </div>
       </div>

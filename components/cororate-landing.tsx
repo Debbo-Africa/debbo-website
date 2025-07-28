@@ -7,7 +7,6 @@ const words = [
   "Empowering",
   "Supporting",
   "Uplifting",
-  "Inspiring",
   "Transforming",
 ];
 
