@@ -181,7 +181,7 @@ export default function EnhancedNavbar() {
     <>
       <nav
         className={`fixed top-0 left-0 right-0 z-[100] transition-colors duration-300 ${
-          isScrolled ? "bg-[#FFF5E9B3]" : "bg-[#fff5e9"
+          isScrolled ? "bg-[#FFF5E9F7]" : "bg-[#fff5e9"
         } ${
           !pathname.includes("individual") && !pathname.includes("cart")
             ? "rounded-b-3xl"
@@ -534,7 +534,7 @@ export default function EnhancedNavbar() {
                   </div>
                 )}
               </div>
-              
+
               <div
                 className={`rounded-xl p-4 ${
                   pathname.startsWith("/resources")
