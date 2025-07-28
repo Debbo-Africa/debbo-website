@@ -427,54 +427,6 @@ export default function EnhancedNavbar() {
                 Home
               </Link>
 
-              <div
-                className={`rounded-3xl p-4 ${
-                  pathname.startsWith("/about")
-                    ? "bg-[--surface-card]"
-                    : "bg-surface-card"
-                }`}
-              >
-                <button
-                  onClick={() => toggleDropdown("about")}
-                  className="flex items-center justify-between w-full text-lg font-medium text-general-black"
-                >
-                  About us
-                  <ChevronDown
-                    className={`h-5 w-5 transition-transform duration-200 ${
-                      openDropdown === "about" ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
-                {openDropdown === "about" && (
-                  <div className="mt-6 space-y-3">
-                    <div className="lg:block hidden mb-4">
-                      <div className="relative h-32 rounded-lg overflow-hidden">
-                        <Image
-                          src={getDefaultImage("about")?.image || ""}
-                          alt="About us"
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                    </div>
-                    <div className="space-y-8">
-                      {aboutUsItems.map((item, index) => (
-                        <Link
-                          key={index}
-                          href={item.href}
-                          className={`block text-base p-2 rounded-xl text-general-black ${
-                            isActiveLink(item.href) ? "bg-[--surface-card]" : ""
-                          }`}
-                          onClick={closeMobileMenu}
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-
               {/* For Individuals */}
               <div
                 className={`rounded-3xl p-4 ${
@@ -535,7 +487,54 @@ export default function EnhancedNavbar() {
               >
                 For Corporate
               </Link>
-
+              <div
+                className={`rounded-3xl p-4 ${
+                  pathname.startsWith("/about")
+                    ? "bg-[--surface-card]"
+                    : "bg-surface-card"
+                }`}
+              >
+                <button
+                  onClick={() => toggleDropdown("about")}
+                  className="flex items-center justify-between w-full text-lg font-medium text-general-black"
+                >
+                  About us
+                  <ChevronDown
+                    className={`h-5 w-5 transition-transform duration-200 ${
+                      openDropdown === "about" ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                {openDropdown === "about" && (
+                  <div className="mt-6 space-y-3">
+                    <div className="lg:block hidden mb-4">
+                      <div className="relative h-32 rounded-lg overflow-hidden">
+                        <Image
+                          src={getDefaultImage("about")?.image || ""}
+                          alt="About us"
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                    </div>
+                    <div className="space-y-8">
+                      {aboutUsItems.map((item, index) => (
+                        <Link
+                          key={index}
+                          href={item.href}
+                          className={`block text-base p-2 rounded-xl text-general-black ${
+                            isActiveLink(item.href) ? "bg-[--surface-card]" : ""
+                          }`}
+                          onClick={closeMobileMenu}
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+              
               <div
                 className={`rounded-xl p-4 ${
                   pathname.startsWith("/resources")
