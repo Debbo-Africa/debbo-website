@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   },
   description: "Cutting-Edge Care for African Women's Health",
   icons: {
-    icon: "/images/banner-logo.svg",
+    icon: "/images/favicon.svg",
   },
   twitter: {
     card: "summary_large_image",
