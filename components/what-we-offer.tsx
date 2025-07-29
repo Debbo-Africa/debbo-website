@@ -166,7 +166,7 @@ export function WhatWeOfferSection() {
                       }}
                     >
                       <div
-                        className="relative aspect-[4/2] rounded-3xl overflow-hidden cursor-pointer transition-all duration-200"
+                        className="relative aspect-[4/3] md:aspect-[4/2] rounded-3xl overflow-hidden cursor-pointer transition-all duration-200"
                         onClick={() => handleCategoryClick(item.category)}
                       >
                         <Image
