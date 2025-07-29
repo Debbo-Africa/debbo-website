@@ -10,7 +10,8 @@ const OFFER_ITEMS = [
     title: "Product",
     description:
       "Through the MyDébbo App and our Lekki Lounge, we provide personalised, patient-centred support, from symptom to solution, ensuring timely care online and in person.",
-    image: "/images/product-card.png",
+
+    image: "/images/communities-card.png",
     category: "Product",
   },
   {
@@ -26,7 +27,7 @@ const OFFER_ITEMS = [
     title: "Communities",
     description:
       "At DébboAfrica, we believe healing is personal, not just medical. Through DébboTribe, we're creating a supportive space platform where women connect, share real stories, and bloom together.",
-    image: "/images/communities-card.png",
+    image: "/images/product-card.png",
     category: "Communities",
   },
 ];
