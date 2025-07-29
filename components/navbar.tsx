@@ -591,7 +591,7 @@ export default function EnhancedNavbar() {
               </div>
 
               <div className="pt-6">
-                <ButtonComponent fullWidth />
+                <ButtonComponent fullWidth onClick={() => setIsOpen(!isOpen)} />
               </div>
             </div>
           </div>
