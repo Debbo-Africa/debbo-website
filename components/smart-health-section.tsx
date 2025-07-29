@@ -63,7 +63,7 @@ export function SmartHealthcareSection() {
           </h2>
         </div>
 
-        <div className="bg-[#ef4444] rounded-2xl  flex items-center justify-center ">
+        <div className="bg-[#D76441] rounded-2xl  flex items-center justify-center ">
           <div className="relative w-64 h-64">
             <Image
               src="/images/smiling-woman.png"
