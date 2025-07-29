@@ -10,9 +10,9 @@ interface Service {
 
 const services: Service[] = [
   {
-    name: "Levornogestrel 1.5mg (Emergency Contraception)",
+    name: "Oral Contraceptive Pills",
     description:
-      "A single-dose oral contraceptive pill used to prevent pregnancy after unprotected sex. Most effective when taken within 72 hours.",
+      "We offer both emergency and daily oral contraceptive pills, supporting your reproductive health needs — whether for immediate use or ongoing family planning.",
   },
   {
     name: "IUD Insertion",
