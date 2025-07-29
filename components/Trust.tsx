@@ -19,9 +19,7 @@ export const Trust = () => {
           setHasPlayed(true);
         }
       },
-      {
-        threshold: 0.5, 
-      }
+      { threshold: 0.5 }
     );
 
     if (sectionRef.current) {
@@ -38,30 +36,33 @@ export const Trust = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative h-[110vh] overflow-hidden rounded-3xl "
+      className="pt-12 md:pt-0 px-4 sm:px-0 relative overflow-hidden bg-[#f3ece1] rounded-3xl"
     >
-      <video
-        ref={videoRef}
-        className="absolute top-0 left-0 w-full h-full object-cover z-0"
-        src="/images/pills_animation_3.mp4" 
-        muted
-        autoPlay={false}
-        playsInline
-        controls={false}
-        preload="auto"
-      />
-
-      <div className="relative z-10 h-full w-full  flex pt-20 justify-center px-4 sm:px-8">
-        <div className="text-center">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-general-black mb-6 max-w-5xl mx-auto">
-            We focus on the often overlooked but vital health needs of African
-            women
-          </h2>
-          <p className="text-base sm:text-lg lg:text-xl text-body-text-gray mb-8 max-w-2xl mx-auto px-4">
-            Whether you're managing pain, planning a family, or just not feeling
-            like yourself, we are here to help.
-          </p>
-          <ButtonComponent />
+      <div className="mx-auto w-full">
+        <div className=" overflow-hidden ">
+          <div className="text-center px-6 py-12 md:absolute w-full  ">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-general-black mb-6 max-w-5xl mx-auto">
+              We focus on the often overlooked but vital health needs of African
+              women
+            </h2>
+            <p className="text-base sm:text-lg lg:text-xl text-body-text-gray mb-8 max-w-2xl mx-auto">
+              Whether you're managing pain, planning a family, or just not
+              feeling like yourself, we are here to help.
+            </p>
+            <ButtonComponent />
+          </div>
+          <div className="w-full aspect-video overflow-hidden -mb-1">
+            <video
+              ref={videoRef}
+              className="w-full h-full object-cover border-none outline-none"
+              src="/images/pills_animation_3.mp4"
+              muted
+              autoPlay={false}
+              playsInline
+              controls={false}
+              preload="auto"
+            />
+          </div>
         </div>
       </div>
     </section>
