@@ -56,7 +56,7 @@ export function WhatWeOfferSection() {
 
   useEffect(() => {
     const intervalDuration = 100;
-    const totalDuration = 10000;
+    const totalDuration = 5000;
     const increment = (intervalDuration / totalDuration) * 100;
 
     const progressInterval = setInterval(() => {
@@ -100,7 +100,6 @@ export function WhatWeOfferSection() {
   return (
     <section className="py-16">
       <div className="max-w-7xl mx-auto px-4 lg:px-0 flex flex-col lg:flex-row gap-4">
-        {/* LEFT SECTION (30%) */}
         <div className="w-full lg:w-[30%] space-y-8 text-center lg:text-left">
           <div>
             <h2 className="text-3xl lg:text-4xl font-bold text-general-black mb-6">
@@ -167,7 +166,7 @@ export function WhatWeOfferSection() {
                       }}
                     >
                       <div
-                        className="relative aspect-[3/2] rounded-3xl overflow-hidden cursor-pointer transition-all duration-200"
+                        className="relative aspect-[4/2] rounded-3xl overflow-hidden cursor-pointer transition-all duration-200"
                         onClick={() => handleCategoryClick(item.category)}
                       >
                         <Image
@@ -189,7 +188,7 @@ export function WhatWeOfferSection() {
             </div>
           </div>
 
-          <div className="space-y-6 mt-4 p-4 px-4 md:px-10 mb-4">
+          <div className="space-y-6  p-4 px-4 md:px-10 mb-4">
             <p className="text-body-text-gray leading-relaxed text-base mb-4">
               {currentItem.description}
             </p>

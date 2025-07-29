@@ -42,8 +42,7 @@ export const Trust = () => {
         <div className=" overflow-hidden ">
           <div className="text-center px-6 py-12 md:absolute w-full  ">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-general-black mb-6 max-w-5xl mx-auto">
-              We focus on the often overlooked but vital health needs of African
-              women
+              We focus on the overlooked but vital health needs of African women
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-body-text-gray mb-8 max-w-2xl mx-auto">
               Whether you're managing pain, planning a family, or just not
