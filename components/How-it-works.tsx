@@ -13,9 +13,9 @@ const cards = [
     title: "Triage",
     description:
       "Our AI-powered tool helps guide you to the right care quickly and safely.",
-    images: ["/images/triage-phone.png", ],
+    images: ["/images/triage-phone.png"],
     alt: "Triage phone interface",
-    background: "bg-[--surface-card]", 
+    background: "bg-[--surface-card]",
   },
   {
     id: 2,
@@ -36,7 +36,7 @@ const cards = [
     id: 4,
     title: "Support",
     description:
-      "Track results, access health reminders, and learn from personalised content in the app.",
+      "Stay on top of your health with personalised reminders and educational content tailored to you.",
     images: ["/images/consult-phone.png"],
     alt: "Support care image",
   },
