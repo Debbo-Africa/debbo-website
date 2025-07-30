@@ -9,11 +9,11 @@ export const metadata: Metadata = {
     title: "Contact Us - Your Company Name",
     description:
       "Get in touch with us for any inquiries, support, or feedback. We're here to help!",
-    url: "https://www.debbo.africa/contact-us",
+    url: "https://debbo-africa.netlify.app/contact-us",
     siteName: "Your Company Name",
     images: [
       {
-        url: "https://www.debbo.africa/contact-image.jpg",
+        url: "https://debbo-africa.netlify.app/contact-image.jpg",
         width: 1200,
         height: 630,
         alt: "Contact Us - Reach out to our team",
