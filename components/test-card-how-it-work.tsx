@@ -23,7 +23,7 @@ export default function HowItWorksCard({
       <div className=" max-w-[350px] mx-auto">
         <h3 className={`text-md font-extrabold  text-general-black `}>
           <h4 className={`inline-block  ${stepColor}`}>{step}</h4>{" "}
-          <h4>{title}</h4>
+          <h4 className="inline-block">{title}</h4>
         </h3>
         <p className="text-sm text-body-text-gray mt-2">{description}</p>
       </div>
