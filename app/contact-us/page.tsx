@@ -6,11 +6,11 @@ export const metadata: Metadata = {
   description:
     "Get in touch with us for any inquiries, support, or feedback. We're here to help!",
   openGraph: {
-    title: "Contact Us - Your Company Name",
+    title: "Contact Us - DébboAfrica",
     description:
       "Get in touch with us for any inquiries, support, or feedback. We're here to help!",
     url: "https://debbo-africa.netlify.app/contact-us",
-    siteName: "Your Company Name",
+    siteName: "DébboAfrica",
     images: [
       {
         url: "https://debbo-africa.netlify.app/contact-image.jpg",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Contact Us - Your Company Name",
+    title: "Contact Us - DébboAfrica",
     description:
       "Get in touch with us for any inquiries, support, or feedback. We're here to help!",
     images: ["/contact-image.jpg"],
