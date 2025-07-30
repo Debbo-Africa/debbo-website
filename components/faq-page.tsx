@@ -25,7 +25,10 @@ export default function FaqsPage() {
     const fetchFaqs = async () => {
       try {
         const entries: EntryCollection<FaqSkeleton> =
-          await client.getEntries<FaqSkeleton>({ content_type: "faqs" });
+          await client.getEntries<FaqSkeleton>({
+            content_type: "faqs",
+            order: "sys.createdAt" as any,
+          });
         setFaqs(entries.items as FaqEntry[]);
         const uniqueCategories = Array.from(
           new Set(entries.items.map((faq) => faq.fields.category))
