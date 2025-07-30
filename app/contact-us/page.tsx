@@ -2,7 +2,7 @@ import ContactUs from "@/components/contact-us-page";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact Us - Your Company Name",
+  title: "Contact Us ",
   description:
     "Get in touch with us for any inquiries, support, or feedback. We're here to help!",
   openGraph: {
