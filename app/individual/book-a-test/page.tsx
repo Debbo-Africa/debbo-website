@@ -25,6 +25,8 @@ import { LetsWorkTogetherSection } from "@/components/lets-work-together";
 import WideningAccessSection from "@/components/widening-access-section";
 import ButtonComponent from "@/components/Button";
 import { useBanner } from "@/hooks/use-banner";
+import HowItWorksSection from "@/components/test-how-it-works-section";
+import ComingSoon from "@/components/test-coming-soon";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -90,7 +92,7 @@ export default function BookTestPage() {
   const [categoryInfoMap, setCategoryInfoMap] = useState<
     Record<string, string>
   >({});
- const { bannerVisible } = useBanner();
+  const { bannerVisible } = useBanner();
   useEffect(() => {
     const fetchTests = async () => {
       try {
@@ -171,11 +173,10 @@ export default function BookTestPage() {
       <div className="min-h-screen pt-20">
         <TestHeader showTabs activeTab={activeTab} onTabChange={setActiveTab} />
         <div className={`${bannerVisible ? "mt-16" : ""} `}>
-
-        <Breadcrumb
-          items={[{ label: "Home", href: "/" }, { label: "Book a Test" }]}
+          <Breadcrumb
+            items={[{ label: "Home", href: "/" }, { label: "Book a Test" }]}
           />
-          </div>
+        </div>
         <PageHero
           title={currentTabContent.title}
           description={currentTabContent.description}
@@ -233,22 +234,27 @@ export default function BookTestPage() {
       />
 
       <div className="max-w-7xl mx-auto px-4 py-8">
-        {/* Tabs at top */}
         {activeTab === "women" && (
-          <Tabs
-            tabs={[
-              { key: "all", label: "All", content: null },
-              ...availableCategories.map((category) => ({
-                key: category,
-                label: category,
-                content: null,
-                infoContent: categoryInfoMap[category],
-              })),
-            ]}
-            activeTab={selectedCategory}
-            setActiveTab={setSelectedCategory}
-            className="justify-center"
-          />
+          <>
+            <div className="py-8 max-w-7xl mx-auto px-4">
+              <HowItWorksSection />
+              {/* <ComingSoon /> */}
+            </div>
+            <Tabs
+              tabs={[
+                { key: "all", label: "All", content: null },
+                ...availableCategories.map((category) => ({
+                  key: category,
+                  label: category,
+                  content: null,
+                  infoContent: categoryInfoMap[category],
+                })),
+              ]}
+              activeTab={selectedCategory}
+              setActiveTab={setSelectedCategory}
+              className="justify-center"
+            />
+          </>
         )}
 
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
@@ -307,7 +313,6 @@ export default function BookTestPage() {
           />
         )}
       </div>
-
       {activeTab === "women" && (
         <>
           <WideningAccessSection
