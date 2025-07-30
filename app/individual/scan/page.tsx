@@ -37,8 +37,7 @@ export default function BookScanPage() {
       try {
         const entries: EntryCollection<MedicalTestSkeleton> =
           await client.getEntries<MedicalTestSkeleton>({
-            content_type: "medicalTest",
-            "fields.scan": true,
+            content_type: "medicalScan" as any,
           });
         console.log(entries);
         setScans(entries.items as MedicalTestEntry[]);
@@ -191,7 +190,7 @@ export default function BookScanPage() {
                 <SkeletonTestCard key={index} />
               ))
             : paginatedScans.map((scan) => (
-                <TestCard key={scan.sys.id} test={scan} />
+                <TestCard key={scan.sys.id} test={scan} isScan />
               ))}
         </div>
 

@@ -8,10 +8,12 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { BLOCKS } from "@contentful/rich-text-types";
 import type { MedicalTestEntry } from "@/types/contentful";
 import ButtonComponent from "./Button";
+import Image from "next/image";
 
 interface TestCardProps {
   test: MedicalTestEntry;
   hideCart?: boolean;
+  isScan?: boolean;
 }
 
 const richTextOptions = {
@@ -50,7 +52,7 @@ const countTestsInRichText = (richText: any): number => {
   return count;
 };
 
-export function TestCard({ test, hideCart }: TestCardProps) {
+export function TestCard({ test, hideCart, isScan = false }: TestCardProps) {
   const { addToCart, updateQuantity, isInCart, getItemQuantity } = useCart();
   const quantity = getItemQuantity(test.sys.id);
   const inCart = isInCart(test.sys.id);
@@ -60,10 +62,6 @@ export function TestCard({ test, hideCart }: TestCardProps) {
     test.fields.scan && typeof test.fields.scan === "object"
       ? countTestsInRichText(test.fields.scan)
       : 0;
-
-  const isScan =
-    test.fields.scan === true ||
-    (test.fields.scan && typeof test.fields.scan === "object");
 
   const finalCount = isScan && scanCount > 0 ? scanCount : testCount;
 
@@ -88,15 +86,15 @@ export function TestCard({ test, hideCart }: TestCardProps) {
       <CardContent className="p-6 flex flex-col h-full">
         <div className="flex justify-between items-start mb-4">
           <div>
-            {test.fields.scan &&
-              (test as any).fields.image &&
-              (test as any).fields.image.fields.file.url && (
-                <img
-                  src={`https:${(test as any).fields.image.fields.file.url}`}
-                  alt={(test as any).fields.image.fields.title}
-                  className="w-20 h-20 object-contain mb-2"
-                />
-              )}
+            {isScan && (
+              <Image
+                src={`https:${(test as any).fields.image.fields.file.url}`}
+                alt={(test as any).fields.image.fields.title}
+                className="w-20 h-20 object-contain mb-2"
+                width={20}
+                height={20}
+              />
+            )}
             <h3 className="font-semibold text-md mb-1 max-w-[15rem]">
               {test.fields.testName}
             </h3>
@@ -121,7 +119,7 @@ export function TestCard({ test, hideCart }: TestCardProps) {
           <span className="text-sm font-medium text-body-text-gray">
             {isScan
               ? `${scanCount > 0 ? scanCount : 1} Scan${
-                  scanCount !== 1 ? "s" : ""
+                  scanCount !== 1 ? "" : ""
                 }`
               : `${testCount > 0 ? testCount : 1} Test${
                   testCount !== 1 ? "s" : ""
