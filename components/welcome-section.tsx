@@ -33,7 +33,7 @@ export function WelcomeSection() {
             </div>
 
            
-            <ButtonComponent text="Learn More" className="mt-4 mb-8 w-full md:w-fit"/>
+            <ButtonComponent text="Learn More" className="mt-4 mb-8 w-full md:w-fit" linkTo="/contact-us"/>
           </div>
 
           <div className="relative h-[400px] lg:h-[600px] group overflow-hidden rounded-3xl">

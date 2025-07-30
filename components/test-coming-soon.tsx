@@ -34,8 +34,8 @@ const ComingSoon = () => {
                 Access Your Test Results
               </h2>
               <p className="md:text-white text-body-text-gray leading-relaxed max-w-xs mb-6">
-                Log in to our secure patient portal to view your results
-                anytime, anywhere.
+                Register and log in to our secure patient portal to view your
+                results anytime, anywhere.
               </p>
             </div>
             <Link
@@ -43,7 +43,7 @@ const ComingSoon = () => {
               target="_blank"
             >
               <ButtonComponent
-                text="Login Now"
+                text="Start Now"
                 linkTo=""
                 className="w-fit md:mt-32"
               />

@@ -141,7 +141,7 @@ const steps = [
     number: "3",
     title: "Book, Track, & Connect",
     description:
-      "Start booking tests, tracking your symptoms, or talk to a specialist - all from your phone.",
+      "Start by tracking your symptoms and booking an appointment with a specialist - all from your phone.",
   },
 ];
 

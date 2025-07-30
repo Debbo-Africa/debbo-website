@@ -48,7 +48,7 @@ export default function EnhancedNavbar() {
       label: "Our Team",
       href: "/about/our-team",
       image: "/images/our-story.jpeg",
-      description: "Meet our team of exceptional female health professionals",
+      description: " Meet our exceptional team ",
     },
     {
       label: "Careers",
@@ -81,7 +81,8 @@ export default function EnhancedNavbar() {
       label: "Glossary",
       href: "/resources/glossary",
       image: "/images/glossary.jpg",
-      description: "Stay up to date with regular health tips",
+      description:
+        " Understand common conditions affecting women through our simple guides",
     },
     {
       label: "FAQs",
@@ -187,7 +188,7 @@ export default function EnhancedNavbar() {
       {bannerVisible && <DismissibleBanner onClose={closeBanner} />}
 
       <nav
-        className={`fixed left-0 right-0 z-[100] transition-colors duration-300 mb-40 ${
+        className={`fixed left-0 right-0 z-[100] transition-colors duration-300 mb-40 bg-[#fff5e9] ${
           bannerVisible ? "top-[32px] mb-64" : "top-0"
         } ${isScrolled ? "bg-[#FFF5E9F7]" : "bg-[#fff5e9"} ${
           !pathname.includes("individual") && !pathname.includes("cart")

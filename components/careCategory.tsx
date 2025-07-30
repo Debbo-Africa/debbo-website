@@ -18,7 +18,7 @@ const categories: CareCategory[] = [
   { name: "Endocrinology", imagePath: "/images/endocrinology.svg" },
   { name: "Haematology", imagePath: "/images/gynaecology.svg" },
   { name: "Nutrition & Dietetics ", imagePath: "/images/nutrition.svg" },
-  { name: "Add More", imagePath: "/images/neurology.svg" },
+  { name: "And More", imagePath: "/images/neurology.svg" },
 ];
 
 export default function CareCategoriesSection() {

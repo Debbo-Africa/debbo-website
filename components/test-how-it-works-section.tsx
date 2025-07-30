@@ -38,8 +38,7 @@ const defaultHowItWorksData = [
     alt: "Results",
     step: "04.",
     title: "Receive Your Results",
-    description:
-      "Your sample is processed at one of our labs. Results are shared securely via our patient portal, with clinical follow-up if needed.",
+    description: `Your sample is processed at one of our labs. Results are shared securely via our <a href="https://celldiagnosticslimited.com/login/" target="_blank" rel="noopener noreferrer" class="font-bold underline text-green-600">patient portal</a>, with clinical follow-up if needed.`,
   },
 ];
 

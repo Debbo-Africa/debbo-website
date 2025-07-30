@@ -53,7 +53,7 @@ export default function HowItWorksCard({
   return (
     <div
       ref={cardRef}
-      className="how-it-works-card flex flex-col items-center text-center gap-4 "
+      className="how-it-works-card flex flex-col items-center text-center gap-4"
     >
       <div className="w-full max-w-[350px] h-[200px] flex items-center justify-center rounded-xl overflow-hidden">
         {image}
@@ -63,7 +63,10 @@ export default function HowItWorksCard({
           <h4 className={`inline-block ${stepColor}`}>{step}</h4>{" "}
           <h4 className="inline-block">{title}</h4>
         </h3>
-        <p className="text-sm text-body-text-gray mt-2">{description}</p>
+        <p
+          className="text-sm text-body-text-gray mt-2"
+          dangerouslySetInnerHTML={{ __html: description }}
+        ></p>
       </div>
     </div>
   );
