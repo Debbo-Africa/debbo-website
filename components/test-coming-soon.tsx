@@ -7,6 +7,7 @@ const ComingSoon = () => {
   return (
     <>
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-6 items-start">
+        {/* First Card */}
         <div className="lg:col-span-2 overflow-hidden min-h-[245px] md:min-h-[445px] text-center rounded-3xl bg-secondary-debbo1 group p-6 pb-0">
           <span className="text-white bg-[#FFF5E94D] w-fit mx-auto px-3 py-1 text-sm md:text-md rounded-full font-semibold mb-6">
             Coming Soon
@@ -25,8 +26,13 @@ const ComingSoon = () => {
           </div>
         </div>
 
-        <div className="lg:col-span-3 overflow-hidden md:bg-[url('/images/coming-soon-bg.png')] bg-cover bg-center rounded-3xl p-6 pb-0 md:min-h-[455px]">
-          <div className="flex flex-col items-center md:items-start justify-between h-full text-center md:text-left">
+        {/* Second Card with Hover Zoom Background */}
+        <div className="lg:col-span-3 overflow-hidden rounded-3xl relative group min-h-[320px] md:min-h-[455px] p-6 pb-0">
+          {/* Zoomable background layer */}
+          <div className="absolute inset-0 bg-[url('/images/coming-soon-bg.png')] bg-cover bg-center transition-transform duration-500 ease-out scale-100 group-hover:scale-105 z-0" />
+
+          {/* Content */}
+          <div className="relative z-10 flex flex-col items-center md:items-start justify-between h-full text-center md:text-left">
             <div>
               <h2 className="text-2xl md:text-3xl font-semibold mb-4 max-w-xs md:text-white text-general-black">
                 Access Your Test Results

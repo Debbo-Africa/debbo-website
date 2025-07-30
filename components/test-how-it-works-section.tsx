@@ -1,4 +1,8 @@
+"use client";
+
+import { useLayoutEffect, useRef } from "react";
 import Image from "next/image";
+import gsap from "gsap";
 import HowItWorksCard from "./test-card-how-it-work";
 
 const defaultHowItWorksData = [
@@ -55,22 +59,46 @@ interface Props {
 export default function HowItWorksSection({
   data = defaultHowItWorksData,
 }: Props) {
+  const cardsContainerRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(".how-it-works-card", {
+        y: 60,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        stagger: 0.2,
+      });
+    }, cardsContainerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section>
-      <h2 className="text-3xl font-bold text-center mb-12">How it works</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
-        {data.map((item, index) => (
-          <HowItWorksCard
-            key={index}
-            image={
-              <Image src={item.image} alt={item.alt} width={350} height={250} />
-            }
-            step={item.step}
-            stepColor={item.stepColor}
-            title={item.title}
-            description={item.description}
-          />
-        ))}
+    <section className="py-16">
+      <div className="max-w-7xl mx-auto px-4 lg:px-8" ref={cardsContainerRef}>
+        <h2 className="text-3xl font-bold text-center mb-12">How it works</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
+          {data.map((item, index) => (
+            <HowItWorksCard
+              key={index}
+              image={
+                <Image
+                  src={item.image || "/placeholder.svg"}
+                  alt={item.alt}
+                  width={350}
+                  height={250}
+                  className="w-full h-48 object-cover rounded-lg"
+                />
+              }
+              step={item.step}
+              stepColor={item.stepColor}
+              title={item.title}
+              description={item.description}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
