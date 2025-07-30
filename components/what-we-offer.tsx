@@ -118,7 +118,10 @@ export function WhatWeOfferSection() {
               const isActive = index === currentIndex;
 
               return (
-                <div key={item.category} className="flex-shrink-0 md:relative mb-4 lg:mb-0">
+                <div
+                  key={item.category}
+                  className="flex-shrink-0 md:relative mb-4 lg:mb-0"
+                >
                   <button
                     onClick={() => handleCategoryClick(item.category)}
                     className={`block text-left px-4 py-3 rounded-full transition-all duration-300 relative overflow-hidden ${
@@ -193,7 +196,18 @@ export function WhatWeOfferSection() {
             <p className="text-body-text-gray leading-relaxed text-base mb-4">
               {currentItem.description}
             </p>
-            <ButtonComponent />
+            <ButtonComponent
+              linkTo={
+                currentItem.id === "communities"
+                  ? "https://chat.whatsapp.com/I9suQLPL6QlEtxux2Uw73S"
+                  : "/download"
+              }
+              text={
+                currentItem.id === "communities"
+                  ? "Explore Our Communities"
+                  : ""
+              }
+            />
           </div>
         </div>
       </div>

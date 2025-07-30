@@ -12,9 +12,9 @@ interface ButtonComponentProps
   text?: React.ReactNode;
   linkTo?: string;
   arrow?: boolean;
-  hoverColor?: string; // ✅ hover radial color
-  defaultColor?: string; // ✅ base button background
-  icon?: React.ReactNode; // ✅ custom icon on right
+  hoverColor?: string; 
+  defaultColor?: string; 
+  icon?: React.ReactNode; 
 }
 
 const ButtonComponent: React.FC<ButtonComponentProps> = ({
