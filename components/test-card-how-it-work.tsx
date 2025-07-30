@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 
 type HowItWorksCardProps = {
   image: React.ReactNode;
@@ -21,10 +21,10 @@ export default function HowItWorksCard({
         {image}
       </div>
       <div className=" max-w-[350px] mx-auto">
-        <h4 className={`text-md font-extrabold  text-general-black `}>
+        <h3 className={`text-md font-extrabold  text-general-black `}>
           <h4 className={`inline-block  ${stepColor}`}>{step}</h4>{" "}
-          <span>{title}</span>
-        </h4>
+          <h4>{title}</h4>
+        </h3>
         <p className="text-sm text-body-text-gray mt-2">{description}</p>
       </div>
     </div>

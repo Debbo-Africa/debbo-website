@@ -238,7 +238,16 @@ export default function BookTestPage() {
           <>
             <div className="py-8 max-w-7xl mx-auto px-4">
               <HowItWorksSection />
-              {/* <ComingSoon /> */}
+              <ComingSoon />
+              <div className=" w-full md:hidden overflow-hidden rounded-xl">
+                <Image
+                  src="/images/bg-coming-soon.jpg"
+                  alt="Book tests phone mockup"
+                  width={500}
+                  height={200}
+                  className="object-contain rounded-xl transform transition-transform duration-300 ease-in-out scale-105 group-hover:scale-100 w-full h-full"
+                />
+              </div>
             </div>
             <Tabs
               tabs={[
