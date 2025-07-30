@@ -88,7 +88,7 @@ export function TestCard({ test, hideCart, isScan = false }: TestCardProps) {
           <div>
             {isScan && (
               <Image
-                src={`https:${(test as any).fields.image.fields.file.url}`}
+                src={`https:${(test as any).fields?.image?.fields?.file.url}`}
                 alt={(test as any).fields.image.fields.title}
                 className="w-20 h-20 object-contain mb-2"
                 width={20}
@@ -96,11 +96,11 @@ export function TestCard({ test, hideCart, isScan = false }: TestCardProps) {
               />
             )}
             <h3 className="font-semibold text-md mb-1 max-w-[15rem]">
-              {test.fields.testName}
+              {test?.fields?.testName}
             </h3>
             <p className="text-xl font-bold">
               &#8358;
-              {test.fields.price}
+              {test?.fields?.price}
             </p>
             {test.fields.description && (
               <p className=" text-body-text-gray mt-2 text-xs md:text-sm">
@@ -108,9 +108,9 @@ export function TestCard({ test, hideCart, isScan = false }: TestCardProps) {
               </p>
             )}
           </div>
-          {test.fields.category && (
+          {test?.fields?.category && (
             <span className="bg-[#FFF8F0] text-general-black px-3 py-1 rounded-full text-xs md:text-sm whitespace-nowrap inline-flex">
-              {test.fields.category}
+              {test?.fields?.category}
             </span>
           )}
         </div>
@@ -128,7 +128,7 @@ export function TestCard({ test, hideCart, isScan = false }: TestCardProps) {
         </div>
 
         <div className="mb-3 flex-grow space-y-4">
-          {test.fields.testList &&
+          {test?.fields?.testList &&
             documentToReactComponents(test.fields.testList, richTextOptions)}
         </div>
 
