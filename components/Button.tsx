@@ -56,7 +56,7 @@ const ButtonComponent: React.FC<ButtonComponentProps> = ({
       className={`relative overflow-hidden cursor-none  text-sm text-general-white rounded-full px-4 py-6 font-extrabold ${
         fullWidth ? "w-full" : ""
       } ${className}`}
-      style={{ backgroundColor: defaultColor }} // ✅ set base bg
+      style={{ backgroundColor: defaultColor }} 
       {...rest}
     >
       <span
@@ -64,7 +64,7 @@ const ButtonComponent: React.FC<ButtonComponentProps> = ({
         style={{
           top: coords.y,
           left: coords.x,
-          backgroundColor: hoverColor, // ✅ use hover color prop
+          backgroundColor: hoverColor, 
           width: isHovering ? "200%" : "0%",
           height: isHovering ? "200%" : "0%",
           transform: `translate(-50%, -50%) scale(${isHovering ? 1 : 0})`,
@@ -96,7 +96,7 @@ const ButtonComponent: React.FC<ButtonComponentProps> = ({
     </Button>
   );
 
-  return linkTo ? <Link href={linkTo}>{buttonElement}</Link> : buttonElement;
+  return linkTo ? <Link href={linkTo} target="">{buttonElement}</Link> : buttonElement;
 };
 
 export default ButtonComponent;

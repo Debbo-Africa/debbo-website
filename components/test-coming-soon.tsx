@@ -25,7 +25,7 @@ const ComingSoon = () => {
           </div>
         </div>
 
-        <div className="lg:col-span-3 overflow-hidden rounded-3xl relative group min-h-[320px] md:min-h-[455px] p-6 pb-0">
+        <div className="hidden md:block lg:col-span-3 overflow-hidden rounded-3xl relative group min-h-[320px] md:min-h-[455px] p-6 pb-0">
           <div className="absolute inset-0 bg-[url('/images/coming-soon-bg.png')] bg-cover bg-center transition-transform duration-500 ease-out scale-100 group-hover:scale-105 z-0" />
 
           <div className="relative z-10 flex flex-col items-center md:items-start justify-between h-full text-center md:text-left">
