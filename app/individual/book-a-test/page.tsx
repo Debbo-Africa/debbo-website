@@ -100,6 +100,7 @@ export default function BookTestPage() {
           await client.getEntries<MedicalTestSkeleton>({
             content_type: "medicalTest",
             limit: 1000,
+            order: "sys.updatedAt" as any,
           });
         const testEntries = entries.items as MedicalTestEntry[];
         setTests(testEntries);

@@ -7,7 +7,6 @@ const ComingSoon = () => {
   return (
     <>
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-6 items-start">
-        {/* Left Card: 40% (2/5) */}
         <div className="lg:col-span-2 overflow-hidden min-h-[245px] md:min-h-[445px] text-center rounded-3xl bg-secondary-debbo1 group p-6 pb-0">
           <span className="text-white bg-[#FFF5E94D] w-fit mx-auto px-3 py-1 text-sm md:text-md rounded-full font-semibold mb-6">
             Coming Soon
@@ -16,7 +15,7 @@ const ComingSoon = () => {
             Book tests and view results directly in the MyDébbo app
           </p>
 
-          <div className="w-full h-60 md:h-80 relative mx-auto">
+          <div className="w-full h-64 md:h-80 relative mx-auto">
             <Image
               src="/images/book-test-mockup.png"
               alt="Book tests phone mockup"
@@ -26,7 +25,6 @@ const ComingSoon = () => {
           </div>
         </div>
 
-        {/* Right Card: 60% (3/5) */}
         <div className="lg:col-span-3 overflow-hidden md:bg-[url('/images/coming-soon-bg.png')] bg-cover bg-center rounded-3xl p-6 pb-0 md:min-h-[455px]">
           <div className="flex flex-col items-center md:items-start justify-between h-full text-center md:text-left">
             <div>

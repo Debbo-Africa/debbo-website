@@ -23,7 +23,7 @@ export function JobCard({ job }: JobCardProps) {
   return (
     <div className="h-full hover:shadow-lg transition-all duration-300 bg-[--surface-card] rounded-2xl md:rounded-3xl ">
       <div className="p-6 flex flex-col h-full">
-        <p className="font-medium text-gray-900 px-2 rounded-full text-xs bg-[#FFF5EB] text-yellow w-fit mb-4">
+        <p className="font-medium text-gray-900 px-3 py-1 rounded-full text-xs bg-[#FFF5EB] text-yellow w-fit mb-4">
           {department}
         </p>
 
