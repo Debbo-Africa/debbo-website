@@ -53,7 +53,7 @@ export default function HowItWorksCard({
   return (
     <div
       ref={cardRef}
-      className="how-it-works-card flex flex-col items-center text-center gap-4 cursor-pointer"
+      className="how-it-works-card flex flex-col items-center text-center gap-4 "
     >
       <div className="w-full max-w-[350px] h-[200px] flex items-center justify-center rounded-xl overflow-hidden">
         {image}
