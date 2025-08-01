@@ -22,6 +22,7 @@ import { SkeletonTestCard } from "@/components/skeleton-test-card";
 import HowItWorksSection from "@/components/test-how-it-works-section";
 import LetsWorkTogetherSection from "@/components/lets-work-together";
 import ComingSoon from "@/components/coming-soon";
+import { useBanner } from "@/hooks/use-banner";
 
 const ITEMS_PER_PAGE = 20;
 
@@ -90,13 +91,15 @@ export default function BookScanPage() {
     setSelectedCategory(value);
     setCurrentPage(1);
   };
-
+  const { bannerVisible } = useBanner();
   return (
     <div className="min-h-screen pt-20 ">
       <TestHeader />
-      <Breadcrumb
-        items={[{ label: "Home", href: "/" }, { label: "Book a Scan" }]}
-      />
+      <div className={`${bannerVisible ? "mt-16" : ""} `}>
+        <Breadcrumb
+          items={[{ label: "Home", href: "/" }, { label: "Book a Scan" }]}
+        />
+      </div>
       <PageHero
         title="Book a Scan"
         description="Sometimes, what's happening inside doesn't show on the outside, scans help fill in the gaps. From breast to abdominal and pelvic scans, our options offer powerful insights to detect issues early and keep you reassured."

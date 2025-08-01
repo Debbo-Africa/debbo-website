@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import ButtonComponent from "./Button";
+import Link from "next/link";
 
 const OFFER_ITEMS = [
   {
@@ -196,18 +197,18 @@ export function WhatWeOfferSection() {
             <p className="text-body-text-gray leading-relaxed text-base mb-4">
               {currentItem.description}
             </p>
-            <ButtonComponent
-              linkTo={
-                currentItem.id === "communities"
-                  ? "https://chat.whatsapp.com/I9suQLPL6QlEtxux2Uw73S"
-                  : "/download"
-              }
-              text={
-                currentItem.id === "communities"
-                  ? "Explore Our Communities"
-                  : ""
-              }
-            />
+            {currentItem.id === "communities" ? (
+              <Link
+                href="https://chat.whatsapp.com/I9suQLPL6QlEtxux2Uw73S"
+                target="_blank"
+              >
+                <ButtonComponent linkTo="" text="Explore Our Communities" />
+              </Link>
+            ) : currentItem.id === "programs" ? (
+              <ButtonComponent linkTo="/corporate" text="Learn More" />
+            ) : (
+              <ButtonComponent linkTo="/download"  />
+            )}
           </div>
         </div>
       </div>
