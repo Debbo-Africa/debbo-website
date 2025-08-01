@@ -1,38 +1,40 @@
-"use client";
 
-import { Breadcrumb } from "@/components/breadcrumb";
-import { TestHeader } from "@/components/test-header";
+import { Metadata } from "next";
+import ContactADoctor from "@/components/contact-a-doctor";
 
-import { InsuranceSection } from "@/components/insurance-section";
-import CareCategoriesSection from "@/components/careCategory";
-import BookAppointment from "@/components/book-appointment";
-import ContraceptionTable from "@/components/contreption-table";
-import LetsWorkTogetherSection from "@/components/lets-work-together";
-import { useBanner } from "@/hooks/use-banner";
+export const metadata: Metadata = {
+  title: "Consult a Doctor. Specialized Women’s Health Care ",
+  description:
+    "Convenient and accessible virtual consultations with a medical officer or consultant including gynaecologist, endocrinologist, dermatologist, mental health specialist",
+  openGraph: {
+    title: "Consult a Doctor. Specialized Women’s Health Care",
+    description:
+      "Convenient and accessible virtual consultations with a medical officer or consultant including gynaecologist, endocrinologist, dermatologist, mental health specialist",
 
+    url: "https://debbo-africa.netlify.app/individual/contact-a-doctor",
+    siteName: "DébboAfrica",
+    images: [
+      {
+        url: "https://debbo-africa.netlify.app/contact-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Consult a Doctor. Specialized Women’s Health Care",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title:
+      "Consult a Doctor – Specialized Women’s Health Support | DébboAfrica",
+    description:
+      "Speak to licensed specialists in gynaecology, dermatology, endocrinology, and mental health. Get trusted virtual care tailored to women’s health.",
+    images: ["https://debbo-africa.netlify.app/contact-image.jpg"],
+  },
+};
 export default function SpeakToDoctor() {
- const { bannerVisible } = useBanner();
 
   return (
-    <div className="min-h-screen pt-20">
-      <TestHeader />
-      <div className={`${bannerVisible && "mt-16"} `}>
-        <Breadcrumb
-          items={[{ label: "Home", href: "/" }, { label: "Speak to a Doctor" }]}
-        />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <CareCategoriesSection />
-        <BookAppointment />
-        <ContraceptionTable />
-        <LetsWorkTogetherSection
-          title="Need a vaccine?"
-          description="Protect your health with our recommended vaccines for long-term disease prevention. We offer safe, medically approved options for adults and eligible adolescents. Contact us to learn more or book an appointment."
-          imageSrc="/images/speak-to-a-doctor.png"
-        />
-        <InsuranceSection />
-      </div>
-    </div>
+   <ContactADoctor/>
   );
 }

@@ -20,13 +20,12 @@ import type { MedicalTestEntry, MedicalTestSkeleton } from "@/types/contentful";
 import type { EntryCollection } from "contentful";
 import { SkeletonTestCard } from "@/components/skeleton-test-card";
 import HowItWorksSection from "@/components/test-how-it-works-section";
-import LetsWorkTogetherSection from "@/components/lets-work-together";
 import ComingSoon from "@/components/coming-soon";
 import { useBanner } from "@/hooks/use-banner";
 
 const ITEMS_PER_PAGE = 20;
 
-export default function BookScanPage() {
+export  function BookScanPage() {
   const [scans, setScans] = useState<MedicalTestEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);

@@ -1,0 +1,39 @@
+"use client"
+import React from 'react'
+import { TestHeader } from './test-header';
+import { Breadcrumb } from './breadcrumb';
+import CareCategoriesSection from './careCategory';
+import BookAppointment from './book-appointment';
+import ContraceptionTable from './contreption-table';
+import LetsWorkTogetherSection from './lets-work-together';
+import { InsuranceSection } from './insurance-section';
+import { useBanner } from '@/hooks/use-banner';
+
+const ContactADoctor = () => {
+  const { bannerVisible } = useBanner();
+
+  return (
+    <div className="min-h-screen pt-20">
+      <TestHeader />
+      <div className={`${bannerVisible && "mt-16"} `}>
+        <Breadcrumb
+          items={[{ label: "Home", href: "/" }, { label: "Speak to a Doctor" }]}
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <CareCategoriesSection />
+        <BookAppointment />
+        <ContraceptionTable />
+        <LetsWorkTogetherSection
+          title="Need a vaccine?"
+          description="Protect your health with our recommended vaccines for long-term disease prevention. We offer safe, medically approved options for adults and eligible adolescents. Contact us to learn more or book an appointment."
+          imageSrc="/images/speak-to-a-doctor.png"
+        />
+        <InsuranceSection />
+      </div>
+    </div>
+  );
+}
+
+export default ContactADoctor

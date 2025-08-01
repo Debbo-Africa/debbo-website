@@ -109,7 +109,7 @@ export default function EnhancedNavbar() {
     },
     {
       label: "Book a Scan",
-      href: "/individual/scan",
+      href: "/individual/book-a-scan",
       image: "/images/book-a-scan.jpg",
       description:
         "Discover our expert radiology services for accurate imaging and timely diagnosis.",
