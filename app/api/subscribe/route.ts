@@ -15,15 +15,18 @@ export async function POST(request: NextRequest) {
 
     console.log("Processing subscription for email:", email);
 
-    const formData = new FormData();
-    formData.append("timestamp", timestamp);
-    formData.append("email", email);
+    const params = new URLSearchParams();
+    params.append("timestamp", timestamp);
+    params.append("email", email);
 
     const response = await fetch(
-      "https://script.google.com/macros/s/AKfycbzbvdBeHgw9YBG4sNL9A0TFbt-XFbyBriWa8NpkEg2WKXYUWCszuFV1L6u81d_7kkmr/exec",
+      "https://script.google.com/macros/s/AKfycbykiiul8ykyM7nE-pIZnepSmJ5lavNkRgddQlv_-_5f1A_ra3UFOS1rUFk9oqflKytReg/exec",
       {
         method: "POST",
-        body: formData,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: params.toString(),
       }
     );
 
@@ -38,7 +41,6 @@ export async function POST(request: NextRequest) {
     try {
       result = JSON.parse(responseText);
     } catch (error) {
-      // If response is not JSON, treat it as plain text success or error
       result = { success: response.ok, message: responseText };
     }
 
