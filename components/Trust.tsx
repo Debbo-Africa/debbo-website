@@ -39,8 +39,8 @@ export const Trust = () => {
       className="pt-12 md:pt-0 px-4 sm:px-0 relative overflow-hidden bg-[#f3ece1] rounded-3xl"
     >
       <div className="mx-auto w-full">
-        <div className=" overflow-hidden ">
-          <div className="text-center px-6 py-12 md:absolute w-full  ">
+        <div className="overflow-hidden">
+          <div className="text-center px-6 py-12 md:absolute w-full">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-general-black mb-6 max-w-5xl mx-auto">
               We focus on the overlooked but vital health needs of African women
             </h2>
@@ -50,17 +50,20 @@ export const Trust = () => {
             </p>
             <ButtonComponent />
           </div>
+
           <div className="w-full aspect-video overflow-hidden -mb-1">
             <video
               ref={videoRef}
               className="w-full h-full object-cover border-none outline-none"
-              src="/images/pills_animation_3.mp4"
-              muted
-              autoPlay={false}
-              playsInline
-              controls={false}
+              muted={true}
+              autoPlay={true}
+              playsInline={true}
               preload="auto"
-            />
+            >
+              <source src="/images/pills_animation_3.mp4" type="video/mp4" />
+              <source src="/images/pills_animation_3.webm" type="video/webm" />
+              Your browser does not support the video tag.
+            </video>
           </div>
         </div>
       </div>
