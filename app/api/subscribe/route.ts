@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
     params.append("email", email);
 
     const response = await fetch(
-      "https://script.google.com/macros/s/AKfycbykiiul8ykyM7nE-pIZnepSmJ5lavNkRgddQlv_-_5f1A_ra3UFOS1rUFk9oqflKytReg/exec",
+      "https://script.google.com/macros/s/AKfycbylCgJ3sLz-8lIPcmJSVXpCZMkxW808QeYCUn3o3sUp3MPygyh7P-jgLYp9XkZUKsorsg/exec",
       {
         method: "POST",
         headers: {

@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
     formData.append("message", message || "");
 
     const response = await fetch(
-      "https://script.google.com/macros/s/AKfycbymJQa95gwCELCi-4UfREmY3Lxl-xtaUIEzvd0REyFQe8bBUNWZccJolbxz3QjJO17T/exec",
+      "https://script.google.com/macros/s/AKfycbyfvJ13LAAYHzHv_sIChpPdZs3pKUN6yIFS2sjJhsD-mRxE-x2H7vn4EabJOFqB5PJquQ/exec",
       {
         method: "POST",
         body: formData,

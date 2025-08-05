@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
 
       try {
         const response = await fetch(
-          "https://script.google.com/macros/s/AKfycbwEnmHSjsJs1prkANLA3Z-P9hmvcymo45bTe15nLfd50Q1oa9-4Zc6HrYZlUIiSHqnk/exec",
+          "https://script.google.com/macros/s/AKfycbxVlHRS9-5eOfS1Gd_9MvKE-1SeXSYTV4QfuXXXrkc2qVljhPO22JSMQD0-4T5FJhbV/exec",
           {
             method: "POST",
             body: individualFormData,
