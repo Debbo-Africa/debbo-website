@@ -5,7 +5,6 @@ export async function POST(request: NextRequest) {
     const contactData = await request.json();
     const { firstName, lastName, email, phoneNumber, companyName, message } =
       contactData;
-
     const timestamp = new Date().toISOString();
 
     console.log("Processing contact submission:", {
@@ -13,6 +12,7 @@ export async function POST(request: NextRequest) {
       timestamp,
     });
 
+    // --- Google Sheet Submission ---
     const formData = new FormData();
     formData.append("timestamp", timestamp);
     formData.append("firstName", firstName || "");
@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
     formData.append("companyName", companyName || "");
     formData.append("message", message || "");
 
-    const response = await fetch(
+    const googleSheetResponse = await fetch(
       "https://script.google.com/macros/s/AKfycbyfvJ13LAAYHzHv_sIChpPdZs3pKUN6yIFS2sjJhsD-mRxE-x2H7vn4EabJOFqB5PJquQ/exec",
       {
         method: "POST",
@@ -30,30 +30,118 @@ export async function POST(request: NextRequest) {
       }
     );
 
-    if (!response.ok) {
-      const errorText = await response.text();
+    if (!googleSheetResponse.ok) {
+      const errorText = await googleSheetResponse.text();
       console.error(
-        "HTTP error for contact submission:",
-        response.status,
+        "HTTP error for contact submission to Google Sheet:",
+        googleSheetResponse.status,
         errorText
       );
-      throw new Error(`HTTP error! status: ${response.status}`);
+      throw new Error(`HTTP error! status: ${googleSheetResponse.status}`);
     }
 
-    const responseText = await response.text();
-    let result;
+    const googleSheetResponseText = await googleSheetResponse.text();
+    let googleSheetResult;
     try {
-      result = JSON.parse(responseText);
+      googleSheetResult = JSON.parse(googleSheetResponseText);
     } catch (error) {
-      result = { success: response.ok, message: responseText };
+      googleSheetResult = {
+        success: googleSheetResponse.ok,
+        message: googleSheetResponseText,
+      };
     }
 
-    console.log("Contact submission processed:", result);
+    console.log(
+      "Contact submission processed by Google Sheet:",
+      googleSheetResult
+    );
 
-    if (!result || !result.success) {
+    if (!googleSheetResult || !googleSheetResult.success) {
       throw new Error(
-        result.message || "Failed to submit contact form to Google Sheet."
+        googleSheetResult.message ||
+          "Failed to submit contact form to Google Sheet."
       );
+    }
+
+    // --- EmailJS Integration ---
+    // Ensure these environment variables are set in your Vercel project settings
+    const EMAILJS_SERVICE_ID = process.env.EMAILJS_SERVICE_ID;
+    const EMAILJS_TEMPLATE_ID = process.env.EMAILJS_TEMPLATE_ID;
+    const EMAILJS_PUBLIC_KEY = process.env.EMAILJS_PUBLIC_KEY; // Your EmailJS User ID
+    const EMAILJS_PRIVATE_KEY = process.env.EMAILJS_PRIVATE_KEY; // Your EmailJS Private Key for server-side sending
+
+    if (
+      !EMAILJS_SERVICE_ID ||
+      !EMAILJS_TEMPLATE_ID ||
+      !EMAILJS_PUBLIC_KEY ||
+      !EMAILJS_PRIVATE_KEY
+    ) {
+      console.warn(
+        "EmailJS environment variables are not fully configured. Skipping email sending."
+      );
+      // Still return success for Google Sheet submission if email config is missing
+      return NextResponse.json({
+        success: true,
+        message:
+          "Your message has been sent successfully to Google Sheet! Email notification skipped due to missing configuration.",
+      });
+    }
+
+    const emailSubject = `New Contact Form Submission from ${firstName || ""} ${
+      lastName || ""
+    }`;
+    const emailMessage = `Someone with the name ${firstName || "N/A"} ${
+      lastName || "N/A"
+    } has submitted a message on Google Sheet.
+    
+    Details:
+    Email: ${email || "N/A"}
+    Phone: ${phoneNumber || "N/A"}
+    Company: ${companyName || "N/A"}
+    Message: ${message || "N/A"}
+    Submitted At: ${timestamp}
+    `;
+
+    const emailJsPayload = {
+      service_id: EMAILJS_SERVICE_ID,
+      template_id: EMAILJS_TEMPLATE_ID,
+      user_id: EMAILJS_PUBLIC_KEY,
+      accessToken: EMAILJS_PRIVATE_KEY, // Changed from private_key to accessToken
+      template_params: {
+        from_name: `${firstName || "Guest"} ${lastName || ""}`,
+        to_email: "admin@example.com", // <<< IMPORTANT: Replace with the actual admin email address
+        subject: emailSubject,
+        message: emailMessage,
+        // Ensure these match your EmailJS template variables
+        user_email: email || "N/A",
+        user_phone: phoneNumber || "N/A",
+        company_name: companyName || "N/A",
+        timestamp: timestamp,
+      },
+    };
+
+    const emailJsResponse = await fetch(
+      "https://api.emailjs.com/api/v1.0/email/send",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(emailJsPayload),
+      }
+    );
+
+    if (!emailJsResponse.ok) {
+      const emailJsErrorText = await emailJsResponse.text();
+      console.error(
+        "Error sending email via EmailJS:",
+        emailJsResponse.status,
+        emailJsErrorText
+      );
+      // Do not throw an error here, as the Google Sheet submission was successful.
+      // Just log the email error and proceed with the success response for the form.
+    } else {
+      console.log("Email sent successfully via EmailJS.");
     }
 
     return NextResponse.json({
@@ -62,7 +150,7 @@ export async function POST(request: NextRequest) {
         "Your message has been sent successfully! We will get back to you shortly.",
     });
   } catch (fetchError) {
-    console.error("Error sending data to Google Sheet:", fetchError);
+    console.error("Error processing contact submission:", fetchError);
     return NextResponse.json(
       {
         success: false,
