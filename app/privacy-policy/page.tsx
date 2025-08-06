@@ -1,4 +1,4 @@
-import PrivacyPolicyPage from '@/components/privacy-policy'
+import PrivacyPolicy from '@/components/privacy-policy'
 import { Metadata } from 'next';
 import React from 'react'
 
@@ -31,8 +31,6 @@ export const metadata: Metadata = {
   },
 };
 
-export const page = () => {
-  return (
-   <PrivacyPolicyPage/>
-  )
+export default function PrivacyPolicyPage() {
+  return <PrivacyPolicy />;
 }
