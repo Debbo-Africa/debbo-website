@@ -109,7 +109,7 @@ export async function POST(request: NextRequest) {
       accessToken: EMAILJS_PRIVATE_KEY, // Changed from private_key to accessToken
       template_params: {
         from_name: `${firstName || "Guest"} ${lastName || ""}`,
-        to_email: "admin@example.com", // <<< IMPORTANT: Replace with the actual admin email address
+        to_email: "isaackeyz55@example.com", // <<< IMPORTANT: Replace with the actual admin email address
         subject: emailSubject,
         message: emailMessage,
         // Ensure these match your EmailJS template variables
