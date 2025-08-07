@@ -65,10 +65,10 @@ export async function POST(request: NextRequest) {
 
     // --- EmailJS Integration ---
     // Ensure these environment variables are set in your Vercel project settings
-    const EMAILJS_SERVICE_ID = process.env.EMAILJS_SERVICE_ID;
-    const EMAILJS_TEMPLATE_ID = process.env.EMAILJS_TEMPLATE_ID;
-    const EMAILJS_PUBLIC_KEY = process.env.EMAILJS_PUBLIC_KEY; // Your EmailJS User ID
-    const EMAILJS_PRIVATE_KEY = process.env.EMAILJS_PRIVATE_KEY; // Your EmailJS Private Key for server-side sending
+    const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+    const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+    const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY; // Your EmailJS User ID
+    const EMAILJS_PRIVATE_KEY = process.env.NEXT_PUBLIC_EMAILJS_PRIVATE_KEY; // Your EmailJS Private Key for server-side sending
 
     if (
       !EMAILJS_SERVICE_ID ||
@@ -106,13 +106,12 @@ export async function POST(request: NextRequest) {
       service_id: EMAILJS_SERVICE_ID,
       template_id: EMAILJS_TEMPLATE_ID,
       user_id: EMAILJS_PUBLIC_KEY,
-      accessToken: EMAILJS_PRIVATE_KEY, // Changed from private_key to accessToken
+      accessToken: EMAILJS_PRIVATE_KEY, 
       template_params: {
         from_name: `${firstName || "Guest"} ${lastName || ""}`,
-        to_email: "isaackeyz55@example.com", // <<< IMPORTANT: Replace with the actual admin email address
+        to_email: "isaackeyz55@example.com", 
         subject: emailSubject,
         message: emailMessage,
-        // Ensure these match your EmailJS template variables
         user_email: email || "N/A",
         user_phone: phoneNumber || "N/A",
         company_name: companyName || "N/A",

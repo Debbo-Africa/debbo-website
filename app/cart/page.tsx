@@ -1,4 +1,5 @@
 "use client";
+import emailjs from "@emailjs/browser";
 
 import type React from "react";
 import { useState } from "react";
@@ -48,63 +49,115 @@ export default function CartPage() {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsSubmitting(true);
 
-    try {
-      const total = getCartTotal();
-      const orderData = {
-        cartItems,
-        formData,
-        total,
-      };
+  try {
+    const total = getCartTotal();
+    const orderData = {
+      cartItems,
+      formData,
+      total,
+    };
 
-      const response = await fetch("/api/submit-order", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(orderData),
+    const response = await fetch("/api/submit-order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(orderData),
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      setSubmittedOrder({
+        cartItems: [...cartItems],
+        total: total,
       });
 
-      const result = await response.json();
+      toast({
+        type: "success" as any,
+        title: "Order Submitted Successfully!",
+        description: result.message,
+        duration: 6000,
+      });
 
-      if (result.success) {
-        setSubmittedOrder({
-          cartItems: [...cartItems],
-          total: total,
-        });
+      setShowSuccessModal(true);
 
-        toast({
-          type: "success" as any,
-          title: "Order Submitted Successfully!",
-          description: result.message,
-          duration: 6000,
-        });
+      // 📨 Send Email via EmailJS
+      const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+      const EMAILJS_ORDER_TEMPLATE_ID =
+        process.env.NEXT_PUBLIC_EMAILJS_ORDER_TEMPLATE_ID;
+      const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
-        setShowSuccessModal(true);
-      } else {
-        toast({
-          type: "error" as any,
-          title: "Submission Failed",
-          description: result.message || "Please try again.",
-          duration: 5000,
-        });
+      if (
+        EMAILJS_SERVICE_ID &&
+        EMAILJS_ORDER_TEMPLATE_ID &&
+        EMAILJS_PUBLIC_KEY
+      ) {
+        const timestamp = new Date().toISOString();
+
+        const orderItemsHtml = cartItems
+          .map(
+            (item) =>
+              `${item.testName} (${
+                item.quantity
+              }) - ₦${item.price.toLocaleString()}`
+          )
+          .join("\n");
+
+        const templateParams = {
+          from_name: `${formData.firstName} ${formData.lastName}`,
+          to_email: "isaackeyz55@gmail.com",
+          user_email: formData.email,
+          user_phone: formData.phoneNumber,
+          special_note: formData.specialNote || "None",
+          total: `₦${total.toLocaleString()}`,
+          order_items: orderItemsHtml,
+          timestamp: timestamp,
+        };
+
+        try {
+          await emailjs.send(
+            EMAILJS_SERVICE_ID,
+            EMAILJS_ORDER_TEMPLATE_ID,
+            templateParams,
+            EMAILJS_PUBLIC_KEY
+          );
+          console.log("Order email sent successfully.");
+        } catch (emailError) {
+          console.error("Failed to send order email:", emailError);
+          toast({
+            title: "Email Error!",
+            description: "Order email could not be sent.",
+            variant: "destructive",
+          });
+        }
       }
-    } catch (error) {
-      console.error("Error submitting order:", error);
+    } else {
       toast({
         type: "error" as any,
-        title: "Network Error",
-        description:
-          "Failed to submit order. Please check your connection and try again.",
+        title: "Submission Failed",
+        description: result.message || "Please try again.",
         duration: 5000,
       });
-    } finally {
-      setIsSubmitting(false);
     }
-  };
+  } catch (error) {
+    console.error("Error submitting order:", error);
+    toast({
+      type: "error" as any,
+      title: "Network Error",
+      description:
+        "Failed to submit order. Please check your connection and try again.",
+      duration: 5000,
+    });
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
 
   const handleModalClose = (open: boolean) => {
     if (!open) {

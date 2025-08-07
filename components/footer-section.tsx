@@ -9,6 +9,8 @@ import Tagline from "./Tagline";
 import Link from "next/link";
 import ButtonComponent from "./Button";
 import { useToast } from "@/hooks/use-toast";
+import emailjs from "@emailjs/browser";
+
 
 type FooterLinkProps = {
   href: string;
@@ -38,6 +40,10 @@ export const Footer = () => {
     "https://play.google.com/store/apps/details?id=com.debboafrica.app";
   const { toast } = useToast(); 
 
+const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
+const EMAILJS_TEMPLATE_ID =
+  process.env.NEXT_PUBLIC_EMAILJS_NEWSLETTER_TEMPLATE_ID!;
+const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
   useEffect(() => {
     const generateQRCode = async () => {
       try {
@@ -60,45 +66,49 @@ export const Footer = () => {
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true); 
+    if (!email) {
+      toast({
+        title: "Email Required",
+        description: "Please enter a valid email address.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setLoading(true);
+
+    const templateParams = {
+      to_email: "newsletter@debboafrica.com", 
+      subscriber_email: email,
+      timestamp: new Date().toLocaleString(),
+    };
 
     try {
-      const response = await fetch("/api/subscribe", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
+
+      toast({
+        title: "Subscribed!",
+        description: "You've been added to our newsletter.",
       });
 
-      const result = await response.json();
-
-      if (result.success) {
-        toast({
-          title: "Success!",
-          description: result.message,
-          variant: "default",
-        });
-        setEmail(""); 
-      } else {
-        toast({
-          title: "Error!",
-          description:
-            result.message || "Something went wrong with your subscription.",
-          variant: "destructive",
-        });
-      }
+      setEmail("");
     } catch (error) {
-      console.error("Subscription form submission error:", error);
+      console.error("EmailJS Error:", error);
       toast({
-        title: "Error!",
-        description: "An unexpected error occurred. Please try again.",
+        title: "Subscription Failed",
+        description: "There was a problem subscribing. Try again later.",
         variant: "destructive",
       });
     } finally {
-      setLoading(false); // Set loading to false after submission
+      setLoading(false);
     }
   };
+
 
   return (
     <footer className="relative bg-secondary-debbo1 rounded-t-3xl mt-10 overflow-hidden">
