@@ -64,50 +64,51 @@ const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
     generateQRCode();
   }, [appUrl]);
 
-  const handleSubscribe = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email) {
-      toast({
-        title: "Email Required",
-        description: "Please enter a valid email address.",
-        variant: "destructive",
-      });
-      return;
-    }
+ const handleSubscribe = async (e: React.FormEvent) => {
+   e.preventDefault();
 
-    setLoading(true);
+   if (!email) {
+     toast({
+       title: "Email Required",
+       description: "Please enter a valid email address.",
+       variant: "destructive",
+     });
+     return;
+   }
 
-    const templateParams = {
-      to_email: "newsletter@debboafrica.com", 
-      subscriber_email: email,
-      timestamp: new Date().toLocaleString(),
-    };
+   setLoading(true);
 
-    try {
-      await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        templateParams,
-        EMAILJS_PUBLIC_KEY
-      );
+   try {
+     const res = await fetch("/api/subscribe", {
+       method: "POST",
+       headers: { "Content-Type": "application/json" },
+       body: JSON.stringify({ email }),
+     });
 
-      toast({
-        title: "Subscribed!",
-        description: "You've been added to our newsletter.",
-      });
+     const data = await res.json();
 
-      setEmail("");
-    } catch (error) {
-      console.error("EmailJS Error:", error);
-      toast({
-        title: "Subscription Failed",
-        description: "There was a problem subscribing. Try again later.",
-        variant: "destructive",
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
+     if (!res.ok || !data.success) {
+       throw new Error(data.message || "Failed to subscribe");
+     }
+
+     toast({
+       title: "Subscribed!",
+       description: data.message || "You've been added to our newsletter.",
+     });
+
+     setEmail("");
+   } catch (error) {
+     console.error("Subscription Error:", error);
+     toast({
+       title: "Subscription Failed",
+       description: "There was a problem subscribing. Try again later.",
+       variant: "destructive",
+     });
+   } finally {
+     setLoading(false);
+   }
+ };
+
 
 
   return (

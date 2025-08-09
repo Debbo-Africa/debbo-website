@@ -1,6 +1,6 @@
-import PrivacyPolicy from '@/components/privacy-policy'
-import { Metadata } from 'next';
-import React from 'react'
+import PrivacyPolicy from "@/components/privacy-policy";
+import { Metadata } from "next";
+import React from "react";
 
 export const metadata: Metadata = {
   title: "Your Data, Your Privacy. Débbo Africa Policy Page",
@@ -10,11 +10,11 @@ export const metadata: Metadata = {
     title: "Your Data, Your Privacy. Débbo Africa Policy Page",
     description:
       "Learn how Débbo Africa collects, uses, and protects your personal data. We’re committed to safeguarding your privacy in all women’s health services.",
-    url: "https://debbo-africa.netlify.app/privacy-policy",
+    url: "https://www.debbo.africa/privacy-policy",
     siteName: "DébboAfrica",
     images: [
       {
-        url: "https://debbo-africa.netlify.app/contact-image.jpg",
+        url: "https://www.debbo.africa/contact-image.jpg",
         width: 1200,
         height: 630,
         alt: "Your Data, Your Privacy. Débbo Africa Policy Page",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     title: "Your Data, Your Privacy. Débbo Africa Policy Page",
     description:
       "Learn how Débbo Africa collects, uses, and protects your personal data. We’re committed to safeguarding your privacy in all women’s health services.",
-    images: ["https://debbo-africa.netlify.app/contact-image.jpg"],
+    images: ["https://www.debbo.africa/contact-image.jpg"],
   },
 };
 

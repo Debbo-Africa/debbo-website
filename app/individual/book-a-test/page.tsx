@@ -9,11 +9,11 @@ export const metadata: Metadata = {
     title: "Laboratory Services for Women’s Health & Wellness",
     description:
       "Debbo Africa’s lab offers expert fertility, hormone, menopause, and wellness testing tailored to women’s health needs.",
-    url: "https://debbo-africa.netlify.app/individual/book-a-test",
+    url: "https://www.debbo.africa/individual/book-a-test",
     siteName: "DébboAfrica",
     images: [
       {
-        url: "https://debbo-africa.netlify.app/contact-image.jpg",
+        url: "https://www.debbo.africa/contact-image.jpg",
         width: 1200,
         height: 630,
         alt: "Laboratory Services for Women’s Health & Wellness",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: "Laboratory Services for Women’s Health & Wellness",
     description:
       "Debbo Africa’s lab offers expert fertility, hormone, menopause, and wellness testing tailored to women’s health needs.",
-    images: ["https://debbo-africa.netlify.app/contact-image.jpg"],
+    images: ["https://www.debbo.africa/contact-image.jpg"],
   },
 };
 const BookATest = () => {

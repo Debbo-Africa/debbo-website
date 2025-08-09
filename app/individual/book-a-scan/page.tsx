@@ -10,11 +10,11 @@ export const metadata: Metadata = {
     title: "Expert Radiology for Women in Lagos. Mammography & Ultrasound",
     description:
       "Expert radiology care for women in a safe, comfortable setting. Advanced diagnostic imaging tailored to every stage of a woman’s health journey.",
-    url: "https://debbo-africa.netlify.app/individual/book-a-scan",
+    url: "https://www.debbo.africa/individual/book-a-scan",
     siteName: "DébboAfrica",
     images: [
       {
-        url: "https://debbo-africa.netlify.app/contact-image.jpg",
+        url: "https://www.debbo.africa/contact-image.jpg",
         width: 1200,
         height: 630,
         alt: "Expert Radiology for Women in Lagos. Mammography & Ultrasound",
@@ -27,13 +27,10 @@ export const metadata: Metadata = {
     title: "Expert Radiology for Women in Lagos. Mammography & Ultrasound",
     description:
       "Expert radiology care for women in a safe, comfortable setting. Advanced diagnostic imaging tailored to every stage of a woman’s health journey.",
-    images: ["https://debbo-africa.netlify.app/contact-image.jpg"],
+    images: ["https://www.debbo.africa/contact-image.jpg"],
   },
 };
 
 export default function page() {
-  return (
-   <BookScanPage/>
-  )
+  return <BookScanPage />;
 }
-

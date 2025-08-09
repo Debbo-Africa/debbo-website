@@ -22,8 +22,7 @@ export default function CartPage() {
   const { cartItems, updateQuantity, removeFromCart, getCartTotal, clearCart } =
     useCart();
   const { toasts, toast, dismiss } = useToast();
- const { bannerVisible } = useBanner();
-
+  const { bannerVisible } = useBanner();
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -49,115 +48,56 @@ export default function CartPage() {
     }));
   };
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setIsSubmitting(true);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
 
-  try {
-    const total = getCartTotal();
-    const orderData = {
-      cartItems,
-      formData,
-      total,
-    };
+    try {
+      const total = getCartTotal();
+      const orderData = {
+        cartItems,
+        formData,
+        total,
+      };
 
-    const response = await fetch("/api/submit-order", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(orderData),
-    });
-
-    const result = await response.json();
-
-    if (result.success) {
-      setSubmittedOrder({
-        cartItems: [...cartItems],
-        total: total,
+      const response = await fetch("/api/submit-order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(orderData),
       });
 
-      toast({
-        type: "success" as any,
-        title: "Order Submitted Successfully!",
-        description: result.message,
-        duration: 6000,
-      });
+      const result = await response.json();
 
-      setShowSuccessModal(true);
+      if (result.success) {
+        setSubmittedOrder({
+          cartItems: [...cartItems],
+          total: total,
+        });
 
-      // 📨 Send Email via EmailJS
-      const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-      const EMAILJS_ORDER_TEMPLATE_ID =
-        process.env.NEXT_PUBLIC_EMAILJS_ORDER_TEMPLATE_ID;
-      const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+        toast({
+          type: "success" as any,
+          title: "Order Submitted Successfully!",
+          description: result.message,
+          duration: 6000,
+        });
 
-      if (
-        EMAILJS_SERVICE_ID &&
-        EMAILJS_ORDER_TEMPLATE_ID &&
-        EMAILJS_PUBLIC_KEY
-      ) {
-        const timestamp = new Date().toISOString();
-
-        const orderItemsHtml = cartItems
-          .map(
-            (item) =>
-              `${item.testName} (${
-                item.quantity
-              }) - ₦${item.price.toLocaleString()}`
-          )
-          .join("\n");
-
-        const templateParams = {
-          from_name: `${formData.firstName} ${formData.lastName}`,
-          to_email: "isaackeyz55@gmail.com",
-          user_email: formData.email,
-          user_phone: formData.phoneNumber,
-          special_note: formData.specialNote || "None",
-          total: `₦${total.toLocaleString()}`,
-          order_items: orderItemsHtml,
-          timestamp: timestamp,
-        };
-
-        try {
-          await emailjs.send(
-            EMAILJS_SERVICE_ID,
-            EMAILJS_ORDER_TEMPLATE_ID,
-            templateParams,
-            EMAILJS_PUBLIC_KEY
-          );
-          console.log("Order email sent successfully.");
-        } catch (emailError) {
-          console.error("Failed to send order email:", emailError);
-          toast({
-            title: "Email Error!",
-            description: "Order email could not be sent.",
-            variant: "destructive",
-          });
-        }
+        setShowSuccessModal(true);
       }
-    } else {
+    } catch (error) {
+      console.error("Error submitting order:", error);
       toast({
         type: "error" as any,
-        title: "Submission Failed",
-        description: result.message || "Please try again.",
+        title: "Network Error",
+        description:
+          "Failed to submit order. Please check your connection and try again.",
         duration: 5000,
       });
+    } finally {
+      setIsSubmitting(false);
     }
-  } catch (error) {
-    console.error("Error submitting order:", error);
-    toast({
-      type: "error" as any,
-      title: "Network Error",
-      description:
-        "Failed to submit order. Please check your connection and try again.",
-      duration: 5000,
-    });
-  } finally {
-    setIsSubmitting(false);
-  }
-};
-
+  };
 
   const handleModalClose = (open: boolean) => {
     if (!open) {
@@ -205,9 +145,8 @@ const handleSubmit = async (e: React.FormEvent) => {
     <div className="min-h-screen pt-20">
       <TestHeader />
       <div className="mt-16">
-        
-      <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Cart" }]} />
-        </div>
+        <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Cart" }]} />
+      </div>
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">

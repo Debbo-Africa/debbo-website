@@ -9,11 +9,11 @@ export const metadata: Metadata = {
     title: "Get in Touch. Débbo Africa Women’s Health in Africa",
     description:
       "Have questions or need support? Contact Débbo Africa for information on our women’s health services, programs, and partnerships across Africa.",
-    url: "https://debbo-africa.netlify.app/contact-us",
+    url: "https://www.debbo.africa/contact-us",
     siteName: "DébboAfrica",
     images: [
       {
-        url: "https://debbo-africa.netlify.app/contact-image.jpg",
+        url: "https://www.debbo.africa/contact-image.jpg",
         width: 1200,
         height: 630,
         alt: "Get in Touch. Débbo Africa Women’s Health in Africa",

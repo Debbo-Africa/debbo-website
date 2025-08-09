@@ -1,7 +1,6 @@
 import GlossaryPage from "@/components/glossary-page";
 import { Metadata } from "next";
 
-
 export const metadata: Metadata = {
   title: "Glossary of Women’s Health Terms. Débbo Africa",
   description:
@@ -10,11 +9,11 @@ export const metadata: Metadata = {
     title: "Glossary of Women’s Health Terms. Débbo Africa",
     description:
       "Need clarity on women’s health terms? Our glossary explains medical, wellness, and tech concepts to support informed care decisions..",
-    url: "https://debbo-africa.netlify.app/resources/glossary",
+    url: "https://www.debbo.africa/resources/glossary",
     siteName: "DébboAfrica",
     images: [
       {
-        url: "https://debbo-africa.netlify.app/contact-image.jpg",
+        url: "https://www.debbo.africa/contact-image.jpg",
         width: 1200,
         height: 630,
         alt: "Glossary of Women’s Health Terms. Débbo Africa",
@@ -27,10 +26,9 @@ export const metadata: Metadata = {
     title: "Glossary of Women’s Health Terms. Débbo Africa",
     description:
       "Need clarity on women’s health terms? Our glossary explains medical, wellness, and tech concepts to support informed care decisions..",
-    images: ["https://debbo-africa.netlify.app/contact-image.jpg"],
+    images: ["https://www.debbo.africa/contact-image.jpg"],
   },
 };
 export default function Page() {
-
   return <GlossaryPage />;
 }

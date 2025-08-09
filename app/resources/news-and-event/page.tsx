@@ -1,7 +1,6 @@
 import NewsEventsPage from "@/components/new-event-page";
 import { Metadata } from "next";
 
-
 export const metadata: Metadata = {
   title: "Débbo Africa News & Events. Women’s Health in Africa",
   description:
@@ -10,11 +9,11 @@ export const metadata: Metadata = {
     title: "Débbo Africa News & Events. Women’s Health in Africa",
     description:
       "Explore recent updates, community events, and health initiatives by Débbo Africa, all focused on empowering African women’s health.",
-    url: "https://debbo-africa.netlify.app/resources/news-and-event",
+    url: "https://www.debbo.africa/resources/news-and-event",
     siteName: "DébboAfrica",
     images: [
       {
-        url: "https://debbo-africa.netlify.app/contact-image.jpg",
+        url: "https://www.debbo.africa/contact-image.jpg",
         width: 1200,
         height: 630,
         alt: "Débbo Africa News & Events. Women’s Health in Africa",
@@ -27,7 +26,7 @@ export const metadata: Metadata = {
     title: "Débbo Africa News & Events. Women’s Health in Africa",
     description:
       "Explore recent updates, community events, and health initiatives by Débbo Africa, all focused on empowering African women’s health.",
-    images: ["https://debbo-africa.netlify.app/contact-image.jpg"],
+    images: ["https://www.debbo.africa/contact-image.jpg"],
   },
 };
 

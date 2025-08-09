@@ -10,11 +10,11 @@ export const metadata: Metadata = {
     title: "Workplace wellness and testing in Africa. Partner With Us",
     description:
       "Collaborate with our laboratory for reliable corporate health screenings, workplace testing, and wellness programs — scalable, confidential, and efficient.",
-    url: "https://debbo-africa.netlify.app/corporate",
+    url: "https://www.debbo.africa/corporate",
     siteName: "DébboAfrica",
     images: [
       {
-        url: "https://debbo-africa.netlify.app/contact-image.jpg",
+        url: "https://www.debbo.africa/contact-image.jpg",
         width: 1200,
         height: 630,
         alt: "Workplace wellness and testing in Africa. Partner With Us",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     title: "Workplace wellness and testing in Africa. Partner With Us",
     description:
       "Collaborate with our laboratory for reliable corporate health screenings, workplace testing, and wellness programs — scalable, confidential, and efficient.",
-    images: ["https://debbo-africa.netlify.app/contact-image.jpg"],
+    images: ["https://www.debbo.africa/contact-image.jpg"],
   },
 };
 

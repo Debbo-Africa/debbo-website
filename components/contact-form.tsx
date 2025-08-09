@@ -5,10 +5,27 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import ButtonComponent from "./Button";
-import emailjs from "@emailjs/browser";
 
-export default function ContactForm() {
-  const [formData, setFormData] = useState({
+interface FormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  companyName: string;
+  message: string;
+}
+
+interface ApiResponse {
+  success: boolean;
+  message: string;
+  emailSent?: boolean;
+  messageId?: string;
+  emailError?: string;
+  error?: string;
+}
+
+export default function ContactForm(){
+  const [formData, setFormData] = useState<FormData>({
     firstName: "",
     lastName: "",
     email: "",
@@ -16,25 +33,27 @@ export default function ContactForm() {
     companyName: "",
     message: "",
   });
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const { toast } = useToast();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  ): void => {
     const { id, value } = e.target;
-    setFormData((prevData) => ({
+    setFormData((prevData: FormData) => ({
       ...prevData,
       [id]: value,
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const response = await fetch("/api/contact", {
+      const response: Response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -42,73 +61,15 @@ export default function ContactForm() {
         body: JSON.stringify(formData),
       });
 
-      const result = await response.json();
+      const result: ApiResponse = await response.json();
 
       if (result.success) {
-        const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-        const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_CONTACT_TEMPLATE_ID;
-        const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
-
-        if (EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ID && EMAILJS_PUBLIC_KEY) {
-          const timestamp = new Date().toISOString();
-          const emailSubject = `New Contact Form Submission from ${
-            formData.firstName || ""
-          } ${formData.lastName || ""}`;
-          const emailMessage = `Someone with the name ${
-            formData.firstName || "N/A"
-          } ${formData.lastName || "N/A"} has submitted a message.
-Details:
-Email: ${formData.email || "N/A"}
-Phone: ${formData.phoneNumber || "N/A"}
-Company: ${formData.companyName || "N/A"}
-Message: ${formData.message || "N/A"}
-Submitted At: ${timestamp}
-`;
-
-          const templateParams = {
-            from_name: `${formData.firstName || "Guest"} ${
-              formData.lastName || ""
-            }`,
-            to_email: "isaackeyz55@gmail.com",
-            subject: emailSubject,
-            message: emailMessage,
-            user_email: formData.email || "N/A",
-            user_phone: formData.phoneNumber || "N/A",
-            company_name: formData.companyName || "N/A",
-            timestamp: timestamp,
-          };
-
-          try {
-            await emailjs.send(
-              EMAILJS_SERVICE_ID,
-              EMAILJS_TEMPLATE_ID,
-              templateParams,
-              EMAILJS_PUBLIC_KEY
-            );
-            console.log("Email sent successfully via EmailJS from client.");
-          } catch (emailError) {
-            console.error(
-              "Error sending email via EmailJS from client:",
-              emailError
-            );
-            toast({
-              title: "Email Error!",
-              description:
-                "Failed to send email notification. Please check EmailJS configuration.",
-              variant: "destructive",
-            });
-          }
-        } else {
-          console.warn(
-            "EmailJS environment variables are not fully configured on client. Skipping email sending."
-          );
-        }
-
         toast({
           title: "Success!",
           description: result.message,
           variant: "default",
         });
+
         setFormData({
           firstName: "",
           lastName: "",
@@ -117,6 +78,12 @@ Submitted At: ${timestamp}
           companyName: "",
           message: "",
         });
+
+        if (result.emailSent && result.messageId) {
+          console.log("Email sent with ID:", result.messageId);
+        } else if (result.emailError) {
+          console.warn("Email sending failed:", result.emailError);
+        }
       } else {
         toast({
           title: "Error!",
@@ -124,7 +91,7 @@ Submitted At: ${timestamp}
           variant: "destructive",
         });
       }
-    } catch (error) {
+    } catch (error: unknown) {
       console.error("Form submission error:", error);
       toast({
         title: "Error!",

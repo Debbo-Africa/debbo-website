@@ -1,18 +1,52 @@
 import { type NextRequest, NextResponse } from "next/server";
+import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
 
-export async function POST(request: NextRequest) {
+interface ContactFormData {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  phoneNumber?: string;
+  companyName?: string;
+  message?: string;
+}
+
+interface GoogleSheetResult {
+  success: boolean;
+  message: string;
+}
+
+interface ApiResponse {
+  success: boolean;
+  message: string;
+  emailSent?: boolean;
+  messageId?: string;
+  emailError?: string;
+  error?: string;
+}
+
+const sesClient = new SESClient({
+  region: process.env.AWS_REGION || "us-east-1",
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+  },
+});
+
+export async function POST(
+  request: NextRequest
+): Promise<NextResponse<ApiResponse>> {
   try {
-    const contactData = await request.json();
+    const contactData: ContactFormData = await request.json();
     const { firstName, lastName, email, phoneNumber, companyName, message } =
       contactData;
-    const timestamp = new Date().toISOString();
+    const timestamp: string = new Date().toISOString();
 
     console.log("Processing contact submission:", {
       email,
       timestamp,
     });
 
-    // --- Google Sheet Submission ---
+    // --- Google Sheets Submission ---
     const formData = new FormData();
     formData.append("timestamp", timestamp);
     formData.append("firstName", firstName || "");
@@ -22,7 +56,7 @@ export async function POST(request: NextRequest) {
     formData.append("companyName", companyName || "");
     formData.append("message", message || "");
 
-    const googleSheetResponse = await fetch(
+    const googleSheetResponse: Response = await fetch(
       "https://script.google.com/macros/s/AKfycbyfvJ13LAAYHzHv_sIChpPdZs3pKUN6yIFS2sjJhsD-mRxE-x2H7vn4EabJOFqB5PJquQ/exec",
       {
         method: "POST",
@@ -31,7 +65,7 @@ export async function POST(request: NextRequest) {
     );
 
     if (!googleSheetResponse.ok) {
-      const errorText = await googleSheetResponse.text();
+      const errorText: string = await googleSheetResponse.text();
       console.error(
         "HTTP error for contact submission to Google Sheet:",
         googleSheetResponse.status,
@@ -40,10 +74,13 @@ export async function POST(request: NextRequest) {
       throw new Error(`HTTP error! status: ${googleSheetResponse.status}`);
     }
 
-    const googleSheetResponseText = await googleSheetResponse.text();
-    let googleSheetResult;
+    const googleSheetResponseText: string = await googleSheetResponse.text();
+    let googleSheetResult: GoogleSheetResult;
+
     try {
-      googleSheetResult = JSON.parse(googleSheetResponseText);
+      googleSheetResult = JSON.parse(
+        googleSheetResponseText
+      ) as GoogleSheetResult;
     } catch (error) {
       googleSheetResult = {
         success: googleSheetResponse.ok,
@@ -63,94 +100,106 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // --- EmailJS Integration ---
-    // Ensure these environment variables are set in your Vercel project settings
-    const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-    const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-    const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY; // Your EmailJS User ID
-    const EMAILJS_PRIVATE_KEY = process.env.NEXT_PUBLIC_EMAILJS_PRIVATE_KEY; // Your EmailJS Private Key for server-side sending
+    const AWS_SES_SENDER: string | undefined = process.env.AWS_SES_SENDER;
+    const AWS_SES_RECIPIENT: string =
+      process.env.AWS_SES_RECIPIENT || "isaackeyz55@gmail.com";
 
     if (
-      !EMAILJS_SERVICE_ID ||
-      !EMAILJS_TEMPLATE_ID ||
-      !EMAILJS_PUBLIC_KEY ||
-      !EMAILJS_PRIVATE_KEY
+      !process.env.AWS_ACCESS_KEY_ID ||
+      !process.env.AWS_SECRET_ACCESS_KEY ||
+      !AWS_SES_SENDER
     ) {
       console.warn(
-        "EmailJS environment variables are not fully configured. Skipping email sending."
+        "AWS SES environment variables are not fully configured. Skipping email sending."
       );
-      // Still return success for Google Sheet submission if email config is missing
-      return NextResponse.json({
+      return NextResponse.json<ApiResponse>({
         success: true,
         message:
-          "Your message has been sent successfully to Google Sheet! Email notification skipped due to missing configuration.",
+          "Your message has been sent successfully to Google Sheet! Email notification skipped due to missing AWS SES configuration.",
       });
     }
 
-    const emailSubject = `New Contact Form Submission from ${firstName || ""} ${
-      lastName || ""
-    }`;
-    const emailMessage = `Someone with the name ${firstName || "N/A"} ${
-      lastName || "N/A"
-    } has submitted a message on Google Sheet.
-    
-    Details:
-    Email: ${email || "N/A"}
-    Phone: ${phoneNumber || "N/A"}
-    Company: ${companyName || "N/A"}
-    Message: ${message || "N/A"}
-    Submitted At: ${timestamp}
-    `;
+    try {
+      const emailSubject: string =
+        `New Contact Form Submission from ${firstName || ""} ${
+          lastName || ""
+        }`.trim() || "New Contact Form Submission";
 
-    const emailJsPayload = {
-      service_id: EMAILJS_SERVICE_ID,
-      template_id: EMAILJS_TEMPLATE_ID,
-      user_id: EMAILJS_PUBLIC_KEY,
-      accessToken: EMAILJS_PRIVATE_KEY, 
-      template_params: {
-        from_name: `${firstName || "Guest"} ${lastName || ""}`,
-        to_email: "isaackeyz55@example.com", 
-        subject: emailSubject,
-        message: emailMessage,
-        user_email: email || "N/A",
-        user_phone: phoneNumber || "N/A",
-        company_name: companyName || "N/A",
-        timestamp: timestamp,
-      },
-    };
+      const emailBody: string = `NEW CONTACT FORM SUBMISSION
+=========================
 
-    const emailJsResponse = await fetch(
-      "https://api.emailjs.com/api/v1.0/email/send",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+Name: ${firstName || "N/A"} ${lastName || "N/A"}
+Email: ${email || "N/A"}
+Phone: ${phoneNumber || "N/A"}
+Company: ${companyName || "N/A"}
+Submission Date: ${new Date(timestamp).toLocaleString()}
+
+MESSAGE:
+${message || "N/A"}
+
+---
+This contact form submission has been automatically saved to your Google Sheets database.
+Next Steps: Please follow up with the customer via their provided contact information.`;
+
+      const sesParams = {
+        Source: AWS_SES_SENDER,
+        Destination: {
+          ToAddresses: [AWS_SES_RECIPIENT],
         },
-        body: JSON.stringify(emailJsPayload),
+        Message: {
+          Subject: {
+            Data: emailSubject,
+            Charset: "UTF-8",
+          },
+          Body: {
+            Text: {
+              Data: emailBody,
+              Charset: "UTF-8",
+            },
+          },
+        },
+      };
+
+      const command = new SendEmailCommand(sesParams);
+      const sesResult = await sesClient.send(command);
+
+      console.log("Email sent successfully via AWS SES:", sesResult.MessageId);
+
+      return NextResponse.json<ApiResponse>({
+        success: true,
+        message:
+          "Your message has been sent successfully! We will get back to you shortly.",
+        emailSent: true,
+        messageId: sesResult.MessageId,
+      });
+    } catch (sesError: unknown) {
+      console.error("Error sending email via AWS SES:", sesError);
+
+      let emailErrorMessage = "Email notification failed";
+
+      if (sesError instanceof Error) {
+        if (sesError.name === "MessageRejected") {
+          emailErrorMessage = "Email was rejected by SES";
+        } else if (sesError.name === "MailFromDomainNotVerifiedException") {
+          emailErrorMessage = "SES sender domain is not verified";
+        } else if (sesError.name === "SendingPausedException") {
+          emailErrorMessage = "SES email sending is currently paused";
+        }
+
+        console.error(`${emailErrorMessage}:`, sesError.message);
       }
-    );
 
-    if (!emailJsResponse.ok) {
-      const emailJsErrorText = await emailJsResponse.text();
-      console.error(
-        "Error sending email via EmailJS:",
-        emailJsResponse.status,
-        emailJsErrorText
-      );
-      // Do not throw an error here, as the Google Sheet submission was successful.
-      // Just log the email error and proceed with the success response for the form.
-    } else {
-      console.log("Email sent successfully via EmailJS.");
+      return NextResponse.json<ApiResponse>({
+        success: true,
+        message:
+          "Your message has been sent successfully to Google Sheet! However, email notification failed.",
+        emailSent: false,
+        emailError: emailErrorMessage,
+      });
     }
-
-    return NextResponse.json({
-      success: true,
-      message:
-        "Your message has been sent successfully! We will get back to you shortly.",
-    });
-  } catch (fetchError) {
+  } catch (fetchError: unknown) {
     console.error("Error processing contact submission:", fetchError);
-    return NextResponse.json(
+    return NextResponse.json<ApiResponse>(
       {
         success: false,
         message: "Failed to send your message. Please try again.",

@@ -10,11 +10,11 @@ export const metadata: Metadata = {
 
     description:
       "Débbo Africa's expert team is pioneering innovation in women’s health and health tech, driving impactful solutions for communities across Africa.",
-    url: "https://debbo-africa.netlify.app/about/foundation",
+    url: "https://www.debbo.africa/about/foundation",
     siteName: "DébboAfrica",
     images: [
       {
-        url: "https://debbo-africa.netlify.app/contact-image.jpg",
+        url: "https://www.debbo.africa/contact-image.jpg",
         width: 1200,
         height: 630,
         alt: "Meet Our Team. Leaders in Women’s Health & Health Tech",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     title: "Meet Our Team. Leaders in Women’s Health & Health Tech",
     description:
       "Débbo Africa's expert team is pioneering innovation in women’s health and health tech, driving impactful solutions for communities across Africa.",
-    images: ["https://debbo-africa.netlify.app/contact-image.jpg"],
+    images: ["https://www.debbo.africa/contact-image.jpg"],
   },
 };
 
