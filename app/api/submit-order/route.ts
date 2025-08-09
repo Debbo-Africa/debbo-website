@@ -42,12 +42,11 @@ interface OrderApiResponse {
   error?: string;
 }
 
-// Initialize AWS SES client
 const sesClient = new SESClient({
-  region: process.env.AWS_REGION || "us-east-1",
+  region: process.env.NEXT_PUBLIC_AWS_REGION || "us-east-1",
   credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+    accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID!,
+    secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY!,
   },
 });
 
@@ -67,7 +66,6 @@ export async function POST(
       total,
     });
 
-    // Process each cart item for Google Sheets
     const promises = cartItems.map(
       async (item: CartItem, index: number): Promise<GoogleSheetResult> => {
         const individualFormData = new FormData();
@@ -158,15 +156,14 @@ export async function POST(
       throw new Error("Some items failed to submit");
     }
 
-    // --- AWS SES Integration (Simple Email) ---
-    const AWS_SES_SENDER: string | undefined = process.env.AWS_SES_SENDER;
+    const AWS_SES_SENDER: string | undefined =
+      process.env.NEXT_PUBLIC_AWS_SES_SENDER;
     const AWS_SES_RECIPIENT: string =
-      process.env.AWS_SES_RECIPIENT || "isaackeyz55@gmail.com";
+      process.env.NEXT_PUBLIC_AWS_SES_RECIPIENT || "isaackeyz55@gmail.com";
 
-    // Check if AWS SES is configured
     if (
-      !process.env.AWS_ACCESS_KEY_ID ||
-      !process.env.AWS_SECRET_ACCESS_KEY ||
+      !process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID ||
+      !process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY ||
       !AWS_SES_SENDER
     ) {
       console.warn(

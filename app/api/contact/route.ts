@@ -25,10 +25,10 @@ interface ApiResponse {
 }
 
 const sesClient = new SESClient({
-  region: process.env.AWS_REGION || "us-east-1",
+  region: process.env.NEXT_PUBLIC_AWS_REGION || "us-east-1",
   credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+    accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID!,
+    secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY!,
   },
 });
 
@@ -46,7 +46,7 @@ export async function POST(
       timestamp,
     });
 
-    // --- Google Sheets Submission ---
+   
     const formData = new FormData();
     formData.append("timestamp", timestamp);
     formData.append("firstName", firstName || "");
@@ -100,13 +100,14 @@ export async function POST(
       );
     }
 
-    const AWS_SES_SENDER: string | undefined = process.env.AWS_SES_SENDER;
+    const AWS_SES_SENDER: string | undefined =
+      process.env.NEXT_PUBLIC_AWS_SES_SENDER;
     const AWS_SES_RECIPIENT: string =
-      process.env.AWS_SES_RECIPIENT || "isaackeyz55@gmail.com";
+      process.env.NEXT_PUBLIC_AWS_SES_RECIPIENT || "isaackeyz55@gmail.com";
 
     if (
-      !process.env.AWS_ACCESS_KEY_ID ||
-      !process.env.AWS_SECRET_ACCESS_KEY ||
+      !process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID ||
+      !process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY ||
       !AWS_SES_SENDER
     ) {
       console.warn(

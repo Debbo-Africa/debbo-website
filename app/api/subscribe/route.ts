@@ -1,7 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
 
-// Types
 interface SubscriptionData {
   email: string;
 }
@@ -21,10 +20,10 @@ interface SubscriptionApiResponse {
 }
 
 const sesClient = new SESClient({
-  region: process.env.AWS_REGION || "us-east-1",
+  region: process.env.NEXT_PUBLIC_AWS_REGION || "us-east-1",
   credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+    accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID!,
+    secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY!,
   },
 });
 
@@ -83,13 +82,14 @@ export async function POST(
       );
     }
 
-    const AWS_SES_SENDER: string | undefined = process.env.AWS_SES_SENDER;
+    const AWS_SES_SENDER: string | undefined =
+      process.env.NEXT_PUBLIC_AWS_SES_SENDER;
     const AWS_SES_RECIPIENT: string =
-      process.env.AWS_SES_RECIPIENT || "isaackeyz55@gmail.com";
+      process.env.NEXT_PUBLIC_AWS_SES_RECIPIENT || "isaackeyz55@gmail.com";
 
     if (
-      !process.env.AWS_ACCESS_KEY_ID ||
-      !process.env.AWS_SECRET_ACCESS_KEY ||
+      !process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID ||
+      !process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY ||
       !AWS_SES_SENDER
     ) {
       console.warn(
@@ -150,7 +150,6 @@ Next Steps: Consider sending a welcome email to the new subscriber.`;
     } catch (sesError: unknown) {
       console.error("Error sending subscription email via AWS SES:", sesError);
 
-      // Handle specific SES errors
       let emailErrorMessage = "Subscription email notification failed";
 
       if (sesError instanceof Error) {
@@ -165,7 +164,6 @@ Next Steps: Consider sending a welcome email to the new subscriber.`;
         console.error(`${emailErrorMessage}:`, sesError.message);
       }
 
-      // Don't fail the entire request if email fails, since Google Sheets succeeded
       return NextResponse.json<SubscriptionApiResponse>({
         success: true,
         message:
