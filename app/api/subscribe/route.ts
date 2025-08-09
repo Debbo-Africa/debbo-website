@@ -85,7 +85,7 @@ export async function POST(
     const AWS_SES_SENDER: string | undefined =
       process.env.NEXT_PUBLIC_AWS_SES_SENDER;
     const AWS_SES_RECIPIENT: string =
-      process.env.NEXT_PUBLIC_AWS_SES_RECIPIENT || "isaackeyz55@gmail.com";
+      process.env.NEXT_PUBLIC_AWS_SES_RECIPIENT!;
 
     if (
       !process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID ||
