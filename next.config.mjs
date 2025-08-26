@@ -46,6 +46,11 @@ const nextConfig = {
         destination: "/resources/faqs",
         permanent: false,
       },
+      {
+        source: "/download",
+        destination: "/contact-us",
+        permanent: false,
+      },
     ];
   },
 };

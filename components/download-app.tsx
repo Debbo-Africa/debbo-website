@@ -38,7 +38,7 @@ export const DownloadSection = () => {
   return (
     <section className="px-4 mx-auto mb-16">
       <div className="space-y-6">
-        <div className="relative rounded-3xl overflow-hidden h-[550px] lg:h-[500px] w-full group">
+        {/* <div className="relative rounded-3xl overflow-hidden h-[550px] lg:h-[500px] w-full group">
           <div className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-[url('/images/app-download-mobile.png')] md:bg-[url('/images/app-download.png')] lg:bg-[url('/images/app-download.png')] transform transition-transform duration-500 ease-in-out group-hover:scale-105" />
 
           <div className="relative z-10 p-6 sm:p-8 lg:p-10 h-full flex flex-col justify-between">
@@ -55,7 +55,7 @@ export const DownloadSection = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="relative rounded-3xl overflow-hidden h-[500px] sm:h-[320px] lg:h-[650px] w-full">
           <video

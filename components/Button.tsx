@@ -12,9 +12,9 @@ interface ButtonComponentProps
   text?: React.ReactNode;
   linkTo?: string;
   arrow?: boolean;
-  hoverColor?: string; 
-  defaultColor?: string; 
-  icon?: React.ReactNode; 
+  hoverColor?: string;
+  defaultColor?: string;
+  icon?: React.ReactNode;
 }
 
 const ButtonComponent: React.FC<ButtonComponentProps> = ({
@@ -56,7 +56,7 @@ const ButtonComponent: React.FC<ButtonComponentProps> = ({
       className={`relative overflow-hidden cursor-none  text-sm text-general-white rounded-full px-4 py-6 font-extrabold ${
         fullWidth ? "w-full" : ""
       } ${className}`}
-      style={{ backgroundColor: defaultColor }} 
+      style={{ backgroundColor: defaultColor }}
       {...rest}
     >
       <span
@@ -64,7 +64,7 @@ const ButtonComponent: React.FC<ButtonComponentProps> = ({
         style={{
           top: coords.y,
           left: coords.x,
-          backgroundColor: hoverColor, 
+          backgroundColor: hoverColor,
           width: isHovering ? "200%" : "0%",
           height: isHovering ? "200%" : "0%",
           transform: `translate(-50%, -50%) scale(${isHovering ? 1 : 0})`,
@@ -89,14 +89,20 @@ const ButtonComponent: React.FC<ButtonComponentProps> = ({
               width={12}
               height={12}
             />
-            Download App
+            Contact Us
           </>
         )}
       </span>
     </Button>
   );
 
-  return linkTo ? <Link href={linkTo} target="">{buttonElement}</Link> : buttonElement;
+  return linkTo ? (
+    <Link href={linkTo} target="">
+      {buttonElement}
+    </Link>
+  ) : (
+    buttonElement
+  );
 };
 
 export default ButtonComponent;
