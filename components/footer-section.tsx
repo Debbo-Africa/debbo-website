@@ -11,7 +11,6 @@ import ButtonComponent from "./Button";
 import { useToast } from "@/hooks/use-toast";
 import emailjs from "@emailjs/browser";
 
-
 type FooterLinkProps = {
   href: string;
   children: React.ReactNode;
@@ -38,12 +37,12 @@ export const Footer = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const appUrl =
     "https://play.google.com/store/apps/details?id=com.debboafrica.app";
-  const { toast } = useToast(); 
+  const { toast } = useToast();
 
-const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
-const EMAILJS_TEMPLATE_ID =
-  process.env.NEXT_PUBLIC_EMAILJS_NEWSLETTER_TEMPLATE_ID!;
-const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
+  const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
+  const EMAILJS_TEMPLATE_ID =
+    process.env.NEXT_PUBLIC_EMAILJS_NEWSLETTER_TEMPLATE_ID!;
+  const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
   useEffect(() => {
     const generateQRCode = async () => {
       try {
@@ -64,52 +63,50 @@ const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
     generateQRCode();
   }, [appUrl]);
 
- const handleSubscribe = async (e: React.FormEvent) => {
-   e.preventDefault();
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-   if (!email) {
-     toast({
-       title: "Email Required",
-       description: "Please enter a valid email address.",
-       variant: "destructive",
-     });
-     return;
-   }
+    if (!email) {
+      toast({
+        title: "Email Required",
+        description: "Please enter a valid email address.",
+        variant: "destructive",
+      });
+      return;
+    }
 
-   setLoading(true);
+    setLoading(true);
 
-   try {
-     const res = await fetch("/api/subscribe", {
-       method: "POST",
-       headers: { "Content-Type": "application/json" },
-       body: JSON.stringify({ email }),
-     });
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
 
-     const data = await res.json();
+      const data = await res.json();
 
-     if (!res.ok || !data.success) {
-       throw new Error(data.message || "Failed to subscribe");
-     }
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || "Failed to subscribe");
+      }
 
-     toast({
-       title: "Subscribed!",
-       description: data.message || "You've been added to our newsletter.",
-     });
+      toast({
+        title: "Subscribed!",
+        description: data.message || "You've been added to our newsletter.",
+      });
 
-     setEmail("");
-   } catch (error) {
-     console.error("Subscription Error:", error);
-     toast({
-       title: "Subscription Failed",
-       description: "There was a problem subscribing. Try again later.",
-       variant: "destructive",
-     });
-   } finally {
-     setLoading(false);
-   }
- };
-
-
+      setEmail("");
+    } catch (error) {
+      console.error("Subscription Error:", error);
+      toast({
+        title: "Subscription Failed",
+        description: "There was a problem subscribing. Try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <footer className="relative bg-secondary-debbo1 rounded-t-3xl mt-10 overflow-hidden">
@@ -137,13 +134,13 @@ const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
                     <input
                       type="email"
                       id="email"
-                      name="email" 
+                      name="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="e.g. test@débboafrica.com"
                       className="w-full px-4 py-3 rounded-lg outline-none bg-[--surface-card] focus:ring-none focus:border-transparent"
                       required
-                      disabled={loading} 
+                      disabled={loading}
                     />
                   </div>
                   <ButtonComponent
@@ -161,10 +158,13 @@ const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
                 <div className="absolute top-4 right-2 md:static md:mb-4 w-24 h-24 bg-white rounded-lg p-2 mx-auto md:mx-0">
                   <canvas ref={canvasRef} className="w-full h-full rounded" />
                 </div>
-                <h3 className="absolute top-4 left-2 max-w-44 md:w-fit md:static text-xl md:text-2xl font-bold mb-6">
+                {/* <h3 className="absolute top-4 left-2 max-w-44 md:w-fit md:static text-xl md:text-2xl font-bold mb-6">
                   Download The MyDébbo <br /> App Today
+                </h3> */}
+                <h3 className="absolute top-4 left-2 max-w-44 md:w-fit md:static text-xl md:text-xl font-bold mb-20">
+                  Coming Soon <br /> Be the first to get started when we launch!
                 </h3>
-                <div className="absolute bottom-4 md:static md:mt-10 flex items-center gap-2">
+                {/* <div className="absolute bottom-4 md:static md:mt-10 flex items-center gap-2">
                   <Image
                     src="/images/playstore-large.svg"
                     alt="Download on Google Play"
@@ -179,7 +179,11 @@ const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
                     height={48}
                     className="h-12 w-auto"
                   />
-                </div>
+                </div> */}
+                <ButtonComponent
+                  title="Contact Us"
+                  className="w-full md:w-fit absolute bottom-4 "
+                />
               </div>
             </div>
           </div>
