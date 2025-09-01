@@ -181,8 +181,9 @@ export const Footer = () => {
                   />
                 </div> */}
                 <ButtonComponent
-                  title="Contact Us"
+                  title="Coming Soon"
                   className="w-full md:w-fit absolute bottom-4 "
+                  linkTo=""
                 />
               </div>
             </div>
