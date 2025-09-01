@@ -181,7 +181,7 @@ export const Footer = () => {
                   />
                 </div> */}
                 <ButtonComponent
-                  title="Coming Soon"
+                  text="Coming Soon"
                   className="w-full md:w-fit absolute bottom-4 "
                   linkTo=""
                 />
