@@ -18,7 +18,7 @@ export function DismissibleBanner({ onClose }: { onClose: () => void }) {
             />
           </div>
           <span className="font-medium text-xs md:text-sm text-body-text-gray">
-            Enrol for our society event
+            Enrol for our tribe event
           </span>
           <Button
             variant="link"
