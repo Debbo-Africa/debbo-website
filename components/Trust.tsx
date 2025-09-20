@@ -44,7 +44,7 @@ export const Trust = () => {
               Whether you're managing pain, planning a family, or just not
               feeling like yourself, we are here to help.
             </p>
-            <ButtonComponent text="Lean More" linkTo="about/who-we-are" />
+            <ButtonComponent text="Learn More" linkTo="about/who-we-are" />
           </div>
 
           <div className="w-full aspect-video overflow-hidden -mb-1">
