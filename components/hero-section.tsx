@@ -109,7 +109,7 @@ export default function HeroSection() {
           <h4 className="text-md sm:text-xl text-body-text-gray mb-8 font-bold">
             Your all-in-one platform for personalised, quality care
           </h4>
-          <ButtonComponent />
+          <ButtonComponent text="Learn More" linkTo="about/who-we-are" />
         </div>
       </div>
 

@@ -51,6 +51,11 @@ const nextConfig = {
         destination: "/contact-us",
         permanent: false,
       },
+      {
+        source: "/careers",
+        destination: "/cabout/careers",
+        permanent: false,
+      },
     ];
   },
 };

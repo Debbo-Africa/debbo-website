@@ -22,14 +22,10 @@ export const Trust = () => {
       { threshold: 0.5 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
+    if (sectionRef.current) observer.observe(sectionRef.current);
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
+      if (sectionRef.current) observer.unobserve(sectionRef.current);
     };
   }, [hasPlayed]);
 
@@ -38,9 +34,9 @@ export const Trust = () => {
       ref={sectionRef}
       className="pt-12 md:pt-0 px-4 sm:px-0 relative overflow-hidden bg-[#f3ece1] rounded-3xl"
     >
-      <div className="mx-auto w-full">
+      <div className="mx-auto w-full relative">
         <div className="overflow-hidden">
-          <div className="text-center px-6 py-12 md:absolute w-full">
+          <div className="text-center px-6 py-12 md:absolute w-full z-10 relative">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-general-black mb-6 max-w-5xl mx-auto">
               We focus on the overlooked but vital health needs of African women
             </h2>
@@ -48,16 +44,16 @@ export const Trust = () => {
               Whether you're managing pain, planning a family, or just not
               feeling like yourself, we are here to help.
             </p>
-            <ButtonComponent />
+            <ButtonComponent text="Lean More" linkTo="about/who-we-are" />
           </div>
 
           <div className="w-full aspect-video overflow-hidden -mb-1">
             <video
               ref={videoRef}
-              className="w-full h-full object-cover border-none outline-none"
-              muted={true}
-              autoPlay={true}
-              playsInline={true}
+              className="w-full h-full object-cover border-none outline-none pointer-events-none"
+              muted
+              autoPlay
+              playsInline
               preload="auto"
             >
               <source src="/images/pills_animation_3.mp4" type="video/mp4" />

@@ -50,7 +50,7 @@ export const DownloadSection = () => {
 
             <div className="flex items-end md:justify-between justify-center">
               <ButtonComponent
-                title="Coming Soon "
+                text="Join Now"
                 linkTo=""
                 className="w-full md:w-fit"
               />
