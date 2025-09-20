@@ -162,7 +162,7 @@ export const Footer = () => {
                   Download The MyDébbo <br /> App Today
                 </h3> */}
                 <h3 className="absolute top-4 left-2 max-w-44 md:w-fit md:static text-xl md:text-xl font-bold mb-20">
-                  Coming Soon <br /> Be the first to get started when we launch!
+                  Coming soon <br /> Join the waitlist for early access
                 </h3>
                 {/* <div className="absolute bottom-4 md:static md:mt-10 flex items-center gap-2">
                   <Image
