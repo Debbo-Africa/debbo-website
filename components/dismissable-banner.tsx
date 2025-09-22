@@ -18,12 +18,14 @@ export function DismissibleBanner({ onClose }: { onClose: () => void }) {
             />
           </div>
           <span className="font-medium text-xs md:text-sm text-body-text-gray">
-            Enrol for our tribe event
+            Join the waitlist for early access to the MyDébbo app
           </span>
           <Button
             variant="link"
             className="text-general-black underline p-0 ml-2 h-auto font-medium"
-            onClick={() => window.open("#", "_blank")}
+            onClick={() =>
+              window.open("https://forms.gle/4iEDeUCFzdPTL3J19", "_blank")
+            }
           >
             Enroll now
           </Button>
