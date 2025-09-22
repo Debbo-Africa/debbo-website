@@ -35,14 +35,9 @@ export const Footer = () => {
   const [loading, setLoading] = useState(false);
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const appUrl =
-    "https://play.google.com/store/apps/details?id=com.debboafrica.app";
+  const appUrl = "https://forms.gle/4iEDeUCFzdPTL3J19";
   const { toast } = useToast();
 
-  const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
-  const EMAILJS_TEMPLATE_ID =
-    process.env.NEXT_PUBLIC_EMAILJS_NEWSLETTER_TEMPLATE_ID!;
-  const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
   useEffect(() => {
     const generateQRCode = async () => {
       try {

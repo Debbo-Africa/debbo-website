@@ -53,7 +53,7 @@ const nextConfig = {
       },
       {
         source: "/careers",
-        destination: "/cabout/careers",
+        destination: "/about/careers",
         permanent: false,
       },
     ];

@@ -6,8 +6,7 @@ import ButtonComponent from "./Button";
 
 export const DownloadSection = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const appUrl =
-    "https://play.google.com/store/apps/details?id=com.debboafrica.app";
+  const appUrl = "https://forms.gle/4iEDeUCFzdPTL3J19";
 
   useEffect(() => {
     const generateQRCode = async () => {
