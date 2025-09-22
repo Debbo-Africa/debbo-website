@@ -116,9 +116,13 @@ export default function BookTestPage() {
   useEffect(() => {
     if (tests.length === 0) return;
 
-    const testsForCurrentTab = tests.filter(
-      (test) => test.fields.type === tabMap[activeTab as keyof typeof tabMap]
-    );
+   const testsForCurrentTab = tests.filter((test) => {
+     const type = test.fields.type?.toLowerCase() || "";
+     const activeType = tabMap[activeTab as keyof typeof tabMap].toLowerCase();
+
+     return type.includes(activeType);
+   });
+
 
     const categoriesForTab = new Set<string>();
     const newCategoryInfoMap: Record<string, string> = {};

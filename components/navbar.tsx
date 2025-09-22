@@ -17,7 +17,6 @@ export default function EnhancedNavbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
-  // Use Zustand store instead of local state
   const { bannerVisible, closeBanner } = useBanner();
 
   const toggleDropdown = (dropdown: string) => {
@@ -31,7 +30,6 @@ export default function EnhancedNavbar() {
     return pathname.startsWith(href);
   };
 
-  // Function to close mobile menu
   const closeMobileMenu = () => {
     setIsOpen(false);
     setOpenDropdown(null);
