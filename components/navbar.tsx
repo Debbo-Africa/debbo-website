@@ -187,7 +187,7 @@ export default function EnhancedNavbar() {
 
       <nav
         className={`fixed left-0 right-0 z-[100] transition-colors duration-300 mb-40 bg-[#fff5e9] ${
-          bannerVisible ? "top-[50px] mb-64" : "top-0"
+          bannerVisible ? "top-[30px] md:top-[50px] mb-64" : "top-0"
         } ${isScrolled ? "bg-[#FFF5E9F7]" : "bg-[#fff5e9"} ${
           !pathname.includes("individual") && !pathname.includes("cart")
             ? "rounded-b-3xl"

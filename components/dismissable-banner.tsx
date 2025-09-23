@@ -27,7 +27,7 @@ export function DismissibleBanner({ onClose }: { onClose: () => void }) {
               window.open("https://forms.gle/4iEDeUCFzdPTL3J19", "_blank")
             }
           >
-            Enroll now
+            Join Now
           </Button>
         </div>
 
