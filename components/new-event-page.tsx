@@ -37,10 +37,11 @@ export default function NewsEventsPage() {
     const fetchNewsEvents = async () => {
       try {
         const entries: EntryCollection<NewsEventsSkeleton> =
-          await client.getEntries<NewsEventsSkeleton>({
+        await client.getEntries<NewsEventsSkeleton>({
             content_type: "newsEvents",
             order: "-fields.event_date" as any,
           });
+        console.log(entries)
         setNewsEvents(entries.items as NewsEventsEntry[]);
       } catch (error) {
         console.error("Error fetching news and events:", error);
