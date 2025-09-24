@@ -50,7 +50,7 @@ export function TestHeader({
   return (
     <header
       className={`bg-[--surface-card] fixed ${
-        bannerVisible ? "top-24" : "top-16"
+        bannerVisible ? "top-[5.5rem] md:top-28" : "top-16"
       }  w-full z-50 shadow-sm`}
     >
       <div className="max-w-7xl mx-auto px-4">

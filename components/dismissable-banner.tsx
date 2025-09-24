@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export function DismissibleBanner({ onClose }: { onClose: () => void }) {
   return (
-    <div className="fixed top-0 left-0 w-full z-[150] bg-[--surface-card] p-2">
+    <div className="fixed top-0 left-0 w-full z-[150] bg-[--surface-card] p-2 ">
       <div className="relative max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-center gap-2 sm:gap-4 text-center sm:text-left">
         <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-2">
           <div className="w-5 h-5 text-secondary-debbo1 flex-shrink-0 flex items-center">

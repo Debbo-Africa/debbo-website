@@ -177,7 +177,7 @@ export default function BookTestPage() {
     return (
       <div className="min-h-screen pt-20">
         <TestHeader showTabs activeTab={activeTab} onTabChange={setActiveTab} />
-        <div className={`${bannerVisible ? "mt-16" : ""} `}>
+        <div className={`${bannerVisible ? "mt-16 " : ""} `}>
           <Breadcrumb
             items={[{ label: "Home", href: "/" }, { label: "Book a Test" }]}
           />

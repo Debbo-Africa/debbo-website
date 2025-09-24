@@ -13,7 +13,7 @@ const ContactADoctor = () => {
   const { bannerVisible } = useBanner();
 
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen pt-24">
       <TestHeader />
       <div className={`${bannerVisible && "mt-16"} `}>
         <Breadcrumb

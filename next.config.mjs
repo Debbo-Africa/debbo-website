@@ -56,6 +56,16 @@ const nextConfig = {
         destination: "/about/careers",
         permanent: false,
       },
+      {
+        source: "/faqs",
+        destination: "/resources/faqs",
+        permanent: false,
+      },
+      {
+        source: "/lab-tests",
+        destination: "/individual/book-a-test",
+        permanent: false,
+      },
     ];
   },
 };
