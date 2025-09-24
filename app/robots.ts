@@ -1,9 +1,13 @@
 import { MetadataRoute } from "next";
 
-export default async function robots(): Promise<MetadataRoute.Robots> {
-  return {
-    rules: [{ userAgent: "*", allow: "/", disallow: ["/cart"] }],
-      sitemap: `${process.env.NEXT_PUBLIC_SITEURL}/sitemap.xml`,
-     
-  };
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  return [
+    {
+      url: `${process.env.NEXT_PUBLIC_SITEURL}/contact-us`,
+      lastModified: new Date(), 
+      changeFrequency: "always", 
+      priority: 1,
+    },
+  ];
 }
+
