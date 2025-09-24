@@ -41,7 +41,6 @@ export default function NewsEventsPage() {
             content_type: "newsEvents",
             order: "-fields.event_date" as any,
           });
-        console.log(entries)
         setNewsEvents(entries.items as NewsEventsEntry[]);
       } catch (error) {
         console.error("Error fetching news and events:", error);
