@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import QRCode from "qrcode";
 import ButtonComponent from "./Button";
+import Link from "next/link";
 
 export const DownloadSection = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -43,16 +44,18 @@ export const DownloadSection = () => {
           <div className="relative z-10 p-6 sm:p-8 lg:p-10 h-full flex flex-col justify-between">
             <div className="flex flex-col sm:flex-row justify-between">
               <h2 className="text-xl max-w-[10rem] sm:text-4xl lg:text-5xl font-bold text-general-white mb-4 sm:mb-0 md:leading-loose sm:max-w-xs">
-                Join the waitlist <br/> for early access to the MyDébbo App
+                Join the waitlist <br /> for early access to the MyDébbo App
               </h2>
             </div>
 
             <div className="flex items-end md:justify-between justify-center">
-              <ButtonComponent
-                text="Join Now"
-                linkTo=""
-                className="w-full md:w-fit"
-              />
+              <Link href="https://forms.gle/4iEDeUCFzdPTL3J19" target="_blank">
+                <ButtonComponent
+                  text="Join Now"
+                  linkTo=""
+                  className="w-full md:w-fit"
+                />
+              </Link>
               <div className="bg-general-white rounded-lg p-1.5 sm:p-2 md:flex md:static absolute top-4 right-4">
                 <canvas ref={canvasRef} className="w-24 h-24 lg:w-32 lg:h-32" />
               </div>

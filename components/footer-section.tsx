@@ -175,11 +175,16 @@ export const Footer = () => {
                     className="h-12 w-auto"
                   />
                 </div> */}
-                <ButtonComponent
-                  text="Coming Soon"
-                  className="w-full md:w-fit absolute bottom-4 "
-                  linkTo=""
-                />
+                <Link
+                  href="https://forms.gle/4iEDeUCFzdPTL3J19"
+                  target="_blank"
+                >
+                  <ButtonComponent
+                    text="Coming Soon"
+                    className="w-full md:w-fit absolute bottom-4 "
+                    linkTo=""
+                  />
+                </Link>
               </div>
             </div>
           </div>

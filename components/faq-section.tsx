@@ -48,31 +48,31 @@ const faqs: FAQItem[] = [
     id: 1,
     question: "What is DébboAfrica?",
     answer:
-      "A digital women's health platform designed by and for African women. We offer AI-powered triage, virtual doctor consults, diagnostics, and health education tailored to you.",
+      "Débbo Africa is a digital women’s health platform designed for and by African women. We are dedicated to closing the gender health gap by delivering high-quality care that is accessible, comprehensive, and compassionate.",
   },
   {
     id: 2,
-    question: "Who can use Débbo Africa's services?",
+    question: "How do I download the MyDébbo App?",
     answer:
-      "Débbo Africa is designed for all women, particularly African women who want access to quality healthcare services. Our platform caters to women of all ages and health needs.",
+      "The MyDébbo app isn’t available for download just yet — it’s coming soon! We’re currently refining the platform with early users. Join the waitlist (via the link at the top of our website) to be the first to get notified when we launch. In the meantime, you can still book virtual appointments with our doctors or access lab tests and scans directly through our website.",
   },
   {
     id: 3,
-    question: "Is MyDébbo app free?",
+    question: "Does Débbo Africa offer both in-person and virtual care?",
     answer:
-      "Yes, the MyDébbo app is free to download and use. Some premium features and consultations may require payment, but basic health tracking and educational content are completely free.",
+      "Yes. Our hybrid model allows women to choose between virtual consultations for convenience or in-person appointments when needed.",
   },
   {
     id: 4,
-    question: "What does the AI triage tool do?",
+    question: "What women’s Health conditions does Débbo Africa treat?",
     answer:
-      "Our AI triage tool helps assess your symptoms and provides personalized health recommendations. It guides you to the right level of care and helps you understand when to seek immediate medical attention.",
+      "We focus on the overlooked but vital health needs of African women, including menstrual disorders, PCOS, fibroids, menopause, skin and gut concerns, autoimmune conditions, sexual and reproductive health, mental health, hormonal disorders, and primary care.",
   },
   {
     id: 5,
-    question: "How does the MyDébbo app work for me?",
+    question: "What types of doctors can I speak to?",
     answer:
-      "The app provides personalized health tracking, symptom assessment, virtual consultations with healthcare providers, educational content, and connects you with local healthcare services when needed.",
+      "We offer two levels of medical support: Medical Officers, who are experienced doctors managing common health conditions and referring patients when specialist care is needed, and Specialist Doctors, experts with years of training in areas such as gynaecology, endocrinology, dermatology, mental health, and more.",
   },
 ];
 
