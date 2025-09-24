@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useBannerStore } from "@/hooks/use-banner";
 
 interface BreadcrumbItem {
   label: string;
@@ -14,14 +15,19 @@ interface BreadcrumbProps {
 }
 
 export function Breadcrumb({ items }: BreadcrumbProps) {
+  const { bannerVisible } = useBannerStore();
   const pathname = usePathname();
   const marginTopClass =
     pathname.includes("individual") || pathname.includes("cart")
-      ? "mt-10"
-      : "mt-0";
+      ? "mt-20"
+      : "mt-10 md:mt-32";
 
   return (
-    <div className={`max-w-7xl mx-auto px-4 pt-4 ${marginTopClass}`}>
+    <div
+      className={`max-w-7xl mx-auto px-4 pt-4  ${
+        bannerVisible ? marginTopClass  : "mt-6"
+      }`}
+    >
       <nav
         className="
           text-sm mb-4

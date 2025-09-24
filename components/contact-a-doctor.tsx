@@ -15,7 +15,7 @@ const ContactADoctor = () => {
   return (
     <div className="min-h-screen pt-24">
       <TestHeader />
-      <div className={`${bannerVisible && "mt-16"} `}>
+      <div className={`  `}>
         <Breadcrumb
           items={[{ label: "Home", href: "/" }, { label: "Speak to a Doctor" }]}
         />
