@@ -66,6 +66,7 @@ const nextConfig = {
         destination: "/individual/book-a-test",
         permanent: false,
       },
+      
     ];
   },
 };
