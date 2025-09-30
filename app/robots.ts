@@ -1,13 +1,15 @@
 import { MetadataRoute } from "next";
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  return [
-    {
-      url: `${process.env.NEXT_PUBLIC_SITEURL}`,
-      lastModified: new Date(), 
-      changeFrequency: "daily", 
-      priority: 1,
-    },
-  ];
-}
+export default function robots(): MetadataRoute.Robots {
+  const baseUrl = process.env.NEXT_PUBLIC_SITEURL || "https://www.debbo.africa";
 
+  return {
+    rules: [
+      {
+        userAgent: "*",
+        allow: "/",
+      },
+    ],
+    sitemap: `${baseUrl}/sitemap.xml`,
+  };
+}
