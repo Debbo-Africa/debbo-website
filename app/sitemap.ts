@@ -1,7 +1,8 @@
 import { MetadataRoute } from "next";
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITEURL || "https://www.debbo.africa";
+
   return [
     {
       url: baseUrl,
