@@ -204,7 +204,7 @@ export const Footer = () => {
                     Block 52, Plot 4 Omorinre Johnson,
                   </p>
                   <p className="hover:text-white">Lekki phase 1, Lagos</p>
-                  <p className="hover:text-white">+2349130076332</p>
+                  <p className="hover:text-white">+2349130076332</p> 
                 </div>
                 <div className="mt-4 flex items-center gap-2 bg-[#DF8367] rounded-3xl w-fit px-6 py-2">
                   <Image
