@@ -165,10 +165,9 @@ export const InsuranceSection = () => {
             ref={desktopImageElementRef}
           />
           <div className="absolute bottom-0 left-0 right-0 p-8 z-10 max-w-xs text-general-black">
-            <h3 className="text-2xl font-bold mb-1">No insurance?</h3>
-            <h3 className="text-2xl font-bold mb-6">No problem.</h3>
+            <h3 className="text-2xl font-bold mb-1"></h3>
+            <h3 className="text-2xl font-bold mb-6"></h3>
             <p className="text-sm opacity-90 leading-relaxed">
-              We offer flexible, transparent payment options that work for you.
             </p>
           </div>
         </div>
