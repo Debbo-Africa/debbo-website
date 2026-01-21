@@ -101,7 +101,7 @@ export async function POST(
     }
 
     const AWS_SES_SENDER: string | undefined =
-      process.env.NEXT_PUBLIC_AWS_SES_SENDER;
+      "support@debbo.africa";
     const AWS_SES_RECIPIENT: string =
       process.env.NEXT_PUBLIC_AWS_SES_RECIPIENT!;
 
