@@ -11,7 +11,7 @@ const cards = [
   {
     id: 1,
     title: "Medical Officers",
-    description: "Virtual Consultations from ₦5,000",
+    description: "Speak with a doctor wherever you are",
     images: ["/images/medical-offer.png"],
     alt: "Triage phone interface",
     background: "bg-[#01AC9C]",
@@ -19,7 +19,7 @@ const cards = [
   {
     id: 2,
     title: "Specialist Doctors",
-    description: "Virtual Consultations from ₦25,000",
+    description: "Speak with a doctor wherever you are",
     images: ["/images/specailist-doctor.png"],
     alt: "Consult phone interface",
     background: "bg-[#D76441]",
