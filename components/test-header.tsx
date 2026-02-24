@@ -1,5 +1,4 @@
 "use client";
-import { CartIcon } from "@/components/cart-icon";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -125,7 +124,6 @@ export function TestHeader({
             )}
           </div>
 
-          <CartIcon />
         </div>
       </div>
     </header>
