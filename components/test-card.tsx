@@ -1,18 +1,15 @@
 "use client";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Check, Minus, Plus } from "lucide-react";
-import { useCart } from "@/hooks/use-cart";
+import { Check } from "lucide-react";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { BLOCKS } from "@contentful/rich-text-types";
 import type { MedicalTestEntry } from "@/types/contentful";
-import ButtonComponent from "./Button";
 import Image from "next/image";
 
 interface TestCardProps {
   test: MedicalTestEntry;
-  hideCart?: boolean;
+  hideCart?: boolean; // kept for compatibility, but not used
   isScan?: boolean;
 }
 
@@ -37,12 +34,8 @@ const countTestsInRichText = (richText: any): number => {
   let count = 0;
 
   const countInNode = (node: any) => {
-    if (node.nodeType === "list-item") {
-      count++;
-    }
-    if (node.content) {
-      node.content.forEach(countInNode);
-    }
+    if (node.nodeType === "list-item") count++;
+    if (node.content) node.content.forEach(countInNode);
   };
 
   if (richText?.content) {
@@ -52,11 +45,7 @@ const countTestsInRichText = (richText: any): number => {
   return count;
 };
 
-export function TestCard({ test, hideCart, isScan = false }: TestCardProps) {
-  const { addToCart, updateQuantity, isInCart, getItemQuantity } = useCart();
-  const quantity = getItemQuantity(test.sys.id);
-  const inCart = isInCart(test.sys.id);
-
+export function TestCard({ test, isScan = false }: TestCardProps) {
   const testCount = countTestsInRichText(test.fields.testList);
   const scanCount =
     test.fields.scan && typeof test.fields.scan === "object"
@@ -64,22 +53,6 @@ export function TestCard({ test, hideCart, isScan = false }: TestCardProps) {
       : 0;
 
   const finalCount = isScan && scanCount > 0 ? scanCount : testCount;
-
-  const handleAddToCart = () => {
-    addToCart({
-      id: test.sys.id,
-      testName: test.fields.testName,
-      price: test.fields.price,
-      category: test.fields.category,
-      type: test.fields.type,
-      testCount: finalCount > 0 ? finalCount : 1,
-      isScan: isScan,
-    });
-  };
-
-  const handleQuantityChange = (newQuantity: number) => {
-    updateQuantity(test.sys.id, newQuantity);
-  };
 
   return (
     <Card className="h-full flex flex-col bg-[--surface-card] border-none rounded-2xl md:rounded-3xl hover:shadow-lg transition-all duration-300">
@@ -91,23 +64,24 @@ export function TestCard({ test, hideCart, isScan = false }: TestCardProps) {
                 src={`https:${(test as any).fields?.image?.fields?.file.url}`}
                 alt={(test as any).fields.image.fields.title}
                 className="w-20 h-20 object-contain mb-2"
-                width={20}
-                height={20}
+                width={80}
+                height={80}
               />
             )}
+
             <h3 className="font-semibold text-md mb-1 max-w-[15rem]">
               {test?.fields?.testName}
             </h3>
-            <p className="text-xl font-bold">
-              &#8358;
-              {test?.fields?.price}
-            </p>
+
+          
+
             {test.fields.description && (
-              <p className=" text-body-text-gray mt-2 text-xs md:text-sm">
+              <p className="text-body-text-gray mt-2 text-xs md:text-sm">
                 {test.fields.description}
               </p>
             )}
           </div>
+
           {test?.fields?.category && (
             <span className="bg-[#FFF8F0] text-general-black px-3 py-1 rounded-full text-xs md:text-sm whitespace-nowrap inline-flex">
               {test?.fields?.category}
@@ -118,11 +92,9 @@ export function TestCard({ test, hideCart, isScan = false }: TestCardProps) {
         <div className="mb-4">
           <span className="text-sm font-medium text-body-text-gray">
             {isScan
-              ? `${scanCount > 0 ? scanCount : 1} Scan${
-                  scanCount !== 1 ? "" : ""
-                }`
-              : `${testCount > 0 ? testCount : 1} Test${
-                  testCount !== 1 ? "s" : ""
+              ? `${scanCount > 0 ? scanCount : 1} Scan`
+              : `${finalCount > 0 ? finalCount : 1} Test${
+                  finalCount !== 1 ? "s" : ""
                 }`}
           </span>
         </div>
@@ -132,45 +104,6 @@ export function TestCard({ test, hideCart, isScan = false }: TestCardProps) {
             documentToReactComponents(test.fields.testList, richTextOptions)}
         </div>
 
-        {!hideCart && (
-          <div className="mt-auto">
-            {!inCart ? (
-              <ButtonComponent
-                text="Add to Cart"
-                defaultColor="#f2e9dd"
-                hoverColor="#0D0D0DFC"
-                icon={<Plus size={16} />}
-                className="text-general-black hover:text-general-white "
-                fullWidth
-                onClick={handleAddToCart}
-                arrow={false}
-                linkTo=""
-              />
-            ) : (
-              <div className="flex items-center justify-center gap-4">
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={() => handleQuantityChange(quantity - 1)}
-                  className="rounded-full bg-[#0D0D0DFC] text-white hover:bg-[#D9D0C6]"
-                >
-                  <Minus className="w-4 h-4" />
-                </Button>
-                <Button className="font-semibold text-lg flex-1 bg-[#D9D0C6] text-general-black rounded-full hover:bg-[#D9D0C6]">
-                  {quantity}
-                </Button>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={() => handleQuantityChange(quantity + 1)}
-                  className="rounded-full bg-[#0D0D0DFC] text-white hover:bg-[#D9D0C6]"
-                >
-                  <Plus className="w-4 h-4" />
-                </Button>
-              </div>
-            )}
-          </div>
-        )}
       </CardContent>
     </Card>
   );
