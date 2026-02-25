@@ -73,8 +73,6 @@ export function TestCard({ test, isScan = false }: TestCardProps) {
               {test?.fields?.testName}
             </h3>
 
-          
-
             {test.fields.description && (
               <p className="text-body-text-gray mt-2 text-xs md:text-sm">
                 {test.fields.description}
@@ -89,21 +87,10 @@ export function TestCard({ test, isScan = false }: TestCardProps) {
           )}
         </div>
 
-        <div className="mb-4">
-          <span className="text-sm font-medium text-body-text-gray">
-            {isScan
-              ? `${scanCount > 0 ? scanCount : 1} Scan`
-              : `${finalCount > 0 ? finalCount : 1} Test${
-                  finalCount !== 1 ? "s" : ""
-                }`}
-          </span>
-        </div>
-
         <div className="mb-3 flex-grow space-y-4">
           {test?.fields?.testList &&
             documentToReactComponents(test.fields.testList, richTextOptions)}
         </div>
-
       </CardContent>
     </Card>
   );
