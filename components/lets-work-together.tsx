@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import ButtonComponent from "./Button";
+import { useState } from "react";
+import { BookAppointmentModal } from "./book-appointment-modal";
 
 interface LetsWorkTogetherProps {
   title?: string;
@@ -16,6 +18,7 @@ interface LetsWorkTogetherProps {
   topImageSrc?: string;
   topImageAlt?: string;
   test?: boolean;
+  openCorporateBooking?: boolean;
 }
 
 export function LetsWorkTogetherSection({
@@ -29,8 +32,12 @@ export function LetsWorkTogetherSection({
   topImageSrc = "/images/download-phone.png",
   topImageAlt = "Top image",
   test = false,
+  openCorporateBooking = false,
 }: LetsWorkTogetherProps) {
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
+    <>
     <section className="pb-16">
       <div
         className={`${
@@ -79,8 +86,16 @@ export function LetsWorkTogetherSection({
                 </div>
               ) : (
                 buttonText &&
-                buttonLink && (
-                  <ButtonComponent text={buttonText} linkTo={buttonLink} />
+                (buttonLink || openCorporateBooking) && (
+                  <ButtonComponent
+                    text={buttonText}
+                    linkTo={openCorporateBooking ? "" : buttonLink}
+                    onClick={
+                      openCorporateBooking
+                        ? () => setModalOpen(true)
+                        : undefined
+                    }
+                  />
                 )
               )}
             </div>
@@ -121,6 +136,13 @@ export function LetsWorkTogetherSection({
         </div>
       </div>
     </section>
+    {modalOpen && (
+      <BookAppointmentModal
+        onClose={() => setModalOpen(false)}
+        variant="corporate"
+      />
+    )}
+    </>
   );
 }
 

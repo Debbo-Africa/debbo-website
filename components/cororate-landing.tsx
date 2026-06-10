@@ -1,13 +1,16 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { BookAppointmentModal } from "./book-appointment-modal";
+import ButtonComponent from "./Button";
 
 const words = ["Empowering", "Connecting", "Supporting", "Uplifting"];
 
 export default function HeroSection() {
   const animatedWordRef = useRef<HTMLSpanElement>(null);
   const cursorRef = useRef<HTMLSpanElement>(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     let currentWordIndex = 0;
@@ -67,6 +70,7 @@ export default function HeroSection() {
   }, []);
 
   return (
+    <>
     <section className="py-16 px-4 sm:px-6 lg:px-8 text-center lg:text-left">
       <div className="max-w-7xl  mx-auto flex flex-col lg:flex-row items-center gap-12">
         <div className="lg:w-1/2 ">
@@ -86,6 +90,12 @@ export default function HeroSection() {
             corporate wellness plans are designed to support employee health,
             boost productivity, and build stronger organisations.
           </p>
+
+          <ButtonComponent
+            text="Book a Discovery Call"
+            linkTo=""
+            onClick={() => setModalOpen(true)}
+          />
         </div>
 
         <div className="hidden lg:block lg:w-1/2 rounded-xl overflow-hidden">
@@ -131,5 +141,10 @@ export default function HeroSection() {
         }
       `}</style>
     </section>
+
+    {modalOpen && (
+      <BookAppointmentModal onClose={() => setModalOpen(false)} />
+    )}
+    </>
   );
 }
