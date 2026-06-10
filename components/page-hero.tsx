@@ -1,19 +1,26 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
+import ButtonComponent from "./Button";
+import {
+  BookAppointmentModal,
+  type AppointmentFormVariant,
+} from "./book-appointment-modal";
 
 interface PageHeroProps {
   title: string;
   description: string;
   imageSrc?: string;
-  leftImageSrc?: string; // NEW PROP for left image small screen
+  leftImageSrc?: string;
   imageAlt?: string;
   imageWidth?: number;
   imageHeight?: number;
   className?: string;
   headingClassName?: string;
   textClassName?: string;
+  showBookButton?: boolean;
+  appointmentVariant?: AppointmentFormVariant;
 }
 
 export function PageHero({
@@ -27,8 +34,12 @@ export function PageHero({
   className = "",
   headingClassName = "",
   textClassName = "",
+  showBookButton = false,
+  appointmentVariant = "individual",
 }: PageHeroProps) {
+  const [modalOpen, setModalOpen] = useState(false);
   return (
+    <>
     <div
       className={`mb-12 mx-auto relative px-4 mt-16 lg:mt-10 lg:px-0 ${className}`}
     >
@@ -92,6 +103,15 @@ export function PageHero({
           <p className={`${textClassName} text-lg text-body-text-gray`}>
             {description}
           </p>
+          {showBookButton && (
+            <div className="mt-6 flex justify-center lg:justify-start">
+              <ButtonComponent
+                text="Book appointment"
+                linkTo=""
+                onClick={() => setModalOpen(true)}
+              />
+            </div>
+          )}
         </div>
 
         {imageSrc && (
@@ -107,5 +127,13 @@ export function PageHero({
         )}
       </div>
     </div>
+
+    {modalOpen && (
+      <BookAppointmentModal
+        onClose={() => setModalOpen(false)}
+        variant={appointmentVariant}
+      />
+    )}
+    </>
   );
 }

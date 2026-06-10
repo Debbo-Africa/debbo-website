@@ -104,6 +104,8 @@ export  function BookScanPage() {
         description="Sometimes, what's happening inside doesn't show on the outside, scans help fill in the gaps. From breast to abdominal and pelvic scans, our options offer powerful insights to detect issues early and keep you reassured."
         imageSrc="/images/teams-hero.png"
         imageAlt="Book a Scan"
+        showBookButton
+        appointmentVariant="individual"
       />
       <div className="max-w-7xl mx-auto">
         <HowItWorksSection

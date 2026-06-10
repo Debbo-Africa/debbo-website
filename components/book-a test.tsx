@@ -187,6 +187,7 @@ export default function BookTestPage() {
           description={currentTabContent.description}
           imageSrc={currentTabContent.imageSrc}
           imageAlt={`${currentTabContent.title} illustration`}
+          showBookButton
         />
         <section className="py-16 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
@@ -236,6 +237,7 @@ export default function BookTestPage() {
         description={currentTabContent.description}
         imageSrc={currentTabContent.imageSrc}
         imageAlt={`${currentTabContent.title} illustration`}
+        showBookButton
       />
       <div className="py-8 max-w-7xl mx-auto px-4">
         <HowItWorksSection />

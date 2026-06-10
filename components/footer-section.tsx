@@ -33,6 +33,7 @@ const FooterLink = ({ href, children, className }: FooterLinkProps) => {
 export const Footer = () => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+  const [subscribed, setSubscribed] = useState(false);
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const appUrl = "https://forms.gle/4iEDeUCFzdPTL3J19";
@@ -91,6 +92,8 @@ export const Footer = () => {
       });
 
       setEmail("");
+      setSubscribed(true);
+      setTimeout(() => setSubscribed(false), 60000);
     } catch (error) {
       console.error("Subscription Error:", error);
       toast({
@@ -139,7 +142,7 @@ export const Footer = () => {
                     />
                   </div>
                   <ButtonComponent
-                    text={loading ? "Subscribing..." : "Subscribe"}
+                    text={loading ? "Subscribing..." : subscribed ? "Subscribed" : "Subscribe"}
                     className="w-full mt-3"
                     disabled={loading}
                     linkTo=""
