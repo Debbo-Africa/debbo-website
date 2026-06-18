@@ -1,10 +1,12 @@
 import React from "react";
 import { Breadcrumb } from "./breadcrumb";
 import HeroSection from "./cororate-landing";
+import WhatWeDoSection from "./what-we-do-section";
 import FiveCSection from "./five-c-section";
 import { StatsSection } from "./stats-counter";
 import { PersonalisedCareSection } from "./personalised-care";
 import { TrustedBySection } from "./truestedby";
+import { CorporateMetrics } from "./corporate-metrics";
 import { LetsWorkTogetherSection } from "./lets-work-together";
 
 const Corporate = () => {
@@ -14,10 +16,12 @@ const Corporate = () => {
         items={[{ label: "Home", href: "/" }, { label: "For Corporate" }]}
       />
       <HeroSection />
+      <WhatWeDoSection />
       <FiveCSection />
       <StatsSection />
-      <PersonalisedCareSection />
+      {/* <PersonalisedCareSection /> */}
       <TrustedBySection />
+      <CorporateMetrics />
       <LetsWorkTogetherSection
         title="Your workforce is already feeling the impact."
         description="Are you addressing it early or paying for it later?"
