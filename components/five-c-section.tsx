@@ -28,7 +28,7 @@ export default function FiveCSection() {
 
         <div className="relative z-10 lg:w-[50%] lg:pl-16 px-4 py-10 md:p-10 text-white">
           <h2 className="text-3xl sm:text-4xl font-semibold mb-8 max-w-[20rem] font-serif">
-            What Makes D&eacute;bboafrica Different
+            What Makes D&eacute;bboAfrica Different
           </h2>
           <ul className="space-y-6 text-sm sm:text-base">
             {items.map((item) => (
