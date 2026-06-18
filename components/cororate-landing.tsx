@@ -86,9 +86,9 @@ export default function HeroSection() {
           </h1>
 
           <p className="text-lg text-gray-700 mb-6">
-            At DébboAfrica, we believe your team is your greatest asset. Our
-            corporate wellness plans are designed to support employee health,
-            boost productivity, and build stronger organisations.
+            DébboAfrica helps organizations reduce absenteeism and improve
+            workforce performance through preventive and coordinated healthcare
+            designed for modern African teams.
           </p>
 
           <ButtonComponent
