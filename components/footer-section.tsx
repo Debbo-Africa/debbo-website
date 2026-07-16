@@ -10,6 +10,7 @@ import Link from "next/link";
 import ButtonComponent from "./Button";
 import { useToast } from "@/hooks/use-toast";
 import emailjs from "@emailjs/browser";
+import { APP_STORE_URL, PLAY_STORE_URL } from "@/lib/app-links";
 
 type FooterLinkProps = {
   href: string;
@@ -36,7 +37,7 @@ export const Footer = () => {
   const [subscribed, setSubscribed] = useState(false);
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const appUrl = "https://forms.gle/4iEDeUCFzdPTL3J19";
+  const appUrl = "https://www.debbo.africa/download";
   const { toast } = useToast();
 
   useEffect(() => {
@@ -156,38 +157,29 @@ export const Footer = () => {
                 <div className="absolute top-4 right-2 md:static md:mb-4 w-24 h-24 bg-white rounded-lg p-2 mx-auto md:mx-0">
                   <canvas ref={canvasRef} className="w-full h-full rounded" />
                 </div>
-                {/* <h3 className="absolute top-4 left-2 max-w-44 md:w-fit md:static text-xl md:text-2xl font-bold mb-6">
+                <h3 className="absolute top-4 left-2 max-w-44 md:w-fit md:static text-xl md:text-2xl font-bold mb-6">
                   Download The MyDébbo <br /> App Today
-                </h3> */}
-                <h3 className="absolute top-4 left-2 max-w-44 md:w-fit md:static text-xl md:text-xl font-bold mb-20">
-                  Coming soon <br /> Join the waitlist for early access
                 </h3>
-                {/* <div className="absolute bottom-4 md:static md:mt-10 flex items-center gap-2">
-                  <Image
-                    src="/images/playstore-large.svg"
-                    alt="Download on Google Play"
-                    width={160}
-                    height={48}
-                    className="h-12 w-auto"
-                  />
-                  <Image
-                    src="/images/appstore-large.svg"
-                    alt="Download on App Store"
-                    width={160}
-                    height={48}
-                    className="h-12 w-auto"
-                  />
-                </div> */}
-                <Link
-                  href="https://forms.gle/4iEDeUCFzdPTL3J19"
-                  target="_blank"
-                >
-                  <ButtonComponent
-                    text="Coming Soon"
-                    className="w-full md:w-fit absolute bottom-4 "
-                    linkTo=""
-                  />
-                </Link>
+                <div className="absolute bottom-4 md:static md:mt-10 flex items-center gap-2">
+                  <Link href={PLAY_STORE_URL} target="_blank">
+                    <Image
+                      src="/images/playstore-large.svg"
+                      alt="Get it on Google Play"
+                      width={160}
+                      height={48}
+                      className="h-12 w-auto"
+                    />
+                  </Link>
+                  <Link href={APP_STORE_URL} target="_blank">
+                    <Image
+                      src="/images/appstore-large.svg"
+                      alt="Download on the App Store"
+                      width={160}
+                      height={48}
+                      className="h-12 w-auto"
+                    />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

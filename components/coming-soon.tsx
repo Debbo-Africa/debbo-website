@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { APP_STORE_URL, PLAY_STORE_URL } from "@/lib/app-links";
 
 export default function ComingSoon() {
   return (
@@ -11,12 +12,31 @@ export default function ComingSoon() {
           <div className="flex flex-col md:flex-row items-center min-h-[450px] md:min-h-[420px]">
             <div className="p-8 text-center md:text-left lg:p-12 text-white flex-1">
               <span className="font-bold mb-6 rounded-full px-3 py-1 bg-[#FFF5E94D]">
-                Coming Soon
+                Now Live
               </span>
               <h3 className="text-lg mt-6 md:text-3xl  leading-relaxed mb-8 max-w-[16rem]">
-                You’ll soon be able to book scans and access reports directly in
-                the MyDébbo app.
+                Book scans and access reports directly in the MyDébbo app.
               </h3>
+              <div className="flex gap-3 justify-center md:justify-start">
+                <Link href={APP_STORE_URL} target="_blank">
+                  <Image
+                    src="/images/appstore-large.svg"
+                    alt="Download on the App Store"
+                    width={150}
+                    height={50}
+                    className="h-12 w-auto"
+                  />
+                </Link>
+                <Link href={PLAY_STORE_URL} target="_blank">
+                  <Image
+                    src="/images/playstore-large.svg"
+                    alt="Get it on Google Play"
+                    width={150}
+                    height={50}
+                    className="h-12 w-auto"
+                  />
+                </Link>
+              </div>
             </div>
 
             <div className="flex-1 w-full relative">

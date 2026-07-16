@@ -3,6 +3,7 @@
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { APP_STORE_URL, PLAY_STORE_URL } from "@/lib/app-links";
 
 export function DismissibleBanner({ onClose }: { onClose: () => void }) {
   return (
@@ -18,16 +19,21 @@ export function DismissibleBanner({ onClose }: { onClose: () => void }) {
             />
           </div>
           <span className="font-medium text-xs md:text-sm text-body-text-gray break-words">
-            Join the waitlist for early access to the MyDébbo app
+            The MyDébbo app is now live — download it today
           </span>
           <Button
             variant="link"
             className="text-general-black underline p-0 h-auto font-medium"
-            onClick={() =>
-              window.open("https://forms.gle/4iEDeUCFzdPTL3J19", "_blank")
-            }
+            onClick={() => window.open(APP_STORE_URL, "_blank")}
           >
-            Join Now
+            App Store
+          </Button>
+          <Button
+            variant="link"
+            className="text-general-black underline p-0 h-auto font-medium"
+            onClick={() => window.open(PLAY_STORE_URL, "_blank")}
+          >
+            Google Play
           </Button>
         </div>
 

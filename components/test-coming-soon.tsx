@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import ButtonComponent from "./Button";
 import Link from "next/link";
+import { APP_STORE_URL, PLAY_STORE_URL } from "@/lib/app-links";
 
 const ComingSoon = () => {
   return (
@@ -9,11 +10,31 @@ const ComingSoon = () => {
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-6 items-start">
         <div className="lg:col-span-2 overflow-hidden min-h-[245px] md:min-h-[445px] text-center rounded-3xl bg-secondary-debbo1 group p-6 pb-0">
           <span className="text-white bg-[#FFF5E94D] w-fit mx-auto px-3 py-1 text-sm md:text-md rounded-full font-semibold mb-6">
-            Coming Soon
+            Now Live
           </span>
           <p className="text-white/90 leading-relaxed max-w-xs mx-auto mb-6 mt-4">
             Book tests and view results directly in the MyDébbo app
           </p>
+          <div className="flex gap-3 justify-center mb-4">
+            <Link href={APP_STORE_URL} target="_blank">
+              <Image
+                src="/images/appstore-large.svg"
+                alt="Download on the App Store"
+                width={140}
+                height={45}
+                className="h-11 w-auto"
+              />
+            </Link>
+            <Link href={PLAY_STORE_URL} target="_blank">
+              <Image
+                src="/images/playstore-large.svg"
+                alt="Get it on Google Play"
+                width={140}
+                height={45}
+                className="h-11 w-auto"
+              />
+            </Link>
+          </div>
 
           <div className="w-full h-64 md:h-80 relative mx-auto">
             <Image

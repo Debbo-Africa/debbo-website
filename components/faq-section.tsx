@@ -54,7 +54,7 @@ const faqs: FAQItem[] = [
     id: 2,
     question: "How do I download the MyDébbo App?",
     answer:
-      "The MyDébbo app isn’t available for download just yet — it’s coming soon! We’re currently refining the platform with early users. Join the waitlist (via the link at the top of our website) to be the first to get notified when we launch. In the meantime, you can still book virtual appointments with our doctors or access lab tests and scans directly through our website.",
+      "The MyDébbo app is now live! You can download it for free on the Apple App Store (for iPhone) and Google Play (for Android) — just search for “MyDébbo” or use the download links on our website. Once installed, you can book virtual appointments with our doctors, order lab tests and scans, and manage your health all from your phone.",
   },
   {
     id: 3,

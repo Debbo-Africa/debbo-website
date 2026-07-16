@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { APP_STORE_URL, PLAY_STORE_URL } from "@/lib/app-links";
 
 const DonwloadHeroSection = () => {
   return (
@@ -24,21 +26,25 @@ const DonwloadHeroSection = () => {
               scans, and manage lab tests, all from your phone.
             </p>
             <div className="flex gap-4">
-              <Image
-                src="/images/playstore-large.svg"
-                alt="Play Store"
-                width={140}
-                height={45}
-                className="h-auto w-auto"
-              />
+              <Link href={PLAY_STORE_URL} target="_blank">
+                <Image
+                  src="/images/playstore-large.svg"
+                  alt="Get it on Google Play"
+                  width={140}
+                  height={45}
+                  className="h-auto w-auto"
+                />
+              </Link>
 
-              <Image
-                src="/images/appstore-large.svg"
-                alt="App Store"
-                width={140}
-                height={45}
-                className="h-auto w-auto"
-              />
+              <Link href={APP_STORE_URL} target="_blank">
+                <Image
+                  src="/images/appstore-large.svg"
+                  alt="Download on the App Store"
+                  width={140}
+                  height={45}
+                  className="h-auto w-auto"
+                />
+              </Link>
             </div>
           </div>
         </div>
@@ -54,20 +60,24 @@ const DonwloadHeroSection = () => {
           and manage lab tests, all from your phone.
         </p>
         <div className="flex gap-4 justify-center">
-          <Image
-            src="/images/playstore-small.svg"
-            alt="Play Store"
-            width={120}
-            height={40}
-            className="h-auto w-auto"
-          />
-          <Image
-            src="/images/appstore-small.svg"
-            alt="App Store"
-            width={120}
-            height={40}
-            className="h-auto w-auto"
-          />
+          <Link href={PLAY_STORE_URL} target="_blank">
+            <Image
+              src="/images/playstore-small.svg"
+              alt="Get it on Google Play"
+              width={120}
+              height={40}
+              className="h-auto w-auto"
+            />
+          </Link>
+          <Link href={APP_STORE_URL} target="_blank">
+            <Image
+              src="/images/appstore-small.svg"
+              alt="Download on the App Store"
+              width={120}
+              height={40}
+              className="h-auto w-auto"
+            />
+          </Link>
         </div>
         <div className="w-full rounded-2xl overflow-hidden group">
           <Image

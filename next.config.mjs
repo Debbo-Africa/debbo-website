@@ -47,11 +47,6 @@ const nextConfig = {
         permanent: false,
       },
       {
-        source: "/download",
-        destination: "/contact-us",
-        permanent: false,
-      },
-      {
         source: "/careers",
         destination: "/about/careers",
         permanent: false,

@@ -1,7 +1,9 @@
 "use client";
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef } from "react";
+import { APP_STORE_URL, PLAY_STORE_URL } from "@/lib/app-links";
 
 export default function HealthFeatureCards() {
   const animatedWordRef = useRef<HTMLSpanElement>(null);
@@ -128,20 +130,24 @@ export default function HealthFeatureCards() {
           </div>
         </div>
         <div className="hidden md:flex flex-row gap-4 absolute bottom-8 left-8">
-          <Image
-            src="/images/playstore-small.svg"
-            alt="Play Store"
-            width={120}
-            height={40}
-            className="h-auto w-auto"
-          />
-          <Image
-            src="/images/appstore-small.svg"
-            alt="App Store"
-            width={120}
-            height={40}
-            className="h-auto w-auto"
-          />
+          <Link href={PLAY_STORE_URL} target="_blank">
+            <Image
+              src="/images/playstore-small.svg"
+              alt="Get it on Google Play"
+              width={120}
+              height={40}
+              className="h-auto w-auto"
+            />
+          </Link>
+          <Link href={APP_STORE_URL} target="_blank">
+            <Image
+              src="/images/appstore-small.svg"
+              alt="Download on the App Store"
+              width={120}
+              height={40}
+              className="h-auto w-auto"
+            />
+          </Link>
         </div>
       </div>
 
@@ -231,20 +237,24 @@ export default function HealthFeatureCards() {
             </div>
 
             <div className="flex flex-row gap-2 justify-center md:justify-start">
-              <Image
-                src="/images/playstore-large.svg"
-                alt="Play Store"
-                width={140}
-                height={45}
-                className="h-auto w-auto"
-              />
-              <Image
-                src="/images/appstore-large.svg"
-                alt="App Store"
-                width={140}
-                height={45}
-                className="h-auto w-auto"
-              />
+              <Link href={PLAY_STORE_URL} target="_blank">
+                <Image
+                  src="/images/playstore-large.svg"
+                  alt="Get it on Google Play"
+                  width={140}
+                  height={45}
+                  className="h-auto w-auto"
+                />
+              </Link>
+              <Link href={APP_STORE_URL} target="_blank">
+                <Image
+                  src="/images/appstore-large.svg"
+                  alt="Download on the App Store"
+                  width={140}
+                  height={45}
+                  className="h-auto w-auto"
+                />
+              </Link>
             </div>
           </div>
 

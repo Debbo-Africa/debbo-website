@@ -6,6 +6,7 @@ import Link from "next/link";
 import ButtonComponent from "./Button";
 import { useState } from "react";
 import { BookAppointmentModal } from "./book-appointment-modal";
+import { APP_STORE_URL, PLAY_STORE_URL } from "@/lib/app-links";
 
 interface LetsWorkTogetherProps {
   title?: string;
@@ -65,19 +66,19 @@ export function LetsWorkTogetherSection({
 
               {download ? (
                 <div className="flex gap-4 justify-center md:justify-start">
-                  <Link href="#" target="_blank">
+                  <Link href={APP_STORE_URL} target="_blank">
                     <Image
                       src="/images/appstore-large.svg"
-                      alt="Download on App Store"
+                      alt="Download on the App Store"
                       width={150}
                       height={50}
                       className="h-12 w-auto"
                     />
                   </Link>
-                  <Link href="#" target="_blank">
+                  <Link href={PLAY_STORE_URL} target="_blank">
                     <Image
                       src="/images/playstore-large.svg"
-                      alt="Download on Play Store"
+                      alt="Get it on Google Play"
                       width={150}
                       height={50}
                       className="h-12 w-auto"
