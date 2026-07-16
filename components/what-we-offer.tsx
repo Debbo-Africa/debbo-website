@@ -207,7 +207,7 @@ export function WhatWeOfferSection() {
             ) : currentItem.id === "programs" ? (
               <ButtonComponent linkTo="/corporate" text="Learn More" />
             ) : (
-              <ButtonComponent linkTo="/download"  />
+              <ButtonComponent linkTo="/download" text="Download App" />
             )}
           </div>
         </div>

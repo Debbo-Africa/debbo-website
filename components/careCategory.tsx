@@ -65,7 +65,7 @@ export default function CareCategoriesSection() {
           consultations, or family planning services — you can access quality
           care, your way.
         </p>
-        <ButtonComponent/>
+        <ButtonComponent text="Download App" linkTo="/download" />
       </div>
     </section>
   );

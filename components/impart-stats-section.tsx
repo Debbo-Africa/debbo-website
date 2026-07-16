@@ -68,7 +68,7 @@ export const ImpactStatsSection = () => {
             we're here to change this — with care that listens, understands, and
             meets you where you are.
           </p>
-          <ButtonComponent />
+          <ButtonComponent text="Download App" linkTo="/download" />
         </div>
         <div className="space-y-4 px-2">
           <div
@@ -134,7 +134,7 @@ export const ImpactStatsSection = () => {
                 unique health needs.
               </p>
               <div className="flex items-center gap-4 mb-6">
-                <ButtonComponent />
+                <ButtonComponent text="Download App" linkTo="/download" />
               </div>
             </div>
           </div>
