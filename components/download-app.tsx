@@ -44,8 +44,8 @@ export const DownloadSection = () => {
 
           <div className="relative z-10 p-6 sm:p-8 lg:p-10 h-full flex flex-col justify-between">
             <div className="flex flex-col sm:flex-row justify-between">
-              <h2 className="text-xl max-w-[12rem] sm:text-4xl lg:text-5xl font-bold text-general-white mb-4 sm:mb-0 md:leading-loose sm:max-w-xs">
-                The MyDébbo App <br /> is now live
+              <h2 className="text-lg max-w-[14rem] sm:text-2xl lg:text-4xl font-bold text-general-white mb-4 sm:mb-0 md:leading-snug sm:max-w-sm">
+                Be among the first to experience MyDébbo
               </h2>
             </div>
 
