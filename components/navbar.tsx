@@ -382,7 +382,7 @@ export default function EnhancedNavbar() {
             </div>
 
             <div className="hidden lg:block cursor-none">
-              <ButtonComponent />
+              <ButtonComponent text="Download App" linkTo="/download" />
             </div>
 
             <Button
@@ -590,7 +590,12 @@ export default function EnhancedNavbar() {
               </div>
 
               <div className="pt-6">
-                <ButtonComponent fullWidth onClick={() => setIsOpen(!isOpen)} />
+                <ButtonComponent
+                  text="Download App"
+                  linkTo="/download"
+                  fullWidth
+                  onClick={() => setIsOpen(!isOpen)}
+                />
               </div>
             </div>
           </div>
